@@ -458,7 +458,7 @@ export const Home: React.FC = () => {
 
           {/* Scroll hint - hors carte */}
           <motion.div
-            className="mt-8 mb-4 flex justify-center relative z-20"
+            className="mt-8 mb-4 flex justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.5 }}
