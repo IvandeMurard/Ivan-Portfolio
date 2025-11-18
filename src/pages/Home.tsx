@@ -978,6 +978,7 @@ export const Home: React.FC = () => {
         siteName="Ivan de Murard"
         tagline="Product Manager building user-centered experiences"
         sections={[
+          { id: "hero", label: "Welcome" },
           { id: "work", label: "Work" },
           { id: "hackathons", label: "Hackathons" },
           { id: "experience", label: "Experience" },
@@ -985,7 +986,14 @@ export const Home: React.FC = () => {
           { id: "contact", label: "Contact" },
         ]}
         onSectionClick={(sectionId) => {
-          document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+          if (sectionId === "hero") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          } else {
+            const element = document.getElementById(sectionId);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
+          }
         }}
       />
 
@@ -1010,9 +1018,12 @@ export const Home: React.FC = () => {
                   ? "/cases/wttj"
                   : selectedProject.id === "agents-eval"
                     ? "/case-study/agents-eval"
-                    : selectedProject.id === "agentic-hospitality"
-                      ? "#"
-                      : "#",
+                    : selectedProject.id === "agentic-hospitality" ||
+                      selectedProject.id === "agentic-studio" ||
+                      selectedProject.id === "spotify-valence-journeys" ||
+                      selectedProject.id === "on-air"
+                    ? "/404"
+                    : "#",
           }}
           showComingSoon={
             projects.findIndex((p) => p.id === selectedProject.id) >= 4 &&
