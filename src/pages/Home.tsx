@@ -268,12 +268,12 @@ interface RippleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement
   children: React.ReactNode;
 }
 
-const RippleButton: React.FC<RippleButtonProps> = ({ 
-  onClick, 
-  className, 
-  children, 
+const RippleButton: React.FC<RippleButtonProps> = ({
+  onClick,
+  className,
+  children,
   prefersReducedMotion,
-  ...props 
+  ...props
 }) => {
   const [ripples, setRipples] = useState<Array<{ x: number; y: number; id: number }>>([]);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -312,27 +312,28 @@ const RippleButton: React.FC<RippleButtonProps> = ({
       ref={buttonRef}
       onClick={handleClick}
       className={className}
-      style={{ 
-        willChange: 'transform',
-        transform: 'translateZ(0)', // GPU acceleration
+      style={{
+        willChange: "transform",
+        transform: "translateZ(0)", // GPU acceleration
       }}
       {...props}
     >
       {children}
-      {!prefersReducedMotion && ripples.map((ripple) => (
-        <span
-          key={ripple.id}
-          className="absolute rounded-full bg-white/30 pointer-events-none"
-          style={{
-            left: ripple.x,
-            top: ripple.y,
-            width: 0,
-            height: 0,
-            transform: 'translate(-50%, -50%)',
-            animation: 'ripple 600ms ease-out',
-          }}
-        />
-      ))}
+      {!prefersReducedMotion &&
+        ripples.map((ripple) => (
+          <span
+            key={ripple.id}
+            className="absolute rounded-full bg-white/30 pointer-events-none"
+            style={{
+              left: ripple.x,
+              top: ripple.y,
+              width: 0,
+              height: 0,
+              transform: "translate(-50%, -50%)",
+              animation: "ripple 600ms ease-out",
+            }}
+          />
+        ))}
     </button>
   );
 };
@@ -428,14 +429,9 @@ export const Home: React.FC = () => {
       />
 
       {/* Hero Section */}
-      <section
-        id="hero"
-        className="px-4 py-12 md:py-16 relative overflow-visible bg-contact text-contact-foreground"
-      >
-
+      <section id="hero" className="px-4 py-12 md:py-16 relative overflow-visible bg-contact text-contact-foreground">
         {/* Container principal */}
-        <div className="mx-auto max-w-[1400px] w-full relative" style={{ padding: 'clamp(24px, 4vw, 80px)' }}>
-          
+        <div className="mx-auto max-w-[1400px] w-full relative" style={{ padding: "clamp(24px, 4vw, 80px)" }}>
           {/* Version Desktop */}
           <div className="hidden md:block">
             {/* Contenu texte - max-width pour lisibilité */}
@@ -443,16 +439,16 @@ export const Home: React.FC = () => {
               {/* Nom */}
               <motion.h1
                 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[900] tracking-tight text-white leading-[0.9]"
-                style={{ 
-                  fontFamily: 'Inter',
-                  color: '#FFFFFF',
+                style={{
+                  fontFamily: "Inter",
+                  color: "#FFFFFF",
                 }}
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: prefersReducedMotion ? 0 : 0.06, 
-                  duration: prefersReducedMotion ? 0 : 0.28, 
-                  ease: [0.22, 1, 0.36, 1] 
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.06,
+                  duration: prefersReducedMotion ? 0 : 0.28,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
               >
                 Ivan de Murard
@@ -461,17 +457,17 @@ export const Home: React.FC = () => {
               {/* Titre */}
               <motion.p
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif italic text-white mt-3 md:mt-4"
-                style={{ 
+                style={{
                   fontFamily: "'Playfair Display', serif",
                   fontWeight: 500,
-                  color: '#FFFFFF',
+                  color: "#FFFFFF",
                 }}
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: prefersReducedMotion ? 0 : 0.12, 
-                  duration: prefersReducedMotion ? 0 : 0.28, 
-                  ease: [0.22, 1, 0.36, 1] 
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.12,
+                  duration: prefersReducedMotion ? 0 : 0.28,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
               >
                 Zero-to-One Product Manager
@@ -480,13 +476,13 @@ export const Home: React.FC = () => {
               {/* Sous-titre - 2 lignes */}
               <motion.p
                 className="text-xl sm:text-2xl md:text-3xl text-white mt-8 md:mt-10 leading-relaxed"
-                style={{ color: '#FFFFFF' }}
+                style={{ color: "#FFFFFF" }}
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: prefersReducedMotion ? 0 : 0.18, 
-                  duration: prefersReducedMotion ? 0 : 0.28, 
-                  ease: [0.22, 1, 0.36, 1] 
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.18,
+                  duration: prefersReducedMotion ? 0 : 0.28,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
               >
                 <span className="block md:inline">From hospitality to AI: I build </span>
@@ -498,19 +494,19 @@ export const Home: React.FC = () => {
                 className="mt-6 md:mt-8 space-y-3 md:space-y-4"
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: prefersReducedMotion ? 0 : 0.24, 
-                  duration: prefersReducedMotion ? 0 : 0.28, 
-                  ease: [0.22, 1, 0.36, 1] 
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.24,
+                  duration: prefersReducedMotion ? 0 : 0.28,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
               >
                 {[
                   "2 hackathon wins turning ideas into working products",
                   "Currently shipping: AI agents for F&B industry",
-                  "5+ years shipping products people use"
+                  "5+ years shipping products people use",
                 ].map((point, index) => (
                   <div key={index} className="flex items-start gap-3 text-base sm:text-lg md:text-xl text-white">
-                    <Check className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 mt-0.5" style={{ color: '#FFFFFF' }} />
+                    <Check className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 mt-0.5" style={{ color: "#FFFFFF" }} />
                     <span>{point}</span>
                   </div>
                 ))}
@@ -521,10 +517,10 @@ export const Home: React.FC = () => {
                 className="flex flex-wrap items-center gap-4 mt-6 md:mt-8"
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: prefersReducedMotion ? 0 : 0.30, 
-                  duration: prefersReducedMotion ? 0 : 0.28, 
-                  ease: [0.22, 1, 0.36, 1] 
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.3,
+                  duration: prefersReducedMotion ? 0 : 0.28,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
               >
                 {/* Bouton primaire - fond blanc avec ripple et glow */}
@@ -535,8 +531,10 @@ export const Home: React.FC = () => {
                 >
                   <span className="relative z-10">View my work</span>
                   {/* Glow effect */}
-                  <span className="absolute inset-0 rounded-lg bg-background opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300" 
-                        style={{ willChange: 'opacity', transform: 'translateZ(0)' }} />
+                  <span
+                    className="absolute inset-0 rounded-lg bg-background opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"
+                    style={{ willChange: "opacity", transform: "translateZ(0)" }}
+                  />
                 </RippleButton>
 
                 {/* CTA secondaire - texte blanc avec flèche animée */}
@@ -545,22 +543,22 @@ export const Home: React.FC = () => {
                   className="inline-flex items-center gap-2 text-base sm:text-lg font-medium text-white/90 hover:text-white transition-colors duration-300 group"
                   whileHover={prefersReducedMotion ? {} : { x: 2 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
-                  style={{ color: 'rgba(255, 255, 255, 0.9)' }}
+                  style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 >
                   Get in touch
                   <motion.div
                     animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
-                    transition={{ 
-                      duration: 1.5, 
-                      repeat: Infinity, 
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
                       ease: "easeInOut",
-                      repeatDelay: 0.5 
+                      repeatDelay: 0.5,
                     }}
                     className="inline-flex"
                   >
-                    <ArrowRight 
-                      className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" 
-                      style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+                    <ArrowRight
+                      className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300"
+                      style={{ willChange: "transform", transform: "translateZ(0)" }}
                     />
                   </motion.div>
                 </motion.button>
@@ -575,16 +573,16 @@ export const Home: React.FC = () => {
               {/* Nom */}
               <motion.h1
                 className="text-5xl font-[900] text-white tracking-tight leading-[0.9]"
-                style={{ 
-                  fontFamily: 'Inter',
-                  color: '#FFFFFF',
+                style={{
+                  fontFamily: "Inter",
+                  color: "#FFFFFF",
                 }}
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: prefersReducedMotion ? 0 : 0.06, 
-                  duration: prefersReducedMotion ? 0 : 0.28, 
-                  ease: [0.22, 1, 0.36, 1] 
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.06,
+                  duration: prefersReducedMotion ? 0 : 0.28,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
               >
                 Ivan de Murard
@@ -593,17 +591,17 @@ export const Home: React.FC = () => {
               {/* Titre */}
               <motion.p
                 className="text-3xl font-serif italic text-white mt-3"
-                style={{ 
+                style={{
                   fontFamily: "'Playfair Display', serif",
                   fontWeight: 500,
-                  color: '#FFFFFF',
+                  color: "#FFFFFF",
                 }}
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: prefersReducedMotion ? 0 : 0.12, 
-                  duration: prefersReducedMotion ? 0 : 0.28, 
-                  ease: [0.22, 1, 0.36, 1] 
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.12,
+                  duration: prefersReducedMotion ? 0 : 0.28,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
               >
                 Zero-to-One Product Manager
@@ -612,16 +610,16 @@ export const Home: React.FC = () => {
               {/* Sous-titre - 1 ligne sur mobile */}
               <motion.p
                 className="text-xl text-white mt-8 leading-relaxed"
-                style={{ color: '#FFFFFF' }}
+                style={{ color: "#FFFFFF" }}
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: prefersReducedMotion ? 0 : 0.18, 
-                  duration: prefersReducedMotion ? 0 : 0.28, 
-                  ease: [0.22, 1, 0.36, 1] 
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.18,
+                  duration: prefersReducedMotion ? 0 : 0.28,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                From hospitality to AI: I build product.
+                From hospitality to AI: I care about scaling needed products and experiences.
               </motion.p>
 
               {/* Proof Points */}
@@ -629,19 +627,19 @@ export const Home: React.FC = () => {
                 className="mt-6 space-y-3"
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: prefersReducedMotion ? 0 : 0.24, 
-                  duration: prefersReducedMotion ? 0 : 0.28, 
-                  ease: [0.22, 1, 0.36, 1] 
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.24,
+                  duration: prefersReducedMotion ? 0 : 0.28,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
               >
                 {[
                   "2 hackathon wins turning ideas into working products",
                   "Currently shipping: AI agents for F&B industry",
-                  "5+ years shipping products people use"
+                  "5+ years shipping products people use",
                 ].map((point, index) => (
                   <div key={index} className="flex items-start justify-center gap-3 text-base text-white">
-                    <Check className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#FFFFFF' }} />
+                    <Check className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: "#FFFFFF" }} />
                     <span className="text-left">{point}</span>
                   </div>
                 ))}
@@ -652,10 +650,10 @@ export const Home: React.FC = () => {
                 className="flex flex-col gap-3 items-center mt-6"
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: prefersReducedMotion ? 0 : 0.30, 
-                  duration: prefersReducedMotion ? 0 : 0.28, 
-                  ease: [0.22, 1, 0.36, 1] 
+                transition={{
+                  delay: prefersReducedMotion ? 0 : 0.3,
+                  duration: prefersReducedMotion ? 0 : 0.28,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
               >
                 {/* Bouton primaire - fond blanc avec ripple et glow */}
@@ -666,8 +664,10 @@ export const Home: React.FC = () => {
                 >
                   <span className="relative z-10">View my work</span>
                   {/* Glow effect */}
-                  <span className="absolute inset-0 rounded-lg bg-background opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300" 
-                        style={{ willChange: 'opacity', transform: 'translateZ(0)' }} />
+                  <span
+                    className="absolute inset-0 rounded-lg bg-background opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"
+                    style={{ willChange: "opacity", transform: "translateZ(0)" }}
+                  />
                 </RippleButton>
 
                 {/* CTA secondaire - texte blanc avec flèche animée */}
@@ -676,22 +676,22 @@ export const Home: React.FC = () => {
                   className="w-full inline-flex items-center justify-center gap-2 text-base font-medium text-white/90 hover:text-white transition-colors duration-300 group"
                   whileHover={prefersReducedMotion ? {} : { x: 2 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
-                  style={{ color: 'rgba(255, 255, 255, 0.9)' }}
+                  style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 >
                   Get in touch
                   <motion.div
                     animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
-                    transition={{ 
-                      duration: 1.5, 
-                      repeat: Infinity, 
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
                       ease: "easeInOut",
-                      repeatDelay: 0.5 
+                      repeatDelay: 0.5,
                     }}
                     className="inline-flex"
                   >
-                    <ArrowRight 
-                      className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" 
-                      style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+                    <ArrowRight
+                      className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
+                      style={{ willChange: "transform", transform: "translateZ(0)" }}
                     />
                   </motion.div>
                 </motion.button>
@@ -704,21 +704,21 @@ export const Home: React.FC = () => {
             className="mt-4 mb-2 flex justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ 
-              delay: prefersReducedMotion ? 0 : 0.8, 
-              duration: prefersReducedMotion ? 0 : 0.5 
+            transition={{
+              delay: prefersReducedMotion ? 0 : 0.8,
+              duration: prefersReducedMotion ? 0 : 0.5,
             }}
           >
             <motion.div
               animate={prefersReducedMotion ? {} : { y: [0, 8, 0] }}
-              transition={{ 
-                repeat: prefersReducedMotion ? 0 : Infinity, 
-                duration: prefersReducedMotion ? 0 : 1.5, 
-                ease: "easeInOut" 
+              transition={{
+                repeat: prefersReducedMotion ? 0 : Infinity,
+                duration: prefersReducedMotion ? 0 : 1.5,
+                ease: "easeInOut",
               }}
               className="cursor-pointer"
               onClick={() => scrollToSection("work")}
-              style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+              style={{ willChange: "transform", transform: "translateZ(0)" }}
             >
               <ArrowDown className="w-6 h-6 text-contact-foreground/60" />
             </motion.div>
@@ -1177,11 +1177,11 @@ export const Home: React.FC = () => {
                   : selectedProject.id === "agents-eval"
                     ? "/case-study/agents-eval"
                     : selectedProject.id === "agentic-hospitality" ||
-                      selectedProject.id === "agentic-studio" ||
-                      selectedProject.id === "spotify-valence-journeys" ||
-                      selectedProject.id === "on-air"
-                    ? "/404"
-                    : "#",
+                        selectedProject.id === "agentic-studio" ||
+                        selectedProject.id === "spotify-valence-journeys" ||
+                        selectedProject.id === "on-air"
+                      ? "/404"
+                      : "#",
           }}
           showComingSoon={
             projects.findIndex((p) => p.id === selectedProject.id) >= 4 &&
