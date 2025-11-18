@@ -374,12 +374,12 @@ export const Home: React.FC = () => {
           {/* Version Desktop */}
           <div className="hidden md:block">
             {/* Photo - Position absolute top-right */}
-            <motion.div
-              className="absolute top-0 right-0 w-[120px] h-[120px]"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            >
+          <motion.div
+            className="absolute top-2 right-0 w-[120px] h-[120px]"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
               <img
                 src="/img/profile_picture.jpg"
                 alt="Ivan de Murard"
@@ -447,7 +447,7 @@ export const Home: React.FC = () => {
                 {/* Bouton primaire */}
                 <Button
                   onClick={() => scrollToSection("work")}
-                  className="bg-[#065f46] text-white px-8 py-[14px] rounded-2xl text-base font-medium border-none cursor-pointer transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:translate-y-[-2px] hover:shadow-[0_12px_24px_-8px_rgba(6,95,70,0.25)]"
+                  className="bg-accent text-accent-foreground px-8 py-[14px] rounded-2xl text-base font-medium border-none cursor-pointer transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:translate-y-[-2px] hover:shadow-[0_12px_24px_-8px_rgba(30,58,138,0.25)]"
                 >
                   View my work
                 </Button>
@@ -455,7 +455,7 @@ export const Home: React.FC = () => {
                 {/* Lien secondaire */}
                 <button
                   onClick={() => scrollToSection("contact")}
-                  className="text-[#065f46] text-base font-medium bg-transparent border-none cursor-pointer transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-[#065f46] hover:underline"
+                  className="text-contact text-base font-medium bg-transparent border-none cursor-pointer transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-contact hover:underline"
                 >
                   Get in touch →
                 </button>
@@ -533,7 +533,7 @@ export const Home: React.FC = () => {
                 {/* Bouton primaire */}
                 <Button
                   onClick={() => scrollToSection("work")}
-                  className="w-full bg-[#065f46] text-white px-8 py-[14px] rounded-2xl text-base font-medium border-none"
+                  className="w-full bg-accent text-accent-foreground px-8 py-[14px] rounded-2xl text-base font-medium border-none"
                 >
                   View my work
                 </Button>
@@ -541,7 +541,7 @@ export const Home: React.FC = () => {
                 {/* Lien secondaire */}
                 <button
                   onClick={() => scrollToSection("contact")}
-                  className="w-full text-[#065f46] text-base font-medium bg-transparent border-none cursor-pointer hover:underline"
+                  className="w-full text-contact text-base font-medium bg-transparent border-none cursor-pointer hover:underline"
                 >
                   Get in touch →
                 </button>
