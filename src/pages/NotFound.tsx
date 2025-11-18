@@ -42,7 +42,7 @@ const NotFound = () => {
   ];
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       <Navigation />
       <section className="relative min-h-screen pt-24 bg-background">
         {/* Background gradient */}
@@ -174,7 +174,7 @@ const NotFound = () => {
         ]}
         onSectionClick={scrollToSection}
       />
-    </>
+    </div>
   );
 };
 

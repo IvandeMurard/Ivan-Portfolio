@@ -1397,7 +1397,7 @@ export default function WttjPage() {
   const perspectiveLabel = language === 'en' ? "Choose your perspective" : "Choisissez votre perspective";
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       <Navigation />
       <CaseStudyLayout
         title={title}
@@ -1416,6 +1416,6 @@ export default function WttjPage() {
         sections={[{ id: "home", label: "Back to Portfolio" }]}
         onSectionClick={scrollToSection}
       />
-    </>
+    </div>
   );
 }

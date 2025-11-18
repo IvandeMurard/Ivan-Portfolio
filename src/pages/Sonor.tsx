@@ -55,7 +55,7 @@ export default function SonorPage() {
 
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       {/* Navigation */}
       <Navigation />
 

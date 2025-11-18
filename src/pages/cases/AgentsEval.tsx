@@ -29,7 +29,7 @@ export default function AgentsEvalCase() {
   };
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       <Navigation />
       <ProgressIndicator
         sections={[
@@ -633,6 +633,6 @@ export default function AgentsEvalCase() {
           </div>
         }
       />
-    </>
+    </div>
   );
 }

@@ -22,7 +22,7 @@ export const FilterChips: React.FC<FilterChipsProps> = ({
 }) => {
   return (
     <div className={`${disableSticky ? 'relative' : 'sticky top-[56px] z-40'} ${disableSticky ? '' : 'backdrop-blur-lg'} py-4 transition-all duration-300 ease-in-out ${className}`}>
-      <div className="flex flex-nowrap md:flex-wrap gap-2 md:gap-3 overflow-x-auto md:overflow-x-visible scrollbar-hide snap-x snap-mandatory px-1 md:px-0 -mx-1 md:mx-0">
+      <div className="flex flex-nowrap md:flex-wrap gap-2 md:gap-3 overflow-x-auto md:overflow-x-visible scrollbar-hide snap-x snap-mandatory">
         {chips.map((chip) => (
           <button
             key={chip.id}
