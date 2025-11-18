@@ -13,7 +13,7 @@ import { CTABanner } from "../components/work/CTABanner";
 import { BuiltWithBanner } from "../components/BuiltWithBanner";
 import { Button } from "../components/ui/button";
 import { Separator } from "../components/ui/separator";
-import { Mail, Linkedin, Calendar, ArrowDown, ChevronDown } from "lucide-react";
+import { Mail, Linkedin, Calendar, ArrowDown, ChevronDown, ArrowRight, Check } from "lucide-react";
 import { sonorCase } from "../data/cases/sonor.case";
 import wttjHero from "@/assets/wttj-hero.png";
 import wttjLogo from "@/assets/wttj-logo.svg";
@@ -25,6 +25,7 @@ import { InlineExpand } from "@/components/InlineExpand";
 import { experiences } from "@/data/experience";
 import { SOCIAL_LINKS } from "@/site.config";
 import { ProgressIndicator } from "@/components/ProgressIndicator";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface Project {
   id: string;
@@ -261,6 +262,81 @@ const education = [
   },
 ];
 
+// RippleButton component with ripple effect
+interface RippleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  prefersReducedMotion: boolean;
+  children: React.ReactNode;
+}
+
+const RippleButton: React.FC<RippleButtonProps> = ({ 
+  onClick, 
+  className, 
+  children, 
+  prefersReducedMotion,
+  ...props 
+}) => {
+  const [ripples, setRipples] = useState<Array<{ x: number; y: number; id: number }>>([]);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (prefersReducedMotion) {
+      onClick?.(e);
+      return;
+    }
+
+    const button = buttonRef.current;
+    if (!button) return;
+
+    const rect = button.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const newRipple = {
+      x,
+      y,
+      id: Date.now(),
+    };
+
+    setRipples((prev) => [...prev, newRipple]);
+
+    // Remove ripple after animation
+    setTimeout(() => {
+      setRipples((prev) => prev.filter((ripple) => ripple.id !== newRipple.id));
+    }, 600);
+
+    onClick?.(e);
+  };
+
+  return (
+    <button
+      ref={buttonRef}
+      onClick={handleClick}
+      className={className}
+      style={{ 
+        willChange: 'transform',
+        transform: 'translateZ(0)', // GPU acceleration
+      }}
+      {...props}
+    >
+      {children}
+      {!prefersReducedMotion && ripples.map((ripple) => (
+        <span
+          key={ripple.id}
+          className="absolute rounded-full bg-white/30 pointer-events-none"
+          style={{
+            left: ripple.x,
+            top: ripple.y,
+            width: 0,
+            height: 0,
+            transform: 'translate(-50%, -50%)',
+            animation: 'ripple 600ms ease-out',
+          }}
+        />
+      ))}
+    </button>
+  );
+};
+
 export const Home: React.FC = () => {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("all");
@@ -270,6 +346,7 @@ export const Home: React.FC = () => {
   const [isStickyDisabled, setIsStickyDisabled] = useState(false);
   const expExpand = useInlineExpand();
   const contactSectionRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   // Intersection Observer pour désactiver le sticky avant la section Contact
   useEffect(() => {
@@ -353,144 +430,140 @@ export const Home: React.FC = () => {
       {/* Hero Section */}
       <section
         id="hero"
-        className="px-4 py-12 md:py-16 relative overflow-visible"
-        style={{
-          background: 'radial-gradient(ellipse at center, hsl(var(--background)) 0%, hsl(var(--secondary)) 100%)',
-        }}
+        className="px-4 py-12 md:py-16 relative overflow-visible bg-contact text-contact-foreground"
       >
-        {/* Animated gradient background pattern */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none overflow-hidden"
-          style={{
-            opacity: 0.04,
-          }}
-        >
-          <motion.div
-            className="absolute inset-0 dark:opacity-[1.3]"
-            style={{
-              background: 'radial-gradient(circle at 20% 50%, hsl(var(--accent)) 0%, transparent 50%), radial-gradient(circle at 80% 50%, hsl(var(--accent)) 0%, transparent 50%), radial-gradient(circle at 50% 20%, hsl(var(--accent)) 0%, transparent 50%)',
-              backgroundSize: '200% 200%',
-            }}
-            animate={{
-              backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          />
-        </motion.div>
-        
-        {/* Animated mesh gradient overlay */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.06, 0.1, 0.06],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        >
-          <div
-            className="absolute inset-0"
-            style={{
-              background: 'radial-gradient(ellipse 800px 600px at 50% 50%, hsl(var(--accent)) 0%, transparent 50%)',
-              opacity: 0.08,
-            }}
-          />
-        </motion.div>
-
-        {/* Grain texture overlay - ultra-légère */}
-        <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.02 }}>
-          <svg className="w-[105%] h-[105%] absolute -top-[2.5%] -left-[2.5%]">
-            <filter id="noise">
-              <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
-            </filter>
-            <rect width="100%" height="100%" filter="url(#noise)" />
-          </svg>
-        </div>
 
         {/* Container principal */}
         <div className="mx-auto max-w-[1400px] w-full relative" style={{ padding: 'clamp(24px, 4vw, 80px)' }}>
           
           {/* Version Desktop */}
           <div className="hidden md:block">
-            {/* Contenu texte - full width */}
-            <div className="max-w-full">
+            {/* Contenu texte - max-width pour lisibilité */}
+            <div className="max-w-4xl">
               {/* Nom */}
               <motion.h1
-                className="font-[900] text-foreground leading-[1.05] tracking-[-0.02em] mb-4"
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[900] tracking-tight text-white leading-[0.9]"
                 style={{ 
                   fontFamily: 'Inter',
-                  fontSize: 'clamp(48px, 6vw, 64px)'
+                  color: '#FFFFFF',
                 }}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.06, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ 
+                  delay: prefersReducedMotion ? 0 : 0.06, 
+                  duration: prefersReducedMotion ? 0 : 0.28, 
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
               >
                 Ivan de Murard
               </motion.h1>
 
-              {/* Tagline */}
+              {/* Titre */}
               <motion.p
-                className="font-[800] text-description leading-[1.10] tracking-[-0.01em] mb-6"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif italic text-white mt-3 md:mt-4"
                 style={{ 
-                  fontFamily: 'Inter',
-                  fontSize: 'clamp(32px, 4vw, 44px)'
+                  fontFamily: "'Playfair Display', serif",
+                  fontWeight: 500,
+                  color: '#FFFFFF',
                 }}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.12, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ 
+                  delay: prefersReducedMotion ? 0 : 0.12, 
+                  duration: prefersReducedMotion ? 0 : 0.28, 
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
               >
                 Zero-to-One Product Manager
               </motion.p>
 
-              {/* Description paragraphe 1 */}
+              {/* Sous-titre - 2 lignes */}
               <motion.p
-                className="text-base text-description leading-[1.6] max-w-[800px] mb-4"
-                initial={{ opacity: 0, y: 24 }}
+                className="text-xl sm:text-2xl md:text-3xl text-white mt-8 md:mt-10 leading-relaxed"
+                style={{ color: '#FFFFFF' }}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.18, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ 
+                  delay: prefersReducedMotion ? 0 : 0.18, 
+                  duration: prefersReducedMotion ? 0 : 0.28, 
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
               >
-                Hospitality and retail taught me the importance of a great experience.
+                <span className="block md:inline">From hospitality to AI: I build </span>
+                <span className="block md:inline">product.</span>
               </motion.p>
 
-              {/* Description paragraphe 2 */}
-              <motion.p
-                className="text-base text-description leading-[1.6] max-w-[800px] mb-6"
-                initial={{ opacity: 0, y: 24 }}
+              {/* Proof Points */}
+              <motion.div
+                className="mt-6 md:mt-8 space-y-3 md:space-y-4"
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.24, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ 
+                  delay: prefersReducedMotion ? 0 : 0.24, 
+                  duration: prefersReducedMotion ? 0 : 0.28, 
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
               >
-                My data-driven and entrepreneurial journey shaped my analytical and pragmatic mindset.
-              </motion.p>
+                {[
+                  "2 hackathon wins turning ideas into working products",
+                  "Currently shipping: AI agents for F&B industry",
+                  "5+ years shipping products people use"
+                ].map((point, index) => (
+                  <div key={index} className="flex items-start gap-3 text-base sm:text-lg md:text-xl text-white">
+                    <Check className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 mt-0.5" style={{ color: '#FFFFFF' }} />
+                    <span>{point}</span>
+                  </div>
+                ))}
+              </motion.div>
 
               {/* CTA Buttons */}
               <motion.div
-                className="flex flex-row gap-4 items-center"
-                initial={{ opacity: 0, y: 24 }}
+                className="flex flex-wrap items-center gap-4 mt-6 md:mt-8"
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.30, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ 
+                  delay: prefersReducedMotion ? 0 : 0.30, 
+                  duration: prefersReducedMotion ? 0 : 0.28, 
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
               >
-                {/* Bouton primaire */}
-                <Button
+                {/* Bouton primaire - fond blanc avec ripple et glow */}
+                <RippleButton
                   onClick={() => scrollToSection("work")}
-                  className="bg-accent text-accent-foreground px-8 py-[14px] rounded-2xl text-base font-medium border-none cursor-pointer transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:translate-y-[-2px] hover:shadow-[0_12px_24px_-8px_rgba(30,58,138,0.25)]"
+                  className="relative inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium rounded-lg bg-background text-foreground hover:bg-background/90 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden group"
+                  prefersReducedMotion={prefersReducedMotion}
                 >
-                  View my work
-                </Button>
+                  <span className="relative z-10">View my work</span>
+                  {/* Glow effect */}
+                  <span className="absolute inset-0 rounded-lg bg-background opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300" 
+                        style={{ willChange: 'opacity', transform: 'translateZ(0)' }} />
+                </RippleButton>
 
-                {/* Lien secondaire */}
-                <button
+                {/* CTA secondaire - texte blanc avec flèche animée */}
+                <motion.button
                   onClick={() => scrollToSection("contact")}
-                  className="text-contact text-base font-medium bg-transparent border-none cursor-pointer transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-contact hover:underline"
+                  className="inline-flex items-center gap-2 text-base sm:text-lg font-medium text-white/90 hover:text-white transition-colors duration-300 group"
+                  whileHover={prefersReducedMotion ? {} : { x: 2 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  style={{ color: 'rgba(255, 255, 255, 0.9)' }}
                 >
-                  Get in touch →
-                </button>
+                  Get in touch
+                  <motion.div
+                    animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
+                    transition={{ 
+                      duration: 1.5, 
+                      repeat: Infinity, 
+                      ease: "easeInOut",
+                      repeatDelay: 0.5 
+                    }}
+                    className="inline-flex"
+                  >
+                    <ArrowRight 
+                      className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" 
+                      style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+                    />
+                  </motion.div>
+                </motion.button>
               </motion.div>
             </div>
           </div>
@@ -498,71 +571,130 @@ export const Home: React.FC = () => {
           {/* Version Mobile */}
           <div className="md:hidden">
             {/* Contenu centré */}
-            <div className="text-center">
+            <div className="text-center max-w-4xl mx-auto">
               {/* Nom */}
               <motion.h1
-                className="text-5xl font-[900] text-foreground leading-[1.05] tracking-[-0.02em] mb-4"
-                style={{ fontFamily: 'Inter' }}
-                initial={{ opacity: 0, y: 24 }}
+                className="text-5xl font-[900] text-white tracking-tight leading-[0.9]"
+                style={{ 
+                  fontFamily: 'Inter',
+                  color: '#FFFFFF',
+                }}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.06, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ 
+                  delay: prefersReducedMotion ? 0 : 0.06, 
+                  duration: prefersReducedMotion ? 0 : 0.28, 
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
               >
                 Ivan de Murard
               </motion.h1>
 
-              {/* Tagline */}
+              {/* Titre */}
               <motion.p
-                className="text-[32px] font-[800] text-description leading-[1.10] tracking-[-0.01em] mb-4"
-                style={{ fontFamily: 'Inter' }}
-                initial={{ opacity: 0, y: 24 }}
+                className="text-3xl font-serif italic text-white mt-3"
+                style={{ 
+                  fontFamily: "'Playfair Display', serif",
+                  fontWeight: 500,
+                  color: '#FFFFFF',
+                }}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.12, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ 
+                  delay: prefersReducedMotion ? 0 : 0.12, 
+                  duration: prefersReducedMotion ? 0 : 0.28, 
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
               >
                 Zero-to-One Product Manager
               </motion.p>
 
-              {/* Description paragraphe 1 */}
+              {/* Sous-titre - 1 ligne sur mobile */}
               <motion.p
-                className="text-base text-description leading-[1.6] mb-3"
-                initial={{ opacity: 0, y: 24 }}
+                className="text-xl text-white mt-8 leading-relaxed"
+                style={{ color: '#FFFFFF' }}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.18, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ 
+                  delay: prefersReducedMotion ? 0 : 0.18, 
+                  duration: prefersReducedMotion ? 0 : 0.28, 
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
               >
-                Hospitality and retail taught me the importance of a great experience.
+                From hospitality to AI: I build product.
               </motion.p>
 
-              {/* Description paragraphe 2 */}
-              <motion.p
-                className="text-base text-description leading-[1.6] mb-5"
-                initial={{ opacity: 0, y: 24 }}
+              {/* Proof Points */}
+              <motion.div
+                className="mt-6 space-y-3"
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.24, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ 
+                  delay: prefersReducedMotion ? 0 : 0.24, 
+                  duration: prefersReducedMotion ? 0 : 0.28, 
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
               >
-                My data-driven and entrepreneurial journey shaped my analytical and pragmatic mindset.
-              </motion.p>
+                {[
+                  "2 hackathon wins turning ideas into working products",
+                  "Currently shipping: AI agents for F&B industry",
+                  "5+ years shipping products people use"
+                ].map((point, index) => (
+                  <div key={index} className="flex items-start justify-center gap-3 text-base text-white">
+                    <Check className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: '#FFFFFF' }} />
+                    <span className="text-left">{point}</span>
+                  </div>
+                ))}
+              </motion.div>
 
               {/* CTA Buttons en colonne */}
               <motion.div
-                className="flex flex-col gap-3 items-center"
-                initial={{ opacity: 0, y: 24 }}
+                className="flex flex-col gap-3 items-center mt-6"
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.30, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ 
+                  delay: prefersReducedMotion ? 0 : 0.30, 
+                  duration: prefersReducedMotion ? 0 : 0.28, 
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
               >
-                {/* Bouton primaire */}
-                <Button
+                {/* Bouton primaire - fond blanc avec ripple et glow */}
+                <RippleButton
                   onClick={() => scrollToSection("work")}
-                  className="w-full bg-accent text-accent-foreground px-8 py-[14px] rounded-2xl text-base font-medium border-none"
+                  className="w-full relative inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg bg-background text-foreground hover:bg-background/90 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden group"
+                  prefersReducedMotion={prefersReducedMotion}
                 >
-                  View my work
-                </Button>
+                  <span className="relative z-10">View my work</span>
+                  {/* Glow effect */}
+                  <span className="absolute inset-0 rounded-lg bg-background opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300" 
+                        style={{ willChange: 'opacity', transform: 'translateZ(0)' }} />
+                </RippleButton>
 
-                {/* Lien secondaire */}
-                <button
+                {/* CTA secondaire - texte blanc avec flèche animée */}
+                <motion.button
                   onClick={() => scrollToSection("contact")}
-                  className="w-full text-contact text-base font-medium bg-transparent border-none cursor-pointer hover:underline"
+                  className="w-full inline-flex items-center justify-center gap-2 text-base font-medium text-white/90 hover:text-white transition-colors duration-300 group"
+                  whileHover={prefersReducedMotion ? {} : { x: 2 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  style={{ color: 'rgba(255, 255, 255, 0.9)' }}
                 >
-                  Get in touch →
-                </button>
+                  Get in touch
+                  <motion.div
+                    animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
+                    transition={{ 
+                      duration: 1.5, 
+                      repeat: Infinity, 
+                      ease: "easeInOut",
+                      repeatDelay: 0.5 
+                    }}
+                    className="inline-flex"
+                  >
+                    <ArrowRight 
+                      className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" 
+                      style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+                    />
+                  </motion.div>
+                </motion.button>
               </motion.div>
             </div>
           </div>
@@ -572,15 +704,23 @@ export const Home: React.FC = () => {
             className="mt-4 mb-2 flex justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
+            transition={{ 
+              delay: prefersReducedMotion ? 0 : 0.8, 
+              duration: prefersReducedMotion ? 0 : 0.5 
+            }}
           >
             <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+              animate={prefersReducedMotion ? {} : { y: [0, 8, 0] }}
+              transition={{ 
+                repeat: prefersReducedMotion ? 0 : Infinity, 
+                duration: prefersReducedMotion ? 0 : 1.5, 
+                ease: "easeInOut" 
+              }}
               className="cursor-pointer"
               onClick={() => scrollToSection("work")}
+              style={{ willChange: 'transform', transform: 'translateZ(0)' }}
             >
-              <ArrowDown className="w-6 h-6 text-muted-foreground/60" />
+              <ArrowDown className="w-6 h-6 text-contact-foreground/60" />
             </motion.div>
           </motion.div>
         </div>
