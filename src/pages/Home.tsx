@@ -353,10 +353,13 @@ export const Home: React.FC = () => {
       {/* Hero Section */}
       <section
         id="hero"
-        className="px-4 py-16 md:py-20 md:pb-0 relative overflow-visible bg-gradient-to-br from-secondary via-primary/[0.18] to-secondary/80 dark:from-card/30 dark:via-accent/[0.25] dark:to-background animate-gradient-shift"
+        className="px-4 py-16 md:py-24 relative overflow-visible"
+        style={{
+          background: 'radial-gradient(ellipse at center, #F8FAFC 0%, #FAFAFA 100%)',
+        }}
       >
-        {/* Grain texture overlay */}
-        <div className="absolute inset-0 pointer-events-none animate-grain-drift" style={{ opacity: 0.035 }}>
+        {/* Grain texture overlay - ultra-légère */}
+        <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.02 }}>
           <svg className="w-[105%] h-[105%] absolute -top-[2.5%] -left-[2.5%]">
             <filter id="noise">
               <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
@@ -365,98 +368,188 @@ export const Home: React.FC = () => {
           </svg>
         </div>
 
-        <div className="mx-auto max-w-[900px] w-full relative z-10">
-          {/* Glass Card */}
-          <motion.div
-            className="backdrop-blur-md bg-background/80 rounded-3xl shadow-2xl p-6 md:p-8 lg:p-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <div className="grid items-center gap-4 md:gap-6 md:grid-cols-2">
-              {/* Left: titles + subtitle + buttons + pills */}
-              <div className="text-left">
-                <motion.h1
-                  className="text-4xl md:text-5xl font-bold text-foreground leading-tight"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1, duration: 0.5 }}
-                >
-                  Ivan de Murard
-                </motion.h1>
-                <motion.p
-                  className="mt-2 text-xl md:text-2xl font-bold text-foreground"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                >
-                  Zero-to-One Product Manager
-                </motion.p>
+        {/* Container principal */}
+        <div className="mx-auto max-w-[1400px] w-full relative" style={{ padding: 'clamp(24px, 6vw, 120px)' }}>
+          
+          {/* Version Desktop */}
+          <div className="hidden md:block">
+            {/* Photo - Position absolute top-right */}
+            <motion.div
+              className="absolute top-0 right-0 w-[120px] h-[120px]"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <img
+                src="/img/profile_picture.jpg"
+                alt="Ivan de Murard"
+                className="w-full h-full object-cover rounded-full border-[3px] border-white/90 shadow-[0_6px_20px_-8px_rgba(0,0,0,0.15)] saturate-[0.9] brightness-[1.02] transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105 hover:saturate-100"
+              />
+            </motion.div>
 
-                <div className="mt-6 text-base md:text-lg space-y-3">
-                  <p className="text-foreground/80 leading-normal transition-opacity">
-                    Hospitality and retail taught me the importance of a great experience.
-                  </p>
-                  <p className="text-muted-foreground leading-normal transition-opacity">
-                    While my product data-driven and entrepreneurial journey shaped my analytical and collaborative
-                    mindset.
-                  </p>
-                  <p className="text-muted-foreground leading-normal transition-opacity">Welcome to my portfolio.</p>
-                  <p className="text-sm italic text-muted-foreground/70 leading-normal transition-opacity">
-                    (It's a work-in-progress)
-                  </p>
-                </div>
+            {/* Contenu texte - 60% largeur */}
+            <div className="max-w-[60%]">
+              {/* Nom */}
+              <motion.h1
+                className="font-[900] text-[#0B1220] leading-[1.05] tracking-[-0.02em] mb-4"
+                style={{ 
+                  fontFamily: 'Inter',
+                  fontSize: 'clamp(48px, 6vw, 64px)'
+                }}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.06, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Ivan de Murard
+              </motion.h1>
 
-                {/* Desktop buttons */}
-                <motion.div
-                  className="mt-5 flex gap-3"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.5 }}
+              {/* Tagline */}
+              <motion.p
+                className="font-[800] text-[#667085] leading-[1.10] tracking-[-0.01em] mb-8"
+                style={{ 
+                  fontFamily: 'Inter',
+                  fontSize: 'clamp(32px, 4vw, 44px)'
+                }}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.12, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Zero-to-One Product Manager
+              </motion.p>
+
+              {/* Description paragraphe 1 */}
+              <motion.p
+                className="text-base text-[#667085] leading-[1.6] max-w-[600px] mb-6"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.18, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Hospitality and retail taught me the importance of a great experience.
+              </motion.p>
+
+              {/* Description paragraphe 2 */}
+              <motion.p
+                className="text-base text-[#667085] leading-[1.6] max-w-[600px] mb-10"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.24, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                My data-driven and entrepreneurial journey shaped my analytical and pragmatic mindset.
+              </motion.p>
+
+              {/* CTA Buttons */}
+              <motion.div
+                className="flex flex-row gap-4 items-start"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.30, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {/* Bouton primaire */}
+                <Button
+                  onClick={() => scrollToSection("work")}
+                  className="bg-[#065f46] text-white px-8 py-[14px] rounded-2xl text-base font-medium border-none cursor-pointer transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:translate-y-[-2px] hover:shadow-[0_12px_24px_-8px_rgba(6,95,70,0.25)]"
                 >
-                  <Button
-                    size="default"
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                    onClick={() => scrollToSection("work")}
-                  >
-                    Discover my projects
-                  </Button>
-                  <Button
-                    size="default"
-                    className="bg-contact hover:bg-white text-contact-foreground hover:text-contact border-2 border-white hover:border-contact transition-colors duration-300"
-                    onClick={() => scrollToSection("contact")}
-                  >
-                    Let's meet!
-                  </Button>
-                </motion.div>
-              </div>
+                  View my work
+                </Button>
 
-              {/* Right: photo */}
-              <div className="flex justify-center md:justify-end">
-                <div className="w-full max-w-[220px]">
-                  <motion.figure
-                    aria-label="Portrait Ivan de Murard"
-                    className="relative aspect-square w-full rounded-2xl overflow-hidden shadow-xl"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.3, duration: 0.6 }}
-                    whileHover={{ scale: 1.015, transition: { duration: 0.2 } }}
-                  >
-                    <img
-                      src="/img/profile_picture.jpg"
-                      alt="Ivan de Murard — Product Manager"
-                      className="h-full w-full object-cover"
-                      loading="eager"
-                      decoding="async"
-                    />
-                  </motion.figure>
-                  <p className="text-sm text-muted-foreground text-center mt-3">Usually replies in &lt;24h</p>
-                </div>
-              </div>
+                {/* Lien secondaire */}
+                <button
+                  onClick={() => scrollToSection("contact")}
+                  className="text-[#065f46] text-base font-medium bg-transparent border-none cursor-pointer transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:text-[#065f46] hover:underline"
+                >
+                  Get in touch →
+                </button>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Scroll hint - hors carte */}
+          {/* Version Mobile */}
+          <div className="md:hidden">
+            {/* Photo centrée en haut */}
+            <motion.div
+              className="w-[100px] h-[100px] mx-auto mb-8"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <img
+                src="/img/profile_picture.jpg"
+                alt="Ivan de Murard"
+                className="w-full h-full object-cover rounded-full border-[3px] border-white/90 shadow-[0_6px_20px_-8px_rgba(0,0,0,0.15)]"
+              />
+            </motion.div>
+
+            {/* Contenu centré */}
+            <div className="text-center">
+              {/* Nom */}
+              <motion.h1
+                className="text-5xl font-[900] text-[#0B1220] leading-[1.05] tracking-[-0.02em] mb-4"
+                style={{ fontFamily: 'Inter' }}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.06, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Ivan de Murard
+              </motion.h1>
+
+              {/* Tagline */}
+              <motion.p
+                className="text-[32px] font-[800] text-[#667085] leading-[1.10] tracking-[-0.01em] mb-8"
+                style={{ fontFamily: 'Inter' }}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.12, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Zero-to-One Product Manager
+              </motion.p>
+
+              {/* Description paragraphe 1 */}
+              <motion.p
+                className="text-base text-[#667085] leading-[1.6] mb-6"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.18, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Hospitality and retail taught me the importance of a great experience.
+              </motion.p>
+
+              {/* Description paragraphe 2 */}
+              <motion.p
+                className="text-base text-[#667085] leading-[1.6] mb-10"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.24, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                My data-driven and entrepreneurial journey shaped my analytical and pragmatic mindset.
+              </motion.p>
+
+              {/* CTA Buttons en colonne */}
+              <motion.div
+                className="flex flex-col gap-3"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.30, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {/* Bouton primaire */}
+                <Button
+                  onClick={() => scrollToSection("work")}
+                  className="w-full bg-[#065f46] text-white px-8 py-[14px] rounded-2xl text-base font-medium border-none"
+                >
+                  View my work
+                </Button>
+
+                {/* Lien secondaire */}
+                <button
+                  onClick={() => scrollToSection("contact")}
+                  className="w-full text-[#065f46] text-base font-medium bg-transparent border-none cursor-pointer hover:underline"
+                >
+                  Get in touch →
+                </button>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Scroll hint */}
           <motion.div
             className="mt-8 mb-4 flex justify-center"
             initial={{ opacity: 0 }}
