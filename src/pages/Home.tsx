@@ -373,19 +373,6 @@ export const Home: React.FC = () => {
           
           {/* Version Desktop */}
           <div className="hidden md:block">
-            {/* Photo - Position absolute top-right */}
-          <motion.div
-            className="absolute top-0 right-[calc(40%-80px)] w-[120px] h-[120px]"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          >
-              <img
-                src="/img/profile_picture.jpg"
-                alt="Ivan de Murard"
-                className="w-full h-full object-cover rounded-full border-[3px] border-white/90 dark:border-white/20 shadow-[0_6px_20px_-8px_rgba(0,0,0,0.15)] dark:shadow-[0_6px_20px_-8px_rgba(0,0,0,0.4)] saturate-[0.9] brightness-[1.02] transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105 hover:saturate-100"
-              />
-            </motion.div>
 
             {/* Contenu texte - 60% largeur */}
             <div className="max-w-[60%]">
@@ -465,19 +452,6 @@ export const Home: React.FC = () => {
 
           {/* Version Mobile */}
           <div className="md:hidden">
-            {/* Photo centrée en haut */}
-            <motion.div
-              className="w-[100px] h-[100px] mx-auto mb-8"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <img
-                src="/img/profile_picture.jpg"
-                alt="Ivan de Murard"
-                className="w-full h-full object-cover rounded-full border-[3px] border-white/90 dark:border-white/20 shadow-[0_6px_20px_-8px_rgba(0,0,0,0.15)] dark:shadow-[0_6px_20px_-8px_rgba(0,0,0,0.4)]"
-              />
-            </motion.div>
 
             {/* Contenu centré */}
             <div className="text-center">
