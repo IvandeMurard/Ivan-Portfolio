@@ -1005,11 +1005,11 @@ export const Home: React.FC = () => {
             label: "Discover the case study!",
             href:
               selectedProject.id === "sonor"
-                ? "/sonor"
+                ? "/case-study/sonor"
                 : selectedProject.id === "wttj-conversion-seniors"
                   ? "/cases/wttj"
                   : selectedProject.id === "agents-eval"
-                    ? "/cases/agents-eval"
+                    ? "/case-study/agents-eval"
                     : selectedProject.id === "agentic-hospitality"
                       ? "#"
                       : "#",

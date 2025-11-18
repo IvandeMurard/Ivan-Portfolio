@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
   server: {
-    host: "::",
+    host: "localhost",
     port: 3456,
     strictPort: false, // Si 3456 est occupé, prend automatiquement le suivant
     open: true, // Ouvre le navigateur automatiquement
