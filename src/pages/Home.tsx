@@ -353,9 +353,9 @@ export const Home: React.FC = () => {
       {/* Hero Section */}
       <section
         id="hero"
-        className="px-4 py-16 md:py-24 relative overflow-visible"
+        className="px-4 py-12 md:py-16 relative overflow-visible"
         style={{
-          background: 'radial-gradient(ellipse at center, #F8FAFC 0%, #FAFAFA 100%)',
+          background: 'radial-gradient(ellipse at center, hsl(var(--background)) 0%, hsl(var(--secondary)) 100%)',
         }}
       >
         {/* Grain texture overlay - ultra-légère */}
@@ -369,13 +369,13 @@ export const Home: React.FC = () => {
         </div>
 
         {/* Container principal */}
-        <div className="mx-auto max-w-[1400px] w-full relative" style={{ padding: 'clamp(24px, 6vw, 120px)' }}>
+        <div className="mx-auto max-w-[1400px] w-full relative" style={{ padding: 'clamp(24px, 4vw, 80px)' }}>
           
           {/* Version Desktop */}
           <div className="hidden md:block">
             {/* Photo - Position absolute top-right */}
           <motion.div
-            className="absolute top-2 right-0 w-[120px] h-[120px]"
+            className="absolute top-0 right-[calc(40%-80px)] w-[120px] h-[120px]"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -383,7 +383,7 @@ export const Home: React.FC = () => {
               <img
                 src="/img/profile_picture.jpg"
                 alt="Ivan de Murard"
-                className="w-full h-full object-cover rounded-full border-[3px] border-white/90 shadow-[0_6px_20px_-8px_rgba(0,0,0,0.15)] saturate-[0.9] brightness-[1.02] transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105 hover:saturate-100"
+                className="w-full h-full object-cover rounded-full border-[3px] border-white/90 dark:border-white/20 shadow-[0_6px_20px_-8px_rgba(0,0,0,0.15)] dark:shadow-[0_6px_20px_-8px_rgba(0,0,0,0.4)] saturate-[0.9] brightness-[1.02] transition-all duration-[280ms] ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105 hover:saturate-100"
               />
             </motion.div>
 
@@ -391,7 +391,7 @@ export const Home: React.FC = () => {
             <div className="max-w-[60%]">
               {/* Nom */}
               <motion.h1
-                className="font-[900] text-[#0B1220] leading-[1.05] tracking-[-0.02em] mb-4"
+                className="font-[900] text-foreground leading-[1.05] tracking-[-0.02em] mb-4"
                 style={{ 
                   fontFamily: 'Inter',
                   fontSize: 'clamp(48px, 6vw, 64px)'
@@ -405,7 +405,7 @@ export const Home: React.FC = () => {
 
               {/* Tagline */}
               <motion.p
-                className="font-[800] text-[#667085] leading-[1.10] tracking-[-0.01em] mb-8"
+                className="font-[800] text-description leading-[1.10] tracking-[-0.01em] mb-6"
                 style={{ 
                   fontFamily: 'Inter',
                   fontSize: 'clamp(32px, 4vw, 44px)'
@@ -419,7 +419,7 @@ export const Home: React.FC = () => {
 
               {/* Description paragraphe 1 */}
               <motion.p
-                className="text-base text-[#667085] leading-[1.6] max-w-[600px] mb-6"
+                className="text-base text-description leading-[1.6] max-w-[600px] mb-4"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.18, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -429,7 +429,7 @@ export const Home: React.FC = () => {
 
               {/* Description paragraphe 2 */}
               <motion.p
-                className="text-base text-[#667085] leading-[1.6] max-w-[600px] mb-10"
+                className="text-base text-description leading-[1.6] max-w-[600px] mb-6"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.24, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -439,7 +439,7 @@ export const Home: React.FC = () => {
 
               {/* CTA Buttons */}
               <motion.div
-                className="flex flex-row gap-4 items-start"
+                className="flex flex-row gap-4 items-center"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.30, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -475,7 +475,7 @@ export const Home: React.FC = () => {
               <img
                 src="/img/profile_picture.jpg"
                 alt="Ivan de Murard"
-                className="w-full h-full object-cover rounded-full border-[3px] border-white/90 shadow-[0_6px_20px_-8px_rgba(0,0,0,0.15)]"
+                className="w-full h-full object-cover rounded-full border-[3px] border-white/90 dark:border-white/20 shadow-[0_6px_20px_-8px_rgba(0,0,0,0.15)] dark:shadow-[0_6px_20px_-8px_rgba(0,0,0,0.4)]"
               />
             </motion.div>
 
@@ -483,7 +483,7 @@ export const Home: React.FC = () => {
             <div className="text-center">
               {/* Nom */}
               <motion.h1
-                className="text-5xl font-[900] text-[#0B1220] leading-[1.05] tracking-[-0.02em] mb-4"
+                className="text-5xl font-[900] text-foreground leading-[1.05] tracking-[-0.02em] mb-4"
                 style={{ fontFamily: 'Inter' }}
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -494,7 +494,7 @@ export const Home: React.FC = () => {
 
               {/* Tagline */}
               <motion.p
-                className="text-[32px] font-[800] text-[#667085] leading-[1.10] tracking-[-0.01em] mb-8"
+                className="text-[32px] font-[800] text-description leading-[1.10] tracking-[-0.01em] mb-4"
                 style={{ fontFamily: 'Inter' }}
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -505,7 +505,7 @@ export const Home: React.FC = () => {
 
               {/* Description paragraphe 1 */}
               <motion.p
-                className="text-base text-[#667085] leading-[1.6] mb-6"
+                className="text-base text-description leading-[1.6] mb-3"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.18, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -515,7 +515,7 @@ export const Home: React.FC = () => {
 
               {/* Description paragraphe 2 */}
               <motion.p
-                className="text-base text-[#667085] leading-[1.6] mb-10"
+                className="text-base text-description leading-[1.6] mb-5"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.24, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -525,7 +525,7 @@ export const Home: React.FC = () => {
 
               {/* CTA Buttons en colonne */}
               <motion.div
-                className="flex flex-col gap-3"
+                className="flex flex-col gap-3 items-center"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.30, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -551,7 +551,7 @@ export const Home: React.FC = () => {
 
           {/* Scroll hint */}
           <motion.div
-            className="mt-8 mb-4 flex justify-center"
+            className="mt-4 mb-2 flex justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.5 }}
@@ -568,7 +568,7 @@ export const Home: React.FC = () => {
         </div>
 
         {/* Marquee Banner - à cheval sur Hero et Work */}
-        <div className="absolute left-0 right-0 -bottom-[26px] z-30">
+        <div className="absolute left-0 right-0 -bottom-[32px] z-30">
           <div className="relative section-border-gradient bg-gradient-to-r from-background via-card/20 to-background after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-border/25 after:to-transparent dark:after:via-border/20 shadow-lg">
             <MarqueeBanner
               phrases={[
@@ -580,7 +580,7 @@ export const Home: React.FC = () => {
               speed={0.65}
               pauseOnHover
               ariaLabel="Highlights"
-              className="py-3 max-w-[1360px] mx-auto px-4"
+              className="py-5 max-w-[1360px] mx-auto px-4"
             />
           </div>
         </div>

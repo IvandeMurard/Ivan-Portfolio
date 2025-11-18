@@ -51,6 +51,7 @@ export default {
           DEFAULT: "hsl(var(--contact))",
           foreground: "hsl(var(--contact-foreground))",
         },
+        description: "hsl(var(--description))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
