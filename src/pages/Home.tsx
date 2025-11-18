@@ -358,6 +358,52 @@ export const Home: React.FC = () => {
           background: 'radial-gradient(ellipse at center, hsl(var(--background)) 0%, hsl(var(--secondary)) 100%)',
         }}
       >
+        {/* Animated gradient background pattern */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none overflow-hidden"
+          style={{
+            opacity: 0.04,
+          }}
+        >
+          <motion.div
+            className="absolute inset-0 dark:opacity-[1.3]"
+            style={{
+              background: 'radial-gradient(circle at 20% 50%, hsl(var(--accent)) 0%, transparent 50%), radial-gradient(circle at 80% 50%, hsl(var(--accent)) 0%, transparent 50%), radial-gradient(circle at 50% 20%, hsl(var(--accent)) 0%, transparent 50%)',
+              backgroundSize: '200% 200%',
+            }}
+            animate={{
+              backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+        </motion.div>
+        
+        {/* Animated mesh gradient overlay */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.06, 0.1, 0.06],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        >
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(ellipse 800px 600px at 50% 50%, hsl(var(--accent)) 0%, transparent 50%)',
+              opacity: 0.08,
+            }}
+          />
+        </motion.div>
+
         {/* Grain texture overlay - ultra-légère */}
         <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.02 }}>
           <svg className="w-[105%] h-[105%] absolute -top-[2.5%] -left-[2.5%]">
@@ -373,9 +419,8 @@ export const Home: React.FC = () => {
           
           {/* Version Desktop */}
           <div className="hidden md:block">
-
-            {/* Contenu texte - 60% largeur */}
-            <div className="max-w-[60%]">
+            {/* Contenu texte - full width */}
+            <div className="max-w-full">
               {/* Nom */}
               <motion.h1
                 className="font-[900] text-foreground leading-[1.05] tracking-[-0.02em] mb-4"
@@ -406,7 +451,7 @@ export const Home: React.FC = () => {
 
               {/* Description paragraphe 1 */}
               <motion.p
-                className="text-base text-description leading-[1.6] max-w-[600px] mb-4"
+                className="text-base text-description leading-[1.6] max-w-[800px] mb-4"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.18, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -416,7 +461,7 @@ export const Home: React.FC = () => {
 
               {/* Description paragraphe 2 */}
               <motion.p
-                className="text-base text-description leading-[1.6] max-w-[600px] mb-6"
+                className="text-base text-description leading-[1.6] max-w-[800px] mb-6"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.24, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
@@ -452,7 +497,6 @@ export const Home: React.FC = () => {
 
           {/* Version Mobile */}
           <div className="md:hidden">
-
             {/* Contenu centré */}
             <div className="text-center">
               {/* Nom */}
