@@ -587,7 +587,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Work Section */}
-      <section id="work" className="relative pt-24 md:pt-28 pb-16 md:pb-20 px-4 bg-background section-border-gradient">
+      <section id="work" className="relative pt-24 md:pt-28 pb-16 md:pb-20 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
             <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">WORK</p>
@@ -758,7 +758,7 @@ export const Home: React.FC = () => {
       />
 
       {/* Experience & Education Section - Left Aligned */}
-      <section id="experience" className="py-24 px-4 section-border-gradient">
+      <section id="experience" className="py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <SectionHeader kicker="BACKGROUND" title="Experience & Education" alignment="left" className="mb-8" />
 
