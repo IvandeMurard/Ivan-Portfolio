@@ -48,11 +48,33 @@ export default function MarqueeBanner({
         )}
         style={{ animation: `mdm-marquee ${duration}s linear infinite` }}
       >
-        {loop.map((p, i) => (
-          <span key={`${p}-${i}`} className="text-sm md:text-[15px] text-muted-foreground">
-            {p}
-          </span>
-        ))}
+        {loop.map((p, i) => {
+          // Détection des stats (commence par chiffre)
+          const isStatNumber = /^\d+/.test(p);
+          // Détection des séparateurs (étoile)
+          const isSeparator = p === "✱";
+          
+          return (
+            <span 
+              key={`${p}-${i}`} 
+              className={clsx(
+                "text-sm md:text-base font-medium whitespace-nowrap",
+                isSeparator && "text-[#22c55e] text-2xl leading-none",
+                isStatNumber && "font-semibold",
+                !isSeparator && !isStatNumber && "text-gray-400 dark:text-gray-400"
+              )}
+            >
+              {p.split('/').map((part, idx) => {
+                const trimmed = part.trim();
+                if (/^\d+\+?$/.test(trimmed)) {
+                  // C'est un nombre -> vert vif
+                  return <span key={idx} className="text-[#22c55e] font-bold">{trimmed}</span>;
+                }
+                return <span key={idx}>{idx > 0 ? ' / ' : ''}{part}</span>;
+              })}
+            </span>
+          );
+        })}
       </div>
 
       {/* animation locale + reduced motion */}

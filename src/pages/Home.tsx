@@ -727,18 +727,23 @@ export const Home: React.FC = () => {
 
         {/* Marquee Banner - à cheval sur Hero et Work */}
         <div className="absolute left-0 right-0 -bottom-[32px] z-30">
-          <div className="relative section-border-gradient bg-gradient-to-r from-background via-card/20 to-background after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-border/25 after:to-transparent dark:after:via-border/20 shadow-lg">
+          <div className="relative bg-[#0A0A0A] dark:bg-[#0A0A0A] border-t border-b border-border/20">
             <MarqueeBanner
               phrases={[
-                "Welcome",
-                "AI-assisted product building",
-                "Hands-on PM across design, data & GTM",
-                "Paris • Open to remote",
+                "30+ / satisfied clients",
+                "✱",
+                "55+ / projects finished",
+                "✱",
+                "6+ / years of experience",
+                "✱",
+                "AI-first product approach",
+                "✱",
+                "Paris • Remote-friendly",
               ]}
-              speed={0.65}
+              speed={0.45}
               pauseOnHover
-              ariaLabel="Highlights"
-              className="py-5 max-w-[1360px] mx-auto px-4"
+              ariaLabel="Key achievements"
+              className="py-6 max-w-[1360px] mx-auto px-4"
             />
           </div>
         </div>
