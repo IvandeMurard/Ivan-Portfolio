@@ -6,6 +6,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { InlineExpand } from "@/components/InlineExpand";
 import { Plus, Volume2, Play, Pause, X, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 
 // ============= COMPOSANT TERM EXPLAIN =============
 export const TermExplain = ({ term, children }: { term: string; children: React.ReactNode }) => {
@@ -116,278 +117,149 @@ export const ExpandSection = ({
 
 // ============= COMPOSANT BANDEAU AUDIO =============
 export const BandeauAudio = ({ language }: { language: string }) => {
-  const [isFixed, setIsFixed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(240);
+  const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [isDark, setIsDark] = useState(
-    document.documentElement.classList.contains("dark")
-  );
 
-  // Detect theme changes
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-    return () => observer.disconnect();
-  }, []);
-
-  // Audio event listeners
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
-    const handleLoadedMetadata = () => setDuration(audio.duration);
-    const handlePlay = () => setIsPlaying(true);
-    const handlePause = () => setIsPlaying(false);
-    const handleEnded = () => {
-      setIsPlaying(false);
-      setCurrentTime(0);
-    };
+    const updateTime = () => setCurrentTime(audio.currentTime);
+    const updateDuration = () => setDuration(audio.duration);
 
-    audio.addEventListener("timeupdate", handleTimeUpdate);
-    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
-    audio.addEventListener("play", handlePlay);
-    audio.addEventListener("pause", handlePause);
-    audio.addEventListener("ended", handleEnded);
+    audio.addEventListener('timeupdate', updateTime);
+    audio.addEventListener('loadedmetadata', updateDuration);
 
     return () => {
-      audio.removeEventListener("timeupdate", handleTimeUpdate);
-      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
-      audio.removeEventListener("play", handlePlay);
-      audio.removeEventListener("pause", handlePause);
-      audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener('timeupdate', updateTime);
+      audio.removeEventListener('loadedmetadata', updateDuration);
     };
   }, []);
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs.toString().padStart(2, "0")}`;
-  };
-
-  const handleInitialClick = async () => {
+  const handlePlayPause = () => {
     if (audioRef.current) {
-      try {
-        await audioRef.current.play();
-        setIsFixed(true);
-      } catch (error) {
-        console.error("Audio playback failed:", error);
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
       }
+      setIsPlaying(!isPlaying);
     }
   };
 
-  const togglePlayPause = async () => {
-    if (!audioRef.current) return;
-    
-    if (isPlaying) {
-      audioRef.current.pause();
-    } else {
-      try {
-        await audioRef.current.play();
-      } catch (error) {
-        console.error("Audio playback failed:", error);
-      }
-    }
-  };
+  const audioSrc = language === 'fr' 
+    ? "/audio/sonor-summary-fr.mp3" 
+    : "/audio/sonor-summary-en.mp3";
 
-  const handleClose = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-    setIsFixed(false);
-    setIsPlaying(false);
-    setCurrentTime(0);
-  };
-
-  const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
-  const circumference = 2 * Math.PI * 23;
-  const strokeDashoffset = circumference * (1 - currentTime / duration);
+  // Calculate time remaining
+  const timeRemaining = Math.ceil(duration - currentTime);
+  const minutesRemaining = Math.floor(timeRemaining / 60);
+  const secondsRemaining = timeRemaining % 60;
+  const formattedTime = `${minutesRemaining}:${secondsRemaining.toString().padStart(2, '0')}`;
 
   return (
     <>
-      <audio ref={audioRef} src="/medianesrineexcerpt.mp3" preload="metadata" />
-
-      {!isFixed ? (
-        // État 1 : Bouton initial (inline) - Enhanced visibility
-        <button
-          onClick={handleInitialClick}
-          className="inline-flex items-center gap-3 px-8 py-4
-            bg-gradient-to-r from-accent/20 to-accent/10
-            backdrop-blur-md 
-            border-2 border-accent/40
-            rounded-full
-            shadow-lg shadow-accent/20
-            hover:shadow-xl hover:shadow-accent/30
-            hover:scale-105 hover:border-accent/60
-            transition-all duration-300
-            text-foreground font-semibold text-base
-            cursor-pointer"
-          aria-label={language === "fr" ? "Lancer la lecture audio" : "Start audio playback"}
-        >
-          <Volume2 className="w-6 h-6 text-accent" />
-          <span>
-            {language === "fr" ? "🎧 Écouter le résumé (4 min)" : "🎧 Listen to summary (4 min)"}
-          </span>
-        </button>
-      ) : (
-        // État 2 : Bouton fixe rond + Mini player
-        <>
+      {/* Main audio banner */}
+      <div className="w-full max-w-6xl mx-auto p-6 bg-accent/5 border border-accent/20 rounded-2xl hover:bg-accent/10 transition-all relative">
+        <div className="flex items-center gap-6">
+          {/* Play button */}
           <button
-            onClick={togglePlayPause}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            className="fixed right-4 bottom-[152px] z-40 w-[52px] h-[52px] md:w-[52px] md:h-[52px] 
-              rounded-full transition-all duration-300 cursor-pointer
-              hover:scale-105"
-            style={{
-              background: isDark 
-                ? "rgba(15, 23, 42, 0.6)" 
-                : "rgba(255, 255, 255, 0.85)",
-              backdropFilter: "blur(20px) saturate(180%)",
-              WebkitBackdropFilter: "blur(20px) saturate(180%)",
-              border: isDark 
-                ? "1px solid rgba(255, 255, 255, 0.2)" 
-                : "1px solid rgba(0, 0, 0, 0.15)",
-              boxShadow: isDark
-                ? "0 4px 16px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
-                : "0 6px 20px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 1)"
-            }}
-            role="button"
-            aria-label={
-              isPlaying 
-                ? `${language === "fr" ? "Pause" : "Pause"} - ${formatTime(currentTime)} / ${formatTime(duration)}`
-                : `${language === "fr" ? "Lecture" : "Play"} - ${formatTime(currentTime)} / ${formatTime(duration)}`
-            }
-            aria-pressed={isPlaying}
-            aria-live="polite"
-            tabIndex={0}
+            onClick={handlePlayPause}
+            className="flex-shrink-0 w-14 h-14 rounded-full bg-accent hover:bg-accent/90 flex items-center justify-center transition-all shadow-lg"
+            aria-label={isPlaying ? "Pause" : "Play"}
           >
-            {/* Progress ring SVG */}
-            <svg className="absolute inset-0 w-full h-full -rotate-90">
-              <circle
-                cx="26"
-                cy="26"
-                r="23"
-                stroke={isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)"}
-                strokeWidth="2"
-                fill="none"
-              />
-              <circle
-                cx="26"
-                cy="26"
-                r="23"
-                stroke="hsl(var(--accent))"
-                strokeWidth="2"
-                fill="none"
-                strokeDasharray={circumference}
-                strokeDashoffset={strokeDashoffset}
-                strokeLinecap="round"
-                className="transition-all duration-300"
-              />
-            </svg>
-
-            {/* Icône Volume */}
-            <Volume2 
-              className={`w-5 h-5 relative z-10 transition-all ${
-                isPlaying ? "animate-pulse text-accent" : "text-foreground"
-              }`} 
-            />
+            {isPlaying ? (
+              <Pause className="w-6 h-6 text-white" />
+            ) : (
+              <Play className="w-6 h-6 text-white ml-0.5" />
+            )}
           </button>
 
-          {/* Mini Player Slide-Out (Desktop only) */}
-          {isHovered && (
-            <div
-              className="hidden md:block fixed right-[72px] bottom-[152px] z-40 
-                w-80 rounded-2xl p-4
-                transition-all duration-300"
-              style={{
-                background: isDark 
-                  ? "rgba(15, 23, 42, 0.95)" 
-                  : "rgba(255, 255, 255, 0.95)",
-                backdropFilter: "blur(20px) saturate(180%)",
-                WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                border: isDark 
-                  ? "1px solid rgba(255, 255, 255, 0.2)" 
-                  : "1px solid rgba(0, 0, 0, 0.15)",
-                boxShadow: isDark
-                  ? "0 8px 32px rgba(0, 0, 0, 0.5)"
-                  : "0 8px 32px rgba(0, 0, 0, 0.15)",
-                animation: "slideInFromRight 0.3s ease-out"
-              }}
-            >
-              <div className="flex items-center gap-3">
-                {/* Play/Pause button */}
-                <button
-                  onClick={togglePlayPause}
-                  className="flex-shrink-0 w-10 h-10 rounded-full 
-                    bg-accent/20 hover:bg-accent/30 
-                    flex items-center justify-center transition-colors"
-                  aria-label={isPlaying ? (language === "fr" ? "Pause" : "Pause") : (language === "fr" ? "Lecture" : "Play")}
-                >
-                  {isPlaying ? (
-                    <Pause className="w-5 h-5 text-accent" />
-                  ) : (
-                    <Play className="w-5 h-5 text-accent ml-0.5" />
-                  )}
-                </button>
+          {/* Content */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <Volume2 className="w-5 h-5 text-accent" />
+              <span className="text-sm font-semibold text-accent uppercase tracking-wider">
+                {language === 'fr' ? "Version Audio" : "Audio Summary"}
+              </span>
+            </div>
+            <p className="text-base text-foreground/80">
+              {language === 'fr'
+                ? "Écoutez le résumé du projet Sonor"
+                : "Listen to the Sonor project summary"
+              }
+            </p>
+          </div>
 
-                {/* Info & Progress bar */}
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold truncate text-foreground">
-                    {language === "fr" ? "Résumé audio" : "Audio summary"}
-                  </p>
-
-                  {/* Progress bar */}
-                  <div className="mt-2 h-1 bg-accent/20 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-accent transition-all duration-300"
-                      style={{ width: `${progressPercent}%` }}
-                    />
-                  </div>
-
-                  {/* Time display */}
-                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                    <span>{formatTime(currentTime)}</span>
-                    <span>{formatTime(duration)}</span>
-                  </div>
-                </div>
-
-                {/* Close button */}
-                <button
-                  onClick={handleClose}
-                  className="flex-shrink-0 w-8 h-8 rounded-full 
-                    hover:bg-accent/20 flex items-center justify-center transition-colors"
-                  aria-label={language === "fr" ? "Fermer" : "Close"}
-                >
-                  <X className="w-4 h-4 text-foreground" />
-                </button>
+          {/* Waveform visualization - center */}
+          {isPlaying && (
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+              <div className="flex items-end gap-1 h-12">
+                {[...Array(12)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="w-1 bg-accent/60 rounded-full"
+                    animate={{
+                      height: ["20%", "100%", "20%"],
+                    }}
+                    transition={{
+                      duration: 0.8,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: i * 0.1,
+                    }}
+                  />
+                ))}
               </div>
             </div>
           )}
-        </>
-      )}
 
-      <style>{`
-        @keyframes slideInFromRight {
-          from {
-            opacity: 0;
-            transform: translateX(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
+          {/* Duration - updated to show time remaining */}
+          <div className="flex-shrink-0 text-right">
+            <div className="text-2xl font-bold text-accent">
+              {isPlaying ? formattedTime : (language === 'fr' ? "2 min" : "2 min")}
+            </div>
+            <div className="text-sm text-muted-foreground">
+              {isPlaying 
+                ? (language === 'fr' ? "restant" : "left")
+                : (language === 'fr' ? "durée" : "duration")
+              }
+            </div>
+          </div>
+        </div>
+
+        {/* Hidden audio element */}
+        <audio
+          ref={audioRef}
+          src={audioSrc}
+          onEnded={() => {
+            setIsPlaying(false);
+            setCurrentTime(0);
+          }}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+        />
+      </div>
+
+      {/* Sticky floating player - repositioned above Tips */}
+      {isPlaying && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.8, y: 20 }}
+          className="fixed bottom-24 right-8 z-50"
+        >
+          <button
+            onClick={handlePlayPause}
+            className="w-16 h-16 rounded-full backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl flex items-center justify-center hover:bg-white/20 transition-all group"
+            aria-label="Pause audio"
+          >
+            <Pause className="w-7 h-7 text-accent group-hover:text-accent/80 transition-colors" />
+          </button>
+        </motion.div>
+      )}
     </>
   );
 };

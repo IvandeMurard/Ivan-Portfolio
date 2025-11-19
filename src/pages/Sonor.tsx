@@ -45,22 +45,13 @@ export default function SonorPage() {
   const { scrollY } = useScroll();
   const parallaxY = useTransform(scrollY, [0, 500], [0, 150]);
 
-  const title = language === 'fr'
-    ? "SONOR — Réduire la pollution sonore grâce à l'open data"
-    : "SONOR — Reducing noise pollution with open data";
-
-  const subtitle = language === 'fr'
-    ? "Deux ans d'entrepreneuriat : du hackathon au prototype, avec Matrice & la Banque des Territoires"
-    : "Two-year journey: from hackathon to prototype, with Matrice & Banque des Territoires";
-
-
   return (
     <div className="overflow-x-hidden">
       {/* Navigation */}
       <Navigation />
 
       {/* Hero Section with Parallax */}
-      <section className="relative h-[50vh] md:h-[60vh] overflow-hidden">
+      <section className="relative h-[30vh] md:h-[40vh] overflow-hidden">
         {/* Parallax background */}
         <motion.img
           src={sonorHero}
@@ -69,25 +60,25 @@ export default function SonorPage() {
           className="absolute inset-0 w-full h-[120%] object-cover"
         />
         
-        {/* Enhanced gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/40 to-black/90" />
+        {/* Lightened gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/5 via-black/20 to-black/70" />
         
-        {/* Centered content with CTA */}
-        <div className="absolute inset-0 flex flex-col justify-end items-center pb-16 text-center px-4">
+        {/* Simplified hero content */}
+        <div className="absolute inset-0 flex flex-col justify-end items-center pb-12 text-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="max-w-4xl"
           >
-            <p className="text-sm uppercase tracking-widest text-white/80 mb-4">
-              CASE STUDY — SONOR
-            </p>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
-              {title}
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 text-white">
+              SONOR
             </h1>
-            <p className="text-lg md:text-2xl text-white/90">
-              {subtitle}
+            <p className="text-lg md:text-xl text-white/90">
+              {language === 'fr' 
+                ? "Construire un SaaS B2G contre la pollution sonore — 2 ans d'apprentissage"
+                : "Building a B2G SaaS for noise pollution — 2-year journey"
+              }
             </p>
           </motion.div>
         </div>
