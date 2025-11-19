@@ -729,18 +729,15 @@ export const Home: React.FC = () => {
         <div className="absolute left-0 right-0 -bottom-[32px] z-30">
           <div className="relative bg-[#0A0A0A] dark:bg-[#0A0A0A] border-t border-b border-border/20">
             <MarqueeBanner
-              phrases={[
-                "30+ / satisfied clients",
-                "✱",
-                "55+ / projects finished",
-                "✱",
-                "6+ / years of experience",
-                "✱",
-                "AI-first product approach",
-                "✱",
-                "Paris • Remote-friendly",
-              ]}
-              speed={0.45}
+          phrases={[
+            "30+ / satisfied clients",
+            "✱",
+            "55+ / projects finished",
+            "✱",
+            "6+ / years of experience",
+            "✱",
+          ]}
+          speed={0.55}
               pauseOnHover
               ariaLabel="Key achievements"
               className="py-6 max-w-[1360px] mx-auto px-4"
