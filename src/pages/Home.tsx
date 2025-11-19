@@ -619,7 +619,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                From hospitality to AI: I care about scaling needed products and experiences.
+                From hospitality to AI: I ship fast friction-less products and experiences with AI expertise.
               </motion.p>
 
               {/* Proof Points */}
