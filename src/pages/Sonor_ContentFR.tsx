@@ -335,18 +335,10 @@ export const ContentFR = () => {
                 <p className="text-muted-foreground leading-relaxed">
                   {language === "fr"
                     ? "Permettre aux résidents de signaler les problèmes de bruit et suivre les réponses de la ville"
-<<<<<<< HEAD
-                    : "Empower residents to report noise issues and track city responses"}
-                </p>
-              </div>
-
-=======
                     : "Empower residents to report noise issues and track city responses"
                   }
-              </p>
-            </div>
-              
->>>>>>> 216a2fd (feat: ajout ProgressIndicator et section témoignages stakeholders au case study Sonor)
+                </p>
+              </div>
               {/* Feature 4: Impact measurement */}
               <div className="bg-card p-8 rounded-2xl border border-border hover:border-accent/30 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-6">
