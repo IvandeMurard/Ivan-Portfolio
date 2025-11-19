@@ -737,7 +737,7 @@ export const Home: React.FC = () => {
             "6+ / years of experience",
             "✱",
           ]}
-          speed={0.55}
+          speed={0.85}
               pauseOnHover
               ariaLabel="Key achievements"
               className="py-6 max-w-[1360px] mx-auto px-4"

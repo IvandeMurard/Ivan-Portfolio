@@ -25,7 +25,7 @@ export default function MarqueeBanner({
     return 60 / s; // ex: 60/0.15 ≈ 400s → très doux
   }, [speed]);
 
-  const loop = React.useMemo(() => [...phrases, ...phrases], [phrases]);
+  const loop = React.useMemo(() => [...phrases, ...phrases, ...phrases, ...phrases], [phrases]);
 
   return (
     <div
@@ -59,7 +59,7 @@ export default function MarqueeBanner({
               key={`${p}-${i}`} 
               className={clsx(
                 "text-sm md:text-base font-medium whitespace-nowrap",
-                isSeparator && "text-contact text-2xl leading-none",
+                isSeparator && "text-[#22c55e] text-2xl leading-none",
                 isStatNumber && "font-semibold",
                 !isSeparator && !isStatNumber && "text-gray-400 dark:text-gray-400"
               )}
@@ -67,8 +67,8 @@ export default function MarqueeBanner({
               {p.split('/').map((part, idx) => {
                 const trimmed = part.trim();
                 if (/^\d+\+?$/.test(trimmed)) {
-                  // C'est un nombre -> vert contact
-                  return <span key={idx} className="text-contact font-bold">{trimmed}</span>;
+                  // C'est un nombre -> vert vif
+                  return <span key={idx} className="text-[#22c55e] font-bold">{trimmed}</span>;
                 }
                 return <span key={idx}>{idx > 0 ? ' / ' : ''}{part}</span>;
               })}
@@ -81,7 +81,7 @@ export default function MarqueeBanner({
       <style>{`
         @keyframes mdm-marquee {
           from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+          to   { transform: translateX(-25%); }
         }
         @media (prefers-reduced-motion: reduce) {
           [aria-label="${ariaLabel}"] > div { animation: none !important; }
