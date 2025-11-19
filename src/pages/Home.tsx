@@ -174,13 +174,32 @@ const projects: Project[] = [
   },
 ];
 
-const filterChips = [
-  { id: "all", label: "All (6)" },
-  { id: "product", label: "Product (3)" }, // Sonor, WTTJ, On Air
-  { id: "experience", label: "Expérience (2)" }, // Spotify valence, Agentic Studio
-  { id: "agents", label: "Agents (2)" }, // Agents d'évaluation, Agentic Studio
-  { id: "automatisations", label: "Automatisations (0)" },
-];
+// Calculate filter chips dynamically based on projects
+const getFilterChips = (projects: Project[]) => {
+  const allCount = projects.length;
+  const productCount = projects.filter((p) => p.category === "product").length;
+  const experienceCount = projects.filter((p) => p.category === "experience").length;
+  const agentsCount = projects.filter(
+    (p) => p.category === "agents" || p.tags.some((tag) => tag.toLowerCase() === "agents"),
+  ).length;
+  const automatisationsCount = projects.filter(
+    (p) => p.category === "automatisations" || p.tags.some((tag) => tag.toLowerCase() === "automatisations"),
+  ).length;
+
+  const chips = [
+    { id: "all", label: `All (${allCount})` },
+    { id: "product", label: `Product (${productCount})` },
+    { id: "experience", label: `Expérience (${experienceCount})` },
+    { id: "agents", label: `Agents (${agentsCount})` },
+  ];
+
+  // Only include automatisations if there are projects with this tag/category
+  if (automatisationsCount > 0) {
+    chips.push({ id: "automatisations", label: `Automatisations (${automatisationsCount})` });
+  }
+
+  return chips;
+};
 
 const experienceFilterChips = [
   { id: "experiences", label: "Expériences" },
@@ -349,6 +368,9 @@ export const Home: React.FC = () => {
   const contactSectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
+  // Calculate filter chips dynamically
+  const filterChips = getFilterChips(projects);
+
   // Intersection Observer pour désactiver le sticky avant la section Contact
   useEffect(() => {
     const observerOptions = {
@@ -419,7 +441,7 @@ export const Home: React.FC = () => {
 
       <ProgressIndicator
         sections={[
-          { id: "hero", label: "Hero" },
+          { id: "hero", label: "Welcome" },
           { id: "work", label: "Work" },
           { id: "hackathons", label: "Hackathons" },
           { id: "experience", label: "Experience" },
@@ -751,10 +773,7 @@ export const Home: React.FC = () => {
       {/* Work Section */}
       <section id="work" className="relative pt-24 md:pt-28 pb-16 md:pb-20 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">WORK</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground">Work</h2>
-          </div>
+          <SectionHeader title="Work" alignment="left" className="mb-8" />
 
           <FilterChips
             chips={filterChips}
@@ -866,7 +885,7 @@ export const Home: React.FC = () => {
       {/* Hackathons Section - Left Aligned */}
       <section id="hackathons" className="py-24 px-4 bg-secondary">
         <div className="max-w-7xl mx-auto">
-          <SectionHeader kicker="COMPETITION" title="Hackathons" alignment="left" className="mb-12" />
+          <SectionHeader title="Hackathons" alignment="left" className="mb-12" />
 
           <div className="space-y-8">
             {hackathons.map((hack, index) => (
@@ -922,7 +941,7 @@ export const Home: React.FC = () => {
       {/* Experience & Education Section - Left Aligned */}
       <section id="experience" className="py-24 px-4">
         <div className="max-w-7xl mx-auto">
-          <SectionHeader kicker="BACKGROUND" title="Experience & Education" alignment="left" className="mb-8" />
+          <SectionHeader title="Experience & Education" alignment="left" className="mb-8" />
 
           <FilterChips
             chips={experienceFilterChips}
@@ -1122,14 +1141,14 @@ export const Home: React.FC = () => {
           </div>
 
           {/* Action A: Fix Dead End - Back to top CTA */}
-          <div className="mt-12 pt-8 border-t border-contact-foreground/20">
+          <div className="mt-12 pt-8 border-t border-contact-foreground/20 mb-2">
             <Button
               variant="ghost"
               size="lg"
               className="text-contact-foreground/80 hover:text-contact-foreground hover:bg-contact-foreground/10 transition-all duration-300"
               onClick={() => scrollToSection("hero")}
             >
-              ↑ Back to top
+              Back to top ↑
             </Button>
           </div>
         </div>

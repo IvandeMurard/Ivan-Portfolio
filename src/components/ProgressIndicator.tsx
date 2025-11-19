@@ -83,7 +83,9 @@ export function ProgressIndicator({ sections }: ProgressIndicatorProps) {
                 <span
                   className={`absolute right-6 whitespace-nowrap text-sm px-2 py-1 rounded-md transition-all duration-300 ${
                     isActive
-                      ? "opacity-100 translate-x-0 bg-primary/20 text-primary font-bold"
+                      ? section.id === "hero" || section.id === "contact"
+                        ? "opacity-100 translate-x-0 bg-white text-primary font-bold"
+                        : "opacity-100 translate-x-0 bg-primary/20 text-primary font-bold"
                       : "opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 group-focus-within:opacity-100 group-focus-within:translate-x-0 bg-background/95 text-foreground/80 font-medium"
                   }`}
                 >

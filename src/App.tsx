@@ -29,7 +29,7 @@ const App = () => (
             <FeedbackWidget
               provider={{ type: "form", url: "https://formspree.io/f/mqaywvpg" }}
               includeMeta={true}
-              nudge={{ enabled: true, delayMs: 25000, scrollPct: 0.8, exitIntent: true }}
+              nudge={{ enabled: true, delayMs: 25000, scrollPct: 0.8, exitIntent: false }}
             />
             <Routes>
               <Route path="/" element={<Home />} />

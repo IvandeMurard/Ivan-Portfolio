@@ -61,7 +61,6 @@ export function CommunitiesInspoResourcesTools({ disableSticky = false }: Commun
     <section id="resources" className="py-24 px-4 bg-secondary">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          kicker="WHAT DRIVES ME"
           title={sectionTitle}
           alignment="left"
           className="mb-8"
