@@ -51,24 +51,24 @@ export default function MarqueeBanner({
         {loop.map((p, i) => {
           // Détection des stats (commence par chiffre)
           const isStatNumber = /^\d+/.test(p);
-          // Détection des séparateurs (étoile)
-          const isSeparator = p === "✱";
+          // Détection des séparateurs (• ou ✱)
+          const isSeparator = p === "•" || p === "✱";
           
           return (
             <span 
               key={`${p}-${i}`} 
               className={clsx(
                 "text-sm md:text-base font-medium whitespace-nowrap",
-                isSeparator && "text-[#22c55e] text-2xl leading-none",
+                isSeparator && "text-primary text-xl leading-none",
                 isStatNumber && "font-semibold",
-                !isSeparator && !isStatNumber && "text-gray-400 dark:text-gray-400"
+                !isSeparator && !isStatNumber && "text-muted-foreground dark:text-muted-foreground"
               )}
             >
               {p.split('/').map((part, idx) => {
                 const trimmed = part.trim();
                 if (/^\d+\+?$/.test(trimmed)) {
-                  // C'est un nombre -> vert vif
-                  return <span key={idx} className="text-[#22c55e] font-bold">{trimmed}</span>;
+                  // C'est un nombre -> bleu primary
+                  return <span key={idx} className="text-primary font-bold">{trimmed}</span>;
                 }
                 return <span key={idx}>{idx > 0 ? ' / ' : ''}{part}</span>;
               })}
