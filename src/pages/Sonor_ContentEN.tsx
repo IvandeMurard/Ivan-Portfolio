@@ -13,8 +13,8 @@ import { TermExplain, ExpandSection, BandeauAudio, TabsApprofondir } from "./Son
 import { ScrollRevealSection } from "@/components/case/ScrollRevealSection";
 import { TimelineItem } from "@/components/case/TimelineItem";
 import { useLanguage } from "@/contexts/LanguageContext";
-import CountUp from 'react-countup';
-import { useInView } from 'react-intersection-observer';
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 
 // ============= TL;DR BLOCK EN =============
 export const TLDRBlockEN = () => (
@@ -103,75 +103,48 @@ export const ContentEN = () => {
       <div className="py-16 px-4 max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            {language === 'fr' 
+            {language === "fr"
               ? "Ce que construire un SaaS B2G m'a appris sur le product-market fit"
-              : "What building a B2G SaaS taught me about product-market fit"
-            }
+              : "What building a B2G SaaS taught me about product-market fit"}
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            {language === 'fr'
+            {language === "fr"
               ? "Un parcours de 2 ans (2020-2022) transformant l'open data en insights actionnables pour les villes — avant l'IA générative, quand le SaaS pour collectivités était un marché émergent."
-              : "A 2-year journey (2020-2022) transforming open data into actionable city insights — before generative AI, when SaaS for municipalities was still an emerging market."
-            }
+              : "A 2-year journey (2020-2022) transforming open data into actionable city insights — before generative AI, when SaaS for municipalities was still an emerging market."}
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-3 gap-6">
           <div className="p-8 bg-card rounded-2xl border border-border hover:border-accent/30 transition-all">
             <div className="text-accent text-5xl font-bold mb-3">
-              <CountUp
-                end={18}
-                duration={2}
-                separator=","
-                suffix="+"
-                enableScrollSpy
-                scrollSpyOnce
-              />
+              <CountUp end={18} duration={2} separator="," suffix="+" enableScrollSpy scrollSpyOnce />
             </div>
             <p className="text-muted-foreground text-base">
-              {language === 'fr'
+              {language === "fr"
                 ? "Mois moyens pour signer un premier contrat B2G"
-                : "Average months for first B2G contract signature"
-              }
+                : "Average months for first B2G contract signature"}
             </p>
           </div>
-          
+
           <div className="p-8 bg-card rounded-2xl border border-border hover:border-accent/30 transition-all">
             <div className="text-accent text-5xl font-bold mb-3">
-              <CountUp
-                end={20}
-                duration={2}
-                separator=","
-                suffix="+"
-                enableScrollSpy
-                scrollSpyOnce
-              />
+              <CountUp end={20} duration={2} separator="," suffix="+" enableScrollSpy scrollSpyOnce />
             </div>
             <p className="text-muted-foreground text-base">
-              {language === 'fr'
+              {language === "fr"
                 ? "Entretiens parties prenantes menés pour valider le product-market fit"
-                : "Stakeholder interviews conducted to validate product-market fit"
-              }
+                : "Stakeholder interviews conducted to validate product-market fit"}
             </p>
           </div>
-          
+
           <div className="p-8 bg-card rounded-2xl border border-border hover:border-accent/30 transition-all">
             <div className="text-accent text-5xl font-bold mb-3">
-              <CountUp
-                end={20}
-                duration={2.5}
-                separator=","
-                prefix="€"
-                suffix="K"
-                enableScrollSpy
-                scrollSpyOnce
-              />
+              <CountUp end={20} duration={2.5} separator="," prefix="€" suffix="K" enableScrollSpy scrollSpyOnce />
             </div>
             <p className="text-muted-foreground text-base">
-              {language === 'fr'
+              {language === "fr"
                 ? "Financement sécurisé via concours et incubation"
-                : "Secured funding through competitive grants and incubation"
-              }
+                : "Secured funding through competitive grants and incubation"}
             </p>
           </div>
         </div>
@@ -184,11 +157,7 @@ export const ContentEN = () => {
 
       {/* SONOR LOGO - NEW */}
       <div className="flex justify-center mb-10">
-        <img 
-          src="/img/logo_sonor.png" 
-          alt="Sonor logo" 
-          className="h-20 object-contain"
-        />
+        <img src="/img/logo_sonor.png" alt="Sonor logo" className="h-20 object-contain" />
       </div>
 
       {/* AUDIO BANNER */}
@@ -200,9 +169,9 @@ export const ContentEN = () => {
       <div id="context" className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
         <div className="max-w-6xl mx-auto space-y-12">
           <h2 className="text-h3 mb-12">
-            {language === 'fr' ? "Contexte : La Crise Invisible" : "Context: The Invisible Crisis"}
+            {language === "fr" ? "Contexte : La Crise Invisible" : "Context: The Invisible Crisis"}
           </h2>
-          
+
           {/* Stats grid - keep existing */}
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <div className="bg-card/80 backdrop-blur-sm p-6 rounded-2xl border border-border/50 hover:border-accent/30 transition-colors">
@@ -210,10 +179,9 @@ export const ContentEN = () => {
                 2nd
               </div>
               <div className="text-muted-foreground text-sm">
-                {language === 'fr'
+                {language === "fr"
                   ? "Source de nuisances urbaines en Europe (après la pollution de l'air)"
-                  : "Source of urban nuisances in Europe (after air pollution)"
-                }
+                  : "Source of urban nuisances in Europe (after air pollution)"}
               </div>
             </div>
             <div className="bg-card/80 backdrop-blur-sm p-6 rounded-2xl border border-border/50 hover:border-accent/30 transition-colors">
@@ -221,10 +189,9 @@ export const ContentEN = () => {
                 25M
               </div>
               <div className="text-muted-foreground text-sm">
-                {language === 'fr'
+                {language === "fr"
                   ? "Français exposés à des niveaux sonores excessifs (ANSES 2021)"
-                  : "French exposed to excessive noise levels (ANSES 2021)"
-                }
+                  : "French exposed to excessive noise levels (ANSES 2021)"}
               </div>
             </div>
             <div className="bg-card/80 backdrop-blur-sm p-6 rounded-2xl border border-border/50 hover:border-accent/30 transition-colors">
@@ -232,60 +199,69 @@ export const ContentEN = () => {
                 48K/year
               </div>
               <div className="text-muted-foreground text-sm">
-                {language === 'fr'
+                {language === "fr"
                   ? "Nouveaux cas de maladies cardiaques dus aux niveaux sonores excessifs (AEE 2025)"
-                  : "New cases of heart disease due to excessive noise levels (EEA 2025)"
-                }
+                  : "New cases of heart disease due to excessive noise levels (EEA 2025)"}
               </div>
             </div>
           </div>
-          
+
           {/* Two-column layout */}
           <div className="grid md:grid-cols-2 gap-12 items-start">
             {/* Left: Text content */}
             <div className="space-y-6">
               <p className="text-lg leading-relaxed">
-                {language === 'fr' ? (
-                  <><strong>20% de la population européenne</strong> est exposée à des niveaux sonores nocturnes dangereux pour la santé.</>
+                {language === "fr" ? (
+                  <>
+                    <strong>20% de la population européenne</strong> est exposée à des niveaux sonores nocturnes
+                    dangereux pour la santé.
+                  </>
                 ) : (
-                  <><strong>20% of the European population</strong> is exposed to dangerous nighttime noise levels for health.</>
+                  <>
+                    <strong>20% of the European population</strong> is exposed to dangerous nighttime noise levels for
+                    health.
+                  </>
                 )}
               </p>
               <p className="leading-relaxed">
-                {language === 'fr'
+                {language === "fr"
                   ? "Les impacts sanitaires sont multiples : troubles du sommeil, stress chronique, maladies cardiovasculaires, impacts cognitifs chez les enfants."
-                  : "Health impacts are multiple: sleep disorders, chronic stress, cardiovascular diseases, cognitive impacts in children."
-                }
+                  : "Health impacts are multiple: sleep disorders, chronic stress, cardiovascular diseases, cognitive impacts in children."}
               </p>
               <p className="leading-relaxed">
-                {language === 'fr' ? (
-                  <>Contrairement à la pollution de l'air, le bruit reste <strong>invisible</strong> et <strong>sous-adressé</strong> par les politiques publiques, malgré son coût social considérable.</>
+                {language === "fr" ? (
+                  <>
+                    Contrairement à la pollution de l'air, le bruit reste <strong>invisible</strong> et{" "}
+                    <strong>sous-adressé</strong> par les politiques publiques, malgré son coût social considérable.
+                  </>
                 ) : (
-                  <>Unlike air pollution, noise remains <strong>invisible</strong> and <strong>under-addressed</strong> by public policies, despite its considerable social cost.</>
+                  <>
+                    Unlike air pollution, noise remains <strong>invisible</strong> and <strong>under-addressed</strong>{" "}
+                    by public policies, despite its considerable social cost.
+                  </>
                 )}
               </p>
             </div>
-            
+
             {/* Right: Visual */}
             <div className="bg-card rounded-2xl p-6 border border-border shadow-sm">
-              <img 
-                src="/img/sonor-noise-thresholds.png" 
-                alt={language === 'fr' ? "Seuils de danger du bruit" : "Noise danger thresholds"} 
+              <img
+                src="/img/sonor-noise-thresholds.png"
+                alt={language === "fr" ? "Seuils de danger du bruit" : "Noise danger thresholds"}
                 className="w-full rounded-lg"
               />
               <p className="text-sm text-muted-foreground mt-4 text-center leading-relaxed">
-                {language === 'fr'
+                {language === "fr"
                   ? "Échelle des niveaux sonores et seuils de danger"
-                  : "Noise level scale and danger thresholds"
-                }
+                  : "Noise level scale and danger thresholds"}
               </p>
             </div>
           </div>
-          
+
           {/* Sources - redesigned */}
           <div className="mt-12 p-6 bg-muted/30 rounded-xl border border-border/30">
             <p className="text-sm font-semibold mb-3 text-muted-foreground">
-              {language === 'fr' ? "Sources des données :" : "Data sources:"}
+              {language === "fr" ? "Sources des données :" : "Data sources:"}
             </p>
             <div className="grid md:grid-cols-2 gap-x-8 gap-y-2 text-sm text-muted-foreground">
               <span>• WHO Europe (2018): Guidelines on noise</span>
@@ -303,19 +279,17 @@ export const ContentEN = () => {
           <div className="max-w-6xl mx-auto space-y-12">
             <div className="text-center max-w-3xl mx-auto">
               <h2 className="text-h3 mb-4">
-                {language === 'fr' 
+                {language === "fr"
                   ? "Du Problème à la Plateforme : Notre Hypothèse Produit"
-                  : "From Problem to Platform: Our Product Hypothesis"
-                }
+                  : "From Problem to Platform: Our Product Hypothesis"}
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                {language === 'fr'
+                {language === "fr"
                   ? "Face à ce constat, nous avons imaginé Sonor comme un outil permettant aux municipalités d'anticiper et d'agir sur la pollution sonore."
-                  : "Faced with this observation, we imagined Sonor as a tool enabling municipalities to anticipate and act on noise pollution."
-                }
+                  : "Faced with this observation, we imagined Sonor as a tool enabling municipalities to anticipate and act on noise pollution."}
               </p>
             </div>
-            
+
             {/* Feature cards grid */}
             <div className="grid md:grid-cols-2 gap-8 mt-12">
               {/* Feature 1: Real-time mapping */}
@@ -324,73 +298,57 @@ export const ContentEN = () => {
                   <MapPin className="w-7 h-7 text-accent" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">
-                  {language === 'fr'
-                    ? "Cartographie temps réel du bruit"
-                    : "Real-time noise mapping"
-                  }
+                  {language === "fr" ? "Cartographie temps réel du bruit" : "Real-time noise mapping"}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  {language === 'fr'
+                  {language === "fr"
                     ? "Transformer l'open data dispersé en visualisation actionnable des points chauds sonores"
-                    : "Transform scattered open data into actionable hotspot visualization"
-                  }
+                    : "Transform scattered open data into actionable hotspot visualization"}
                 </p>
               </div>
-              
+
               {/* Feature 2: Action plans */}
               <div className="bg-card p-8 rounded-2xl border border-border hover:border-accent/30 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-6">
                   <Target className="w-7 h-7 text-accent" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">
-                  {language === 'fr'
-                    ? "Plans d'action priorisés"
-                    : "Prioritized action plans"
-                  }
+                  {language === "fr" ? "Plans d'action priorisés" : "Prioritized action plans"}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  {language === 'fr'
+                  {language === "fr"
                     ? "Recommandations alimentées par l'IA pour les urbanistes afin de réduire efficacement le bruit"
-                    : "AI-powered recommendations for urban planners to reduce noise effectively"
-                  }
+                    : "Data-driven recommendations for urban planners to reduce noise effectively"}
                 </p>
               </div>
-              
+
               {/* Feature 3: Citizen engagement */}
               <div className="bg-card p-8 rounded-2xl border border-border hover:border-accent/30 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-6">
                   <Users className="w-7 h-7 text-accent" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">
-                  {language === 'fr'
-                    ? "Engagement citoyen"
-                    : "Citizen engagement"
-                  }
+                  {language === "fr" ? "Engagement citoyen" : "Citizen engagement"}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  {language === 'fr'
+                  {language === "fr"
                     ? "Permettre aux résidents de signaler les problèmes de bruit et suivre les réponses de la ville"
-                    : "Empower residents to report noise issues and track city responses"
-                  }
+                    : "Empower residents to report noise issues and track city responses"}
                 </p>
               </div>
-              
+
               {/* Feature 4: Impact measurement */}
               <div className="bg-card p-8 rounded-2xl border border-border hover:border-accent/30 transition-all">
                 <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-6">
                   <BarChart className="w-7 h-7 text-accent" />
                 </div>
                 <h3 className="text-xl font-bold mb-3">
-                  {language === 'fr'
-                    ? "Mesure d'impact"
-                    : "Impact measurement"
-                  }
+                  {language === "fr" ? "Mesure d'impact" : "Impact measurement"}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  {language === 'fr'
+                  {language === "fr"
                     ? "Suivre la réduction du bruit au fil du temps et communiquer les progrès aux parties prenantes"
-                    : "Track noise reduction over time and communicate progress to stakeholders"
-                  }
+                    : "Track noise reduction over time and communicate progress to stakeholders"}
                 </p>
               </div>
             </div>
@@ -805,19 +763,15 @@ export const ContentEN = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-h3 mb-4">
-                {language === 'fr'
-                  ? "Ce Que Ce Parcours M'a Appris"
-                  : "What This Journey Taught Me"
-                }
+                {language === "fr" ? "Ce Que Ce Parcours M'a Appris" : "What This Journey Taught Me"}
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                {language === 'fr'
+                {language === "fr"
                   ? "Construire Sonor était ambitieux. L'arrêter fut humiliant. Voici les leçons durement acquises qui ont façonné mon approche du product management."
-                  : "Building Sonor was ambitious. Stopping it was humbling. Here are the hard-earned lessons that shaped my approach to product management."
-                }
+                  : "Building Sonor was ambitious. Stopping it was humbling. Here are the hard-earned lessons that shaped my approach to product management."}
               </p>
             </div>
-            
+
             <div className="grid md:grid-cols-3 gap-8">
               {/* Learning 1: B2G sales cycles */}
               <div className="bg-card p-8 rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all">
@@ -825,107 +779,101 @@ export const ContentEN = () => {
                   <Clock className="w-7 h-7 text-accent" />
                 </div>
                 <h3 className="text-xl font-bold mb-4">
-                  {language === 'fr'
-                    ? "Le B2G nécessite un capital patient"
-                    : "B2G requires patient capital"
-                  }
+                  {language === "fr" ? "Le B2G nécessite un capital patient" : "B2G requires patient capital"}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  {language === 'fr'
+                  {language === "fr"
                     ? "18+ mois de cycle de vente moyen pour les municipalités. Nos €20K de financement étaient épuisés avant de signer le premier contrat."
-                    : "18+ months average sales cycle for municipalities. Our €20K funding was exhausted before securing the first contract."
-                  }
+                    : "18+ months average sales cycle for municipalities. Our €20K funding was exhausted before securing the first contract."}
                 </p>
                 <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-accent">
                   <p className="text-sm italic text-foreground/80">
-                    {language === 'fr'
+                    {language === "fr"
                       ? "« Le timing du product-market fit compte autant que le produit lui-même. J'ai appris à prendre en compte la vélocité de vente lors de l'évaluation des business models. »"
-                      : "\"Product-market fit timing matters as much as the product itself. I learned to factor in sales velocity when evaluating business models.\""
-                    }
+                      : '"Product-market fit timing matters as much as the product itself. I learned to factor in sales velocity when evaluating business models."'}
                   </p>
                 </div>
               </div>
-              
+
               {/* Learning 2: Data quality */}
               <div className="bg-card p-8 rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all">
                 <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mb-6">
                   <Database className="w-7 h-7 text-accent" />
                 </div>
                 <h3 className="text-xl font-bold mb-4">
-                  {language === 'fr'
+                  {language === "fr"
                     ? "La qualité de l'open data est le goulot"
-                    : "Open data quality is the bottleneck"
-                  }
+                    : "Open data quality is the bottleneck"}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  {language === 'fr'
+                  {language === "fr"
                     ? "Nous avons sous-estimé la complexité technique du traitement de datasets municipaux fragmentés et de faible qualité en insights actionnables."
-                    : "We underestimated the technical complexity of processing fragmented, low-quality municipal datasets into actionable insights."
-                  }
+                    : "We underestimated the technical complexity of processing fragmented, low-quality municipal datasets into actionable insights."}
                 </p>
                 <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-accent">
                   <p className="text-sm italic text-foreground/80">
-                    {language === 'fr'
+                    {language === "fr"
                       ? "« De grands produits nécessitent une grande infrastructure data. Je valide maintenant la disponibilité et qualité des données avant de m'engager sur des solutions data-driven. »"
-                      : "\"Great products require great data infrastructure. I now validate data availability and quality before committing to data-driven solutions.\""
-                    }
+                      : '"Great products require great data infrastructure. I now validate data availability and quality before committing to data-driven solutions."'}
                   </p>
                 </div>
               </div>
-              
+
               {/* Learning 3: Positioning clarity */}
               <div className="bg-card p-8 rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all">
                 <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mb-6">
                   <Target className="w-7 h-7 text-accent" />
                 </div>
                 <h3 className="text-xl font-bold mb-4">
-                  {language === 'fr'
-                    ? "La clarté bat la richesse fonctionnelle"
-                    : "Clarity beats feature richness"
-                  }
+                  {language === "fr" ? "La clarté bat la richesse fonctionnelle" : "Clarity beats feature richness"}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  {language === 'fr'
+                  {language === "fr"
                     ? "Notre positionnement était flou entre plateforme SaaS et consulting. Les parties prenantes voulaient l'un ou l'autre, pas les deux."
-                    : "Our positioning blurred between SaaS platform and consulting. Stakeholders wanted one or the other, not both."
-                  }
+                    : "Our positioning blurred between SaaS platform and consulting. Stakeholders wanted one or the other, not both."}
                 </p>
                 <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-accent">
                   <p className="text-sm italic text-foreground/80">
-                    {language === 'fr'
+                    {language === "fr"
                       ? "« Une proposition de valeur tranchée et différenciée est non-négociable. J'ai appris à simplifier impitoyablement le positionnement avant de construire des features. »"
-                      : "\"A sharp, differentiated value proposition is non-negotiable. I learned to ruthlessly simplify positioning before building features.\""
-                    }
+                      : '"A sharp, differentiated value proposition is non-negotiable. I learned to ruthlessly simplify positioning before building features."'}
                   </p>
                 </div>
               </div>
             </div>
-            
+
             {/* Historical context callout */}
             <div className="mt-12 p-8 bg-card rounded-2xl border-2 border-accent/30">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 text-3xl">📅</div>
                 <div className="flex-1">
                   <p className="text-sm font-semibold mb-2 text-foreground">
-                    {language === 'fr' ? "Contexte historique" : "Historical context"}
+                    {language === "fr" ? "Contexte historique" : "Historical context"}
                   </p>
                   <p className="text-base text-foreground/80 leading-relaxed">
-                    {language === 'fr'
+                    {language === "fr"
                       ? "Ce projet s'est déroulé de 2020 à 2022, avant la révolution de l'IA générative. À l'époque, la visualisation d'open data pour les municipalités était un différenciateur novateur, et l'adoption du SaaS dans le secteur public commençait tout juste à s'accélérer. Aujourd'hui, ces apprentissages informent ma façon d'évaluer les technologies émergentes et le timing de marché."
-                      : "This project ran from 2020-2022, before the generative AI revolution. At the time, open data visualization for municipalities was a novel differentiator, and SaaS adoption in the public sector was just beginning to accelerate. Today, these learnings inform how I evaluate emerging technologies and market timing."
-                    }
+                      : "This project ran from 2020-2022, before the generative AI revolution. At the time, open data visualization for municipalities was a novel differentiator, and SaaS adoption in the public sector was just beginning to accelerate. Today, these learnings inform how I evaluate emerging technologies and market timing."}
                   </p>
                 </div>
               </div>
             </div>
-            
+
             {/* Bridge to next role */}
             <div className="mt-12 p-8 bg-muted/20 rounded-2xl">
               <p className="text-lg leading-relaxed text-center">
-                {language === 'fr' ? (
-                  <><strong>Ces apprentissages ont directement informé mon travail chez HUWISE,</strong> où j'ai aidé à opérationnaliser l'optimisation de conversion avec un positionnement plus clair et des cycles d'itération plus rapides—contribuant finalement à une croissance mesurable.</>
+                {language === "fr" ? (
+                  <>
+                    <strong>Ces apprentissages ont directement informé mon travail chez HUWISE,</strong> où j'ai aidé à
+                    opérationnaliser l'optimisation de conversion avec un positionnement plus clair et des cycles
+                    d'itération plus rapides—contribuant finalement à une croissance mesurable.
+                  </>
                 ) : (
-                  <><strong>These learnings directly informed my work at HUWISE,</strong> where I helped operationalize conversion optimization with clearer positioning and faster iteration cycles—ultimately contributing to measurable growth.</>
+                  <>
+                    <strong>These learnings directly informed my work at HUWISE,</strong> where I helped operationalize
+                    conversion optimization with clearer positioning and faster iteration cycles—ultimately contributing
+                    to measurable growth.
+                  </>
                 )}
               </p>
             </div>
@@ -1082,13 +1030,9 @@ export const ContentEN = () => {
             <div className="flex items-center justify-center gap-12 flex-wrap pt-6">
               {/* Sonor logo - NEW */}
               <div>
-                <img
-                  src="/img/logo_sonor.png"
-                  alt="Sonor"
-                  className="h-24 object-contain"
-                />
+                <img src="/img/logo_sonor.png" alt="Sonor" className="h-24 object-contain" />
               </div>
-              
+
               <div>
                 <img
                   src="/img/banque-des-territoires-logo.png"
