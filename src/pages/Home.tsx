@@ -724,10 +724,10 @@ export const Home: React.FC = () => {
             </motion.div>
           </motion.div>
         </div>
+      </section>
 
-        {/* Marquee Banner - à cheval sur Hero et Work */}
-        <div className="absolute left-0 right-0 -bottom-[32px] z-30">
-      <div className="relative bg-background dark:bg-card border-t border-b border-border/10">
+      {/* Marquee Banner - Transition entre Hero et Work */}
+      <div className="relative bg-gradient-to-b from-card/30 via-card/50 to-background dark:from-card/40 dark:via-card/60 dark:to-card border-t border-border/10 border-b border-border/20 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-muted-foreground/15 after:to-transparent">
         <MarqueeBanner
           phrases={[
             "2 / AI Hackathons Won",
@@ -742,13 +742,11 @@ export const Home: React.FC = () => {
             "•",
           ]}
           speed={0.65}
-              pauseOnHover
-              ariaLabel="Key achievements"
-              className="py-6 max-w-[1360px] mx-auto px-4"
-            />
-          </div>
-        </div>
-      </section>
+          pauseOnHover
+          ariaLabel="Highlights"
+          className="py-5 max-w-[1360px] mx-auto px-4"
+        />
+      </div>
 
       {/* Work Section */}
       <section id="work" className="relative pt-24 md:pt-28 pb-16 md:pb-20 px-4 bg-background">

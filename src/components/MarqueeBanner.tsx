@@ -25,7 +25,46 @@ export default function MarqueeBanner({
     return 60 / s; // ex: 60/0.15 ≈ 400s → très doux
   }, [speed]);
 
-  const loop = React.useMemo(() => [...phrases, ...phrases, ...phrases, ...phrases], [phrases]);
+  const loop = React.useMemo(() => [...phrases, ...phrases], [phrases]);
+
+  const renderPhrase = (p: string, idx: number) => {
+    const isSeparator = p === "•" || p === "✱";
+    
+    // Détecter les chiffres dans la phrase (format: "2 /", "10+ /", "5+ /")
+    const statMatch = p.match(/^(\d+\+?)\s*\/\s*/);
+    const isStatNumber = !!statMatch;
+    const trimmed = statMatch ? p.replace(/^\d+\+?\s*\/\s*/, "") : p;
+
+    if (isSeparator) {
+      return (
+        <span key={`${p}-${idx}`} className="text-primary text-xl leading-none">
+          {p}
+        </span>
+      );
+    }
+
+    if (isStatNumber) {
+      return (
+        <span key={`${p}-${idx}`} className="text-sm md:text-[15px]">
+          <span className="text-primary font-bold">{statMatch[1]}</span>
+          <span className="text-primary"> / </span>
+          <span className="text-muted-foreground dark:text-muted-foreground">{trimmed}</span>
+        </span>
+      );
+    }
+
+    return (
+      <span
+        key={`${p}-${idx}`}
+        className={clsx(
+          "text-sm md:text-[15px]",
+          !isSeparator && !isStatNumber && "text-muted-foreground dark:text-muted-foreground"
+        )}
+      >
+        {p}
+      </span>
+    );
+  };
 
   return (
     <div
@@ -48,40 +87,14 @@ export default function MarqueeBanner({
         )}
         style={{ animation: `mdm-marquee ${duration}s linear infinite` }}
       >
-        {loop.map((p, i) => {
-          // Détection des stats (commence par chiffre)
-          const isStatNumber = /^\d+/.test(p);
-          // Détection des séparateurs (• ou ✱)
-          const isSeparator = p === "•" || p === "✱";
-          
-          return (
-            <span 
-              key={`${p}-${i}`} 
-              className={clsx(
-                "text-sm md:text-base font-medium whitespace-nowrap",
-                isSeparator && "text-primary text-xl leading-none",
-                isStatNumber && "font-semibold",
-                !isSeparator && !isStatNumber && "text-muted-foreground dark:text-muted-foreground"
-              )}
-            >
-              {p.split('/').map((part, idx) => {
-                const trimmed = part.trim();
-                if (/^\d+\+?$/.test(trimmed)) {
-                  // C'est un nombre -> bleu primary
-                  return <span key={idx} className="text-primary font-bold">{trimmed}</span>;
-                }
-                return <span key={idx}>{idx > 0 ? ' / ' : ''}{part}</span>;
-              })}
-            </span>
-          );
-        })}
+        {loop.map((p, i) => renderPhrase(p, i))}
       </div>
 
       {/* animation locale + reduced motion */}
       <style>{`
         @keyframes mdm-marquee {
           from { transform: translateX(0); }
-          to   { transform: translateX(-25%); }
+          to   { transform: translateX(-50%); }
         }
         @media (prefers-reduced-motion: reduce) {
           [aria-label="${ariaLabel}"] > div { animation: none !important; }
