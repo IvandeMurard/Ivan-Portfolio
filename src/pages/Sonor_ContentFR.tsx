@@ -276,7 +276,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION: PRODUCT VISION ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.1}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.05}>
         <div id="our-approach" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-12">
             <div className="text-center max-w-3xl mx-auto">
@@ -359,7 +359,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION: EXPLORE THE PLATFORM ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.2}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.1}>
         <div className="py-16 px-4 md:px-8 lg:px-12 bg-card border-b border-border/50">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -412,7 +412,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION 2: TIMELINE ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.3}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.15}>
         <div id="timeline" className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8">
             <h2 className="text-h3">Timeline du projet</h2>
@@ -452,7 +452,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION 3: MOMENTS CLÉS ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.3}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.15}>
         <div id="key-moments" className="py-16 px-4 md:px-8 lg:px-12 bg-card border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8">
             <h2 className="text-h3">Moments clés</h2>
@@ -521,7 +521,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION 4: GALERIE PROTOTYPE ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.4}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.2}>
         <div id="prototype-gallery" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8">
             <div className="space-y-6">
@@ -610,7 +610,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION 5: OBSTACLES RENCONTRÉS ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.5}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.25}>
         <div id="obstacles" className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8">
             <h2 className="text-h3">Obstacles rencontrés</h2>
@@ -635,7 +635,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION 6: RÉSULTATS & IMPACT ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.6}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.3}>
         <div id="results" className="py-16 px-4 md:px-8 lg:px-12 bg-card border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8">
             <h2 className="text-h3">Résultats & Impact</h2>
@@ -672,7 +672,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION 7: ÉPILOGUE & APPRENTISSAGES ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.7}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.35}>
         <div id="epilogue" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8">
             <h2 className="text-h3">Épilogue & Apprentissages</h2>
@@ -766,7 +766,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION 8: SI C'ÉTAIT À REFAIRE ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.8}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.4}>
         <div id="if-i-had-to-do-it-again" className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8">
             <h2 className="text-h3">Si c'était à refaire</h2>
@@ -816,7 +816,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION 9: CONCLUSION ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.9}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.45}>
         <div id="conclusion" className="py-16 px-4 md:px-8 lg:px-12 bg-card border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8">
             <div className="text-center">
@@ -834,7 +834,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION: KEY LEARNINGS ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.9}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.45}>
         <div id="learnings" className="py-20 px-4 md:px-8 lg:px-12 bg-accent/5 border-y border-accent/20">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
@@ -958,7 +958,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION: STAKEHOLDER TESTIMONIALS ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={1.0}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.5}>
         <div id="testimonials" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -1054,7 +1054,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION 10: FAQ ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={1.1}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.55}>
         <div id="faq" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8 text-center">
             <div>
@@ -1116,7 +1116,7 @@ export const ContentFR = () => {
       </ScrollRevealSection>
 
       {/* ========== SECTION 10: POUR ALLER PLUS LOIN ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={1.1}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.55}>
         <div className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8">
             <div className="text-center">
