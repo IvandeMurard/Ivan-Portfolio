@@ -356,8 +356,61 @@ export const ContentEN = () => {
         </div>
       </ScrollRevealSection>
 
-      {/* ========== SECTION 2: TIMELINE ========== */}
+      {/* ========== SECTION: EXPLORE THE PLATFORM ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={0.2}>
+        <div className="py-16 px-4 md:px-8 lg:px-12 bg-card border-b border-border/50">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-h3 mb-4">
+                {language === 'fr' 
+                  ? "Explorer la Plateforme"
+                  : "Explore the Platform"
+                }
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                {language === 'fr'
+                  ? "Le site commercial Sonor est toujours en ligne, présentant la vision et les fonctionnalités que nous avons construites."
+                  : "The Sonor commercial site is still live, showcasing the vision and features we built."
+                }
+              </p>
+            </div>
+            
+            {/* Screenshot mockup + CTA */}
+            <div className="relative group">
+              <a 
+                href="https://sonor.dorik.io/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <img 
+                  src="/img/sonor-website-screenshot.png" 
+                  alt={language === 'fr' ? "Interface plateforme Sonor" : "Sonor platform interface"} 
+                  className="w-full rounded-2xl border-2 border-border shadow-lg group-hover:shadow-2xl transition-all"
+                />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
+                  <div className="bg-accent text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2">
+                    {language === 'fr' ? "Visiter le Site" : "Visit Live Site"}
+                    <ExternalLink className="w-5 h-5" />
+                  </div>
+                </div>
+              </a>
+            </div>
+            
+            {/* Note about preservation */}
+            <p className="text-sm text-muted-foreground text-center mt-6">
+              {language === 'fr'
+                ? "Ce site reste en ligne comme témoignage de la vision produit et du travail accompli durant le projet."
+                : "This site remains online as a testament to the product vision and work accomplished during the project."
+              }
+            </p>
+          </div>
+        </div>
+      </ScrollRevealSection>
+
+      {/* ========== SECTION 2: TIMELINE ========== */}
+      <ScrollRevealSection variant="fade-in-up" delay={0.3}>
         <div id="timeline" className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8">
             <h2 className="text-h3">Project Timeline</h2>
@@ -881,8 +934,104 @@ export const ContentEN = () => {
         </div>
       </ScrollRevealSection>
 
-      {/* ========== SECTION 10: FAQ ========== */}
+      {/* ========== SECTION: STAKEHOLDER TESTIMONIALS ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={1.0}>
+        <div id="testimonials" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-h3 mb-4">
+                {language === 'fr' 
+                  ? "Ce Que Les Décideurs En Ont Dit"
+                  : "What Stakeholders Said"
+                }
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                {language === 'fr'
+                  ? "Retours de décideurs publics sur l'approche Sonor"
+                  : "Feedback from public decision-makers on the Sonor approach"
+                }
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Testimonial 1 - Pierre Ferrari */}
+              <div className="bg-card p-6 rounded-2xl border border-border hover:border-accent/30 transition-all">
+                <div className="mb-4">
+                  <svg className="w-8 h-8 text-accent/30" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                  </svg>
+                </div>
+                <p className="text-base italic text-foreground/80 mb-6 leading-relaxed">
+                  {language === 'fr'
+                    ? "Une approche pertinente, engageant les citoyens, pour traiter le bruit et redynamiser les cœurs de ville."
+                    : "A relevant approach, engaging citizens, to address noise and revitalize city centers."
+                  }
+                </p>
+                <div className="pt-4 border-t border-border/50">
+                  <p className="font-semibold text-sm">Pierre Ferrari</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {language === 'fr'
+                      ? "Directeur Smart City & Stratégie Numérique, Ville d'Arras"
+                      : "Smart City Director, City of Arras"
+                    }
+                  </p>
+                </div>
+              </div>
+              
+              {/* Testimonial 2 - C. de Clermont-Tonnerre */}
+              <div className="bg-card p-6 rounded-2xl border border-border hover:border-accent/30 transition-all">
+                <div className="mb-4">
+                  <svg className="w-8 h-8 text-accent/30" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                  </svg>
+                </div>
+                <p className="text-base italic text-foreground/80 mb-6 leading-relaxed">
+                  {language === 'fr'
+                    ? "L'approche humaine et terrain proposée, est essentielle à la compréhension de l'ensemble des enjeux liés à la pollution sonore."
+                    : "The human-centered, field-based approach is essential to understanding all issues related to noise pollution."
+                  }
+                </p>
+                <div className="pt-4 border-t border-border/50">
+                  <p className="font-semibold text-sm">C. de Clermont-Tonnerre</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {language === 'fr'
+                      ? "Conseillère de Paris, Déléguée Urbanisme & Patrimoine"
+                      : "Paris City Councillor, Urban Planning Delegate"
+                    }
+                  </p>
+                </div>
+              </div>
+              
+              {/* Testimonial 3 - Lauriane Rossi */}
+              <div className="bg-card p-6 rounded-2xl border border-border hover:border-accent/30 transition-all">
+                <div className="mb-4">
+                  <svg className="w-8 h-8 text-accent/30" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                  </svg>
+                </div>
+                <p className="text-base italic text-foreground/80 mb-6 leading-relaxed">
+                  {language === 'fr'
+                    ? "La pollution sonore est une nuisance majeure, à laquelle Sonor apporte une solution pertinente."
+                    : "Noise pollution is a major nuisance, to which Sonor provides a relevant solution."
+                  }
+                </p>
+                <div className="pt-4 border-t border-border/50">
+                  <p className="font-semibold text-sm">Lauriane Rossi</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {language === 'fr'
+                      ? "Députée des Hauts-de-Seine, Présidente du Conseil National du Bruit"
+                      : "Deputy, President of the National Noise Council"
+                    }
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ScrollRevealSection>
+
+      {/* ========== SECTION 10: FAQ ========== */}
+      <ScrollRevealSection variant="fade-in-up" delay={1.1}>
         <div id="faq" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8 text-center">
             <div>

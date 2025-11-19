@@ -6,6 +6,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/footer";
+import { ProgressIndicator } from "@/components/ProgressIndicator";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown } from "lucide-react";
@@ -45,13 +46,34 @@ export default function SonorPage() {
   const { scrollY } = useScroll();
   const parallaxY = useTransform(scrollY, [0, 500], [0, 150]);
 
+  const sections = [
+    { id: "hero", label: language === 'fr' ? "Hero" : "Hero" },
+    { id: "overview", label: language === 'fr' ? "TL;DR" : "TL;DR" },
+    { id: "context", label: language === 'fr' ? "Contexte" : "Context" },
+    { id: "our-approach", label: language === 'fr' ? "Vision Produit" : "Product Vision" },
+    { id: "timeline", label: language === 'fr' ? "Timeline" : "Timeline" },
+    { id: "key-moments", label: language === 'fr' ? "Moments Clés" : "Key Moments" },
+    { id: "prototype-gallery", label: language === 'fr' ? "Prototype" : "Prototype" },
+    { id: "obstacles", label: language === 'fr' ? "Obstacles" : "Obstacles" },
+    { id: "results", label: language === 'fr' ? "Résultats" : "Results" },
+    { id: "epilogue", label: language === 'fr' ? "Épilogue" : "Epilogue" },
+    { id: "if-i-had-to-do-it-again", label: language === 'fr' ? "Si c'était à refaire" : "If I Had to Do It Again" },
+    { id: "conclusion", label: language === 'fr' ? "Conclusion" : "Conclusion" },
+    { id: "learnings", label: language === 'fr' ? "Apprentissages" : "Learnings" },
+    { id: "testimonials", label: language === 'fr' ? "Témoignages" : "Testimonials" },
+    { id: "faq", label: language === 'fr' ? "FAQ" : "FAQ" },
+  ];
+
   return (
     <div className="overflow-x-hidden">
       {/* Navigation */}
       <Navigation />
 
+      {/* Progress Indicator */}
+      <ProgressIndicator sections={sections} />
+
       {/* Hero Section with Parallax */}
-      <section className="relative h-[30vh] md:h-[40vh] overflow-hidden">
+      <section id="hero" className="relative h-[30vh] md:h-[40vh] overflow-hidden">
         {/* Parallax background */}
         <motion.img
           src={sonorHero}
