@@ -728,30 +728,6 @@ export const Home: React.FC = () => {
             </div>
           </div>
 
-          {/* Scroll hint */}
-          <motion.div
-            className="mt-4 mb-2 flex justify-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-              delay: prefersReducedMotion ? 0 : 0.8,
-              duration: prefersReducedMotion ? 0 : 0.5,
-            }}
-          >
-            <motion.div
-              animate={prefersReducedMotion ? {} : { y: [0, 8, 0] }}
-              transition={{
-                repeat: prefersReducedMotion ? 0 : Infinity,
-                duration: prefersReducedMotion ? 0 : 1.5,
-                ease: "easeInOut",
-              }}
-              className="cursor-pointer"
-              onClick={() => scrollToSection("work")}
-              style={{ willChange: "transform", transform: "translateZ(0)" }}
-            >
-              <ArrowDown className="w-6 h-6 text-contact-foreground/60" />
-            </motion.div>
-          </motion.div>
         </div>
       </section>
 
