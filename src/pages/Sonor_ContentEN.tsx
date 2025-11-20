@@ -57,6 +57,11 @@ export const ContentEN = () => {
 
   const galleryImages = [
     {
+      src: "/img/sonor-noise-thresholds.png",
+      alt: language === "fr" ? "Seuils de danger du bruit" : "Noise danger thresholds",
+      caption: language === "fr" ? "Échelle des niveaux sonores et seuils de danger" : "Noise level scale and danger thresholds",
+    },
+    {
       src: "/img/Sonor-notre-approche.webp",
       alt: "Mapping dashboard — Hotspots & real-time indicators",
       caption: "Mapping dashboard — Hotspots & real-time indicators",
@@ -244,18 +249,12 @@ export const ContentEN = () => {
             </div>
 
             {/* Right: Visual */}
-            <div className="bg-card rounded-2xl p-6 border border-border shadow-sm">
-              <img
-                src="/img/sonor-noise-thresholds.png"
-                alt={language === "fr" ? "Seuils de danger du bruit" : "Noise danger thresholds"}
-                className="w-full rounded-lg"
-              />
-              <p className="text-sm text-muted-foreground mt-4 text-center leading-relaxed">
-                {language === "fr"
-                  ? "Échelle des niveaux sonores et seuils de danger"
-                  : "Noise level scale and danger thresholds"}
-              </p>
-            </div>
+            <CaseImage
+              onClick={() => openLightbox(0)}
+              desktopSrc="/img/sonor-noise-thresholds.png"
+              alt={language === "fr" ? "Seuils de danger du bruit" : "Noise danger thresholds"}
+              caption={language === "fr" ? "Échelle des niveaux sonores et seuils de danger" : "Noise level scale and danger thresholds"}
+            />
           </div>
 
           {/* Sources - redesigned */}
