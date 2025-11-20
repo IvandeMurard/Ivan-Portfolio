@@ -229,13 +229,13 @@ export const BandeauAudio = ({ language }: { language: string }) => {
         />
       </div>
 
-      {/* Sticky floating player - repositioned above Tips */}
+      {/* Sticky floating player - positioned below Tips button */}
       {isPlaying && (
         <motion.div
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
-          className="fixed bottom-24 right-8 z-50"
+          className="fixed bottom-32 right-8 z-40"
         >
           <button
             onClick={handlePlayPause}
