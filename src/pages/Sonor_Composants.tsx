@@ -75,22 +75,20 @@ export const ExpandSection = ({
 
   // Split title at "?" to insert chevron immediately after
   const renderTitle = () => {
-    const questionIndex = title.indexOf('?');
+    const questionIndex = title.indexOf("?");
     if (questionIndex === -1) {
-      return <span className="font-semibold text-base md:text-lg group-hover:underline underline-offset-4">{title}</span>;
+      return (
+        <span className="font-semibold text-base md:text-lg group-hover:underline underline-offset-4">{title}</span>
+      );
     }
-    
+
     const beforeQuestion = title.slice(0, questionIndex + 1);
     const afterQuestion = title.slice(questionIndex + 1);
-    
+
     return (
       <span className="font-semibold text-base md:text-lg group-hover:underline underline-offset-4 inline-flex items-center gap-1">
         <span>{beforeQuestion}</span>
-        <ChevronDown
-          className={`w-4 h-4 transition-transform duration-200 inline-block ${
-            open ? "rotate-180" : ""
-          }`}
-        />
+        <ChevronDown className={`w-4 h-4 transition-transform duration-200 inline-block ${open ? "rotate-180" : ""}`} />
         <span>{afterQuestion}</span>
       </span>
     );
@@ -129,12 +127,12 @@ export const BandeauAudio = ({ language }: { language: string }) => {
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
 
-    audio.addEventListener('timeupdate', updateTime);
-    audio.addEventListener('loadedmetadata', updateDuration);
+    audio.addEventListener("timeupdate", updateTime);
+    audio.addEventListener("loadedmetadata", updateDuration);
 
     return () => {
-      audio.removeEventListener('timeupdate', updateTime);
-      audio.removeEventListener('loadedmetadata', updateDuration);
+      audio.removeEventListener("timeupdate", updateTime);
+      audio.removeEventListener("loadedmetadata", updateDuration);
     };
   }, []);
 
@@ -149,15 +147,13 @@ export const BandeauAudio = ({ language }: { language: string }) => {
     }
   };
 
-  const audioSrc = language === 'fr' 
-    ? "/audio/sonor-summary-fr.mp3" 
-    : "/audio/sonor-summary-en.mp3";
+  const audioSrc = language === "fr" ? "/audio/sonor-summary-fr.mp3" : "/audio/sonor-summary-en.mp3";
 
   // Calculate time remaining
   const timeRemaining = Math.ceil(duration - currentTime);
   const minutesRemaining = Math.floor(timeRemaining / 60);
   const secondsRemaining = timeRemaining % 60;
-  const formattedTime = `${minutesRemaining}:${secondsRemaining.toString().padStart(2, '0')}`;
+  const formattedTime = `${minutesRemaining}:${secondsRemaining.toString().padStart(2, "0")}`;
 
   return (
     <>
@@ -170,11 +166,7 @@ export const BandeauAudio = ({ language }: { language: string }) => {
             className="flex-shrink-0 w-14 h-14 rounded-full bg-accent hover:bg-accent/90 flex items-center justify-center transition-all shadow-lg"
             aria-label={isPlaying ? "Pause" : "Play"}
           >
-            {isPlaying ? (
-              <Pause className="w-6 h-6 text-white" />
-            ) : (
-              <Play className="w-6 h-6 text-white ml-0.5" />
-            )}
+            {isPlaying ? <Pause className="w-6 h-6 text-white" /> : <Play className="w-6 h-6 text-white ml-0.5" />}
           </button>
 
           {/* Content */}
@@ -182,14 +174,11 @@ export const BandeauAudio = ({ language }: { language: string }) => {
             <div className="flex items-center gap-2 mb-1">
               <Volume2 className="w-5 h-5 text-accent" />
               <span className="text-sm font-semibold text-accent uppercase tracking-wider">
-                {language === 'fr' ? "Version Audio" : "Audio Summary"}
+                {language === "fr" ? "Version Audio" : "Audio Summary"}
               </span>
             </div>
             <p className="text-base text-foreground/80">
-              {language === 'fr'
-                ? "Écoutez le résumé du projet Sonor"
-                : "Listen to the Sonor project summary"
-              }
+              {language === "fr" ? "Écoutez le résumé du projet Sonor" : "Sonor project summary"}
             </p>
           </div>
 
@@ -219,13 +208,10 @@ export const BandeauAudio = ({ language }: { language: string }) => {
           {/* Duration - updated to show time remaining */}
           <div className="flex-shrink-0 text-right">
             <div className="text-2xl font-bold text-accent">
-              {isPlaying ? formattedTime : (language === 'fr' ? "2 min" : "2 min")}
+              {isPlaying ? formattedTime : language === "fr" ? "2 min" : "2 min"}
             </div>
             <div className="text-sm text-muted-foreground">
-              {isPlaying 
-                ? (language === 'fr' ? "restant" : "left")
-                : (language === 'fr' ? "durée" : "duration")
-              }
+              {isPlaying ? (language === "fr" ? "restant" : "left") : language === "fr" ? "durée" : "duration"}
             </div>
           </div>
         </div>
