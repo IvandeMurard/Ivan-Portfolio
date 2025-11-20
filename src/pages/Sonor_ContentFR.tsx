@@ -385,7 +385,7 @@ export const ContentFR = () => {
                 className="block"
               >
                 <img 
-                  src="/img/sonor-website-screenshot.png" 
+                  src="/img/sonor-website-screenshot.gif" 
                   alt={language === 'fr' ? "Interface plateforme Sonor" : "Sonor platform interface"} 
                   className="w-full rounded-2xl border-2 border-border shadow-lg group-hover:shadow-2xl transition-all"
                 />
