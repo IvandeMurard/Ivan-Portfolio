@@ -57,14 +57,9 @@ export const ContentFR = () => {
 
   const galleryImages = [
     {
-      src: "/img/sonor-noise-thresholds.png",
-      alt: language === "fr" ? "Seuils de danger du bruit" : "Noise danger thresholds",
-      caption: language === "fr" ? "Échelle des niveaux sonores et seuils de danger" : "Noise level scale and danger thresholds",
-    },
-    {
       src: "/img/Sonor-notre-approche.webp",
-      alt: "Mapping dashboard — Hotspots & real-time indicators",
-      caption: "Mapping dashboard — Hotspots & real-time indicators",
+      alt: "Tableau de bord de cartographie — Points chauds et indicateurs en temps réel",
+      caption: "Tableau de bord de cartographie — Points chauds et indicateurs en temps réel",
     },
     {
       src: "/img/sonor_recommandations.png",
