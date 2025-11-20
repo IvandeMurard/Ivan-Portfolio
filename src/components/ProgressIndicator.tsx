@@ -51,7 +51,7 @@ export function ProgressIndicator({ sections }: ProgressIndicatorProps) {
 
   return (
     <nav
-      className="fixed lg:right-6 xl:right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:block"
+      className="fixed lg:right-6 xl:right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block"
       aria-label="Page navigation"
     >
       <ul className="space-y-4">
