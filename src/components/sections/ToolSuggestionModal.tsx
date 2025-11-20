@@ -51,6 +51,17 @@ export function ToolSuggestionModal({ open, onOpenChange }: Props) {
     try {
       setIsSubmitting(true);
 
+      // Check authentication
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast.error(
+          language === 'fr' 
+            ? 'Vous devez être connecté pour suggérer un outil' 
+            : 'You must be logged in to suggest a tool'
+        );
+        return;
+      }
+
       // Validate input
       const validated = suggestionSchema.parse({
         product_name: productName,
@@ -65,7 +76,18 @@ export function ToolSuggestionModal({ open, onOpenChange }: Props) {
           product_link: validated.product_link || null,
         });
 
-      if (error) throw error;
+      if (error) {
+        // Handle rate limit error
+        if (error.message?.includes('rate_limit') || error.message?.includes('check_tool_suggestion_rate_limit')) {
+          toast.error(
+            language === 'fr'
+              ? 'Limite atteinte. Maximum 5 suggestions par heure.'
+              : 'Rate limit reached. Maximum 5 suggestions per hour.'
+          );
+          return;
+        }
+        throw error;
+      }
 
       toast.success(t.successToast);
       
