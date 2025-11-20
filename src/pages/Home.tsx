@@ -210,6 +210,13 @@ const experienceFilterChips = [
 const hackathons = [
   {
     year: "2025",
+    title: "Pioneers AI Lab Hackathon @ Station F",
+    team: "Solo",
+    description: "Built an Autonomous AI Agent for hotels' F&B operations",
+    skills: ["AI Agents", "Hospitality Tech", "Autonomous Systems", "F&B Operations"],
+  },
+  {
+    year: "2025",
     title: "Windsurf × Mistral × The AI Collective",
     team: "Team of 4",
     status: "3rd Place",
