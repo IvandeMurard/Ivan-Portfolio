@@ -13,10 +13,8 @@ import {
   tools,
 } from "@/data/inspirationsToolsMerged";
 import { ToolsTable } from "./ToolsTable";
-import { MyApproachContent } from "./MyApproachContent";
 
 const TABS = [
-  { id: "my-approach", label: "My approach" },
   { id: "communities", label: "Communities" },
   { id: "inspirations", label: "Inspirations" },
   { id: "resources", label: "Resources" },
@@ -46,8 +44,6 @@ export function CommunitiesInspoResourcesTools({ disableSticky = false }: Commun
 
   const data = useMemo(() => {
     switch (active) {
-      case "my-approach":
-        return [];
       case "communities":
         return communities;
       case "inspirations":
@@ -78,9 +74,7 @@ export function CommunitiesInspoResourcesTools({ disableSticky = false }: Commun
           disableSticky={disableSticky}
         />
 
-        {active === "my-approach" ? (
-          <MyApproachContent />
-        ) : active === "tools" ? (
+        {active === "tools" ? (
           <>
             {/* Desktop: Table view */}
             <div className="hidden lg:block">
