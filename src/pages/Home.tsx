@@ -20,6 +20,7 @@ import wttjLogo from "@/assets/wttj-logo.svg";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import { GradientBorderSection } from "@/components/GradientBorderSection";
 import { CommunitiesInspoResourcesTools } from "@/components/sections/CommunitiesInspoResourcesTools";
+import { AboutSection } from "@/components/sections/AboutSection";
 import { useInlineExpand } from "@/hooks/useInlineExpand";
 import { InlineExpand } from "@/components/InlineExpand";
 import { experiences } from "@/data/experience";
@@ -452,6 +453,7 @@ export const Home: React.FC = () => {
           { id: "work", label: "Work" },
           { id: "hackathons", label: "Hackathons" },
           { id: "experience", label: "Experience" },
+          { id: "about", label: "About" },
           { id: "resources", label: "Resources" },
           { id: "contact", label: "Contact" },
         ]}
@@ -1074,6 +1076,8 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+      <AboutSection />
+
       <CommunitiesInspoResourcesTools disableSticky={isStickyDisabled} />
 
       {/* Built With Banner */}
@@ -1146,6 +1150,7 @@ export const Home: React.FC = () => {
           { id: "work", label: "Work" },
           { id: "hackathons", label: "Hackathons" },
           { id: "experience", label: "Experience" },
+          { id: "about", label: "About" },
           { id: "resources", label: "Resources" },
           { id: "contact", label: "Contact" },
         ]}
