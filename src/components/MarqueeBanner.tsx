@@ -25,7 +25,7 @@ export default function MarqueeBanner({
     return 60 / s; // ex: 60/0.15 ≈ 400s → très doux
   }, [speed]);
 
-  const loop = React.useMemo(() => [...phrases, ...phrases], [phrases]);
+  const loop = React.useMemo(() => [...phrases, ...phrases, ...phrases, ...phrases], [phrases]);
 
   const renderPhrase = (p: string, idx: number) => {
     const isSeparator = p === "•" || p === "✱";
@@ -37,7 +37,7 @@ export default function MarqueeBanner({
 
     if (isSeparator) {
       return (
-        <span key={`${p}-${idx}`} className="text-primary text-xl leading-none">
+        <span key={`${p}-${idx}`} className="text-primary text-2xl leading-none">
           {p}
         </span>
       );
@@ -45,7 +45,7 @@ export default function MarqueeBanner({
 
     if (isStatNumber) {
       return (
-        <span key={`${p}-${idx}`} className="text-sm md:text-[15px]">
+        <span key={`${p}-${idx}`} className="text-base md:text-lg">
           <span className="text-primary font-bold">{statMatch[1]}</span>
           <span className="text-primary"> / </span>
           <span className="text-muted-foreground dark:text-muted-foreground">{trimmed}</span>
@@ -57,7 +57,7 @@ export default function MarqueeBanner({
       <span
         key={`${p}-${idx}`}
         className={clsx(
-          "text-sm md:text-[15px]",
+          "text-base md:text-lg",
           !isSeparator && !isStatNumber && "text-muted-foreground dark:text-muted-foreground"
         )}
       >
@@ -81,7 +81,7 @@ export default function MarqueeBanner({
     >
       <div
         className={clsx(
-          "flex gap-8 whitespace-nowrap will-change-transform",
+          "flex gap-6 whitespace-nowrap will-change-transform",
           pauseOnHover &&
             "hover:[animation-play-state:paused] focus-within:[animation-play-state:paused]"
         )}
@@ -94,7 +94,7 @@ export default function MarqueeBanner({
       <style>{`
         @keyframes mdm-marquee {
           from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+          to   { transform: translateX(-75%); }
         }
         @media (prefers-reduced-motion: reduce) {
           [aria-label="${ariaLabel}"] > div { animation: none !important; }
