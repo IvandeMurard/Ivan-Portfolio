@@ -50,7 +50,7 @@ export function AboutSection() {
 
   return (
     <section id="about" className="py-24 px-4 bg-background">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <SectionHeader
           title={content.title}
           alignment="left"
