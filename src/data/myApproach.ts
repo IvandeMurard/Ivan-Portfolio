@@ -7,17 +7,17 @@ export const myApproachContent = {
         {
           title: "What drives me",
           content:
-            "As an AI Product Manager, I build products and experiences at the intersection of technology and human connection. I specialize in AI agents and SaaS platforms, but my sweet spot is creating experiences that bridge digital and physical worlds—where community, design, and technology meet.",
+            "As an AI Product Manager, I build products and experiences at the intersection of technology and human connection. I specialize in AI agents and SaaS platforms, but my sweet spot is creating experiences that bridge digital and physical worlds, where community, design, and technology meet.",
         },
         {
           title: "How I work",
           content:
-            "I combine design intuition with data-driven decisions, grounded in a human-first, community-led philosophy. AI is my execution accelerator—I constantly explore new tools and processes to ship faster and smarter. Whether it's prototyping agents, running experiments, or orchestrating cross-functional teams, I believe the best solutions emerge when technology amplifies genuine human needs.",
+            "I combine design intuition with data-driven decisions, grounded in a human-first, community-led philosophy. I constantly explore new AI tools and processes to ship faster and smarter. Whether it's prototyping agents, running experiments, or orchestrating cross-functional teams, I believe the best solutions emerge when technology amplifies genuine human needs.",
         },
         {
           title: "My background",
           content:
-            "5+ years building products from scratch, including 2 years co-founding a B2G SaaS (Sonor), with experience across Europe and the US. I've won hackathons, shipped products, and built communities—always at the intersection of strategy, design, and execution.",
+            "5+ years building products from scratch, including 2 years co-founding a B2G SaaS (Sonor), with experience with European clients. I've won hackathons, shipped products, and am building a community, always at the intersection of strategy, design, and execution.",
         },
       ],
     },
