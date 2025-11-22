@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      communities: {
+        Row: {
+          created_at: string
+          description: string
+          display_order: number | null
+          id: string
+          image_url: string | null
+          logo_url: string | null
+          name: string
+          personal_comment: string | null
+          tags: string[] | null
+          url: string | null
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          logo_url?: string | null
+          name: string
+          personal_comment?: string | null
+          tags?: string[] | null
+          url?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          logo_url?: string | null
+          name?: string
+          personal_comment?: string | null
+          tags?: string[] | null
+          url?: string | null
+        }
+        Relationships: []
+      }
       experience_tools: {
         Row: {
           created_at: string
@@ -78,22 +117,34 @@ export type Database = {
         Row: {
           created_at: string
           description: string
+          display_order: number | null
           id: string
+          image_url: string | null
           name: string
+          personal_comment: string | null
+          tags: string[] | null
           url: string | null
         }
         Insert: {
           created_at?: string
           description: string
+          display_order?: number | null
           id?: string
+          image_url?: string | null
           name: string
+          personal_comment?: string | null
+          tags?: string[] | null
           url?: string | null
         }
         Update: {
           created_at?: string
           description?: string
+          display_order?: number | null
           id?: string
+          image_url?: string | null
           name?: string
+          personal_comment?: string | null
+          tags?: string[] | null
           url?: string | null
         }
         Relationships: []
@@ -171,22 +222,34 @@ export type Database = {
         Row: {
           created_at: string
           description: string
+          display_order: number | null
           id: string
+          image_url: string | null
           name: string
+          personal_comment: string | null
+          tags: string[] | null
           url: string | null
         }
         Insert: {
           created_at?: string
           description: string
+          display_order?: number | null
           id?: string
+          image_url?: string | null
           name: string
+          personal_comment?: string | null
+          tags?: string[] | null
           url?: string | null
         }
         Update: {
           created_at?: string
           description?: string
+          display_order?: number | null
           id?: string
+          image_url?: string | null
           name?: string
+          personal_comment?: string | null
+          tags?: string[] | null
           url?: string | null
         }
         Relationships: []
@@ -220,11 +283,15 @@ export type Database = {
           category: string
           created_at: string
           description: string
-          feedback: string | null
+          description_long: string | null
+          display_order: number | null
           id: string
+          image_url: string | null
           logo_url: string | null
           name: string
+          personal_comment: string | null
           referral_link: string | null
+          tags: string[] | null
           tool_type: string
           url: string | null
         }
@@ -232,11 +299,15 @@ export type Database = {
           category: string
           created_at?: string
           description: string
-          feedback?: string | null
+          description_long?: string | null
+          display_order?: number | null
           id?: string
+          image_url?: string | null
           logo_url?: string | null
           name: string
+          personal_comment?: string | null
           referral_link?: string | null
+          tags?: string[] | null
           tool_type: string
           url?: string | null
         }
@@ -244,11 +315,15 @@ export type Database = {
           category?: string
           created_at?: string
           description?: string
-          feedback?: string | null
+          description_long?: string | null
+          display_order?: number | null
           id?: string
+          image_url?: string | null
           logo_url?: string | null
           name?: string
+          personal_comment?: string | null
           referral_link?: string | null
+          tags?: string[] | null
           tool_type?: string
           url?: string | null
         }
@@ -256,7 +331,21 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      all_resources: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          id: string | null
+          image_url: string | null
+          name: string | null
+          personal_comment: string | null
+          tags: string[] | null
+          type: string | null
+          url: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       check_tool_suggestion_rate_limit: {
