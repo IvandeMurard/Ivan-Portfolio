@@ -176,7 +176,7 @@ export function WhatDrivesMeSection({ disableSticky = false }: WhatDrivesMeSecti
   // Loading state: Show skeleton cards
   if (isLoading) {
     return (
-      <section id="resources" className="py-24 px-4 bg-secondary">
+      <section id="resources" className="py-24 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
           <SectionHeader
             title={sectionTitle}
@@ -213,7 +213,7 @@ export function WhatDrivesMeSection({ disableSticky = false }: WhatDrivesMeSecti
   // Error state: Show error message with retry button
   if (error) {
     return (
-      <section id="resources" className="py-24 px-4 bg-secondary">
+      <section id="resources" className="py-24 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
           <SectionHeader
             title={sectionTitle}
