@@ -2,7 +2,7 @@ export const myApproachContent = {
   en: {
     title: "About & My Approach",
     about: {
-      title: "About Me",
+      title: "About",
       paragraphs: [
         {
           title: "What drives me",
@@ -15,9 +15,9 @@ export const myApproachContent = {
             "I combine design intuition with data-driven decisions, grounded in a human-first, community-led philosophy. I constantly explore new AI tools and processes to ship faster and smarter. Whether it's prototyping agents, running experiments, or orchestrating cross-functional teams, I believe the best solutions emerge when technology amplifies genuine human needs.",
         },
         {
-          title: "My background",
+          title: "Why I care",
           content:
-            "5+ years building products from scratch, including 2 years co-founding a B2G SaaS (Sonor), with experience with European clients. I've won hackathons, shipped products, and am building a community, always at the intersection of strategy, design, and execution.",
+            "I'm driven by the belief that the best products feel invisible—they solve real problems without getting in the way. Coming from hospitality, I learned that great experiences are about anticipating needs and creating moments that matter. Now, I bring that same philosophy to building AI-powered products: obsessing over the details that make technology feel human.",
         },
       ],
     },
@@ -79,7 +79,7 @@ export const myApproachContent = {
   fr: {
     title: "À propos & Ma méthode",
     about: {
-      title: "À propos de moi",
+      title: "À propos",
       paragraphs: [
         {
           title: "Ce qui me motive",
@@ -92,9 +92,9 @@ export const myApproachContent = {
             "Je combine intuition design et décisions data-driven, ancrées dans une philosophie human-first et community-led. L'IA est mon accélérateur d'exécution—j'explore constamment de nouveaux outils et processus pour livrer plus vite et plus intelligemment. Que ce soit pour prototyper des agents, mener des expérimentations ou orchestrer des équipes cross-fonctionnelles, je crois que les meilleures solutions émergent quand la technologie amplifie de véritables besoins humains.",
         },
         {
-          title: "Mon parcours",
+          title: "Pourquoi c'est important pour moi",
           content:
-            "5+ ans à construire des produits from scratch, dont 2 ans à co-fonder un SaaS B2G (Sonor), avec une expérience en Europe et aux États-Unis. J'ai gagné des hackathons, lancé des produits et créé des communautés—toujours à l'intersection de la stratégie, du design et de l'exécution.",
+            "Je suis convaincu que les meilleurs produits sont invisibles—ils résolvent de vrais problèmes sans se mettre en travers du chemin. Venant de l'hospitalité, j'ai appris que les grandes expériences consistent à anticiper les besoins et créer des moments qui comptent. Aujourd'hui, j'apporte cette même philosophie à la création de produits IA : une obsession pour les détails qui rendent la technologie humaine.",
         },
       ],
     },
