@@ -10,7 +10,11 @@ export interface Tool {
   url: string | null;
   logo_url: string | null;
   referral_link: string | null;
-  feedback: string | null;
+  description_long: string | null;
+  image_url: string | null;
+  personal_comment: string | null;
+  tags: string[] | null;
+  display_order: number;
 }
 
 export interface Resource {
@@ -18,6 +22,10 @@ export interface Resource {
   name: string;
   description: string;
   url: string | null;
+  image_url: string | null;
+  personal_comment: string | null;
+  tags: string[] | null;
+  display_order: number;
 }
 
 export interface Inspiration {
@@ -25,6 +33,22 @@ export interface Inspiration {
   name: string;
   description: string;
   url: string | null;
+  image_url: string | null;
+  personal_comment: string | null;
+  tags: string[] | null;
+  display_order: number;
+}
+
+export interface Community {
+  id: string;
+  name: string;
+  description: string;
+  url: string | null;
+  logo_url: string | null;
+  image_url: string | null;
+  personal_comment: string | null;
+  tags: string[] | null;
+  display_order: number;
 }
 
 export const useTools = () => {
@@ -68,6 +92,21 @@ export const useInspirations = () => {
       
       if (error) throw error;
       return data as Inspiration[];
+    },
+  });
+};
+
+export const useCommunities = () => {
+  return useQuery({
+    queryKey: ['communities'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('communities')
+        .select('*')
+        .order('display_order', { ascending: true });
+      
+      if (error) throw error;
+      return data as Community[];
     },
   });
 };
