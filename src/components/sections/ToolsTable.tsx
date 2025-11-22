@@ -204,16 +204,16 @@ export function ToolsTable() {
                   
                   {/* Feedback (truncated + tooltip) */}
                   <td className="px-4 py-3 text-sm text-muted-foreground max-w-[200px]">
-                    {tool.feedback ? (
+                    {tool.description_long ? (
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <span className="truncate block cursor-help">
-                              {tool.feedback}
+                              {tool.description_long}
                             </span>
                           </TooltipTrigger>
                           <TooltipContent>
-                            <p className="max-w-xs">{tool.feedback}</p>
+                            <p className="max-w-xs">{tool.description_long}</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
