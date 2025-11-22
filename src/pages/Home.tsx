@@ -19,7 +19,7 @@ import wttjHero from "@/assets/wttj-hero.png";
 import wttjLogo from "@/assets/wttj-logo.svg";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import { GradientBorderSection } from "@/components/GradientBorderSection";
-import { CommunitiesInspoResourcesTools } from "@/components/sections/CommunitiesInspoResourcesTools";
+import { WhatDrivesMeSection } from "@/components/sections/WhatDrivesMeSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { useInlineExpand } from "@/hooks/useInlineExpand";
 import { InlineExpand } from "@/components/InlineExpand";
@@ -1078,7 +1078,7 @@ export const Home: React.FC = () => {
 
       <AboutSection />
 
-      <CommunitiesInspoResourcesTools disableSticky={isStickyDisabled} />
+      <WhatDrivesMeSection disableSticky={isStickyDisabled} />
 
       {/* Built With Banner */}
       <BuiltWithBanner />
