@@ -51,6 +51,19 @@ export interface Community {
   display_order: number;
 }
 
+export interface AllResource {
+  id: string;
+  type: 'tool' | 'resource' | 'inspiration' | 'community';
+  name: string;
+  description: string;
+  image_url: string | null;
+  personal_comment: string | null;
+  tags: string[] | null;
+  url: string | null;
+  display_order: number;
+  created_at: string;
+}
+
 export const useTools = () => {
   return useQuery({
     queryKey: ['tools'],
@@ -107,6 +120,20 @@ export const useCommunities = () => {
       
       if (error) throw error;
       return data as Community[];
+    },
+  });
+};
+
+export const useAllResources = () => {
+  return useQuery({
+    queryKey: ['all-resources'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('all_resources')
+        .select('*');
+      
+      if (error) throw error;
+      return data as AllResource[];
     },
   });
 };
