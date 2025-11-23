@@ -255,23 +255,23 @@ export function VisualCard({
           {/* Image with aspect ratio constraint */}
           <div className="relative w-full overflow-hidden rounded-xl bg-muted/30">
             {type === 'tool' && logo_url ? (
-              // Logo container for tools (more compact, centered)
-              <div className="flex items-center justify-center p-8 aspect-square max-h-[200px]">
+              // Logo container for tools (adapts to content)
+              <div className="flex items-center justify-center p-8 min-h-[120px]">
                 <img
                   src={imageUrl}
                   alt={name}
-                  className="max-w-full max-h-full object-contain"
+                  className="max-w-full max-h-[200px] w-auto h-auto object-contain"
                   onError={handleImageError}
                   loading="lazy"
                 />
               </div>
             ) : (
-              // Regular image (with max height constraint)
-              <div className="relative w-full aspect-[4/3] max-h-[280px]">
+              // Regular image (adapts to content, no fixed height)
+              <div className="relative w-full">
                 <img
                   src={imageUrl}
                   alt={name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto object-cover"
                   onError={handleImageError}
                   loading="lazy"
                 />
@@ -285,10 +285,10 @@ export function VisualCard({
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
                 
                 {/* Comment/Description text */}
-                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
+                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 max-h-[60%] overflow-y-auto">
                   <p
                     className={cn(
-                      "text-xs md:text-sm text-white line-clamp-3 leading-relaxed",
+                      "text-xs md:text-sm text-white leading-relaxed",
                       personal_comment && "italic"
                     )}
                   >
@@ -317,12 +317,12 @@ export function VisualCard({
           {/* Left: Image (40% on desktop, full width on mobile) */}
           <div className="w-full md:w-2/5 flex-shrink-0">
             {type === 'tool' && logo_url ? (
-              // Logo container for tools (compact, centered with padding)
-              <div className="flex items-center justify-center p-8 bg-muted/20 rounded-lg aspect-square max-h-[240px]">
+              // Logo container for tools (adapts to content)
+              <div className="flex items-center justify-center p-8 bg-muted/20 rounded-lg min-h-[120px]">
                 <img
                   src={imageUrl}
                   alt={name}
-                  className="max-w-full max-h-full object-contain"
+                  className="max-w-full max-h-[240px] w-auto h-auto object-contain"
                   onError={handleImageError}
                   loading="lazy"
                 />
@@ -333,11 +333,11 @@ export function VisualCard({
                 className="w-full cursor-pointer rounded-lg overflow-hidden"
                 aria-label="Close"
               >
-                <div className="relative w-full aspect-[4/3] max-h-[300px]">
+                <div className="relative w-full">
                   <img
                     src={imageUrl}
                     alt={name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto object-cover"
                     onError={handleImageError}
                     loading="lazy"
                   />
@@ -363,10 +363,10 @@ export function VisualCard({
               </blockquote>
             )}
 
-            {/* Tags - Limited display (max 3 shown) */}
+            {/* Tags - Show all tags */}
             {tags && tags.length > 0 && (
               <div className="flex flex-wrap gap-1.5 items-center">
-                {tags.slice(0, 3).map((tag) => (
+                {tags.map((tag) => (
                   <span
                     key={tag}
                     className="px-2 py-0.5 text-[10px] font-medium text-muted-foreground bg-muted/40 rounded-md border border-border/40"
@@ -374,11 +374,6 @@ export function VisualCard({
                     {tag}
                   </span>
                 ))}
-                {tags.length > 3 && (
-                  <span className="text-[10px] text-muted-foreground/70">
-                    +{tags.length - 3}
-                  </span>
-                )}
               </div>
             )}
 

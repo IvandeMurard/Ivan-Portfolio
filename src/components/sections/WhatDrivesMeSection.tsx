@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SearchWithFilters, type FilterState } from "@/components/SearchWithFilters";
 import { MasonryGrid } from "@/components/MasonryGrid";
@@ -25,6 +26,7 @@ interface WhatDrivesMeSectionProps {
 export function WhatDrivesMeSection({ disableSticky = false }: WhatDrivesMeSectionProps) {
   const { language } = useLanguage();
   const { data: allResources, isLoading, error, refetch } = useAllResources();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   // Search and filter state
   const [searchQuery, setSearchQuery] = useState("");
@@ -34,7 +36,11 @@ export function WhatDrivesMeSection({ disableSticky = false }: WhatDrivesMeSecti
   });
 
   // Expanded card state (only 1 card expanded at a time)
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  // Initialize from URL parameter (pre-loading like mymind.com)
+  const [expandedId, setExpandedId] = useState<string | null>(() => {
+    const expandParam = searchParams.get('expand');
+    return expandParam || null;
+  });
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
 
   // Refs for keyboard navigation between cards
@@ -124,21 +130,57 @@ export function WhatDrivesMeSection({ disableSticky = false }: WhatDrivesMeSecti
 
   // Toggle expanded card
   const handleToggleCard = useCallback((id: string) => {
-    setExpandedId((prev) => (prev === id ? null : id));
+    setExpandedId((prev) => {
+      const newExpandedId = prev === id ? null : id;
+      
+      // Update URL parameter (pre-loading like mymind.com)
+      const newSearchParams = new URLSearchParams(searchParams);
+      if (newExpandedId) {
+        newSearchParams.set('expand', newExpandedId);
+      } else {
+        newSearchParams.delete('expand');
+      }
+      setSearchParams(newSearchParams, { replace: true });
+      
+      return newExpandedId;
+    });
+    
     // Update focused index when toggling
     const index = filteredResources.findIndex((r) => r.id === id);
     if (index !== -1) {
       setFocusedIndex(index);
     }
-  }, [filteredResources]);
+  }, [filteredResources, searchParams, setSearchParams]);
+
+  // Pre-load card from URL parameter (like mymind.com)
+  useEffect(() => {
+    const expandParam = searchParams.get('expand');
+    if (expandParam && allResources.length > 0) {
+      const resourceExists = allResources.some((r) => r.id === expandParam);
+      if (resourceExists && expandedId !== expandParam) {
+        setExpandedId(expandParam);
+        // Scroll to the card after a short delay to ensure it's rendered
+        setTimeout(() => {
+          const cardElement = cardRefs.current.get(expandParam)?.current;
+          if (cardElement) {
+            cardElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }, 100);
+      }
+    }
+  }, [searchParams, allResources, expandedId]);
 
   // Close expanded card if it's no longer in filtered results
   useEffect(() => {
     if (expandedId && !filteredResources.some((r) => r.id === expandedId)) {
       setExpandedId(null);
       setFocusedIndex(null);
+      // Also remove from URL
+      const newSearchParams = new URLSearchParams(searchParams);
+      newSearchParams.delete('expand');
+      setSearchParams(newSearchParams, { replace: true });
     }
-  }, [expandedId, filteredResources]);
+  }, [expandedId, filteredResources, searchParams, setSearchParams]);
 
   // Navigation handler for arrow keys
   const handleNavigate = useCallback((id: string, direction: 'up' | 'down' | 'left' | 'right') => {
