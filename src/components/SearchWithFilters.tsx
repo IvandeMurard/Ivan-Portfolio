@@ -18,13 +18,19 @@ interface SearchWithFiltersProps {
   placeholder?: string;
 }
 
-const TYPE_OPTIONS = [
-  { id: 'all', label: 'All', value: null as const },
-  { id: 'community', label: 'Communities', value: 'community' as const },
-  { id: 'inspiration', label: 'Inspirations', value: 'inspiration' as const },
-  { id: 'resource', label: 'Resources', value: 'resource' as const },
-  { id: 'tool', label: 'Tools', value: 'tool' as const },
-] as const;
+type TypeOption = {
+  id: string;
+  label: string;
+  value: 'community' | 'inspiration' | 'resource' | 'tool' | null;
+};
+
+const TYPE_OPTIONS: TypeOption[] = [
+  { id: 'all', label: 'All', value: null },
+  { id: 'community', label: 'Communities', value: 'community' },
+  { id: 'inspiration', label: 'Inspirations', value: 'inspiration' },
+  { id: 'resource', label: 'Resources', value: 'resource' },
+  { id: 'tool', label: 'Tools', value: 'tool' },
+];
 
 /**
  * SearchWithFilters Component
@@ -115,7 +121,7 @@ export function SearchWithFilters({
     setShowFilters(isFocused || searchQuery.length > 0 || hasActiveFilters);
   }, [isFocused, searchQuery, filterState.types.length, filterState.tags.length]);
 
-  const handleTypeToggle = useCallback((type: typeof TYPE_OPTIONS[number]['value']) => {
+  const handleTypeToggle = useCallback((type: TypeOption['value']) => {
     setFilterState((prev) => {
       if (type === null) {
         // "All" clears other type filters
@@ -140,7 +146,7 @@ export function SearchWithFilters({
     });
   }, []);
 
-  const isTypeActive = (type: typeof TYPE_OPTIONS[number]['value']) => {
+  const isTypeActive = (type: TypeOption['value']) => {
     if (type === null) {
       return filterState.types.length === 0;
     }
