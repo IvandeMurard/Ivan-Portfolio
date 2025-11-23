@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 export interface FilterState {
-  types: ('all' | 'community' | 'inspiration' | 'resource' | 'tool')[];
+  types: ('community' | 'inspiration' | 'resource' | 'tool')[];
   tags: string[];
 }
 
@@ -27,7 +27,7 @@ export function SearchBar({
   const [query, setQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
-    types: ['all'],
+    types: [],
     tags: [],
   });
   const prefersReducedMotion = useReducedMotion();
@@ -67,28 +67,20 @@ export function SearchBar({
   // Handle type filter
   const toggleType = (type: string) => {
     setFilters((prev) => {
-      const newTypes = [...prev.types];
-      const typeValue = type.toLowerCase() as FilterState['types'][number];
-
       if (type === 'all') {
-        // "All" clears others and toggles itself
-        if (newTypes.includes('all')) {
-          return { ...prev, types: [] };
-        } else {
-          return { ...prev, types: ['all'] };
-        }
+        // "All" clears all type filters
+        return { ...prev, types: [] };
+      }
+      
+      const typeValue = type.toLowerCase() as FilterState['types'][number];
+      const newTypes = [...prev.types];
+      
+      if (newTypes.includes(typeValue)) {
+        // Deselect
+        return { ...prev, types: newTypes.filter((t) => t !== typeValue) };
       } else {
-        // Remove 'all' if selecting a specific type
-        const filteredTypes = newTypes.filter((t) => t !== 'all');
-        
-        if (filteredTypes.includes(typeValue)) {
-          // Deselect
-          const updated = filteredTypes.filter((t) => t !== typeValue);
-          return { ...prev, types: updated.length > 0 ? updated : ['all'] };
-        } else {
-          // Select
-          return { ...prev, types: [...filteredTypes, typeValue] };
-        }
+        // Select
+        return { ...prev, types: [...newTypes, typeValue] };
       }
     });
   };
@@ -155,9 +147,9 @@ export function SearchBar({
               <p className="text-sm font-medium mb-2 text-foreground">Type</p>
               <div className="flex flex-wrap gap-2">
                 {typeOptions.map((type) => {
-                  const isActive = filters.types.includes(
-                    type.id as FilterState['types'][number]
-                  );
+                  const isActive = type.id === 'all' 
+                    ? filters.types.length === 0
+                    : filters.types.includes(type.id as FilterState['types'][number]);
                   return (
                     <button
                       key={type.id}

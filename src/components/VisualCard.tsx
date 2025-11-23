@@ -256,11 +256,11 @@ export function VisualCard({
           <div className="relative w-full overflow-hidden rounded-xl bg-muted/30">
             {type === 'tool' && logo_url ? (
               // Logo container for tools (adapts to content)
-              <div className="flex items-center justify-center p-8 min-h-[120px]">
+              <div className="flex items-center justify-center p-6 min-h-[100px]">
                 <img
                   src={imageUrl}
                   alt={name}
-                  className="max-w-full max-h-[200px] w-auto h-auto object-contain"
+                  className="max-w-full max-h-[120px] w-auto h-auto object-contain"
                   onError={handleImageError}
                   loading="lazy"
                 />
@@ -271,7 +271,7 @@ export function VisualCard({
                 <img
                   src={imageUrl}
                   alt={name}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto max-h-[280px] object-cover"
                   onError={handleImageError}
                   loading="lazy"
                 />
@@ -303,7 +303,7 @@ export function VisualCard({
         // Expanded State: Horizontal layout
         <div 
           ref={expandedContentRef}
-          className="relative flex flex-col md:flex-row gap-6 p-5 md:p-6"
+          className="relative flex flex-row gap-4 md:gap-6 p-4 md:p-6"
         >
           {/* Close button (top-right) */}
           <button
@@ -314,15 +314,15 @@ export function VisualCard({
             <X className="w-4 h-4" />
           </button>
 
-          {/* Left: Image (40% on desktop, full width on mobile) */}
-          <div className="w-full md:w-2/5 flex-shrink-0">
+          {/* Left: Image (40% width, always) */}
+          <div className="w-2/5 flex-shrink-0">
             {type === 'tool' && logo_url ? (
               // Logo container for tools (adapts to content)
               <div className="flex items-center justify-center p-8 bg-muted/20 rounded-lg min-h-[120px]">
                 <img
                   src={imageUrl}
                   alt={name}
-                  className="max-w-full max-h-[240px] w-auto h-auto object-contain"
+                  className="max-w-full max-h-[160px] w-auto h-auto object-contain"
                   onError={handleImageError}
                   loading="lazy"
                 />
@@ -361,20 +361,6 @@ export function VisualCard({
               <blockquote className="border-l-2 border-accent/60 pl-4 py-2 italic text-sm text-muted-foreground leading-relaxed">
                 {personal_comment}
               </blockquote>
-            )}
-
-            {/* Tags - Show all tags */}
-            {tags && tags.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 items-center">
-                {tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-[10px] font-medium text-muted-foreground bg-muted/40 rounded-md border border-border/40"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
             )}
 
             {/* CTA: Visit Resource */}
