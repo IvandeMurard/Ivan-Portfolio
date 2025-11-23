@@ -1,11 +1,5 @@
-import { useMemo, useState, useEffect, useCallback } from "react";
-import {
-  communities,
-  inspirations,
-  resources,
-  tools,
-  type BaseItem,
-} from "@/data/inspirationsToolsMerged";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 /**
  * Unified Resource interface matching VisualCard props
@@ -23,32 +17,6 @@ export interface UnifiedResource {
   display_order: number;
 }
 
-/**
- * Map BaseItem to UnifiedResource format
- */
-function mapBaseItemToUnifiedResource(
-  item: BaseItem,
-  type: UnifiedResource['type'],
-  index: number
-): UnifiedResource {
-  // Use logo as image_url (primary image) for tools, logo_url for others
-  const logoUrl = item.logo || null;
-  
-  return {
-    id: item.id,
-    type,
-    name: item.title,
-    description: item.excerpt || item.subtitle || null,
-    // For tools, use logo_url as the primary image; for others, use as image_url too
-    image_url: logoUrl,
-    logo_url: type === 'tool' ? logoUrl : null, // logo_url is mainly for tools
-    personal_comment: item.comment || null,
-    tags: item.tags || null,
-    url: item.link || null,
-    display_order: index,
-  };
-}
-
 export interface UseAllResourcesResult {
   data: UnifiedResource[];
   isLoading: boolean;
@@ -57,85 +25,45 @@ export interface UseAllResourcesResult {
 }
 
 /**
- * Hook to fetch and combine all resources (communities, inspirations, resources, tools)
+ * Hook to fetch all resources from Supabase all_resources view
  * 
  * Returns a unified array with type discrimination for use with VisualCard component.
- * Currently uses static data from inspirationsToolsMerged.ts, but can be extended
- * to query a Supabase "all_resources" view in the future.
- * 
- * Includes loading and error states for future API integration.
  */
 export function useAllResources(): UseAllResourcesResult {
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-  const [retryCount, setRetryCount] = useState(0);
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['all-resources'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('all_resources')
+        .select('*')
+        .order('display_order', { ascending: true, nullsFirst: false })
+        .order('created_at', { ascending: false });
 
-  const allResources = useMemo<UnifiedResource[]>(() => {
-    try {
-      const unified: UnifiedResource[] = [];
+      if (error) {
+        throw new Error(`Failed to fetch resources: ${error.message}`);
+      }
 
-      // Map communities
-      communities.forEach((item, index) => {
-        unified.push(mapBaseItemToUnifiedResource(item, 'community', index));
-      });
-
-      // Map inspirations
-      inspirations.forEach((item, index) => {
-        unified.push(mapBaseItemToUnifiedResource(item, 'inspiration', index));
-      });
-
-      // Map resources
-      resources.forEach((item, index) => {
-        unified.push(mapBaseItemToUnifiedResource(item, 'resource', index));
-      });
-
-      // Map tools
-      tools.forEach((item, index) => {
-        unified.push(mapBaseItemToUnifiedResource(item, 'tool', index));
-      });
-
-      return unified;
-    } catch (err) {
-      throw err;
-    }
-  }, []);
-
-  // Simulate loading for initial mount (can be removed when using real API)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 300); // Short delay to show skeleton
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Refetch function (for error retry)
-  const refetch = useCallback(() => {
-    setError(null);
-    setIsLoading(true);
-    setRetryCount((prev) => prev + 1);
-    
-    // Simulate refetch
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 300);
-  }, []);
-
-  // Simulate error (set to true to test error state)
-  // In production, this would come from the API
-  const shouldSimulateError = false;
-
-  useEffect(() => {
-    if (shouldSimulateError && retryCount === 0) {
-      setError(new Error('Failed to load resources'));
-      setIsLoading(false);
-    }
-  }, [retryCount]);
+      // Map Supabase data to UnifiedResource
+      return (data || []).map((item): UnifiedResource => ({
+        id: item.id!,
+        type: item.type as UnifiedResource['type'],
+        name: item.name!,
+        description: item.description,
+        image_url: item.image_url,
+        logo_url: null, // all_resources view doesn't have logo_url, but tools have it in image_url
+        personal_comment: item.personal_comment,
+        tags: item.tags,
+        url: item.url,
+        display_order: item.display_order ?? 0,
+      }));
+    },
+    staleTime: 1000 * 60 * 5, // 5 minutes
+  });
 
   return {
-    data: allResources,
+    data: data || [],
     isLoading,
-    error,
+    error: error as Error | null,
     refetch,
   };
 }
