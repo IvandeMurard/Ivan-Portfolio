@@ -19,7 +19,6 @@ import wttjHero from "@/assets/wttj-hero.png";
 import wttjLogo from "@/assets/wttj-logo.svg";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import { GradientBorderSection } from "@/components/GradientBorderSection";
-import { WhatDrivesMeSection } from "@/components/sections/WhatDrivesMeSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { useInlineExpand } from "@/hooks/useInlineExpand";
 import { InlineExpand } from "@/components/InlineExpand";
@@ -454,7 +453,6 @@ export const Home: React.FC = () => {
           { id: "hackathons", label: "Hackathons" },
           { id: "experience", label: "Experience" },
           { id: "about", label: "About" },
-          { id: "resources", label: "Resources" },
           { id: "contact", label: "Contact" },
         ]}
       />
@@ -1061,15 +1059,15 @@ export const Home: React.FC = () => {
             </p>
           </div>
 
-          {/* CTA vers la section Resources/Communautés (dans la page) */}
+          {/* CTA vers la section Contact */}
           <div className="flex justify-center">
             <Button
               variant="outline"
               size="lg"
               className="group hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
-              onClick={() => document.getElementById("resources")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={() => scrollToSection("contact")}
             >
-              Check my toolkit & inspiration sources
+              Let's connect
               <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
             </Button>
           </div>
@@ -1077,8 +1075,6 @@ export const Home: React.FC = () => {
       </section>
 
       <AboutSection />
-
-      <WhatDrivesMeSection disableSticky={isStickyDisabled} />
 
       {/* Built With Banner */}
       <BuiltWithBanner />
@@ -1151,7 +1147,6 @@ export const Home: React.FC = () => {
           { id: "hackathons", label: "Hackathons" },
           { id: "experience", label: "Experience" },
           { id: "about", label: "About" },
-          { id: "resources", label: "Resources" },
           { id: "contact", label: "Contact" },
         ]}
         onSectionClick={(sectionId) => {
