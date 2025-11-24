@@ -11,6 +11,7 @@ import { Home } from "./pages/Home";
 import Sonor from "./pages/Sonor";
 import Wttj from "./pages/cases/Wttj";
 import WttjDefaultCase from "./pages/cases/wttj-default";
+import WTTJCaseStudy from "./pages/cases/wttj-case-study";
 import AgentsEval from "./pages/cases/AgentsEval";
 import NotFound from "./pages/NotFound";
 
@@ -34,8 +35,9 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/case-study/sonor" element={<Sonor />} />
-              <Route path="/cases/wttj" element={<Wttj />} />
+              <Route path="/cases/wttj" element={<WTTJCaseStudy />} />
               <Route path="/case-study/wttj-conversion-seniors" element={<Wttj />} />
+              <Route path="/case-study/wttj" element={<WTTJCaseStudy />} />
               <Route path="/case-study/agents-eval" element={<AgentsEval />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
