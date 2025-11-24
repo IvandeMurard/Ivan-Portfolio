@@ -636,10 +636,15 @@ export const Home: React.FC = () => {
                 Zero-to-One Product Manager
               </motion.p>
 
-              {/* Sous-titre - 1 ligne sur mobile */}
+              {/* Sous-titre - texte complet sur toutes les tailles d'écran */}
               <motion.p
-                className="text-xl text-white mt-8 leading-relaxed"
-                style={{ color: "#FFFFFF" }}
+                className="text-xl text-white mt-8 leading-relaxed px-4 sm:px-0"
+                style={{ 
+                  color: "#FFFFFF",
+                  wordWrap: "break-word",
+                  overflowWrap: "break-word",
+                  hyphens: "auto"
+                }}
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
@@ -648,7 +653,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                From hospitality to AI: I ship fast friction-less products and experiences with care and AI.
+                From hospitality to AI: I build product.
               </motion.p>
 
               {/* Proof Points */}
