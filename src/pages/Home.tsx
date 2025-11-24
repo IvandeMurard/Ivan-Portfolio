@@ -502,9 +502,9 @@ export const Home: React.FC = () => {
                 Zero-to-One Product Manager
               </motion.p>
 
-              {/* Sous-titre - 2 lignes */}
+              {/* Sous-titre */}
               <motion.p
-                className="text-xl sm:text-2xl md:text-3xl text-white mt-8 md:mt-10 leading-relaxed"
+                className="text-xl sm:text-2xl md:text-3xl text-white mt-8 md:mt-10 leading-relaxed max-w-4xl"
                 style={{ color: "#FFFFFF" }}
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -514,8 +514,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                <span className="block md:inline">From hospitality to AI: I build </span>
-                <span className="block md:inline">product.</span>
+                From hospitality to AI: I ship fast friction-less products and experiences with care and AI.
               </motion.p>
 
               {/* Proof Points */}
@@ -653,7 +652,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                From hospitality to AI: I build product.
+                From hospitality to AI: I ship fast friction-less products and experiences with care and AI.
               </motion.p>
 
               {/* Proof Points */}
