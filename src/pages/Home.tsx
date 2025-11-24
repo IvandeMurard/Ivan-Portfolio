@@ -638,11 +638,11 @@ export const Home: React.FC = () => {
               {/* Sous-titre - texte complet sur toutes les tailles d'écran */}
               <motion.p
                 className="text-xl text-white mt-8 leading-relaxed px-4 sm:px-0"
-                style={{ 
+                style={{
                   color: "#FFFFFF",
                   wordWrap: "break-word",
                   overflowWrap: "break-word",
-                  hyphens: "auto"
+                  hyphens: "auto",
                 }}
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -652,7 +652,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                From hospitality to AI: I ship fast friction-less products and experiences with care and AI.
+                From hospitality to AI: I ship fast friction-less products and experiences with care.
               </motion.p>
 
               {/* Proof Points */}
