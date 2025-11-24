@@ -608,8 +608,104 @@ export const ContentEN = () => {
         </div>
       </ScrollRevealSection>
 
+      {/* ========== SECTION: STAKEHOLDER TESTIMONIALS ========== */}
+      <ScrollRevealSection variant="fade-in-up" delay={0.225}>
+        <div id="testimonials" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-h3 mb-4">
+                {language === 'fr' 
+                  ? "Ce Que Les Décideurs En Ont Dit"
+                  : "What Stakeholders Said"
+                }
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                {language === 'fr'
+                  ? "Retours de décideurs publics sur l'approche Sonor"
+                  : "Feedback from public decision-makers on the Sonor approach"
+                }
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Testimonial 1 - Pierre Ferrari */}
+              <div className="bg-card p-6 rounded-2xl border border-border hover:border-accent/30 transition-all">
+                <div className="mb-4">
+                  <svg className="w-8 h-8 text-accent/30" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                  </svg>
+                </div>
+                <p className="text-base italic text-foreground/80 mb-6 leading-relaxed">
+                  {language === 'fr'
+                    ? "Une approche pertinente, engageant les citoyens, pour traiter le bruit et redynamiser les cœurs de ville."
+                    : "A relevant approach, engaging citizens, to address noise and revitalize city centers."
+                  }
+                </p>
+                <div className="pt-4 border-t border-border/50">
+                  <p className="font-semibold text-sm">Pierre Ferrari</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {language === 'fr'
+                      ? "Directeur Smart City & Stratégie Numérique, Ville d'Arras"
+                      : "Smart City Director, City of Arras"
+                    }
+                  </p>
+                </div>
+              </div>
+              
+              {/* Testimonial 2 - C. de Clermont-Tonnerre */}
+              <div className="bg-card p-6 rounded-2xl border border-border hover:border-accent/30 transition-all">
+                <div className="mb-4">
+                  <svg className="w-8 h-8 text-accent/30" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                  </svg>
+                </div>
+                <p className="text-base italic text-foreground/80 mb-6 leading-relaxed">
+                  {language === 'fr'
+                    ? "L'approche humaine et terrain proposée, est essentielle à la compréhension de l'ensemble des enjeux liés à la pollution sonore."
+                    : "The human-centered, field-based approach is essential to understanding all issues related to noise pollution."
+                  }
+                </p>
+                <div className="pt-4 border-t border-border/50">
+                  <p className="font-semibold text-sm">C. de Clermont-Tonnerre</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {language === 'fr'
+                      ? "Conseillère de Paris, Déléguée Urbanisme & Patrimoine"
+                      : "Paris City Councillor, Urban Planning Delegate"
+                    }
+                  </p>
+                </div>
+              </div>
+              
+              {/* Testimonial 3 - Lauriane Rossi */}
+              <div className="bg-card p-6 rounded-2xl border border-border hover:border-accent/30 transition-all">
+                <div className="mb-4">
+                  <svg className="w-8 h-8 text-accent/30" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                  </svg>
+                </div>
+                <p className="text-base italic text-foreground/80 mb-6 leading-relaxed">
+                  {language === 'fr'
+                    ? "La pollution sonore est une nuisance majeure, à laquelle Sonor apporte une solution pertinente."
+                    : "Noise pollution is a major nuisance, to which Sonor provides a relevant solution."
+                  }
+                </p>
+                <div className="pt-4 border-t border-border/50">
+                  <p className="font-semibold text-sm">Lauriane Rossi</p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {language === 'fr'
+                      ? "Députée des Hauts-de-Seine, Présidente du Conseil National du Bruit"
+                      : "Deputy, President of the National Noise Council"
+                    }
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ScrollRevealSection>
+
       {/* ========== SECTION 5: OBSTACLES ENCOUNTERED ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.25}>
+      <ScrollRevealSection variant="fade-in-up" delay={0.3}>
         <div id="obstacles" className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
           <div className="max-w-6xl mx-auto space-y-8">
             <h2 className="text-h3">Obstacles Encountered</h2>
@@ -923,102 +1019,6 @@ export const ContentEN = () => {
                   </>
                 )}
               </p>
-            </div>
-          </div>
-        </div>
-      </ScrollRevealSection>
-
-      {/* ========== SECTION: STAKEHOLDER TESTIMONIALS ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.5}>
-        <div id="testimonials" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-h3 mb-4">
-                {language === 'fr' 
-                  ? "Ce Que Les Décideurs En Ont Dit"
-                  : "What Stakeholders Said"
-                }
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                {language === 'fr'
-                  ? "Retours de décideurs publics sur l'approche Sonor"
-                  : "Feedback from public decision-makers on the Sonor approach"
-                }
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Testimonial 1 - Pierre Ferrari */}
-              <div className="bg-card p-6 rounded-2xl border border-border hover:border-accent/30 transition-all">
-                <div className="mb-4">
-                  <svg className="w-8 h-8 text-accent/30" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                  </svg>
-                </div>
-                <p className="text-base italic text-foreground/80 mb-6 leading-relaxed">
-                  {language === 'fr'
-                    ? "Une approche pertinente, engageant les citoyens, pour traiter le bruit et redynamiser les cœurs de ville."
-                    : "A relevant approach, engaging citizens, to address noise and revitalize city centers."
-                  }
-                </p>
-                <div className="pt-4 border-t border-border/50">
-                  <p className="font-semibold text-sm">Pierre Ferrari</p>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {language === 'fr'
-                      ? "Directeur Smart City & Stratégie Numérique, Ville d'Arras"
-                      : "Smart City Director, City of Arras"
-                    }
-                  </p>
-                </div>
-              </div>
-              
-              {/* Testimonial 2 - C. de Clermont-Tonnerre */}
-              <div className="bg-card p-6 rounded-2xl border border-border hover:border-accent/30 transition-all">
-                <div className="mb-4">
-                  <svg className="w-8 h-8 text-accent/30" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                  </svg>
-                </div>
-                <p className="text-base italic text-foreground/80 mb-6 leading-relaxed">
-                  {language === 'fr'
-                    ? "L'approche humaine et terrain proposée, est essentielle à la compréhension de l'ensemble des enjeux liés à la pollution sonore."
-                    : "The human-centered, field-based approach is essential to understanding all issues related to noise pollution."
-                  }
-                </p>
-                <div className="pt-4 border-t border-border/50">
-                  <p className="font-semibold text-sm">C. de Clermont-Tonnerre</p>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {language === 'fr'
-                      ? "Conseillère de Paris, Déléguée Urbanisme & Patrimoine"
-                      : "Paris City Councillor, Urban Planning Delegate"
-                    }
-                  </p>
-                </div>
-              </div>
-              
-              {/* Testimonial 3 - Lauriane Rossi */}
-              <div className="bg-card p-6 rounded-2xl border border-border hover:border-accent/30 transition-all">
-                <div className="mb-4">
-                  <svg className="w-8 h-8 text-accent/30" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                  </svg>
-                </div>
-                <p className="text-base italic text-foreground/80 mb-6 leading-relaxed">
-                  {language === 'fr'
-                    ? "La pollution sonore est une nuisance majeure, à laquelle Sonor apporte une solution pertinente."
-                    : "Noise pollution is a major nuisance, to which Sonor provides a relevant solution."
-                  }
-                </p>
-                <div className="pt-4 border-t border-border/50">
-                  <p className="font-semibold text-sm">Lauriane Rossi</p>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {language === 'fr'
-                      ? "Députée des Hauts-de-Seine, Présidente du Conseil National du Bruit"
-                      : "Deputy, President of the National Noise Council"
-                    }
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
