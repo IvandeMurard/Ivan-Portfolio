@@ -648,7 +648,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                From hospitality to AI: I ship fast friction-less products and experiences with AI expertise.
+                From hospitality to AI: I ship fast friction-less products and experiences with care and AI.
               </motion.p>
 
               {/* Proof Points */}
@@ -727,7 +727,6 @@ export const Home: React.FC = () => {
               </motion.div>
             </div>
           </div>
-
         </div>
       </section>
 
