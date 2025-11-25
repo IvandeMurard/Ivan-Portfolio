@@ -1,8 +1,35 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Component, ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import { ArrowUp } from "lucide-react";
 
-export const ScrollToTop = () => {
+// Error Boundary to catch Router context errors
+class RouterErrorBoundary extends Component<
+  { children: ReactNode; fallback?: ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: ReactNode; fallback?: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch() {
+    // Silently catch Router context errors
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback ?? null;
+    }
+    return this.props.children;
+  }
+}
+
+// Main ScrollToTop component that uses Router
+const ScrollToTopWithRouter = () => {
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(false);
   const [isDark, setIsDark] = useState(
@@ -14,7 +41,6 @@ export const ScrollToTop = () => {
     const hash = location.hash.replace('#', '');
     
     if (hash) {
-      // If there's a hash, scroll to that section after a short delay
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) {
@@ -22,7 +48,6 @@ export const ScrollToTop = () => {
         }
       }, 100);
     } else {
-      // No hash, scroll to top
       window.scrollTo({ top: 0, behavior: "instant" });
     }
   }, [location.pathname, location.hash]);
@@ -42,11 +67,7 @@ export const ScrollToTop = () => {
   // Show button when page is scrolled down
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.scrollY > 300);
     };
 
     window.addEventListener("scroll", toggleVisibility);
@@ -54,10 +75,7 @@ export const ScrollToTop = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -99,3 +117,75 @@ export const ScrollToTop = () => {
     </>
   );
 };
+
+// Fallback version without Router (just scroll button, no route detection)
+const ScrollToTopFallback = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isDark, setIsDark] = useState(
+    document.documentElement.classList.contains("dark")
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      setIsVisible(window.scrollY > 300);
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <>
+      {isVisible && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-4 right-4 z-50 rounded-full p-3.5 transition-all duration-300"
+          aria-label="Retour en haut"
+          style={{
+            border: isDark 
+              ? "1px solid hsl(var(--border) / 0.2)" 
+              : "1px solid hsl(var(--border) / 0.3)",
+            background: isDark 
+              ? "hsl(var(--background) / 0.6)" 
+              : "hsl(var(--background) / 0.85)",
+            backdropFilter: "blur(20px) saturate(180%)",
+            WebkitBackdropFilter: "blur(20px) saturate(180%)",
+            boxShadow: isDark
+              ? "0 4px 16px hsl(var(--foreground) / 0.1), inset 0 1px 0 hsl(var(--background) / 0.8)"
+              : "0 6px 20px hsl(var(--foreground) / 0.12), inset 0 1px 0 hsl(var(--background) / 1)"
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-2px) scale(1.08)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0) scale(1)";
+          }}
+        >
+          <ArrowUp className="h-5 w-5" />
+        </button>
+      )}
+    </>
+  );
+};
+
+// Export wrapped component with error boundary
+export const ScrollToTop = () => (
+  <RouterErrorBoundary fallback={<ScrollToTopFallback />}>
+    <ScrollToTopWithRouter />
+  </RouterErrorBoundary>
+);
