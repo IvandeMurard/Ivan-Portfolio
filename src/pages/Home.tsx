@@ -102,7 +102,7 @@ const projects: Project[] = [
   // — Agentic Hospitality —
   {
     id: "agentic-hospitality",
-    title: "An agentic hospitality product case study",
+    title: "A hospitality agentic experience case study",
     subtitle: "Can we value agents to predict restaurant and hotel attendance?",
     image: "/img/photo-by-dylan-calluy-unsplash.jpg",
     tags: ["Agentic Experiences", "Hackathon"],
@@ -181,7 +181,7 @@ const projects: Project[] = [
 // Calculate filter chips dynamically based on visible projects (excluding hidden)
 const getFilterChips = (projects: Project[]) => {
   const visibleProjects = projects.filter((p) => !p.hidden);
-  
+
   const allCount = visibleProjects.length;
   const agenticExperiencesCount = visibleProjects.filter(
     (p) => p.category === "agentic-experiences" || p.tags.some((tag) => tag.toLowerCase() === "agentic experiences"),
@@ -413,7 +413,7 @@ export const Home: React.FC = () => {
 
   // Filtrer les projets masqués (hidden: true) puis appliquer le filtre de catégorie
   const visibleProjects = projects.filter((p) => !p.hidden);
-  
+
   const filteredProjects =
     activeFilter === "all"
       ? visibleProjects
@@ -782,7 +782,10 @@ export const Home: React.FC = () => {
           />
 
           {/* Mobile/Tablet: Grid Layout with staggered animations */}
-          <StaggerContainer className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 justify-items-center" staggerDelay={0.1}>
+          <StaggerContainer
+            className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 justify-items-center"
+            staggerDelay={0.1}
+          >
             {filteredProjects.map((project, index) => {
               const originalIndex = projects.findIndex((p) => p.id === project.id);
               const isComingSoon =
@@ -1119,36 +1122,36 @@ export const Home: React.FC = () => {
 
           <ScrollReveal variant="scale" delay={0.2}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Button
-              size="lg"
-              className="bg-card hover:bg-card/90 text-contact dark:text-white hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
-              asChild
-            >
-              <a href={SOCIAL_LINKS.mail.href}>
-                <Mail className="mr-2 h-5 w-5" />
-                Email
-              </a>
-            </Button>
-            <Button
-              size="lg"
-              className="bg-card hover:bg-card/90 text-contact dark:text-white hover:text-[#0077B5] hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 group"
-              asChild
-            >
-              <a href={SOCIAL_LINKS.linkedin.href} target="_blank" rel="noopener noreferrer">
-                <Linkedin className="mr-2 h-5 w-5 group-hover:text-[#0077B5] transition-colors" />
-                LinkedIn
-              </a>
-            </Button>
-            <Button
-              size="lg"
-              className="bg-card hover:bg-card/90 text-contact dark:text-white hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
-              asChild
-            >
-              <a href={SOCIAL_LINKS.calendar.href} target="_blank" rel="noopener noreferrer">
-                <Calendar className="mr-2 h-5 w-5" />
-                Calendar
-              </a>
-            </Button>
+              <Button
+                size="lg"
+                className="bg-card hover:bg-card/90 text-contact dark:text-white hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
+                asChild
+              >
+                <a href={SOCIAL_LINKS.mail.href}>
+                  <Mail className="mr-2 h-5 w-5" />
+                  Email
+                </a>
+              </Button>
+              <Button
+                size="lg"
+                className="bg-card hover:bg-card/90 text-contact dark:text-white hover:text-[#0077B5] hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 group"
+                asChild
+              >
+                <a href={SOCIAL_LINKS.linkedin.href} target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="mr-2 h-5 w-5 group-hover:text-[#0077B5] transition-colors" />
+                  LinkedIn
+                </a>
+              </Button>
+              <Button
+                size="lg"
+                className="bg-card hover:bg-card/90 text-contact dark:text-white hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
+                asChild
+              >
+                <a href={SOCIAL_LINKS.calendar.href} target="_blank" rel="noopener noreferrer">
+                  <Calendar className="mr-2 h-5 w-5" />
+                  Calendar
+                </a>
+              </Button>
             </div>
           </ScrollReveal>
 
