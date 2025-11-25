@@ -85,8 +85,8 @@ const projects: Project[] = [
     title: "Evaluating AI agents at scale",
     subtitle: "How do we turn trust into an asset?.",
     image: "/img/samuel-arkwright-unsplash.jpg",
-    tags: ["Agents", "Evaluation"],
-    category: "agents",
+    tags: ["Agentic Experiences", "Evaluation"],
+    category: "agentic-experiences",
     longDescription: "From run lifecycle to clear signals, helping teams ship agents with confidence.",
     bullets: [
       "Structured lifecycle and dashboard",
@@ -103,8 +103,8 @@ const projects: Project[] = [
     title: "An agentic hospitality product case study",
     subtitle: "Can we value agents to predict restaurant and hotel attendance?",
     image: "/img/photo-by-dylan-calluy-unsplash.jpg",
-    tags: ["Agentic", "Hackathon"],
-    category: "agents",
+    tags: ["Agentic Experiences", "Hackathon"],
+    category: "agentic-experiences",
     kicker: "CASE STUDY – AN AGENTIC HOSPITALITY PRODUCT CASE STUDY",
     tagline: "Building autonomous AI agents for hospitality efficiency",
     modalTitle: "Can we value agents to predict restaurant and hotel attendance?",
@@ -124,7 +124,7 @@ const projects: Project[] = [
     title: "AN EXPERIMENTAL PRODUCT IN AGENTIC DESIGN",
     subtitle: "How might we bridge human intuition and agent intelligence?",
     image: "/img/gabriella-clare-marino-unsplash.jpg",
-    tags: ["Experience", "Agents"],
+    tags: ["Experience", "Agentic Experiences"],
     category: "experience",
     kicker: "CASE STUDY – AN EXPERIMENTAL PRODUCT IN AGENTIC DESIGN",
     tagline: "A product exploration in Agent Experience (AX)",
@@ -181,20 +181,20 @@ const getFilterChips = (projects: Project[]) => {
   const visibleProjects = projects.filter((p) => !p.hidden);
   
   const allCount = visibleProjects.length;
-  const productCount = visibleProjects.filter((p) => p.category === "product").length;
-  const experienceCount = visibleProjects.filter((p) => p.category === "experience").length;
-  const agentsCount = visibleProjects.filter(
-    (p) => p.category === "agents" || p.tags.some((tag) => tag.toLowerCase() === "agents"),
+  const agenticExperiencesCount = visibleProjects.filter(
+    (p) => p.category === "agentic-experiences" || p.tags.some((tag) => tag.toLowerCase() === "agentic experiences"),
   ).length;
+  const experienceCount = visibleProjects.filter((p) => p.category === "experience").length;
+  const productCount = visibleProjects.filter((p) => p.category === "product").length;
   const automatisationsCount = visibleProjects.filter(
     (p) => p.category === "automatisations" || p.tags.some((tag) => tag.toLowerCase() === "automatisations"),
   ).length;
 
   const chips = [
     { id: "all", label: `All (${allCount})` },
-    { id: "product", label: `Product (${productCount})` },
+    { id: "agentic-experiences", label: `Agentic Experiences (${agenticExperiencesCount})` },
     { id: "experience", label: `Expérience (${experienceCount})` },
-    { id: "agents", label: `Agents (${agentsCount})` },
+    { id: "product", label: `Product (${productCount})` },
   ];
 
   // Only include automatisations if there are projects with this tag/category
