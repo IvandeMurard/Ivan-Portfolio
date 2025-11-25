@@ -147,7 +147,8 @@ export const BandeauAudio = ({ language }: { language: string }) => {
     }
   };
 
-  const audioSrc = language === "fr" ? "/audio/sonor-summary-fr.mp3" : "/audio/sonor-summary-en.mp3";
+  // Audio uniquement en anglais pour l'instant
+  const audioSrc = "/audio/sonor-audio-summary-en.mp3";
 
   // Calculate time remaining
   const timeRemaining = Math.ceil(duration - currentTime);
