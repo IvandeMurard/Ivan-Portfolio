@@ -67,9 +67,20 @@ export default function WTTJCaseStudy() {
   return (
     <div className="overflow-x-hidden" role="main">
       <Navigation />
+      <ProgressIndicator
+        sections={[
+          { id: 'context-problem', label: '1. Context' },
+          { id: 'discovery', label: '2. Discovery' },
+          { id: 'pivot', label: '3. Pivot' },
+          { id: 'process', label: '4. Process' },
+          { id: 'solution', label: '5. Solution' },
+          { id: 'learnings', label: '6. Learnings' },
+          { id: 'go-further', label: '7. More' },
+        ]}
+      />
 
       {/* Main Container */}
-      <div className="container mx-auto px-4 lg:px-8 pt-20 pb-16">
+      <div className="container mx-auto px-4 lg:px-8 pt-20 pb-16 max-w-7xl">
         <div className="grid lg:grid-cols-[280px_1fr] gap-8">
           {/* Sidebar - Empty space for alignment */}
           <div className="hidden lg:block"></div>
@@ -551,18 +562,6 @@ export default function WTTJCaseStudy() {
           </main>
         </div>
       </div>
-
-      <ProgressIndicator
-        sections={[
-          { id: 'context-problem', label: 'Context & Problem' },
-          { id: 'discovery', label: 'Discovery' },
-          { id: 'pivot', label: 'Strategic Pivot' },
-          { id: 'process', label: 'Process & Key Decisions' },
-          { id: 'solution', label: 'Solution & Prototype' },
-          { id: 'learnings', label: 'Key Learnings' },
-          { id: 'go-further', label: 'Go Further' },
-        ]}
-      />
 
       <Footer
         siteName="Ivan de Murard"
