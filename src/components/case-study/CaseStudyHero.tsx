@@ -1,10 +1,12 @@
 /**
  * CaseStudyHero Component
  * Hero section avec design moderne : Image blur + Texte à gauche + Stack outils
+ * Avec effet parallax amélioré
  */
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { heroAnimationPreset } from '@/config/case-study/case-study-animations';
+import { useRef } from 'react';
 
 interface Tool {
   name: string;
@@ -26,31 +28,41 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
   backgroundImage,
   tools = [],
 }) => {
-  // Parallax effect pour l'image de fond
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const ref = useRef<HTMLDivElement>(null);
+  
+  // Parallax effect amélioré pour l'image de fond
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.9, 0.7]);
 
   return (
-    <section className="relative h-[40vh] min-h-[350px] w-full flex items-center overflow-hidden rounded-2xl">
-      {/* Background Image avec Parallax et Blur */}
+    <section 
+      ref={ref}
+      className="relative h-[40vh] min-h-[350px] w-full flex items-center overflow-hidden rounded-2xl"
+    >
+      {/* Background Image avec Parallax amélioré et Blur */}
       {backgroundImage && (
         <motion.div 
           className="absolute inset-0 z-0"
           style={{ y }}
         >
-          <img
+          <motion.img
             src={backgroundImage}
             alt=""
+            style={{ opacity }}
             className="w-full h-full object-cover"
-            style={{ filter: 'blur(4px)' }}
             aria-hidden="true"
           />
         </motion.div>
       )}
 
-      {/* Dark Overlay pour accessibilité */}
+      {/* Gradient Overlay pour meilleure lisibilité */}
       <div 
-        className="absolute inset-0 bg-black/50 z-10"
+        className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background/80 backdrop-blur-[2px] z-10"
         aria-hidden="true"
       />
 

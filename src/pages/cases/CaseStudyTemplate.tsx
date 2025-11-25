@@ -43,6 +43,7 @@ import { CaseStudyTLDR } from '@/components/case-study/CaseStudyTLDR';
 import { TimelinePhase, TimelineContainer } from '@/components/case-study/TimelinePhase';
 import { KeyLearning, KeyLearningsGrid } from '@/components/case-study/KeyLearning';
 import { CaseImage } from '@/components/case/CaseImage';
+import { ScrollRevealSection, StaggerList, StaggerItem, SectionTransition } from '@/components/case';
 import { ImageLightbox } from '@/components/ImageLightbox';
 import { ExternalLink, Mail, Linkedin, Calendar } from 'lucide-react';
 import { SOCIAL_LINKS } from '@/site.config';
@@ -185,77 +186,99 @@ export default function CaseStudyTemplate() {
             {/* ============================================================= */}
             {/* 3. CONTEXT & PROBLEM - PRIORITY SECTION (200-300 words) */}
             {/* ============================================================= */}
-            <section className="mb-16" id="context-problem" aria-labelledby="context-problem-heading">
-              <h2 id="context-problem-heading" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">
-                1. Context & Problem
-              </h2>
+            <SectionTransition id="context-problem">
+              <div className="mb-16" aria-labelledby="context-problem-heading">
+                <ScrollRevealSection variant="fade-in-up">
+                  <h2 id="context-problem-heading" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">
+                    1. Context & Problem
+                  </h2>
+                </ScrollRevealSection>
 
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">The Challenge</h3>
-                <p className="text-base text-gray-800 dark:text-gray-200 mb-6 leading-relaxed">
-                  {/* 100-150 words describing the problem */}
-                  Describe the business context and the core problem you were asked to solve.
-                  Include relevant metrics or data points that quantify the problem.
-                </p>
+                <ScrollRevealSection variant="fade-in-up" delay={0.1}>
+                  <div className="mb-8">
+                    <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">The Challenge</h3>
+                    <p className="text-base text-gray-800 dark:text-gray-200 mb-6 leading-relaxed">
+                      {/* 100-150 words describing the problem */}
+                      Describe the business context and the core problem you were asked to solve.
+                      Include relevant metrics or data points that quantify the problem.
+                    </p>
 
-                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Why It Matters</h3>
-                <ul className="space-y-2 text-base text-gray-800 dark:text-gray-200 mb-8 list-none">
-                  <li className="flex items-start">
-                    <span className="text-gray-900 dark:text-gray-100 mr-3 mt-1 font-bold" aria-hidden="true">•</span>
-                    <span>Business impact point 1</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-gray-900 dark:text-gray-100 mr-3 mt-1 font-bold" aria-hidden="true">•</span>
-                    <span>Business impact point 2</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-gray-900 dark:text-gray-100 mr-3 mt-1 font-bold" aria-hidden="true">•</span>
-                    <span>Business impact point 3</span>
-                  </li>
-                </ul>
+                    <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Why It Matters</h3>
+                    <StaggerList className="space-y-2 text-base text-gray-800 dark:text-gray-200 mb-8 list-none">
+                      <StaggerItem>
+                        <li className="flex items-start">
+                          <span className="text-gray-900 dark:text-gray-100 mr-3 mt-1 font-bold" aria-hidden="true">•</span>
+                          <span>Business impact point 1</span>
+                        </li>
+                      </StaggerItem>
+                      <StaggerItem>
+                        <li className="flex items-start">
+                          <span className="text-gray-900 dark:text-gray-100 mr-3 mt-1 font-bold" aria-hidden="true">•</span>
+                          <span>Business impact point 2</span>
+                        </li>
+                      </StaggerItem>
+                      <StaggerItem>
+                        <li className="flex items-start">
+                          <span className="text-gray-900 dark:text-gray-100 mr-3 mt-1 font-bold" aria-hidden="true">•</span>
+                          <span>Business impact point 3</span>
+                        </li>
+                      </StaggerItem>
+                    </StaggerList>
+                  </div>
+                </ScrollRevealSection>
+
+                {/* Context Image - Optional */}
+                {/* 
+                <div className="mb-8 max-w-xl mx-auto">
+                  <CaseImage
+                    alt="Descriptive alt text"
+                    desktopSrc="/path/to/image.png"
+                    caption="Caption describing the image"
+                    onClick={() => openLightbox(0)}
+                  />
+                </div>
+                */}
               </div>
-
-              {/* Context Image - Optional */}
-              {/* 
-              <div className="mb-8 max-w-xl mx-auto">
-                <CaseImage
-                  alt="Descriptive alt text"
-                  desktopSrc="/path/to/image.png"
-                  caption="Caption describing the image"
-                  onClick={() => openLightbox(0)}
-                />
-              </div>
-              */}
-            </section>
+            </SectionTransition>
 
             {/* ============================================================= */}
             {/* 4. MY ROLE & APPROACH (150-200 words) */}
             {/* ============================================================= */}
-            <section className="mb-16" id="role-approach" aria-labelledby="role-approach-heading">
-              <h2 id="role-approach-heading" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">
-                2. My Role & Approach
-              </h2>
+            <SectionTransition id="role-approach">
+              <div className="mb-16" aria-labelledby="role-approach-heading">
+                <ScrollRevealSection variant="fade-in-up">
+                  <h2 id="role-approach-heading" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">
+                    2. My Role & Approach
+                  </h2>
+                </ScrollRevealSection>
 
-              <div className="mb-8">
-                <p className="text-base text-gray-800 dark:text-gray-200 mb-6 leading-relaxed">
-                  {/* Describe your specific role, responsibilities, and approach */}
-                  As [role], I was responsible for [key responsibilities].
-                  My approach focused on [methodology/framework used].
-                </p>
+                <ScrollRevealSection variant="fade-in-up" delay={0.1}>
+                  <div className="mb-8">
+                    <p className="text-base text-gray-800 dark:text-gray-200 mb-6 leading-relaxed">
+                      {/* Describe your specific role, responsibilities, and approach */}
+                      As [role], I was responsible for [key responsibilities].
+                      My approach focused on [methodology/framework used].
+                    </p>
 
-                {/* Key contributions */}
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Discovery & Research</h4>
-                    <p className="text-sm text-gray-700 dark:text-gray-300">User interviews, data analysis, stakeholder alignment</p>
+                    {/* Key contributions */}
+                    <StaggerList className="grid md:grid-cols-2 gap-6">
+                      <StaggerItem variant="scale-in">
+                        <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                          <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Discovery & Research</h4>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">User interviews, data analysis, stakeholder alignment</p>
+                        </div>
+                      </StaggerItem>
+                      <StaggerItem variant="scale-in">
+                        <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                          <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Stakeholder Management</h4>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">Cross-functional collaboration, executive buy-in</p>
+                        </div>
+                      </StaggerItem>
+                    </StaggerList>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Stakeholder Management</h4>
-                    <p className="text-sm text-gray-700 dark:text-gray-300">Cross-functional collaboration, executive buy-in</p>
-                  </div>
-                </div>
+                </ScrollRevealSection>
               </div>
-            </section>
+            </SectionTransition>
 
             {/* ============================================================= */}
             {/* 5. PROCESS & KEY DECISIONS (4-6 phases) */}
@@ -318,34 +341,45 @@ export default function CaseStudyTemplate() {
             {/* ============================================================= */}
             {/* 6. SOLUTION & DELIVERABLES - 2ND PRIORITY (300-400 words) */}
             {/* ============================================================= */}
-            <section className="mb-16" id="solution" aria-labelledby="solution-heading">
-              <h2 id="solution-heading" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">
-                4. Solution & Deliverables
-              </h2>
+            <SectionTransition id="solution">
+              <div className="mb-16" aria-labelledby="solution-heading">
+                <ScrollRevealSection variant="fade-in-up">
+                  <h2 id="solution-heading" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">
+                    4. Solution & Deliverables
+                  </h2>
+                </ScrollRevealSection>
 
-              <div className="mb-8">
-                <p className="text-base text-gray-800 dark:text-gray-200 mb-6 leading-relaxed">
-                  {/* Describe the solution in detail */}
-                  Based on our research and analysis, we developed [solution name/type].
-                  The key features include...
-                </p>
+                <ScrollRevealSection variant="fade-in-up" delay={0.1}>
+                  <div className="mb-8">
+                    <p className="text-base text-gray-800 dark:text-gray-200 mb-6 leading-relaxed">
+                      {/* Describe the solution in detail */}
+                      Based on our research and analysis, we developed [solution name/type].
+                      The key features include...
+                    </p>
 
-                {/* Key Features Grid */}
-                <div className="grid md:grid-cols-3 gap-4 mb-8">
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Feature 1</h4>
-                    <p className="text-sm text-gray-700 dark:text-gray-300">Brief description</p>
+                    {/* Key Features Grid */}
+                    <StaggerList className="grid md:grid-cols-3 gap-4 mb-8">
+                      <StaggerItem variant="scale-in">
+                        <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                          <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Feature 1</h4>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">Brief description</p>
+                        </div>
+                      </StaggerItem>
+                      <StaggerItem variant="scale-in">
+                        <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                          <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Feature 2</h4>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">Brief description</p>
+                        </div>
+                      </StaggerItem>
+                      <StaggerItem variant="scale-in">
+                        <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                          <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Feature 3</h4>
+                          <p className="text-sm text-gray-700 dark:text-gray-300">Brief description</p>
+                        </div>
+                      </StaggerItem>
+                    </StaggerList>
                   </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Feature 2</h4>
-                    <p className="text-sm text-gray-700 dark:text-gray-300">Brief description</p>
-                  </div>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                    <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">Feature 3</h4>
-                    <p className="text-sm text-gray-700 dark:text-gray-300">Brief description</p>
-                  </div>
-                </div>
-              </div>
+                </ScrollRevealSection>
 
               {/* Prototype/Deliverable Image - Make prominent */}
               {/*
@@ -364,7 +398,8 @@ export default function CaseStudyTemplate() {
                 </a>
               </div>
               */}
-            </section>
+              </div>
+            </SectionTransition>
 
             {/* ============================================================= */}
             {/* MID-PAGE CTA BANNER */}
