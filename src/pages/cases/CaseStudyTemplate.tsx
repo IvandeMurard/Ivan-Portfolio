@@ -29,6 +29,13 @@
  * - ProgressIndicator required
  * - Lighthouse score > 90
  * 
+ * UX STANDARDS (applied globally via shared components):
+ * - Hero overlay: bg-black/60 for optimal text contrast
+ * - Smooth scroll: html { scroll-behavior: smooth } (index.css)
+ * - Scroll offset: [id] { scroll-margin-top: 100px } for sticky navbar
+ * - Preload critical images in index.html for faster LCP
+ * - Animations: GPU-accelerated (transform, opacity only)
+ * 
  * =============================================================================
  */
 
