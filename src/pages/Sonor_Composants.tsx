@@ -160,16 +160,7 @@ export const BandeauAudio = ({ language }: { language: string }) => {
       {/* Main audio banner */}
       <div className="w-full p-4 md:p-6 bg-accent/5 border border-accent/20 rounded-2xl hover:bg-accent/10 transition-all relative">
         <div className="flex items-center gap-4 md:gap-6">
-          {/* Play button */}
-          <button
-            onClick={handlePlayPause}
-            className="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full bg-accent hover:bg-accent/90 flex items-center justify-center transition-all shadow-lg"
-            aria-label={isPlaying ? "Pause" : "Play"}
-          >
-            {isPlaying ? <Pause className="w-5 h-5 md:w-6 md:h-6 text-white" /> : <Play className="w-5 h-5 md:w-6 md:h-6 text-white ml-0.5" />}
-          </button>
-
-          {/* Content */}
+          {/* Content - Texte à gauche */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
               <Volume2 className="w-4 h-4 md:w-5 md:h-5 text-accent" />
@@ -181,6 +172,15 @@ export const BandeauAudio = ({ language }: { language: string }) => {
               {language === "fr" ? "Écoutez le résumé du projet Sonor" : "Sonor project summary"}
             </p>
           </div>
+
+          {/* Play button - Plus visible, à droite */}
+          <button
+            onClick={handlePlayPause}
+            className="flex-shrink-0 w-14 h-14 md:w-16 md:h-16 rounded-full bg-accent hover:bg-accent/90 hover:scale-105 flex items-center justify-center transition-all shadow-xl ring-4 ring-accent/20"
+            aria-label={isPlaying ? "Pause" : "Play"}
+          >
+            {isPlaying ? <Pause className="w-6 h-6 md:w-7 md:h-7 text-white" /> : <Play className="w-6 h-6 md:w-7 md:h-7 text-white ml-1" />}
+          </button>
 
           {/* Waveform visualization - center - hidden on mobile */}
           {isPlaying && (
@@ -229,7 +229,7 @@ export const BandeauAudio = ({ language }: { language: string }) => {
         />
       </div>
 
-      {/* Sticky floating player - positioned below Tips button */}
+      {/* Sticky floating player - très visible avec pulsation */}
       {isPlaying && (
         <motion.div
           initial={{ opacity: 0, scale: 0.8, y: 20 }}
@@ -237,12 +237,24 @@ export const BandeauAudio = ({ language }: { language: string }) => {
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
           className="fixed bottom-32 right-8 z-40"
         >
+          {/* Pulse ring animation */}
+          <motion.div
+            className="absolute inset-0 rounded-full bg-accent/30"
+            animate={{ scale: [1, 1.4, 1], opacity: [0.6, 0, 0.6] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
+            className="absolute inset-0 rounded-full bg-accent/20"
+            animate={{ scale: [1, 1.6, 1], opacity: [0.4, 0, 0.4] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+          />
+          
           <button
             onClick={handlePlayPause}
-            className="w-16 h-16 rounded-full backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl flex items-center justify-center hover:bg-white/20 transition-all group"
+            className="relative w-16 h-16 rounded-full bg-accent shadow-2xl flex items-center justify-center hover:bg-accent/90 hover:scale-105 transition-all ring-4 ring-accent/30"
             aria-label="Pause audio"
           >
-            <Pause className="w-7 h-7 text-accent group-hover:text-accent/80 transition-colors" />
+            <Pause className="w-7 h-7 text-white" />
           </button>
         </motion.div>
       )}

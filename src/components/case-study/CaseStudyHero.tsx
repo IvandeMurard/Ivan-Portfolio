@@ -60,9 +60,9 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
         </motion.div>
       )}
 
-      {/* Gradient Overlay pour meilleure lisibilité */}
+      {/* Dark Overlay pour accessibilité - plus sombre pour meilleur contraste */}
       <div 
-        className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background/80 backdrop-blur-[2px] z-10"
+        className="absolute inset-0 bg-black/60 z-10"
         aria-hidden="true"
       />
 

@@ -164,6 +164,10 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   html, body {
     overflow-x: hidden;
     width: 100%;
@@ -172,6 +176,11 @@
   body {
     @apply bg-background text-foreground font-sans;
     font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Scroll offset pour compenser la navbar sticky */
+  [id] {
+    scroll-margin-top: 100px;
   }
   
   /* Typography with exact Figma values */
