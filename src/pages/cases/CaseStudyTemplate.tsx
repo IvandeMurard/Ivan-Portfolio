@@ -380,7 +380,7 @@ export default function CaseStudyTemplate() {
                 </p>
                 <div className="flex flex-wrap justify-center gap-4">
                   <a
-                    href={`mailto:${SOCIAL_LINKS.email}`}
+                    href={SOCIAL_LINKS.mail.href}
                     className="inline-flex items-center gap-2 px-4 py-2 bg-[#065f46] text-white rounded-lg hover:bg-[#065f46]/90 transition-colors"
                     aria-label="Send email"
                   >
@@ -388,7 +388,7 @@ export default function CaseStudyTemplate() {
                     Email
                   </a>
                   <a
-                    href={SOCIAL_LINKS.linkedin}
+                    href={SOCIAL_LINKS.linkedin.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 border border-[#065f46] text-[#065f46] dark:text-[#10b981] rounded-lg hover:bg-[#065f46]/10 transition-colors"
@@ -398,7 +398,7 @@ export default function CaseStudyTemplate() {
                     LinkedIn
                   </a>
                   <a
-                    href={SOCIAL_LINKS.calendar}
+                    href={SOCIAL_LINKS.calendar.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-4 py-2 border border-[#065f46] text-[#065f46] dark:text-[#10b981] rounded-lg hover:bg-[#065f46]/10 transition-colors"
@@ -463,17 +463,17 @@ export default function CaseStudyTemplate() {
                 <KeyLearning
                   title="Learning 1"
                   description="What you learned and how it applies to future projects."
-                  accentColor="blue"
+                  color="blue"
                 />
                 <KeyLearning
                   title="Learning 2"
                   description="What you learned and how it applies to future projects."
-                  accentColor="orange"
+                  color="orange"
                 />
                 <KeyLearning
                   title="Learning 3"
                   description="What you learned and how it applies to future projects."
-                  accentColor="green"
+                  color="green"
                 />
               </KeyLearningsGrid>
             </section>
@@ -552,7 +552,7 @@ export default function CaseStudyTemplate() {
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <a
-                  href={`mailto:${SOCIAL_LINKS.email}`}
+                  href={SOCIAL_LINKS.mail.href}
                   className="inline-flex items-center gap-2 px-6 py-3 bg-white text-[#065f46] rounded-lg font-medium hover:bg-gray-100 transition-colors"
                   aria-label="Send email"
                 >
@@ -560,7 +560,7 @@ export default function CaseStudyTemplate() {
                   Email me
                 </a>
                 <a
-                  href={SOCIAL_LINKS.linkedin}
+                  href={SOCIAL_LINKS.linkedin.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 border-2 border-white text-white rounded-lg font-medium hover:bg-white/10 transition-colors"
@@ -570,7 +570,7 @@ export default function CaseStudyTemplate() {
                   LinkedIn
                 </a>
                 <a
-                  href={SOCIAL_LINKS.calendar}
+                  href={SOCIAL_LINKS.calendar.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 border-2 border-white text-white rounded-lg font-medium hover:bg-white/10 transition-colors"
