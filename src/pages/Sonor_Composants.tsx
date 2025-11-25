@@ -158,33 +158,33 @@ export const BandeauAudio = ({ language }: { language: string }) => {
   return (
     <>
       {/* Main audio banner */}
-      <div className="w-full max-w-6xl mx-auto p-6 bg-accent/5 border border-accent/20 rounded-2xl hover:bg-accent/10 transition-all relative">
-        <div className="flex items-center gap-6">
+      <div className="w-full p-4 md:p-6 bg-accent/5 border border-accent/20 rounded-2xl hover:bg-accent/10 transition-all relative">
+        <div className="flex items-center gap-4 md:gap-6">
           {/* Play button */}
           <button
             onClick={handlePlayPause}
-            className="flex-shrink-0 w-14 h-14 rounded-full bg-accent hover:bg-accent/90 flex items-center justify-center transition-all shadow-lg"
+            className="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-full bg-accent hover:bg-accent/90 flex items-center justify-center transition-all shadow-lg"
             aria-label={isPlaying ? "Pause" : "Play"}
           >
-            {isPlaying ? <Pause className="w-6 h-6 text-white" /> : <Play className="w-6 h-6 text-white ml-0.5" />}
+            {isPlaying ? <Pause className="w-5 h-5 md:w-6 md:h-6 text-white" /> : <Play className="w-5 h-5 md:w-6 md:h-6 text-white ml-0.5" />}
           </button>
 
           {/* Content */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              <Volume2 className="w-5 h-5 text-accent" />
-              <span className="text-sm font-semibold text-accent uppercase tracking-wider">
+              <Volume2 className="w-4 h-4 md:w-5 md:h-5 text-accent" />
+              <span className="text-xs md:text-sm font-semibold text-accent uppercase tracking-wider">
                 {language === "fr" ? "Version Audio" : "Audio Summary"}
               </span>
             </div>
-            <p className="text-base text-foreground/80">
+            <p className="text-sm md:text-base text-foreground/80">
               {language === "fr" ? "Écoutez le résumé du projet Sonor" : "Sonor project summary"}
             </p>
           </div>
 
-          {/* Waveform visualization - center */}
+          {/* Waveform visualization - center - hidden on mobile */}
           {isPlaying && (
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
               <div className="flex items-end gap-1 h-12">
                 {[...Array(12)].map((_, i) => (
                   <motion.div
@@ -207,10 +207,10 @@ export const BandeauAudio = ({ language }: { language: string }) => {
 
           {/* Duration - updated to show time remaining */}
           <div className="flex-shrink-0 text-right">
-            <div className="text-2xl font-bold text-accent">
+            <div className="text-xl md:text-2xl font-bold text-accent">
               {isPlaying ? formattedTime : language === "fr" ? "2 min" : "2 min"}
             </div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-xs md:text-sm text-muted-foreground">
               {isPlaying ? (language === "fr" ? "restant" : "left") : language === "fr" ? "durée" : "duration"}
             </div>
           </div>

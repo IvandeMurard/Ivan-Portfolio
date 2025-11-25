@@ -5,9 +5,11 @@ import { Footer } from "@/components/footer";
 import { CTABanner } from "@/components/work/CTABanner";
 import { EvaluationEngineDiagram } from "@/components/case/EvaluationEngineDiagram";
 import { ArchitectureStepper } from "@/components/case/ArchitectureStepper";
-import { ToolsMarquee } from "@/components/case/ToolsMarquee";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import { ProgressIndicator } from "@/components/ProgressIndicator";
+import { CaseStudyHero } from "@/components/case-study/CaseStudyHero";
+import { CaseStudySidebar } from "@/components/case-study/CaseStudySidebar";
+import { CaseStudyTLDR } from "@/components/case-study/CaseStudyTLDR";
 import { ZoomIn } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -29,55 +31,82 @@ export default function AgentsEvalCase() {
   };
 
   return (
-    <div className="overflow-x-hidden">
+    <div className="overflow-x-hidden" role="main">
       <Navigation />
       <ProgressIndicator
         sections={[
-          { id: "hero", label: "Hero" },
-          { id: "problem", label: "Problem" },
-          { id: "solution", label: "Solution" },
-          { id: "how-it-works", label: "How it works" },
-          { id: "why-it-matters", label: "Why it matters" },
-          { id: "architecture", label: "Architecture" },
-          { id: "example", label: "Example" },
-          { id: "impact", label: "Impact" },
-          { id: "going-further", label: "Going further" },
+          { id: "problem", label: "1. Problem" },
+          { id: "role-approach", label: "2. Role" },
+          { id: "solution", label: "3. Solution" },
+          { id: "how-it-works", label: "4. Process" },
+          { id: "architecture", label: "5. Architecture" },
+          { id: "example", label: "6. Deliverable" },
+          { id: "impact", label: "7. Impact" },
+          { id: "learnings", label: "8. Learnings" },
+          { id: "going-further", label: "9. More" },
         ]}
       />
-      <main className="w-full pt-24 pb-10 bg-background">
-        {/* Section 0: Hero - Ada style with blue background */}
-        <section id="hero" className="w-full py-24 md:py-32 lg:py-40 bg-[#B7D4FF] dark:bg-background">
-          <div className="max-w-6xl mx-auto px-4 md:px-8 lg:px-12 text-center space-y-6 md:space-y-8">
-            <motion.div
-              className="space-y-6 md:space-y-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-            >
-              <div className="text-sm md:text-base font-medium tracking-[0.22em] uppercase text-[#3D56CC] dark:text-[#A8B8FF]">
-                Case Study · AI Agent Evaluation
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-                The Evaluation Engine™
-              </h1>
-              <p className="text-xl md:text-2xl lg:text-3xl text-slate-800 dark:text-slate-200 max-w-3xl mx-auto font-medium">
-                An autonomous system that tests your AI agents with enterprise-grade rigor.
-              </p>
-              <p className="text-lg md:text-xl lg:text-2xl text-slate-700 dark:text-slate-300 max-w-3xl mx-auto">
-                Automated scoring, structured reasoning, reliability, and safety — wrapped into one auditable evaluation pipeline.
-              </p>
-            </motion.div>
-          </div>
-        </section>
 
-        <div className="max-w-4xl mx-auto px-4 md:px-8 lg:px-12 space-y-12">
+      {/* Main Container */}
+      <div className="container mx-auto px-4 lg:px-8 pt-20 pb-16 max-w-7xl">
+        {/* Hero Section - Full width */}
+        <div className="mb-8">
+          <CaseStudyHero
+            title="The Evaluation Engine™"
+            subtitle="An autonomous system that tests your AI agents with enterprise-grade rigor"
+            backgroundImage={undefined}
+            tools={[
+              { name: 'Supabase', icon: '/img/supabase-icon.png' },
+              { name: 'OpenAI', icon: '/img/openai-icon.svg' },
+              { name: 'n8n', icon: '/img/n8n-icon.svg' },
+              { name: 'GitHub', icon: '/img/github-icon.svg' },
+              { name: 'Figma', icon: '/img/figma-icon.svg' },
+            ]}
+          />
+        </div>
 
-          {/* Section 1.b: Tools Marquee */}
-          <ToolsMarquee />
+        <div className="grid lg:grid-cols-[260px_1fr] gap-8 lg:gap-12">
+          {/* Sidebar - Metadata */}
+          <CaseStudySidebar
+            role="Product Manager & Technical Lead"
+            duration="Ongoing"
+            team="Solo project"
+            client="Personal project"
+            industry="AI / Agent Evaluation"
+            context="Autonomous evaluation system"
+          />
+
+          {/* TL;DR aligned with sidebar */}
+          <section className="mb-8">
+            <CaseStudyTLDR
+              items={[
+                {
+                  label: 'Context',
+                  content: 'Modern AI agents are powerful but unpredictable. Without structured evaluation, you cannot safely deploy them in production.',
+                },
+                {
+                  label: 'Challenge',
+                  content: 'Unpredictability, subjective manual review, and no shared standard for evaluation',
+                },
+                {
+                  label: 'Solution',
+                  content: 'The Evaluation Engine™: an autonomous system that scores agents against a structured rubric with safety, privacy, reliability, and auditability',
+                },
+                {
+                  label: 'Impact',
+                  content: '80% reduction in evaluation time, repeatability, industrial-grade trust layer, reusable foundation',
+                },
+              ]}
+            />
+          </section>
+        </div>
+
+        {/* Main Content - Full width after sidebar */}
+        <main className="w-full space-y-16">
 
           {/* Section 1: The problem - Ada structure with blue background and accent bar */}
           <section id="problem" className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-12 md:py-16 bg-[#C9DDFF] dark:bg-[#0F1416]">
-            <div className="max-w-4xl mx-auto px-4 md:px-8 lg:px-12">
+            <div className="w-full px-4 md:px-8 lg:px-12">
               <div className="relative pl-6 md:pl-8 space-y-8">
                 {/* Accent bar */}
                 <div className="absolute left-0 top-4 bottom-4 w-[4px] rounded-full bg-[#5B7CFF]" />
@@ -148,10 +177,57 @@ export default function AgentsEvalCase() {
             </div>
           </section>
 
-          {/* Section 2: The solution - Ada structure */}
+          {/* Section 2: My Role & Approach */}
+          <section id="role-approach" className="py-12 md:py-16 space-y-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">2. My Role & Approach</h2>
+              <p className="text-base md:text-lg text-muted-foreground max-w-3xl">
+                As Product Manager & Technical Lead, I designed and built this autonomous evaluation system from the ground up.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="p-6 bg-card rounded-xl border border-border">
+                <h3 className="font-semibold text-lg mb-3">Product Strategy</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    Defined the evaluation framework and scoring rubric
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    Designed the agent-as-evaluator architecture
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    Prioritized safety, privacy, and auditability by design
+                  </li>
+                </ul>
+              </div>
+              <div className="p-6 bg-card rounded-xl border border-border">
+                <h3 className="font-semibold text-lg mb-3">Technical Execution</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    Built the evaluation pipeline with OpenAI + Supabase
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    Implemented structured output and audit logging
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    Created the Evaluation Receipt format for traceability
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          {/* Section 3: The solution - Ada structure */}
           <section id="solution" className="py-12 md:py-16 space-y-8">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">2. The solution</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">3. The solution</h2>
               <p className="text-base md:text-lg text-muted-foreground max-w-3xl">
                 The Evaluation Engine™ is an autonomous evaluation system that scores agents against a structured rubric.
               </p>
@@ -223,10 +299,10 @@ export default function AgentsEvalCase() {
             </motion.div>
           </section>
 
-          {/* Section 3: How it works - Ada style with diagram */}
+          {/* Section 4: How it works - Ada style with diagram */}
           <section id="how-it-works" className="py-12 md:py-16 space-y-8">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">3. How it works</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">4. How it works</h2>
               <p className="text-base md:text-lg text-muted-foreground max-w-3xl">
                 The Engine processes every evaluation through a structured flow: agent output → reasoning → scoring → structured storage → verdict.
               </p>
@@ -286,8 +362,8 @@ export default function AgentsEvalCase() {
             </motion.div>
           </section>
 
-          {/* Section 4: Battle-tested evaluation (UNCHANGED) */}
-          <section id="why-it-matters" className="py-20 md:py-24 px-4 md:px-8 bg-zinc-900 dark:bg-zinc-950 rounded-3xl my-8">
+          {/* Section 3 continued: Battle-tested evaluation (part of Solution) */}
+          <section className="py-20 md:py-24 px-4 md:px-8 bg-zinc-900 dark:bg-zinc-950 rounded-3xl my-8">
             <div className="max-w-6xl mx-auto space-y-12">
               {/* Header */}
               <div className="text-center space-y-4">
@@ -422,7 +498,7 @@ export default function AgentsEvalCase() {
 
           {/* CTA Ribbon after Section 4 */}
           <section className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-6 md:py-8 bg-contact/10 dark:bg-contact/20">
-            <div className="max-w-4xl mx-auto px-4 md:px-8 lg:px-12">
+            <div className="w-full px-4 md:px-8 lg:px-12">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
                 <p className="text-base md:text-lg text-slate-700 dark:text-slate-300 font-medium">
                   Ready to boost your agents safety?
@@ -437,10 +513,10 @@ export default function AgentsEvalCase() {
             </div>
           </section>
 
-          {/* Section 5: Architecture summary - Vertical stepper */}
+          {/* Section 5: Architecture (Process) summary - Vertical stepper */}
           <section id="architecture" className="py-12 md:py-16 space-y-8">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">5. Architecture summary</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">5. Process: Architecture</h2>
               <p className="text-base md:text-lg text-muted-foreground max-w-3xl">
                 How the evaluation pipeline runs
               </p>
@@ -450,7 +526,7 @@ export default function AgentsEvalCase() {
 
           {/* Section 6: Evaluation Receipt™ */}
           <section id="example" className="py-12 md:py-16">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-0">
+            <div className="w-full px-4 sm:px-6 lg:px-0">
               <motion.div
                 className="rounded-3xl border border-slate-200 dark:border-slate-700 bg-white/85 dark:bg-slate-900/85 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur"
                 initial={{ opacity: 0, scale: 0.98 }}
@@ -467,7 +543,7 @@ export default function AgentsEvalCase() {
                     </div>
                   </div>
                   <h2 className="mt-1 text-2xl font-semibold text-slate-900 dark:text-slate-100">
-                    6. Example evaluation receipt
+                    6. Deliverable: Evaluation Receipt
                   </h2>
                   <p className="mt-2 text-sm text-slate-500 dark:text-slate-400 max-w-md">
                     This is the structured summary your agent receives after running through the Engine.
@@ -506,8 +582,8 @@ export default function AgentsEvalCase() {
 
           {/* Section 7: Impact - Ada style */}
           <section id="impact" className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-12 md:py-16 bg-[#F8FAFC] dark:bg-slate-950">
-            <div className="max-w-4xl mx-auto px-4 md:px-8 lg:px-12 space-y-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100">7. Impact</h2>
+            <div className="w-full px-4 md:px-8 lg:px-12 space-y-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100">7. Impact & Results</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <motion.div
                   className="p-6 rounded-2xl border border-slate-200/50 bg-white dark:bg-slate-900 shadow-md shadow-black/5 hover:shadow-lg hover:-translate-y-[1px] transition-all"
@@ -558,9 +634,52 @@ export default function AgentsEvalCase() {
             </div>
           </section>
 
+          {/* Section 8: Key Learnings */}
+          <section id="learnings" className="py-12 md:py-16 space-y-8">
+            <h2 className="text-2xl md:text-3xl font-bold">8. Key Learnings</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              <motion.div
+                className="p-6 rounded-2xl border border-border bg-card hover:shadow-lg transition-all"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3 }}
+              >
+                <h3 className="text-lg font-semibold mb-3">Agent-as-Evaluator works</h3>
+                <p className="text-sm text-muted-foreground">
+                  Using LLMs to evaluate other LLMs provides structured, reproducible assessments when given clear rubrics.
+                </p>
+              </motion.div>
+              <motion.div
+                className="p-6 rounded-2xl border border-border bg-card hover:shadow-lg transition-all"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+              >
+                <h3 className="text-lg font-semibold mb-3">Structured output is key</h3>
+                <p className="text-sm text-muted-foreground">
+                  Forcing JSON schemas ensures deterministic, parseable results that can be stored and compared.
+                </p>
+              </motion.div>
+              <motion.div
+                className="p-6 rounded-2xl border border-border bg-card hover:shadow-lg transition-all"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+              >
+                <h3 className="text-lg font-semibold mb-3">Safety-first mindset</h3>
+                <p className="text-sm text-muted-foreground">
+                  Building evaluation around safety, privacy, and auditability from day one creates a robust foundation.
+                </p>
+              </motion.div>
+            </div>
+          </section>
+
           {/* Section 9: Going further */}
           <section id="going-further" className="py-12 md:py-16 space-y-8">
-            <h2 className="text-2xl md:text-3xl font-bold">9. Going further</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">9. Go Further</h2>
             <div className="relative pl-6 md:pl-8">
               {/* Accent bar */}
               <div className="absolute left-0 top-0 bottom-0 w-[4px] rounded-full bg-[#5B7CFF]" />
@@ -591,25 +710,25 @@ export default function AgentsEvalCase() {
             </div>
           </section>
 
-          {/* CTA Banner */}
-          <CTABanner
-            title="Explore more projects"
-            description="Discover how I build scalable systems for AI agent evaluation"
-            ctaText="Back to portfolio"
-            onClick={() => navigate("/")}
-            className="my-6"
-          />
-        </div>
+        </main>
 
-        {/* Footer */}
-        <Footer
-          siteName="Ivan de Murard"
-          tagline="Product Manager building user-centered experiences"
-          sections={[{ id: "home", label: "Back to Portfolio" }]}
-          onSectionClick={scrollToSection}
-          className="mt-16"
+        {/* CTA Banner - Full width */}
+        <CTABanner
+          title="Ready to build the future?"
+          description="Let's discuss your product vision and build something great together"
+          ctaText="Let's talk!"
+          onClick={() => navigate("/#contact")}
         />
-      </main>
+      </div>
+
+      {/* Footer */}
+      <Footer
+        siteName="Ivan de Murard"
+        tagline="Product Manager building user-centered experiences"
+        sections={[{ id: "home", label: "Back to Portfolio" }]}
+        onSectionClick={scrollToSection}
+        className="mt-16"
+      />
 
       {/* Lightbox for diagram */}
       <ImageLightbox

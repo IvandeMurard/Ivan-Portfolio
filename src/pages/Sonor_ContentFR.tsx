@@ -4,7 +4,6 @@
 
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CaseTldr from "@/components/case/CaseTldr";
 import { CaseImage } from "@/components/case/CaseImage";
 import { CTABanner } from "@/components/work/CTABanner";
 import { ExternalLink, Play, Info, MapPin, Target, Users, BarChart, Clock, Database } from "lucide-react";
@@ -16,37 +15,6 @@ import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { TermExplain, ExpandSection, BandeauAudio, TabsApprofondir } from "./Sonor_Composants";
 
-// ============= TL;DR BLOCK FR (CONDENSÉ) =============
-export const TLDRBlockFR = () => (
-  <CaseTldr
-    tone="neutral"
-    title="TL;DR — L'essentiel"
-    items={[
-      <>
-        <b>Contexte :</b> Hackathon Recoder l'Habitat #2 (gagnant) → incubation Matrice & Banque des Territoires
-        (2020-2022)
-      </>,
-      <>
-        <b>Problème :</b> Pollution sonore (2e nuisance urbaine), invisible, impacts sanitaires réels
-      </>,
-      <>
-        <b>Solution :</b> Plateforme SaaS 360° avec cartographie open data, recommandations d'actions publiques,
-        engagement citoyen (sensibilisation, communication)
-      </>,
-      <>
-        <b>Équipe :</b> 4 co-fondateurs (Émilie, Majda, Benjamin, Ivan), 1 dev/data-scientist à mi-temps
-      </>,
-      <>
-        <b>Mon rôle :</b> Cadrage produit, discovery, prototypage, commercial, encadrement data-scientist
-      </>,
-      <>
-        <b>Durée & méthode :</b> 2 ans / Agile Lean, sprints Kanban 2-3 semaines, 6+ jalons mensuels (présentations
-        partenaires)
-      </>,
-    ]}
-  />
-);
-
 // ============= CONTENT FR =============
 export const ContentFR = () => {
   const navigate = useNavigate();
@@ -56,6 +24,11 @@ export const ContentFR = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const galleryImages = [
+    {
+      src: "/img/sonor-noise-thresholds.png",
+      alt: language === "fr" ? "Échelle des niveaux sonores et seuils de danger" : "Noise level scale and danger thresholds",
+      caption: language === "fr" ? "Échelle des niveaux sonores et seuils de danger" : "Noise level scale and danger thresholds",
+    },
     {
       src: "/img/Sonor-notre-approche.webp",
       alt: "Tableau de bord de cartographie — Points chauds et indicateurs en temps réel",
@@ -99,78 +72,12 @@ export const ContentFR = () => {
 
   return (
     <>
-      {/* ========== HOOK SECTION - NEW ========== */}
-      <div className="py-16 px-4 max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            {language === "fr"
-              ? "Ce que construire un SaaS B2G m'a appris sur le product-market fit"
-              : "What building a B2G SaaS taught me about product-market fit"}
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            {language === "fr"
-              ? "Un parcours de 2 ans (2020-2022) transformant l'open data en insights actionnables pour les villes — avant l'IA générative, quand le SaaS pour collectivités était un marché émergent."
-              : "A 2-year journey (2020-2022) transforming open data into actionable city insights — before generative AI, when SaaS for municipalities was still an emerging market."}
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="p-8 bg-card rounded-2xl border border-border hover:border-accent/30 transition-all">
-            <div className="text-accent text-5xl font-bold mb-3">
-              <CountUp end={18} duration={2} separator="," suffix="+" enableScrollSpy scrollSpyOnce />
-            </div>
-            <p className="text-muted-foreground text-base">
-              {language === "fr"
-                ? "Mois moyens pour signer un premier contrat B2G"
-                : "Average months for first B2G contract signature"}
-            </p>
-          </div>
-
-          <div className="p-8 bg-card rounded-2xl border border-border hover:border-accent/30 transition-all">
-            <div className="text-accent text-5xl font-bold mb-3">
-              <CountUp end={20} duration={2} separator="," suffix="+" enableScrollSpy scrollSpyOnce />
-            </div>
-            <p className="text-muted-foreground text-base">
-              {language === "fr"
-                ? "Entretiens parties prenantes menés pour valider le product-market fit"
-                : "Stakeholder interviews conducted to validate product-market fit"}
-            </p>
-          </div>
-
-          <div className="p-8 bg-card rounded-2xl border border-border hover:border-accent/30 transition-all">
-            <div className="text-accent text-5xl font-bold mb-3">
-              <CountUp end={20} duration={2.5} separator="," prefix="€" suffix="K" enableScrollSpy scrollSpyOnce />
-            </div>
-            <p className="text-muted-foreground text-base">
-              {language === "fr"
-                ? "Financement sécurisé via concours et incubation"
-                : "Secured funding through competitive grants and incubation"}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* TL;DR */}
-      <div id="overview" className="mb-10 max-w-6xl mx-auto">
-        <TLDRBlockFR />
-      </div>
-
-      {/* SONOR LOGO - NEW */}
-      <div className="flex justify-center mb-10">
-        <img src="/img/logo_sonor.png" alt="Sonor logo" className="h-20 object-contain" />
-      </div>
-
-      {/* BANDEAU AUDIO */}
-      <div className="mb-10 max-w-6xl mx-auto">
-        <BandeauAudio language="fr" />
-      </div>
-
       {/* ========== SECTION: CONTEXT ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={0}>
         <div id="context" className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
-          <div className="max-w-6xl mx-auto space-y-12">
+          <div className="w-full space-y-12">
             <h2 className="text-h3 mb-12">
-              {language === "fr" ? "Contexte : La Crise Invisible" : "Context: The Invisible Crisis"}
+              {language === "fr" ? "1. Contexte & Problème" : "1. Context & Problem"}
             </h2>
 
             {/* Stats grid - keep existing */}
@@ -269,15 +176,73 @@ export const ContentFR = () => {
         </div>
       </ScrollRevealSection>
 
-      {/* ========== SECTION: PRODUCT VISION ========== */}
+      {/* ========== SECTION 2: MY ROLE & APPROACH ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={0.05}>
-        <div id="our-approach" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
-          <div className="max-w-6xl mx-auto space-y-12">
+        <div id="role-approach" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
+          <div className="w-full space-y-8">
+            <h2 className="text-h3 mb-8">
+              {language === "fr" ? "2. Mon Rôle & Approche" : "2. My Role & Approach"}
+            </h2>
+            
+            <p className="text-lg leading-relaxed max-w-4xl">
+              {language === "fr"
+                ? "En tant que Co-fondateur & Product Lead, j'ai piloté l'ensemble du cycle produit, de la discovery à la commercialisation, en collaboration avec 3 co-fondateurs et 1 développeur/data-scientist à mi-temps."
+                : "As Co-founder & Product Lead, I drove the entire product cycle, from discovery to go-to-market, in collaboration with 3 co-founders and 1 part-time developer/data-scientist."}
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="p-6 bg-card rounded-xl border border-border">
+                <h3 className="font-semibold text-lg mb-3">
+                  {language === "fr" ? "Discovery & Stratégie" : "Discovery & Strategy"}
+                </h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent mt-1">•</span>
+                    {language === "fr" ? "20+ entretiens parties prenantes" : "20+ stakeholder interviews"}
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent mt-1">•</span>
+                    {language === "fr" ? "Cadrage produit et définition du MVP" : "Product framing and MVP definition"}
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent mt-1">•</span>
+                    {language === "fr" ? "Pivot stratégique privé → public" : "Strategic pivot private → public sector"}
+                  </li>
+                </ul>
+              </div>
+              <div className="p-6 bg-card rounded-xl border border-border">
+                <h3 className="font-semibold text-lg mb-3">
+                  {language === "fr" ? "Exécution & Leadership" : "Execution & Leadership"}
+                </h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent mt-1">•</span>
+                    {language === "fr" ? "Prototypage Figma (3 versions)" : "Figma prototyping (3 versions)"}
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent mt-1">•</span>
+                    {language === "fr" ? "Encadrement data-scientist (pipeline données)" : "Data-scientist mentorship (data pipeline)"}
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-accent mt-1">•</span>
+                    {language === "fr" ? "Commercial : 8+ villes, 2 propositions" : "Sales: 8+ cities, 2 proposals"}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ScrollRevealSection>
+
+      {/* ========== SECTION 3: PRODUCT VISION (Solution) ========== */}
+      <ScrollRevealSection variant="fade-in-up" delay={0.1}>
+        <div id="our-approach" className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
+          <div className="w-full space-y-12">
             <div className="text-center max-w-3xl mx-auto">
               <h2 className="text-h3 mb-4">
                 {language === "fr"
-                  ? "Du Problème à la Plateforme : Notre Hypothèse Produit"
-                  : "From Problem to Platform: Our Product Hypothesis"}
+                  ? "3. Solution : Notre Hypothèse Produit"
+                  : "3. Solution: Our Product Hypothesis"}
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
                 {language === "fr"
@@ -355,7 +320,7 @@ export const ContentFR = () => {
       {/* ========== SECTION: EXPLORE THE PLATFORM ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={0.1}>
         <div className="py-16 px-4 md:px-8 lg:px-12 bg-card border-b border-border/50">
-          <div className="max-w-6xl mx-auto">
+          <div className="w-full">
             <div className="text-center mb-12">
               <h2 className="text-h3 mb-4">
                 {language === 'fr' 
@@ -405,28 +370,47 @@ export const ContentFR = () => {
         </div>
       </ScrollRevealSection>
 
-      {/* ========== SECTION 2: TIMELINE ========== */}
+      {/* ========== SECTION 4: PROCESS & KEY DECISIONS ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={0.15}>
         <div id="timeline" className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
-          <div className="max-w-6xl mx-auto space-y-8">
-            <h2 className="text-h3">Timeline du projet</h2>
+          <div className="w-full space-y-12">
+            <h2 className="text-h3">
+              {language === "fr" ? "4. Processus & Décisions Clés" : "4. Process & Key Decisions"}
+            </h2>
 
+            {/* Timeline */}
             <div className="space-y-8">
               {[
                 {
                   date: "Oct. 2020",
-                  title: "Hackathon",
-                  desc: "Victoire Recoder l'Habitat #2 → incubation Matrice/BdT",
+                  title: language === "fr" ? "Hackathon" : "Hackathon",
+                  desc: language === "fr" ? "Victoire Recoder l'Habitat #2 → incubation Matrice/BdT" : "Recoder l'Habitat #2 win → Matrice/BdT incubation",
                 },
                 {
-                  date: "Oct. 2020 - Janv. 2021",
+                  date: language === "fr" ? "Oct. 2020 - Janv. 2021" : "Oct. 2020 - Jan. 2021",
                   title: "Discovery",
-                  desc: "20+ entretiens, exploration acteurs privés",
+                  desc: language === "fr" ? "20+ entretiens, exploration acteurs privés" : "20+ interviews, private sector exploration",
                 },
-                { date: "Janv. 2021", title: "Pivot", desc: "Décision stratégique → focus collectivités" },
-                { date: "Janv. - Avril 2021", title: "Prototype", desc: "3 versions Figma + évolution marque blanche" },
-                { date: "Mai 2021 - Mars 2022", title: "Go-to-market", desc: "20+ villes, 2 propales, cycles longs" },
-                { date: "Mars 2022", title: "Fin", desc: "Épuisement financements, 0 signature" },
+                { 
+                  date: language === "fr" ? "Janv. 2021" : "Jan. 2021", 
+                  title: "Pivot", 
+                  desc: language === "fr" ? "Décision stratégique → focus collectivités" : "Strategic decision → focus municipalities" 
+                },
+                { 
+                  date: language === "fr" ? "Janv. - Avril 2021" : "Jan. - April 2021", 
+                  title: "Prototype", 
+                  desc: language === "fr" ? "3 versions Figma + évolution marque blanche" : "3 Figma versions + white-label evolution" 
+                },
+                { 
+                  date: language === "fr" ? "Mai 2021 - Mars 2022" : "May 2021 - March 2022", 
+                  title: "Go-to-market", 
+                  desc: language === "fr" ? "20+ villes, 2 propales, cycles longs" : "20+ cities, 2 proposals, long cycles" 
+                },
+                { 
+                  date: language === "fr" ? "Mars 2022" : "March 2022", 
+                  title: language === "fr" ? "Fin" : "End", 
+                  desc: language === "fr" ? "Épuisement financements, 0 signature" : "Funding exhaustion, 0 signature" 
+                },
               ].map((step, i, arr) => (
                 <TimelineItem
                   key={i}
@@ -438,88 +422,71 @@ export const ContentFR = () => {
                 />
               ))}
             </div>
-            <p className="text-base text-foreground/80 italic text-center mt-8">
-              → Trois moments ont marqué cette trajectoire...
-            </p>
-          </div>
-        </div>
-      </ScrollRevealSection>
 
-      {/* ========== SECTION 3: MOMENTS CLÉS ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.15}>
-        <div id="key-moments" className="py-16 px-4 md:px-8 lg:px-12 bg-card border-b border-border/50">
-          <div className="max-w-6xl mx-auto space-y-8">
-            <h2 className="text-h3">Moments clés</h2>
+            {/* Key Decisions */}
+            <div className="mt-12">
+              <h3 className="text-xl font-semibold mb-6">
+                {language === "fr" ? "Décisions stratégiques" : "Strategic Decisions"}
+              </h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                {/* Decision 1 */}
+                <div className="p-6 rounded-xl bg-card border border-border hover:border-accent/30 transition-all">
+                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-4">
+                    <span className="text-lg font-bold text-accent">1</span>
+                  </div>
+                  <h4 className="font-semibold mb-2">
+                    {language === "fr" ? "Pivot B2C → B2G" : "B2C → B2G Pivot"}
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    {language === "fr" 
+                      ? "Focus sur les collectivités après conseil des incubateurs. Les municipalités ont les moyens d'agir durablement."
+                      : "Focus on municipalities after incubator advice. Cities have the means to act sustainably."}
+                  </p>
+                </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              {/* Moment 1 */}
-              <div className="p-6 rounded-lg bg-card border-l-4 border-accent">
-                <h3 className="text-h4 mb-3">Pivot stratégique : Acteurs privés → Collectivités</h3>
-                <p className="text-base mb-3">
-                  <b>Contexte :</b> Après 3 mois d'exploration d'acteurs privés, présentation du 1er jalon.
-                </p>
-                <blockquote className="italic text-base leading-relaxed border-l-4 border-accent/30 pl-4 mb-3">
-                  "Les collectivités ont les compétences et les moyens d'agir durablement sur cette problématique. Et
-                  nous avons le réseau pour vous accompagner."
-                  <footer className="text-sm mt-2 text-muted-foreground">
-                    — Conseil Banque des Territoires / Matrice
-                  </footer>
-                </blockquote>
-                <p className="text-base">
-                  <b>Décision :</b> Pivoter vers le marché public (villes, métropoles). Débat interne : moins "sexy",
-                  processus longs, mais consensus : soutien BdT décisif.
-                </p>
-              </div>
+                {/* Decision 2 */}
+                <div className="p-6 rounded-xl bg-card border border-destructive/30 hover:border-destructive/50 transition-all">
+                  <div className="w-10 h-10 rounded-full bg-destructive/10 flex items-center justify-center mb-4">
+                    <span className="text-lg font-bold text-destructive">2</span>
+                  </div>
+                  <h4 className="font-semibold mb-2">
+                    {language === "fr" ? "Offre 360° (erreur)" : "360° Offering (mistake)"}
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    {language === "fr"
+                      ? "Tentative de répondre à tous les besoins (plateforme + accompagnement). Résultat : positionnement flou."
+                      : "Trying to address all needs (platform + consulting). Result: blurred positioning."}
+                  </p>
+                </div>
 
-              {/* Moment 2 */}
-              <div className="p-6 rounded-lg bg-card border-l-4 border-destructive">
-                <h3 className="text-h4 mb-3">L'insight qui a dilué le focus</h3>
-                <p className="text-base mb-3">
-                  <b>Contexte :</b> Discovery, entretiens élus et chargés de mission.
-                </p>
-                <blockquote className="italic text-base leading-relaxed border-l-4 border-destructive/30 pl-4 mb-3">
-                  "On aimerait surtout de l'accompagnement humain : communication sur nos actions, sensibilisation des
-                  citoyens, identification des solutions terrain."
-                  <footer className="text-sm mt-2 text-muted-foreground">— Collectivité</footer>
-                </blockquote>
-                <p className="text-base">
-                  <b>Erreur :</b> Tentative de répondre aux 2 besoins (plateforme + accompagnement humain). Résultat :
-                  Offre 360° floue, MVP jamais finalisé.
-                  <br />
-                  <b>Leçon :</b> Chasser un seul lièvre à la fois.
-                </p>
-              </div>
-
-              {/* Moment 3 */}
-              <div className="p-6 rounded-lg bg-card border-l-4 border-accent">
-                <h3 className="text-h4 mb-3">De plateforme standalone à composant intégrable</h3>
-                <p className="text-base mb-3">
-                  <b>Contexte :</b> Présentation du prototype (branding Sonor) à une collectivité.
-                </p>
-                <blockquote className="italic text-base leading-relaxed border-l-4 border-accent/30 pl-4 mb-3">
-                  "Votre solution nous intéresse, mais nous ne pouvons pas renvoyer nos citoyens vers un site externe.
-                  Il faudrait que ce soit intégrable à notre portail open-data."
-                  <footer className="text-sm mt-2 text-muted-foreground">— Collectivité</footer>
-                </blockquote>
-                <p className="text-base">
-                  <b>Décision :</b> Pivot vers composant en marque blanche (reprise direction artistique collectivité).
-                  Enjeu clé : <b>Souveraineté des données</b>.
-                </p>
+                {/* Decision 3 */}
+                <div className="p-6 rounded-xl bg-card border border-border hover:border-accent/30 transition-all">
+                  <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center mb-4">
+                    <span className="text-lg font-bold text-accent">3</span>
+                  </div>
+                  <h4 className="font-semibold mb-2">
+                    {language === "fr" ? "Marque blanche" : "White-label"}
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    {language === "fr"
+                      ? "Pivot vers composant intégrable après feedback : les collectivités veulent garder leurs citoyens sur leur portail."
+                      : "Pivot to embeddable component after feedback: cities want to keep citizens on their portal."}
+                  </p>
+                </div>
               </div>
             </div>
-            <p className="text-base text-foreground/80 italic text-center mt-8">
-              → Découvrez comment nous avons concrétisé cette vision en prototype...
-            </p>
           </div>
         </div>
       </ScrollRevealSection>
 
-      {/* ========== SECTION 4: GALERIE PROTOTYPE ========== */}
+      {/* ========== SECTION 5: PROTOTYPE & DELIVERABLES ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={0.2}>
         <div id="prototype-gallery" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
-          <div className="max-w-6xl mx-auto space-y-8">
+          <div className="w-full space-y-8">
             <div className="space-y-6">
-              <h2 className="text-h3">Voir notre premier prototype</h2>
+              <h2 className="text-h3">
+                {language === "fr" ? "5. Prototype & Livrables" : "5. Prototype & Deliverables"}
+              </h2>
 
               {/* Iframe Figma - visible par défaut */}
               <div className="space-y-4">
@@ -559,13 +526,13 @@ export const ContentFR = () => {
               </div>
             </div>
 
-            {/* Galerie prototype en grid */}
+            {/* Galerie prototype en grid - skip first image (already in Context section) */}
             <section className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
-                {galleryImages.map((img, i) => (
+                {galleryImages.slice(1).map((img, i) => (
                   <CaseImage
                     key={i}
-                    onClick={() => openLightbox(i)}
+                    onClick={() => openLightbox(i + 1)}
                     desktopSrc={img.src}
                     alt={img.alt}
                     caption={img.caption}
@@ -606,7 +573,7 @@ export const ContentFR = () => {
       {/* ========== SECTION: STAKEHOLDER TESTIMONIALS ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={0.225}>
         <div id="testimonials" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
-          <div className="max-w-6xl mx-auto">
+          <div className="w-full">
             <div className="text-center mb-12">
               <h2 className="text-h3 mb-4">
                 {language === 'fr' 
@@ -699,11 +666,24 @@ export const ContentFR = () => {
         </div>
       </ScrollRevealSection>
 
-      {/* ========== SECTION 5: OBSTACLES RENCONTRÉS ========== */}
+      {/* ========== CTA MID-PAGE ========== */}
+      <CTABanner
+        title={language === "fr" ? "Prêt à construire l'avenir ?" : "Ready to build the future?"}
+        description={language === "fr" 
+          ? "Discutons de votre vision produit et construisons quelque chose de génial ensemble"
+          : "Let's discuss your product vision and build something great together"
+        }
+        ctaText={language === "fr" ? "Discutons !" : "Let's talk!"}
+        onClick={() => navigate("/#contact")}
+      />
+
+      {/* ========== SECTION 6: OBSTACLES (moved into Impact) ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={0.3}>
         <div id="obstacles" className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
-          <div className="max-w-6xl mx-auto space-y-8">
-            <h2 className="text-h3">Obstacles rencontrés</h2>
+          <div className="w-full space-y-8">
+            <h2 className="text-h3">
+              {language === "fr" ? "6. Obstacles Rencontrés" : "6. Challenges Faced"}
+            </h2>
             <div className="space-y-4">
               <div className="p-4 rounded-lg bg-card border-l-4 border-destructive">
                 <h4 className="font-semibold mb-2">Disponibilité données open data</h4>
@@ -724,11 +704,13 @@ export const ContentFR = () => {
         </div>
       </ScrollRevealSection>
 
-      {/* ========== SECTION 6: RÉSULTATS & IMPACT ========== */}
+      {/* ========== SECTION 7: IMPACT ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={0.3}>
         <div id="results" className="py-16 px-4 md:px-8 lg:px-12 bg-card border-b border-border/50">
-          <div className="max-w-6xl mx-auto space-y-8">
-            <h2 className="text-h3">Résultats & Impact</h2>
+          <div className="w-full space-y-8">
+            <h2 className="text-h3">
+              {language === "fr" ? "7. Impact & Résultats" : "7. Impact & Results"}
+            </h2>
 
             {/* Chiffres clés */}
             <div className="grid md:grid-cols-4 gap-6">
@@ -761,202 +743,40 @@ export const ContentFR = () => {
         </div>
       </ScrollRevealSection>
 
-      {/* ========== SECTION 7: ÉPILOGUE & APPRENTISSAGES ========== */}
+      {/* ========== SECTION 8: KEY LEARNINGS ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={0.35}>
-        <div id="epilogue" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
-          <div className="max-w-6xl mx-auto space-y-8">
-            <h2 className="text-h3">Épilogue & Apprentissages</h2>
-
-            <section className="space-y-6">
-              <h3 className="text-h4">
-                Le projet SONOR n'est pas devenu une start-up à proprement parler, mais l'expérience, passionnante, a
-                été formatrice à plusieurs niveaux, tant sur le plan professionnel que personnel.
-              </h3>
-            </section>
-
-            {/* 3 causes fin du projet */}
-            <section className="space-y-4">
-              <h3 className="text-h4">3 causes de la fin du projet</h3>
-
-              <ExpandSection id="cause-1" title="1. Complexité technique sous-estimée" defaultOpen={true}>
-                <p>
-                  Nous avons sous-estimé la difficulté d'accès et de traitement des données open data de qualité
-                  exploitable sur la pollution sonore. Le manque de matière première (données ouvertes fiables et
-                  standardisées) a ralenti le développement du prototype.
-                </p>
-              </ExpandSection>
-
-              <ExpandSection id="cause-2" title="2. Cycles de vente B2G longs">
-                <p>
-                  Les cycles de vente auprès des collectivités sont très longs (4-6 mois minimum), et nous manquions de
-                  temps pour finaliser les signatures avant l'épuisement de nos financements.
-                </p>
-              </ExpandSection>
-
-              <ExpandSection id="cause-3" title="3. Positionnement flou">
-                <p>
-                  Notre positionnement entre plateforme SaaS et accompagnement conseil n'était pas assez clair. Il
-                  fallait choisir un angle d'attaque plus précis pour faciliter la compréhension de la proposition de
-                  valeur.
-                </p>
-              </ExpandSection>
-            </section>
-
-            {/* Learnings */}
-            <section className="space-y-6">
-              <h3 className="text-h4">Apprentissages</h3>
-
-              <div className="grid md:grid-cols-2 gap-4">
-                {/* Pratiques */}
-                <div className="rounded-xl p-6 bg-card/80 backdrop-blur-sm border border-border/50 hover:border-accent/30 transition-all group hover:shadow-lg hover:scale-[1.01] duration-300">
-                  <h4 className="text-lg font-semibold mb-4">Pratiques</h4>
-                  <ul className="list-disc pl-5 space-y-3 text-base leading-relaxed">
-                    <li>
-                      <b>End-to-end 0→1</b> : Discovery complète → prototypage → go-to-market → commercialisation
-                    </li>
-                    <li>
-                      <b>Priorisation & dire non</b> : Importance de rester focus sur 1 MVP plutôt qu'offre 360°
-                    </li>
-                    <li>
-                      <b>B2G go-to-market</b> : Cycles longs, importance d'un prototype fonctionnel à mettre entre les
-                      mains du lead
-                    </li>
-                    <li>
-                      <b>Communiquer avant d'être "prêt"</b> : Prototype fonctionnel nécessaire pour convaincre
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Personnels */}
-                <div className="rounded-xl p-6 bg-card/80 backdrop-blur-sm border border-border/50 hover:border-accent/30 transition-all group hover:shadow-lg hover:scale-[1.01] duration-300">
-                  <h4 className="text-lg font-semibold mb-4">Personnels</h4>
-                  <ul className="list-disc pl-5 space-y-3 text-base leading-relaxed">
-                    <li>
-                      <b>Appétence pour l'exploration et l'analyse</b> : Confirmé mon goût pour l'étude approfondie de
-                      problématiques complexes, la recherche de solutions concrètes, et la capacité à transformer
-                      apprentissages techniques et données en réponses adaptées aux besoins terrain
-                    </li>
-                    <li>
-                      <b>Produits à impact</b> : Intérêt confirmé pour produits à fort impact sociétal et
-                      environnemental
-                    </li>
-                    <li>
-                      <b>Aller-retour terrain ↔ conception</b> : L'importance de la confrontation régulière avec le
-                      terrain
-                    </li>
-                    <li>
-                      <b>Travail en équipe pluridisciplinaire</b> : Communication claire et synthèse d'enjeux complexes
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-          </div>
-        </div>
-      </ScrollRevealSection>
-
-      {/* ========== SECTION 8: SI C'ÉTAIT À REFAIRE ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.4}>
-        <div id="if-i-had-to-do-it-again" className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
-          <div className="max-w-6xl mx-auto space-y-8">
-            <h2 className="text-h3">Si c'était à refaire</h2>
-
-            <div className="space-y-6">
-              <p className="text-lg">
-                Avec le recul, voici les décisions que j'aurais prises différemment pour maximiser nos chances de succès
-                :
-              </p>
-
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="rounded-xl p-5 bg-card border-l-4 border-accent">
-                  <h4 className="font-semibold mb-2">Choisir 1 MVP dès le départ</h4>
-                  <p className="text-base text-foreground/80">
-                    Plutôt qu'une offre 360°, se concentrer sur un segment précis (ex: cartographie seule) pour valider
-                    la proposition de valeur rapidement.
-                  </p>
-                </div>
-
-                <div className="rounded-xl p-5 bg-card border-l-4 border-accent">
-                  <h4 className="font-semibold mb-2">Valider la complexité technique avant de promettre</h4>
-                  <p className="text-base text-foreground/80">
-                    Réaliser un prototype fonctionnel minimal avant d'engager des discussions commerciales pour éviter
-                    les promesses non tenables.
-                  </p>
-                </div>
-
-                <div className="rounded-xl p-5 bg-card border-l-4 border-accent">
-                  <h4 className="font-semibold mb-2">Construire un prototype fonctionnel plus tôt</h4>
-                  <p className="text-base text-foreground/80">
-                    Passer du Figma au code dès les premiers retours terrain pour accélérer la confrontation avec la
-                    réalité technique et utilisateur.
-                  </p>
-                </div>
-
-                <div className="rounded-xl p-5 bg-card border-l-4 border-accent">
-                  <h4 className="font-semibold mb-2">Se focaliser sur un segment client précis</h4>
-                  <p className="text-base text-foreground/80">
-                    Cibler un type de collectivité spécifique (ex: villes moyennes de 50-100k habitants) pour adapter le
-                    discours et la solution à leurs contraintes réelles.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ScrollRevealSection>
-
-      {/* ========== SECTION 9: CONCLUSION ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.45}>
-        <div id="conclusion" className="py-16 px-4 md:px-8 lg:px-12 bg-card border-b border-border/50">
-          <div className="max-w-6xl mx-auto space-y-8">
-            <div className="text-center">
-              <h2 className="text-h3 mb-4">Conclusion</h2>
-            </div>
-            <section className="max-w-4xl mx-auto text-center">
-              <p className="text-lg">
-                SONOR a confirmé mon goût pour la transformation de problématiques en solutions data-driven et m'a
-                permis d'acquérir une expérience précieuse en product management 0→1, de la discovery à la
-                commercialisation.
-              </p>
-            </section>
-          </div>
-        </div>
-      </ScrollRevealSection>
-
-      {/* ========== SECTION: KEY LEARNINGS ========== */}
-      <ScrollRevealSection variant="fade-in-up" delay={0.45}>
         <div id="learnings" className="py-20 px-4 md:px-8 lg:px-12 bg-accent/5 border-y border-accent/20">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
+          <div className="w-full">
+            <div className="text-center mb-12">
               <h2 className="text-h3 mb-4">
-                {language === "fr" ? "Ce Que Ce Parcours M'a Appris" : "What This Journey Taught Me"}
+                {language === "fr" ? "8. Apprentissages Clés" : "8. Key Learnings"}
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                 {language === "fr"
-                  ? "Construire Sonor était ambitieux. L'arrêter fut humiliant. Voici les leçons durement acquises qui ont façonné mon approche du product management."
-                  : "Building Sonor was ambitious. Stopping it was humbling. Here are the hard-earned lessons that shaped my approach to product management."}
+                  ? "Construire Sonor a confirmé mon goût pour la transformation de problématiques en solutions data-driven et m'a permis d'acquérir une expérience précieuse en product management 0-1."
+                  : "Building Sonor confirmed my passion for transforming problems into data-driven solutions and gave me valuable experience in 0-1 product management."}
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
               {/* Learning 1: B2G sales cycles */}
               <div className="bg-card p-8 rounded-2xl border border-border shadow-sm hover:shadow-lg transition-all">
                 <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mb-6">
                   <Clock className="w-7 h-7 text-accent" />
                 </div>
                 <h3 className="text-xl font-bold mb-4">
-                  {language === "fr" ? "Le B2G nécessite un capital patient" : "B2G requires patient capital"}
+                  {language === "fr" ? "Le B2G necessite un capital patient" : "B2G requires patient capital"}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   {language === "fr"
-                    ? "18+ mois de cycle de vente moyen pour les municipalités. Nos €20K de financement étaient épuisés avant de signer le premier contrat."
-                    : "18+ months average sales cycle for municipalities. Our €20K funding was exhausted before securing the first contract."}
+                    ? "18+ mois de cycle de vente moyen pour les municipalites. Nos 20K de financement etaient epuises avant de signer le premier contrat."
+                    : "18+ months average sales cycle for municipalities. Our 20K funding was exhausted before securing the first contract."}
                 </p>
                 <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-accent">
                   <p className="text-sm italic text-foreground/80">
                     {language === "fr"
-                      ? "« Le timing du product-market fit compte autant que le produit lui-même. J'ai appris à prendre en compte la vélocité de vente lors de l'évaluation des business models. »"
-                      : '"Product-market fit timing matters as much as the product itself. I learned to factor in sales velocity when evaluating business models."'}
+                      ? "Le timing du product-market fit compte autant que le produit lui-meme."
+                      : "Product-market fit timing matters as much as the product itself."}
                   </p>
                 </div>
               </div>
@@ -968,19 +788,19 @@ export const ContentFR = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-4">
                   {language === "fr"
-                    ? "La qualité de l'open data est le goulot"
+                    ? "La qualite de l'open data est le goulot"
                     : "Open data quality is the bottleneck"}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   {language === "fr"
-                    ? "Nous avons sous-estimé la complexité technique du traitement de datasets municipaux fragmentés et de faible qualité en insights actionnables."
-                    : "We underestimated the technical complexity of processing fragmented, low-quality municipal datasets into actionable insights."}
+                    ? "Nous avons sous-estime la complexite technique du traitement de datasets municipaux fragmentes en insights actionnables."
+                    : "We underestimated the technical complexity of processing fragmented municipal datasets into actionable insights."}
                 </p>
                 <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-accent">
                   <p className="text-sm italic text-foreground/80">
                     {language === "fr"
-                      ? "« De grands produits nécessitent une grande infrastructure data. Je valide maintenant la disponibilité et qualité des données avant de m'engager sur des solutions data-driven. »"
-                      : '"Great products require great data infrastructure. I now validate data availability and quality before committing to data-driven solutions."'}
+                      ? "De grands produits necessitent une grande infrastructure data."
+                      : "Great products require great data infrastructure."}
                   </p>
                 </div>
               </div>
@@ -991,68 +811,67 @@ export const ContentFR = () => {
                   <Target className="w-7 h-7 text-accent" />
                 </div>
                 <h3 className="text-xl font-bold mb-4">
-                  {language === "fr" ? "La clarté bat la richesse fonctionnelle" : "Clarity beats feature richness"}
+                  {language === "fr" ? "La clarte bat la richesse fonctionnelle" : "Clarity beats feature richness"}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   {language === "fr"
-                    ? "Notre positionnement était flou entre plateforme SaaS et consulting. Les parties prenantes voulaient l'un ou l'autre, pas les deux."
+                    ? "Notre positionnement etait flou entre plateforme SaaS et consulting. Les parties prenantes voulaient l'un ou l'autre, pas les deux."
                     : "Our positioning blurred between SaaS platform and consulting. Stakeholders wanted one or the other, not both."}
                 </p>
                 <div className="p-4 bg-muted/30 rounded-lg border-l-4 border-accent">
                   <p className="text-sm italic text-foreground/80">
                     {language === "fr"
-                      ? "« Une proposition de valeur tranchée et différenciée est non-négociable. J'ai appris à simplifier impitoyablement le positionnement avant de construire des features. »"
-                      : '"A sharp, differentiated value proposition is non-negotiable. I learned to ruthlessly simplify positioning before building features."'}
+                      ? "Une proposition de valeur tranchee est non-negociable."
+                      : "A sharp value proposition is non-negotiable."}
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Historical context callout */}
-            <div className="mt-12 p-8 bg-card rounded-2xl border-2 border-accent/30">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 text-3xl">📅</div>
-                <div className="flex-1">
-                  <p className="text-sm font-semibold mb-2 text-foreground">
-                    {language === "fr" ? "Contexte historique" : "Historical context"}
+            {/* What I would do differently */}
+            <div className="p-8 bg-card rounded-2xl border border-border">
+              <h3 className="text-xl font-semibold mb-6">
+                {language === "fr" ? "Si c'était à refaire" : "If I had to do it again"}
+              </h3>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="flex items-start gap-3">
+                  <span className="text-accent font-bold">1.</span>
+                  <p className="text-muted-foreground">
+                    {language === "fr" 
+                      ? "Choisir 1 MVP dès le départ plutôt qu'une offre 360°" 
+                      : "Choose 1 MVP from the start rather than a 360-degree offering"}
                   </p>
-                  <p className="text-base text-foreground/80 leading-relaxed">
-                    {language === "fr"
-                      ? "Ce projet s'est déroulé de 2020 à 2022, avant la révolution de l'IA générative. À l'époque, la visualisation d'open data pour les municipalités était un différenciateur novateur, et l'adoption du SaaS dans le secteur public commençait tout juste à s'accélérer. Aujourd'hui, ces apprentissages informent ma façon d'évaluer les technologies émergentes et le timing de marché."
-                      : "This project ran from 2020-2022, before the generative AI revolution. At the time, open data visualization for municipalities was a novel differentiator, and SaaS adoption in the public sector was just beginning to accelerate. Today, these learnings inform how I evaluate emerging technologies and market timing."}
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-accent font-bold">2.</span>
+                  <p className="text-muted-foreground">
+                    {language === "fr" 
+                      ? "Valider la complexité technique avant de promettre" 
+                      : "Validate technical complexity before making promises"}
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-accent font-bold">3.</span>
+                  <p className="text-muted-foreground">
+                    {language === "fr" 
+                      ? "Construire un prototype fonctionnel plus tôt" 
+                      : "Build a functional prototype earlier"}
                   </p>
                 </div>
               </div>
-            </div>
-
-            {/* Bridge to next role */}
-            <div className="mt-12 p-8 bg-muted/20 rounded-2xl">
-              <p className="text-lg leading-relaxed text-center">
-                {language === "fr" ? (
-                  <>
-                    <strong>Ces apprentissages ont directement informé mon travail chez HUWISE,</strong> où j'ai aidé à
-                    opérationnaliser l'optimisation de conversion avec un positionnement plus clair et des cycles
-                    d'itération plus rapides—contribuant finalement à une croissance mesurable.
-                  </>
-                ) : (
-                  <>
-                    <strong>These learnings directly informed my work at HUWISE,</strong> where I helped operationalize
-                    conversion optimization with clearer positioning and faster iteration cycles—ultimately contributing
-                    to measurable growth.
-                  </>
-                )}
-              </p>
             </div>
           </div>
         </div>
       </ScrollRevealSection>
 
-      {/* ========== SECTION 10: FAQ ========== */}
+      {/* ========== SECTION 9: FAQ ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={0.55}>
         <div id="faq" className="py-16 px-4 md:px-8 lg:px-12 bg-secondary border-b border-border/50">
-          <div className="max-w-6xl mx-auto space-y-8 text-center">
+          <div className="w-full space-y-8 text-center">
             <div>
-              <h2 className="text-h3 mb-4">Questions fréquentes</h2>
+              <h2 className="text-h3 mb-4">
+                {language === "fr" ? "9. Questions Frequentes" : "9. Frequently Asked Questions"}
+              </h2>
             </div>
 
             <div className="space-y-4 text-left max-w-4xl mx-auto">
@@ -1109,12 +928,14 @@ export const ContentFR = () => {
         </div>
       </ScrollRevealSection>
 
-      {/* ========== SECTION 10: POUR ALLER PLUS LOIN ========== */}
+      {/* ========== SECTION 10: GO FURTHER ========== */}
       <ScrollRevealSection variant="fade-in-up" delay={0.55}>
-        <div className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
-          <div className="max-w-6xl mx-auto space-y-8">
+        <div id="go-further" className="py-16 px-4 md:px-8 lg:px-12 bg-background border-b border-border/50">
+          <div className="w-full space-y-8">
             <div className="text-center">
-              <h2 className="text-h3 mb-4">Pour aller plus loin</h2>
+              <h2 className="text-h3 mb-4">
+                {language === "fr" ? "10. Pour Aller Plus Loin" : "10. Go Further"}
+              </h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6">
@@ -1185,7 +1006,7 @@ export const ContentFR = () => {
 
       {/* ========== SECTION 11: REMERCIEMENTS ========== */}
       <div className="py-16 px-4 md:px-8 lg:px-12 bg-card border-b border-border/50">
-        <div className="max-w-6xl mx-auto space-y-8">
+        <div className="w-full space-y-8">
           <div className="text-center space-y-6">
             <h2 className="text-h3">Remerciements</h2>
             <p className="text-lg max-w-3xl mx-auto">
@@ -1216,16 +1037,15 @@ export const ContentFR = () => {
       </div>
 
       {/* ========== SECTION 12: CTA FINAL ========== */}
-      <div className="py-16 px-4 md:px-8 lg:px-12 bg-secondary">
-        <div className="max-w-6xl mx-auto">
-          <CTABanner
-            title="Intéressé par mon approche produit ?"
-            description="Vous recrutez un Product Manager orienté impact, avec expérience B2G et appétence pour les sujets data/santé publique ? Échangeons sur vos défis produits."
-            ctaText="Prendre contact"
-            onClick={() => navigate("/Contact")}
-          />
-        </div>
-      </div>
+      <CTABanner
+        title={language === "fr" ? "Prêt à construire l'avenir ?" : "Ready to build the future?"}
+        description={language === "fr" 
+          ? "Discutons de votre vision produit et construisons quelque chose de génial ensemble"
+          : "Let's discuss your product vision and build something great together"
+        }
+        ctaText={language === "fr" ? "Discutons !" : "Let's talk!"}
+        onClick={() => navigate("/#contact")}
+      />
 
       {/* Lightbox */}
       <ImageLightbox

@@ -15,6 +15,8 @@ interface CaseStudySidebarProps {
   industry: string;
   context?: string;
   isCollapsible?: boolean;
+  logo?: string;
+  logoAlt?: string;
 }
 
 export const CaseStudySidebar: React.FC<CaseStudySidebarProps> = ({
@@ -25,6 +27,8 @@ export const CaseStudySidebar: React.FC<CaseStudySidebarProps> = ({
   industry,
   context,
   isCollapsible = true,
+  logo,
+  logoAlt = "Project logo",
 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
 
@@ -42,13 +46,24 @@ export const CaseStudySidebar: React.FC<CaseStudySidebarProps> = ({
       {/* Desktop: Sticky Sidebar */}
       <div className="hidden lg:block sticky top-24">
         <motion.div
-          className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm"
+          className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
+          {/* Logo if provided */}
+          {logo && (
+            <div className="flex justify-center mb-6">
+              <img 
+                src={logo} 
+                alt={logoAlt} 
+                className="h-16 object-contain" 
+              />
+            </div>
+          )}
+          
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+            <h3 className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
               📋 Project Info
             </h3>
           </div>
@@ -61,10 +76,10 @@ export const CaseStudySidebar: React.FC<CaseStudySidebarProps> = ({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
               >
-                <dt className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">
+                <dt className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">
                   {item.label}
                 </dt>
-                <dd className="text-sm font-medium text-gray-900">
+                <dd className="text-sm font-medium text-gray-900 dark:text-gray-100">
                   {item.value}
                 </dd>
               </motion.div>

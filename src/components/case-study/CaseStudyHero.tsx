@@ -62,9 +62,9 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
         animate="visible"
       >
         <div className="max-w-3xl">
-          {/* Title - Texte blanc à gauche, taille réduite */}
+          {/* Title - Texte blanc à gauche */}
           <motion.h1
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-white whitespace-pre-line"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 leading-tight text-white whitespace-pre-line"
             style={{
               textShadow: '0 2px 8px rgba(0, 0, 0, 0.6), 0 4px 16px rgba(0, 0, 0, 0.4)',
             }}
@@ -72,6 +72,19 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
           >
             {title}
           </motion.h1>
+
+          {/* Subtitle */}
+          {subtitle && (
+            <motion.p
+              className="text-lg md:text-xl text-white/90 mb-6 max-w-2xl"
+              style={{
+                textShadow: '0 1px 4px rgba(0, 0, 0, 0.5)',
+              }}
+              variants={heroAnimationPreset.item}
+            >
+              {subtitle}
+            </motion.p>
+          )}
 
           {/* Stack Tools - Icônes en ligne horizontale */}
           {tools.length > 0 && (
