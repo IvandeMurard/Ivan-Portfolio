@@ -10,7 +10,7 @@ import { FeedbackWidget } from "@/components/FeedbackWidget";
 import { Home } from "./pages/Home";
 import Sonor from "./pages/Sonor";
 import WTTJCaseStudy from "./pages/cases/wttj-case-study";
-import AgentsEval from "./pages/cases/AgentsEval";
+// import AgentsEval from "./pages/cases/AgentsEval"; // MASQUÉ temporairement
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,7 +36,8 @@ const App = () => (
               <Route path="/case-study/wttj" element={<WTTJCaseStudy />} />
               <Route path="/cases/wttj" element={<WTTJCaseStudy />} />
               <Route path="/case-study/wttj-conversion-seniors" element={<WTTJCaseStudy />} />
-              <Route path="/case-study/agents-eval" element={<AgentsEval />} />
+              {/* MASQUÉ temporairement - AgentsEval case study */}
+              {/* <Route path="/case-study/agents-eval" element={<AgentsEval />} /> */}
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

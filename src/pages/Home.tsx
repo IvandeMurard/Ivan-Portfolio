@@ -41,6 +41,7 @@ interface Project {
   tagline?: string;
   modalTitle?: string;
   modalSubtitle?: string;
+  hidden?: boolean; // Masquer temporairement du portfolio
 }
 
 const projects: Project[] = [
@@ -78,7 +79,7 @@ const projects: Project[] = [
     ],
   },
 
-  // — Agents d'évaluation —
+  // — Agents d'évaluation — MASQUÉ temporairement (hidden: true)
   {
     id: "agents-eval",
     title: "Evaluating AI agents at scale",
@@ -93,6 +94,7 @@ const projects: Project[] = [
       "Issues & recommendations captured for fast iteration",
       "Ready to adapt to any domain (UX, quality, robustness)",
     ],
+    hidden: true, // Masqué du portfolio - trop "AI slop"
   },
 
   // — Agentic Hospitality —
@@ -174,15 +176,17 @@ const projects: Project[] = [
   },
 ];
 
-// Calculate filter chips dynamically based on projects
+// Calculate filter chips dynamically based on visible projects (excluding hidden)
 const getFilterChips = (projects: Project[]) => {
-  const allCount = projects.length;
-  const productCount = projects.filter((p) => p.category === "product").length;
-  const experienceCount = projects.filter((p) => p.category === "experience").length;
-  const agentsCount = projects.filter(
+  const visibleProjects = projects.filter((p) => !p.hidden);
+  
+  const allCount = visibleProjects.length;
+  const productCount = visibleProjects.filter((p) => p.category === "product").length;
+  const experienceCount = visibleProjects.filter((p) => p.category === "experience").length;
+  const agentsCount = visibleProjects.filter(
     (p) => p.category === "agents" || p.tags.some((tag) => tag.toLowerCase() === "agents"),
   ).length;
-  const automatisationsCount = projects.filter(
+  const automatisationsCount = visibleProjects.filter(
     (p) => p.category === "automatisations" || p.tags.some((tag) => tag.toLowerCase() === "automatisations"),
   ).length;
 
@@ -405,10 +409,13 @@ export const Home: React.FC = () => {
     };
   }, []);
 
+  // Filtrer les projets masqués (hidden: true) puis appliquer le filtre de catégorie
+  const visibleProjects = projects.filter((p) => !p.hidden);
+  
   const filteredProjects =
     activeFilter === "all"
-      ? projects
-      : projects.filter(
+      ? visibleProjects
+      : visibleProjects.filter(
           (project) =>
             project.category === activeFilter ||
             project.tags.some((tag) => tag.toLowerCase() === activeFilter.toLowerCase()),
