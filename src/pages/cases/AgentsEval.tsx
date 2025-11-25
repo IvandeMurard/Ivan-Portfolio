@@ -13,6 +13,13 @@ import { CaseStudyTLDR } from "@/components/case-study/CaseStudyTLDR";
 import { ZoomIn } from "lucide-react";
 import { motion } from "framer-motion";
 
+// Haptic feedback helper (vibration API for mobile)
+const triggerHaptic = (pattern: number | number[] = 10) => {
+  if (navigator.vibrate) {
+    navigator.vibrate(pattern);
+  }
+};
+
 export default function AgentsEvalCase() {
   const navigate = useNavigate();
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -504,8 +511,11 @@ export default function AgentsEvalCase() {
                   Ready to boost your agents safety?
                 </p>
                 <button
-                  onClick={() => scrollToSection("contact")}
-                  className="px-6 py-2.5 rounded-full bg-contact text-white font-medium hover:bg-contact/90 transition-colors shadow-sm hover:shadow-md"
+                  onClick={() => {
+                    triggerHaptic([15, 30, 15]);
+                    scrollToSection("contact");
+                  }}
+                  className="px-6 py-2.5 rounded-full bg-contact text-white font-medium hover:bg-contact/90 hover:shadow-[0_0_20px_rgba(6,95,70,0.4)] active:scale-[0.97] transition-all shadow-sm hover:shadow-md"
                 >
                   Let's talk
                 </button>

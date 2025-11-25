@@ -11,6 +11,13 @@ type Props = {
   className?: string;
 };
 
+// Haptic feedback helper (vibration API for mobile)
+const triggerHaptic = (pattern: number | number[] = 10) => {
+  if (navigator.vibrate) {
+    navigator.vibrate(pattern);
+  }
+};
+
 export function CTABanner({
   title,
   description,
@@ -26,6 +33,8 @@ export function CTABanner({
     window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
   const handleClick = () => {
+    // Trigger haptic feedback on click
+    triggerHaptic([15, 30, 15]);
     if (onClick) onClick();
     else if (ctaLink) window.location.href = ctaLink;
   };
@@ -68,17 +77,19 @@ export function CTABanner({
               {description}
             </motion.p>
 
-            {/* CTA avec bordure et texte blancs */}
+            {/* CTA avec bordure et texte blancs + haptic feedback */}
             <motion.button
               onClick={handleClick}
-              className="inline-flex items-center justify-center h-9 md:h-10 px-4 md:px-5
+              className="group relative inline-flex items-center justify-center h-9 md:h-10 px-4 md:px-5
                          rounded-full border-2 text-[13px] font-[600]
                          border-white text-white
                          bg-transparent hover:bg-white hover:text-contact hover:border-white
-                         transition-colors duration-200
-                         focus:outline-none focus:ring-2 focus:ring-white/30"
-              whileHover={{ scale: reducedMotion ? 1 : 1.01 }}
-              whileTap={{ scale: reducedMotion ? 1 : 0.99 }}
+                         transition-all duration-200
+                         focus:outline-none focus:ring-2 focus:ring-white/30
+                         hover:shadow-[0_0_20px_rgba(255,255,255,0.4)]
+                         active:scale-[0.97]"
+              whileHover={{ scale: reducedMotion ? 1 : 1.02 }}
+              whileTap={{ scale: reducedMotion ? 1 : 0.97 }}
             >
               {ctaText}
               <svg

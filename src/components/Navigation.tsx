@@ -16,11 +16,21 @@ const COLORS = {
   onAccent: designTokens.color.accent.on,
 };
 
-// leaner link style (no filled pills)
+// Enhanced nav link style with better hover/active states
 const navLinkBase =
   "relative inline-flex items-center px-3 h-9 text-sm font-medium rounded-xl " +
-  "text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] " +
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 transition-all duration-200";
+  "text-foreground/70 hover:text-foreground " +
+  "hover:bg-black/[0.06] dark:hover:bg-white/[0.10] " +
+  "active:scale-[0.97] active:bg-black/[0.10] dark:active:bg-white/[0.15] " +
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 " +
+  "transition-all duration-200 ease-out";
+
+// Haptic feedback helper (vibration API)
+const triggerHaptic = (pattern: number | number[] = 10) => {
+  if (navigator.vibrate) {
+    navigator.vibrate(pattern);
+  }
+};
 
 export const Navigation: FC = () => {
   const location = useLocation();
@@ -58,6 +68,7 @@ export const Navigation: FC = () => {
   // --- Section observers (Home page only)
   const [heroVisible, setHeroVisible] = useState(location.pathname === "/");
   const [workActive, setWorkActive] = useState(false);
+  const [aboutActive, setAboutActive] = useState(false);
 
   useEffect(() => {
     if (location.pathname !== "/") return;
@@ -83,7 +94,19 @@ export const Navigation: FC = () => {
     return () => io.disconnect();
   }, [location.pathname]);
 
-  // --- Typewriter (unchanged, but without green cursor)
+  useEffect(() => {
+    if (location.pathname !== "/") return;
+    const about = document.getElementById("about");
+    if (!about) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setAboutActive(entry.isIntersecting && entry.intersectionRatio >= 0.4),
+      { threshold: [0.3, 0.4, 0.6], rootMargin: "-10% 0px -20% 0px" },
+    );
+    io.observe(about);
+    return () => io.disconnect();
+  }, [location.pathname]);
+
+  // --- Typewriter
   const [displayText, setDisplayText] = useState("Ivan de Murard");
   const currentTextRef = useRef(displayText);
   const timeoutRef = useRef<number | null>(null);
@@ -128,6 +151,12 @@ export const Navigation: FC = () => {
   const BORDER = isDark ? "rgba(255,255,255,0.10)" : "rgba(0,0,0,0.08)";
   const SHADOW = isScrolled ? "0 6px 20px rgba(0,0,0,0.08)" : "none";
 
+  // Contact CTA click handler with haptic
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    triggerHaptic([15, 30, 15]); // Short pulse pattern
+    handleAnchorClick(e, "contact");
+  };
+
   return (
     <nav
       role="navigation"
@@ -142,23 +171,24 @@ export const Navigation: FC = () => {
         transitionTimingFunction: designTokens.motion.easing.product,
       }}
     >
-      <div className="max-w-[1120px] mx-auto px-4 sm:px-6 md:px-8">
+      {/* Aligned with content: max-w-7xl matches Home page sections */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
-          {/* Brand (cursor removed) */}
+          {/* Brand - aligned with content */}
           <Link
             to="/#hero"
             onClick={(e) => handleAnchorClick(e, "hero")}
-            className="text-[16px] font-[600] tracking-tight w-[160px] text-left whitespace-nowrap hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 rounded-md"
+            className="text-[16px] font-[600] tracking-tight w-[160px] text-left whitespace-nowrap hover:opacity-80 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 rounded-md transition-all duration-200"
             style={{ color: inkOnContext }}
             aria-label="Go to top"
           >
             {displayText}
           </Link>
 
-          {/* Mobile Menu Button - Visible only on mobile */}
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-lg text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 transition-all"
+            className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-lg text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 transition-all"
             aria-label="Open menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -175,13 +205,20 @@ export const Navigation: FC = () => {
                 onClick={(e) => handleAnchorClick(e, "hero")}
                 className={navLinkBase}
                 aria-current={heroVisible ? "page" : undefined}
-                style={{ color: heroVisible ? inkOnContext : undefined }}
+                style={{ color: heroVisible ? inkOnContext : undefined, fontWeight: heroVisible ? 600 : undefined }}
               >
                 Home
-                <span
+                {/* Animated underline */}
+                <motion.span
                   aria-hidden
-                  className="pointer-events-none absolute left-3 right-3 -bottom-[6px] h-[2px] rounded-full bg-foreground/70 transition-opacity"
-                  style={{ opacity: heroVisible ? 1 : 0 }}
+                  className="pointer-events-none absolute left-3 right-3 -bottom-[6px] h-[2px] rounded-full bg-foreground/80"
+                  initial={false}
+                  animate={{ 
+                    scaleX: heroVisible ? 1 : 0,
+                    opacity: heroVisible ? 1 : 0 
+                  }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  style={{ originX: 0.5 }}
                 />
               </Link>
 
@@ -191,55 +228,92 @@ export const Navigation: FC = () => {
                 onClick={(e) => handleAnchorClick(e, "work")}
                 className={navLinkBase}
                 aria-current={workActive ? "page" : undefined}
-                style={{ color: workActive ? inkOnContext : undefined }}
+                style={{ color: workActive ? inkOnContext : undefined, fontWeight: workActive ? 600 : undefined }}
               >
                 Work
-                <span
+                <motion.span
                   aria-hidden
-                  className="pointer-events-none absolute left-3 right-3 -bottom-[6px] h-[2px] rounded-full bg-foreground/70 transition-opacity"
-                  style={{ opacity: workActive ? 1 : 0 }}
+                  className="pointer-events-none absolute left-3 right-3 -bottom-[6px] h-[2px] rounded-full bg-foreground/80"
+                  initial={false}
+                  animate={{ 
+                    scaleX: workActive ? 1 : 0,
+                    opacity: workActive ? 1 : 0 
+                  }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  style={{ originX: 0.5 }}
                 />
               </Link>
 
-              {/* CONTACT (accent CTA, kept) */}
+              {/* ABOUT (NEW) */}
+              <Link
+                to="/#about"
+                onClick={(e) => handleAnchorClick(e, "about")}
+                className={navLinkBase}
+                aria-current={aboutActive ? "page" : undefined}
+                style={{ color: aboutActive ? inkOnContext : undefined, fontWeight: aboutActive ? 600 : undefined }}
+              >
+                About
+                <motion.span
+                  aria-hidden
+                  className="pointer-events-none absolute left-3 right-3 -bottom-[6px] h-[2px] rounded-full bg-foreground/80"
+                  initial={false}
+                  animate={{ 
+                    scaleX: aboutActive ? 1 : 0,
+                    opacity: aboutActive ? 1 : 0 
+                  }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  style={{ originX: 0.5 }}
+                />
+              </Link>
+
+              {/* CONTACT CTA - Enhanced with glow and haptic */}
               <Link
                 to="/#contact"
-                onClick={(e) => handleAnchorClick(e, "contact")}
-                className="inline-flex items-center h-9 px-3 text-sm font-medium rounded-xl hover:brightness-110 active:scale-95 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-contact/40"
+                onClick={handleContactClick}
+                className="group relative inline-flex items-center h-9 px-4 text-sm font-semibold rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-contact/50"
                 style={{
                   background: COLORS.accent,
                   color: COLORS.onAccent,
-                  border: `1px solid ${COLORS.accent}`,
                   transitionTimingFunction: designTokens.motion.easing.product,
                 }}
               >
-                Contact
+                {/* Glow effect on hover */}
+                <span 
+                  className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  style={{
+                    boxShadow: `0 0 20px ${COLORS.accent}60, 0 4px 12px ${COLORS.accent}40`,
+                  }}
+                />
+                {/* Scale and brightness on hover */}
+                <span className="relative z-10 group-hover:scale-[1.02] group-active:scale-[0.96] transition-transform duration-150">
+                  Contact
+                </span>
               </Link>
             </div>
 
             {/* Lang / Theme */}
             <div className="flex items-center gap-3">
-              <div className="hidden sm:flex items-center gap-2 text-sm">
+              <div className="hidden sm:flex items-center gap-1 text-sm">
                 <button
-                  className={`h-9 px-2 rounded-lg font-medium transition-all ${
+                  className={`h-8 px-2.5 rounded-lg font-medium transition-all duration-200 ${
                     language === 'en' 
-                      ? 'text-foreground font-bold' 
-                      : 'text-foreground/70 hover:text-foreground'
-                  } hover:bg-black/[0.04] dark:hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30`}
+                      ? 'text-foreground bg-black/[0.08] dark:bg-white/[0.12] font-semibold' 
+                      : 'text-foreground/60 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.06]'
+                  } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40`}
                   onClick={() => setLanguage('en')}
                   aria-label="Switch to English"
                 >
                   EN
                 </button>
-                <span className="opacity-50" style={{ color: inkOnContext }}>
+                <span className="opacity-40 text-xs" style={{ color: inkOnContext }}>
                   |
                 </span>
                 <button
-                  className={`h-9 px-2 rounded-lg font-medium transition-all ${
+                  className={`h-8 px-2.5 rounded-lg font-medium transition-all duration-200 ${
                     language === 'fr' 
-                      ? 'text-foreground font-bold' 
-                      : 'text-foreground/70 hover:text-foreground'
-                  } hover:bg-black/[0.04] dark:hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30`}
+                      ? 'text-foreground bg-black/[0.08] dark:bg-white/[0.12] font-semibold' 
+                      : 'text-foreground/60 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.06]'
+                  } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40`}
                   onClick={() => setLanguage('fr')}
                   aria-label="Passer en français"
                 >
@@ -279,7 +353,7 @@ export const Navigation: FC = () => {
               <div className="flex justify-end mb-8">
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="inline-flex items-center justify-center h-10 w-10 rounded-lg text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 transition-all"
+                  className="inline-flex items-center justify-center h-10 w-10 rounded-lg text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 transition-all"
                   aria-label="Close menu"
                 >
                   <X size={24} />
@@ -294,7 +368,7 @@ export const Navigation: FC = () => {
                     handleAnchorClick(e, "hero");
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] transition-all"
+                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] transition-all"
                 >
                   Home
                 </Link>
@@ -305,22 +379,34 @@ export const Navigation: FC = () => {
                     handleAnchorClick(e, "work");
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] transition-all"
+                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] transition-all"
                 >
                   Work
+                </Link>
+
+                {/* ABOUT (NEW - Mobile) */}
+                <Link
+                  to="/#about"
+                  onClick={(e) => {
+                    handleAnchorClick(e, "about");
+                    setMobileMenuOpen(false);
+                  }}
+                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] transition-all"
+                >
+                  About
                 </Link>
 
                 <Link
                   to="/#contact"
                   onClick={(e) => {
+                    triggerHaptic([15, 30, 15]);
                     handleAnchorClick(e, "contact");
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl transition-all"
+                  className="flex items-center justify-center h-12 px-4 text-base font-semibold rounded-xl transition-all active:scale-[0.97]"
                   style={{
                     background: COLORS.accent,
                     color: COLORS.onAccent,
-                    border: `1px solid ${COLORS.accent}`,
                   }}
                 >
                   Contact
@@ -335,7 +421,7 @@ export const Navigation: FC = () => {
                       language === 'en' 
                         ? 'text-foreground bg-black/[0.08] dark:bg-white/[0.12] font-bold' 
                         : 'text-foreground/70 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.08]'
-                    } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30`}
+                    } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40`}
                     onClick={() => setLanguage('en')}
                     aria-label="Switch to English"
                   >
@@ -347,7 +433,7 @@ export const Navigation: FC = () => {
                       language === 'fr' 
                         ? 'text-foreground bg-black/[0.08] dark:bg-white/[0.12] font-bold' 
                         : 'text-foreground/70 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.08]'
-                    } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30`}
+                    } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40`}
                     onClick={() => setLanguage('fr')}
                     aria-label="Passer en français"
                   >
