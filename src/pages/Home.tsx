@@ -25,6 +25,8 @@ import { InlineExpand } from "@/components/InlineExpand";
 import { experiences } from "@/data/experience";
 import { SOCIAL_LINKS } from "@/site.config";
 import { ProgressIndicator } from "@/components/ProgressIndicator";
+import { ScrollProgressBar } from "@/components/ScrollProgressBar";
+import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface Project {
@@ -452,6 +454,7 @@ export const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Navigation />
+      <ScrollProgressBar />
 
       <ProgressIndicator
         sections={[
@@ -766,7 +769,9 @@ export const Home: React.FC = () => {
       {/* Work Section */}
       <section id="work" className="relative pt-24 md:pt-28 pb-16 md:pb-20 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
-          <SectionHeader title="Work" alignment="left" className="mb-8" />
+          <ScrollReveal variant="fade-up">
+            <SectionHeader title="Work" alignment="left" className="mb-8" />
+          </ScrollReveal>
 
           <FilterChips
             chips={filterChips}
@@ -776,43 +781,45 @@ export const Home: React.FC = () => {
             disableSticky={isStickyDisabled}
           />
 
-          {/* Mobile/Tablet: Grid Layout */}
-          <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 justify-items-center">
+          {/* Mobile/Tablet: Grid Layout with staggered animations */}
+          <StaggerContainer className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 justify-items-center" staggerDelay={0.1}>
             {filteredProjects.map((project, index) => {
               const originalIndex = projects.findIndex((p) => p.id === project.id);
               const isComingSoon =
                 originalIndex >= 4 && project.id !== "agents-eval" && project.id !== "agentic-hospitality";
               const isBuilding = project.id === "agentic-hospitality";
 
-              return project.id === "sonor" ? (
-                <MediaCard
-                  key={project.id}
-                  id={project.id}
-                  kicker={project.kicker || `Case Study – ${project.title}`}
-                  title={project.subtitle}
-                  tagline={project.tagline || "De l'idée au produit validé"}
-                  badge={project.tags[0] || "Project"}
-                  image={project.image}
-                  onClick={() => openModal(index)}
-                  showComingSoon={isComingSoon}
-                  showBuilding={isBuilding}
-                />
-              ) : (
-                <CardImmersive
-                  key={project.id}
-                  id={project.id}
-                  kicker={project.kicker || `Case Study – ${project.title}`}
-                  title={project.subtitle}
-                  tagline={project.tagline || "De l'idée au produit validé"}
-                  badge={project.tags[0] || "Project"}
-                  image={project.image}
-                  onClick={() => openModal(index)}
-                  showComingSoon={isComingSoon}
-                  showBuilding={isBuilding}
-                />
+              return (
+                <StaggerItem key={project.id} variant="fade-up">
+                  {project.id === "sonor" ? (
+                    <MediaCard
+                      id={project.id}
+                      kicker={project.kicker || `Case Study – ${project.title}`}
+                      title={project.subtitle}
+                      tagline={project.tagline || "De l'idée au produit validé"}
+                      badge={project.tags[0] || "Project"}
+                      image={project.image}
+                      onClick={() => openModal(index)}
+                      showComingSoon={isComingSoon}
+                      showBuilding={isBuilding}
+                    />
+                  ) : (
+                    <CardImmersive
+                      id={project.id}
+                      kicker={project.kicker || `Case Study – ${project.title}`}
+                      title={project.subtitle}
+                      tagline={project.tagline || "De l'idée au produit validé"}
+                      badge={project.tags[0] || "Project"}
+                      image={project.image}
+                      onClick={() => openModal(index)}
+                      showComingSoon={isComingSoon}
+                      showBuilding={isBuilding}
+                    />
+                  )}
+                </StaggerItem>
               );
             })}
-          </div>
+          </StaggerContainer>
 
           {/* Desktop: Carousel Layout */}
           <div className="hidden lg:block mb-12">
@@ -878,29 +885,33 @@ export const Home: React.FC = () => {
       {/* Hackathons Section - Left Aligned */}
       <section id="hackathons" className="py-24 px-4 bg-secondary">
         <div className="max-w-7xl mx-auto">
-          <SectionHeader title="Hackathons" alignment="left" className="mb-12" />
+          <ScrollReveal variant="fade-up">
+            <SectionHeader title="Hackathons" alignment="left" className="mb-12" />
+          </ScrollReveal>
 
-          <div className="space-y-8">
+          <StaggerContainer className="space-y-8" staggerDelay={0.15}>
             {hackathons.map((hack, index) => (
-              <div key={index} className="flex gap-8 pb-8 last:pb-0">
-                <div className="w-20 flex-shrink-0">
-                  <span className="text-sm font-medium text-muted-foreground">{hack.year}</span>
-                </div>
-                <div className="flex-1 space-y-2">
-                  <div className="flex items-start gap-2">
-                    <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold text-foreground">{hack.title}</h3>
-                      <p className="text-sm text-accent font-medium">
-                        {hack.team} people <span className="text-muted-foreground">•</span> {hack.status}
-                      </p>
-                      <p className="text-sm text-muted-foreground mt-1">{hack.description}</p>
+              <StaggerItem key={index} variant="slide-right">
+                <div className="flex gap-8 pb-8 last:pb-0">
+                  <div className="w-20 flex-shrink-0">
+                    <span className="text-sm font-medium text-muted-foreground">{hack.year}</span>
+                  </div>
+                  <div className="flex-1 space-y-2">
+                    <div className="flex items-start gap-2">
+                      <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold text-foreground">{hack.title}</h3>
+                        <p className="text-sm text-accent font-medium">
+                          {hack.team} people <span className="text-muted-foreground">•</span> {hack.status}
+                        </p>
+                        <p className="text-sm text-muted-foreground mt-1">{hack.description}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
 
           {/* Inter-section teaser */}
           <div className="text-center mt-12 mb-6">
@@ -934,7 +945,9 @@ export const Home: React.FC = () => {
       {/* Experience & Education Section - Left Aligned */}
       <section id="experience" className="py-24 px-4">
         <div className="max-w-7xl mx-auto">
-          <SectionHeader title="Experience & Education" alignment="left" className="mb-8" />
+          <ScrollReveal variant="fade-up">
+            <SectionHeader title="Experience & Education" alignment="left" className="mb-8" />
+          </ScrollReveal>
 
           <FilterChips
             chips={experienceFilterChips}
@@ -1096,11 +1109,16 @@ export const Home: React.FC = () => {
         className="py-24 px-4 bg-contact text-contact-foreground section-border-accent"
       >
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          <h2 className="text-h2">Ready to build tomorrow?</h2>
+          <ScrollReveal variant="fade-up">
+            <h2 className="text-h2">Ready to build tomorrow?</h2>
+          </ScrollReveal>
 
-          <p className="text-lg max-w-2xl mx-auto opacity-90">Let's explore opportunities together.</p>
+          <ScrollReveal variant="fade-up" delay={0.1}>
+            <p className="text-lg max-w-2xl mx-auto opacity-90">Let's explore opportunities together.</p>
+          </ScrollReveal>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+          <ScrollReveal variant="scale" delay={0.2}>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Button
               size="lg"
               className="bg-card hover:bg-card/90 text-contact dark:text-white hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
@@ -1131,7 +1149,8 @@ export const Home: React.FC = () => {
                 Calendar
               </a>
             </Button>
-          </div>
+            </div>
+          </ScrollReveal>
 
           {/* Action A: Fix Dead End - Back to top CTA */}
           <div className="mt-12 pt-8 border-t border-contact-foreground/20 mb-2">

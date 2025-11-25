@@ -6,7 +6,7 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CaseImage } from "@/components/case/CaseImage";
 import { CTABanner } from "@/components/work/CTABanner";
-import { ExternalLink, Play, Info, MapPin, Target, Users, BarChart, Clock, Database } from "lucide-react";
+import { ExternalLink, Play, Info, MapPin, Target, Users, BarChart, Clock, Database, X } from "lucide-react";
 import { ScrollRevealSection } from "@/components/case/ScrollRevealSection";
 import { TimelineItem } from "@/components/case/TimelineItem";
 import { ImageLightbox } from "@/components/ImageLightbox";
@@ -22,6 +22,7 @@ export const ContentFR = () => {
   const tabsRef = useRef<HTMLDivElement>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
 
   const galleryImages = [
     {
@@ -336,27 +337,71 @@ export const ContentFR = () => {
               </p>
             </div>
             
-            {/* Screenshot mockup + CTA */}
-            <div className="relative group">
-              <a 
-                href="https://sonor.dorik.io/" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <img 
-                  src="/img/sonor-website-screenshot.gif" 
-                  alt={language === 'fr' ? "Interface plateforme Sonor" : "Sonor platform interface"} 
-                  className="w-full rounded-2xl border-2 border-border shadow-lg group-hover:shadow-2xl transition-all"
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl flex items-center justify-center">
-                  <div className="bg-accent text-white px-6 py-3 rounded-full font-semibold flex items-center gap-2">
-                    {language === 'fr' ? "Visiter le Site" : "Visit Live Site"}
-                    <ExternalLink className="w-5 h-5" />
+            {/* Loom Video - Inline Player */}
+            <div className="relative max-w-4xl mx-auto">
+              {!videoModalOpen ? (
+                /* GIF Preview - Click to play video inline */
+                <button
+                  onClick={() => setVideoModalOpen(true)}
+                  className="group block relative w-full overflow-hidden rounded-2xl border-2 border-border shadow-lg hover:shadow-2xl transition-all cursor-pointer"
+                  aria-label={language === "fr" ? "Voir la vidéo de démonstration" : "Watch demo video"}
+                >
+                  <img
+                    src="https://cdn.loom.com/sessions/thumbnails/80aea87ed30245bdb4a0847abbda7aae-4b03249d605da29f-full-play.gif"
+                    alt={language === "fr" ? "Démonstration vidéo de la plateforme Sonor" : "Sonor platform video demo"}
+                    className="w-full"
+                    loading="lazy"
+                  />
+                  {/* Play overlay */}
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-white/90 group-hover:bg-white group-hover:scale-110 transition-all flex items-center justify-center shadow-2xl">
+                      <Play className="w-8 h-8 text-accent ml-1" fill="currentColor" />
+                    </div>
+                  </div>
+                </button>
+              ) : (
+                /* Inline Loom Video Player */
+                <div className="relative w-full rounded-2xl overflow-hidden border-2 border-border shadow-2xl">
+                  {/* Close button to return to GIF */}
+                  <button
+                    onClick={() => setVideoModalOpen(false)}
+                    className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-colors"
+                    aria-label={language === "fr" ? "Fermer la vidéo" : "Close video"}
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                  
+                  {/* Video embed */}
+                  <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                    <iframe
+                      src="https://www.loom.com/embed/80aea87ed30245bdb4a0847abbda7aae?autoplay=1"
+                      frameBorder="0"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
+                      allow="autoplay; fullscreen"
+                    />
                   </div>
                 </div>
-              </a>
+              )}
+
+              {/* Caption + CTA to visit site */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+                <p className="text-sm text-muted-foreground">
+                  {videoModalOpen 
+                    ? (language === "fr" ? "Vidéo en cours de lecture" : "Video playing")
+                    : (language === "fr" ? "Cliquez pour voir la vidéo complète" : "Click to watch the full video")
+                  }
+                </p>
+                <a
+                  href="https://sonor.dorik.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-full font-medium hover:bg-accent/90 transition-colors shadow-lg"
+                >
+                  {language === "fr" ? "Visiter le Site" : "Visit Live Site"}
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </div>
             </div>
             
             {/* Note about preservation */}
