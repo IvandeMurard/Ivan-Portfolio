@@ -1083,29 +1083,31 @@ export const Home: React.FC = () => {
       <AboutSection />
 
       {/* CTA Section after About */}
-      <section className="py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-          {/* Inter-section teaser */}
-          <div className="text-center mb-6">
-            <p className="text-sm text-muted-foreground">
-              🔧 <span className="font-medium">Curious about my stack?</span>
-            </p>
-          </div>
+      <ScrollReveal variant="fade-up" delay={0.2}>
+        <section className="py-12 px-4">
+          <div className="max-w-7xl mx-auto">
+            {/* Inter-section teaser */}
+            <div className="text-center mb-6">
+              <p className="text-sm text-muted-foreground">
+                🔧 <span className="font-medium">Curious about my stack?</span>
+              </p>
+            </div>
 
-          {/* CTA vers la section Contact */}
-          <div className="flex justify-center">
-            <Button
-              variant="outline"
-              size="lg"
-              className="group hover:bg-contact hover:text-contact-foreground hover:border-contact transition-all duration-300"
-              onClick={() => scrollToSection("contact")}
-            >
-              Let's connect
-              <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
-            </Button>
+            {/* CTA vers la section Contact */}
+            <div className="flex justify-center">
+              <Button
+                variant="outline"
+                size="lg"
+                className="group hover:bg-contact hover:text-contact-foreground hover:border-contact transition-all duration-300"
+                onClick={() => scrollToSection("contact")}
+              >
+                Let's connect
+                <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
       {/* Built With Banner */}
       <BuiltWithBanner />
