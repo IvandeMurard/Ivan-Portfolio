@@ -22,7 +22,7 @@ export const ContentFR = () => {
   const tabsRef = useRef<HTMLDivElement>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const [videoModalOpen, setVideoModalOpen] = useState(true);
 
   const galleryImages = [
     {
@@ -403,14 +403,6 @@ export const ContentFR = () => {
                 </a>
               </div>
             </div>
-            
-            {/* Note about preservation */}
-            <p className="text-sm text-muted-foreground text-center mt-6">
-              {language === 'fr'
-                ? "Ce site reste en ligne comme témoignage de la vision produit et du travail accompli durant le projet."
-                : "This site remains online as a testament to the product vision and work accomplished during the project."
-              }
-            </p>
           </div>
         </div>
       </ScrollRevealSection>
