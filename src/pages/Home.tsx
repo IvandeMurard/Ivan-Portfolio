@@ -1078,8 +1078,16 @@ export const Home: React.FC = () => {
             )}
           </div>
 
+        </div>
+      </section>
+
+      <AboutSection />
+
+      {/* CTA Section after About */}
+      <section className="py-12 px-4">
+        <div className="max-w-7xl mx-auto">
           {/* Inter-section teaser */}
-          <div className="text-center mt-12 mb-6">
+          <div className="text-center mb-6">
             <p className="text-sm text-muted-foreground">
               🔧 <span className="font-medium">Curious about my stack?</span>
             </p>
@@ -1090,7 +1098,7 @@ export const Home: React.FC = () => {
             <Button
               variant="outline"
               size="lg"
-              className="group hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
+              className="group hover:bg-contact hover:text-contact-foreground hover:border-contact transition-all duration-300"
               onClick={() => scrollToSection("contact")}
             >
               Let's connect
@@ -1099,8 +1107,6 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </section>
-
-      <AboutSection />
 
       {/* Built With Banner */}
       <BuiltWithBanner />
