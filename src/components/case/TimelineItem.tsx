@@ -17,9 +17,9 @@ export function TimelineItem({ date, title, description, index, isLast = false }
       transition={{ delay: index * 0.1, duration: 0.5 }}
       className="relative flex gap-6 items-start group"
     >
-      {/* Date */}
-      <div className="w-36 flex-shrink-0 text-right">
-        <span className="inline-block px-3 py-1 rounded-full bg-accent/20 text-accent font-semibold text-sm">
+      {/* Date - wider for long date ranges */}
+      <div className="w-44 flex-shrink-0 text-right">
+        <span className="inline-block px-3 py-1 rounded-full bg-accent/20 text-accent font-semibold text-sm whitespace-nowrap">
           {date}
         </span>
       </div>
@@ -35,12 +35,10 @@ export function TimelineItem({ date, title, description, index, isLast = false }
           className="relative z-10 w-4 h-4 rounded-full bg-accent border-4 border-background shadow-lg group-hover:scale-125 transition-transform duration-300"
         />
         
-        {/* Vertical line */}
-        {!isLast && (
-          <div className="absolute top-4 bottom-0 w-0.5 bg-gradient-to-b from-accent/50 via-primary/30 to-accent/50" 
-               style={{ height: "calc(100% + 2rem)" }} 
-          />
-        )}
+        {/* Vertical line - always show */}
+        <div className="absolute top-4 bottom-0 w-0.5 bg-gradient-to-b from-accent/50 via-primary/30 to-accent/50" 
+             style={{ height: "calc(100% + 2rem)" }} 
+        />
       </div>
 
       {/* Content Card */}

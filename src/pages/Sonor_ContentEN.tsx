@@ -459,7 +459,7 @@ export const ContentEN = () => {
                 {
                   date: language === "fr" ? "Mars 2022" : "March 2022",
                   title: language === "fr" ? "Fin" : "End",
-                  desc: language === "fr" ? "Épuisement financements, 0 signature" : "Funding exhaustion, 0 signature",
+                  desc: language === "fr" ? "Épuisement financements" : "Funding exhaustion",
                 },
               ].map((step, i, arr) => (
                 <TimelineItem
