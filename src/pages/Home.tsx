@@ -878,7 +878,7 @@ export const Home: React.FC = () => {
               className="group hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
               onClick={() => scrollToSection("hackathons")}
             >
-              See how I build products in 48 hours
+              See my hackathons experiments
               <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
             </Button>
           </div>
