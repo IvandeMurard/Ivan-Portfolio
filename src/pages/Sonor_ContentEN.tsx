@@ -374,7 +374,7 @@ export const ContentEN = () => {
                   {/* Video embed */}
                   <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                     <iframe
-                      src="https://www.loom.com/embed/80aea87ed30245bdb4a0847abbda7aae?autoplay=1"
+                      src="https://www.loom.com/embed/80aea87ed30245bdb4a0847abbda7aae?autoplay=1&muted=1&hide_owner=true&hide_share=true&hideEmbedTopBar=true"
                       frameBorder="0"
                       allowFullScreen
                       className="absolute inset-0 w-full h-full"
