@@ -562,19 +562,16 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {/* Bouton primaire - fond blanc avec ripple et glow */}
-                <RippleButton
+                {/* Bouton primaire */}
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="group hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
                   onClick={() => scrollToSection("work")}
-                  className="relative inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium rounded-lg bg-background text-foreground hover:bg-background/90 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden group"
-                  prefersReducedMotion={prefersReducedMotion}
                 >
-                  <span className="relative z-10">View my work</span>
-                  {/* Glow effect */}
-                  <span
-                    className="absolute inset-0 rounded-lg bg-background opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"
-                    style={{ willChange: "opacity", transform: "translateZ(0)" }}
-                  />
-                </RippleButton>
+                  View my work
+                  <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
+                </Button>
 
                 {/* CTA secondaire - texte blanc avec flèche animée */}
                 <motion.button
@@ -695,19 +692,16 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {/* Bouton primaire - fond blanc avec ripple et glow */}
-                <RippleButton
+                {/* Bouton primaire */}
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full group hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
                   onClick={() => scrollToSection("work")}
-                  className="w-full relative inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg bg-background text-foreground hover:bg-background/90 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden group"
-                  prefersReducedMotion={prefersReducedMotion}
                 >
-                  <span className="relative z-10">View my work</span>
-                  {/* Glow effect */}
-                  <span
-                    className="absolute inset-0 rounded-lg bg-background opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"
-                    style={{ willChange: "opacity", transform: "translateZ(0)" }}
-                  />
-                </RippleButton>
+                  View my work
+                  <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
+                </Button>
 
                 {/* CTA secondaire - texte blanc avec flèche animée */}
                 <motion.button
