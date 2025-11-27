@@ -566,7 +566,7 @@ export const Home: React.FC = () => {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="group text-white border-white/30 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
+                  className="group bg-background text-foreground border-transparent hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
                   onClick={() => scrollToSection("work")}
                 >
                   View my work
@@ -696,7 +696,7 @@ export const Home: React.FC = () => {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="w-full group text-white border-white/30 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
+                  className="w-full group bg-background text-foreground border-transparent hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
                   onClick={() => scrollToSection("work")}
                 >
                   View my work
