@@ -28,6 +28,7 @@ import { ProgressIndicator } from "@/components/ProgressIndicator";
 import { ScrollProgressBar } from "@/components/ScrollProgressBar";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { TextRevealLines } from "@/components/TextReveal";
 
 interface Project {
   id: string;
@@ -475,52 +476,52 @@ export const Home: React.FC = () => {
           <div className="hidden md:block">
             {/* Contenu texte - max-width pour lisibilité */}
             <div className="max-w-4xl">
-              {/* Nom */}
-              <motion.h1
-                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[900] tracking-tight text-white leading-[0.9]"
-                style={{
-                  fontFamily: "Inter",
-                  color: "#FFFFFF",
-                }}
-                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: prefersReducedMotion ? 0 : 0.06,
-                  duration: prefersReducedMotion ? 0 : 0.28,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                Ivan de Murard
-              </motion.h1>
+              {/* Nom + Titre avec effet d'éclaircissement progressif */}
+              {prefersReducedMotion ? (
+                <>
+                  <h1
+                    className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[900] tracking-tight text-white leading-[0.9]"
+                    style={{ fontFamily: "Inter" }}
+                  >
+                    Ivan de Murard
+                  </h1>
+                  <p
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mt-2 md:mt-3"
+                    style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+                  >
+                    Zero-to-One Product Manager
+                  </p>
+                </>
+              ) : (
+                <TextRevealLines
+                  lines={[
+                    {
+                      text: "Ivan de Murard",
+                      as: "h1",
+                      className: "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[900] tracking-tight text-white leading-[0.9]",
+                      style: { fontFamily: "Inter" },
+                    },
+                    {
+                      text: "Zero-to-One Product Manager",
+                      as: "p",
+                      className: "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mt-2 md:mt-3",
+                      style: { fontFamily: "'Playfair Display', serif", fontWeight: 500 },
+                    },
+                  ]}
+                  delay={0.1}
+                  lineStagger={0.3}
+                  duration={1.4}
+                />
+              )}
 
-              {/* Titre */}
+              {/* Sous-titre - taille réduite pour meilleure hiérarchie */}
               <motion.p
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif italic text-white mt-3 md:mt-4"
-                style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontWeight: 500,
-                  color: "#FFFFFF",
-                }}
-                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
+                className="text-base sm:text-lg md:text-xl text-white/85 mt-6 md:mt-8 leading-relaxed max-w-2xl"
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  delay: prefersReducedMotion ? 0 : 0.12,
-                  duration: prefersReducedMotion ? 0 : 0.28,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                Zero-to-One Product Manager
-              </motion.p>
-
-              {/* Sous-titre */}
-              <motion.p
-                className="text-xl sm:text-2xl md:text-3xl text-white mt-8 md:mt-10 leading-relaxed max-w-4xl"
-                style={{ color: "#FFFFFF" }}
-                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: prefersReducedMotion ? 0 : 0.18,
-                  duration: prefersReducedMotion ? 0 : 0.28,
+                  delay: prefersReducedMotion ? 0 : 0.6,
+                  duration: prefersReducedMotion ? 0 : 0.4,
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
@@ -543,8 +544,8 @@ export const Home: React.FC = () => {
                   "Currently shipping: AI agents for F&B industry",
                   "5+ years shipping products people use",
                 ].map((point, index) => (
-                  <div key={index} className="flex items-start gap-3 text-base sm:text-lg md:text-xl text-white">
-                    <Check className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0 mt-0.5" style={{ color: "#FFFFFF" }} />
+                  <div key={index} className="flex items-start gap-2 text-sm sm:text-base text-white/80">
+                    <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "rgba(255,255,255,0.8)" }} />
                     <span>{point}</span>
                   </div>
                 ))}
@@ -608,57 +609,52 @@ export const Home: React.FC = () => {
           <div className="md:hidden">
             {/* Contenu centré */}
             <div className="text-center max-w-4xl mx-auto">
-              {/* Nom */}
-              <motion.h1
-                className="text-5xl font-[900] text-white tracking-tight leading-[0.9]"
-                style={{
-                  fontFamily: "Inter",
-                  color: "#FFFFFF",
-                }}
-                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: prefersReducedMotion ? 0 : 0.06,
-                  duration: prefersReducedMotion ? 0 : 0.28,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                Ivan de Murard
-              </motion.h1>
+              {/* Nom + Titre avec effet d'éclaircissement progressif */}
+              {prefersReducedMotion ? (
+                <>
+                  <h1
+                    className="text-4xl sm:text-5xl font-[900] text-white tracking-tight leading-[0.9]"
+                    style={{ fontFamily: "Inter" }}
+                  >
+                    Ivan de Murard
+                  </h1>
+                  <p
+                    className="text-xl sm:text-2xl font-serif italic text-white mt-2"
+                    style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
+                  >
+                    Zero-to-One Product Manager
+                  </p>
+                </>
+              ) : (
+                <TextRevealLines
+                  lines={[
+                    {
+                      text: "Ivan de Murard",
+                      as: "h1",
+                      className: "text-4xl sm:text-5xl font-[900] text-white tracking-tight leading-[0.9]",
+                      style: { fontFamily: "Inter" },
+                    },
+                    {
+                      text: "Zero-to-One Product Manager",
+                      as: "p",
+                      className: "text-xl sm:text-2xl font-serif italic text-white mt-2",
+                      style: { fontFamily: "'Playfair Display', serif", fontWeight: 500 },
+                    },
+                  ]}
+                  delay={0.1}
+                  lineStagger={0.3}
+                  duration={1.4}
+                />
+              )}
 
-              {/* Titre */}
+              {/* Sous-titre - taille réduite pour meilleure hiérarchie */}
               <motion.p
-                className="text-3xl font-serif italic text-white mt-3"
-                style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontWeight: 500,
-                  color: "#FFFFFF",
-                }}
-                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
+                className="text-sm sm:text-base text-white/85 mt-5 leading-relaxed px-2"
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  delay: prefersReducedMotion ? 0 : 0.12,
-                  duration: prefersReducedMotion ? 0 : 0.28,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                Zero-to-One Product Manager
-              </motion.p>
-
-              {/* Sous-titre - texte complet sur toutes les tailles d'écran */}
-              <motion.p
-                className="text-xl text-white mt-8 leading-relaxed px-4 sm:px-0"
-                style={{
-                  color: "#FFFFFF",
-                  wordWrap: "break-word",
-                  overflowWrap: "break-word",
-                  hyphens: "auto",
-                }}
-                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: prefersReducedMotion ? 0 : 0.18,
-                  duration: prefersReducedMotion ? 0 : 0.28,
+                  delay: prefersReducedMotion ? 0 : 0.6,
+                  duration: prefersReducedMotion ? 0 : 0.4,
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
@@ -681,8 +677,8 @@ export const Home: React.FC = () => {
                   "Currently shipping: AI agents for F&B industry",
                   "5+ years shipping products people use",
                 ].map((point, index) => (
-                  <div key={index} className="flex items-start justify-center gap-3 text-base text-white">
-                    <Check className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: "#FFFFFF" }} />
+                  <div key={index} className="flex items-start justify-center gap-2 text-sm text-white/80">
+                    <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "rgba(255,255,255,0.8)" }} />
                     <span className="text-left">{point}</span>
                   </div>
                 ))}
