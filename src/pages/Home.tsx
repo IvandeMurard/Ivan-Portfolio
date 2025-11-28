@@ -29,8 +29,6 @@ import { ScrollProgressBar } from "@/components/ScrollProgressBar";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { TextRevealLines } from "@/components/TextReveal";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { homeContent } from "@/data/homeContent";
 
 interface Project {
   id: string;
@@ -375,8 +373,6 @@ const RippleButton: React.FC<RippleButtonProps> = ({
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
-  const { language } = useLanguage();
-  const content = homeContent[language];
   const [activeFilter, setActiveFilter] = useState("all");
   const [activeExperienceFilter, setActiveExperienceFilter] = useState("experiences");
   const [selectedProjectIndex, setSelectedProjectIndex] = useState<number | null>(null);
@@ -531,7 +527,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {content.hero.title}
+                From hospitality to AI: I ship fast friction-less products and experiences with care.
               </motion.p>
 
               {/* Proof Points */}
@@ -545,7 +541,11 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {content.hero.proofPoints.map((point, index) => (
+                {[
+                  "2 hackathon wins turning ideas into working products",
+                  "Currently shipping: AI agents for F&B industry",
+                  "5+ years shipping products people use",
+                ].map((point, index) => (
                   <div key={index} className="flex items-start gap-2 text-sm sm:text-base text-white/80">
                     <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "rgba(255,255,255,0.8)" }} />
                     <span>{point}</span>
@@ -571,7 +571,7 @@ export const Home: React.FC = () => {
                   className="group bg-background text-foreground border-transparent hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
                   onClick={() => scrollToSection("work")}
                 >
-                  {content.hero.ctas.viewWork}
+                  View my work
                   <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
                 </Button>
 
@@ -583,7 +583,7 @@ export const Home: React.FC = () => {
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 >
-                  {content.hero.ctas.contact}
+                  Get in touch
                   <motion.div
                     animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
                     transition={{
@@ -657,7 +657,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {content.hero.title}
+                From hospitality to AI: I ship fast friction-less products and experiences with care.
               </motion.p>
 
               {/* Proof Points */}
@@ -671,7 +671,11 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {content.hero.proofPoints.map((point, index) => (
+                {[
+                  "2 hackathon wins turning ideas into working products",
+                  "Currently shipping: AI agents for F&B industry",
+                  "5+ years shipping products people use",
+                ].map((point, index) => (
                   <div key={index} className="flex items-start justify-center gap-2 text-sm text-white/80">
                     <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "rgba(255,255,255,0.8)" }} />
                     <span className="text-left">{point}</span>
@@ -697,7 +701,7 @@ export const Home: React.FC = () => {
                   className="w-full group bg-background text-foreground border-transparent hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
                   onClick={() => scrollToSection("work")}
                 >
-                  {content.hero.ctas.viewWork}
+                  View my work
                   <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
                 </Button>
 
@@ -709,7 +713,7 @@ export const Home: React.FC = () => {
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 >
-                  {content.hero.ctas.contact}
+                  Get in touch
                   <motion.div
                     animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
                     transition={{
