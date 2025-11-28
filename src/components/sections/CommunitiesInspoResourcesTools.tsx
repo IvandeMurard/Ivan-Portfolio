@@ -3,7 +3,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { FilterChips } from "@/components/FilterChips";
 import ZoomContextCard from "@/components/ZoomContextCard";
 import { useInlineExpand } from "@/hooks/useInlineExpand";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
 import {
