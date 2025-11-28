@@ -498,13 +498,15 @@ export const Home: React.FC = () => {
                     {
                       text: "Ivan de Murard",
                       as: "h1",
-                      className: "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[900] tracking-tight text-white leading-[0.9]",
+                      className:
+                        "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[900] tracking-tight text-white leading-[0.9]",
                       style: { fontFamily: "Inter" },
                     },
                     {
                       text: "Zero-to-One Product Manager",
                       as: "p",
-                      className: "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mt-2 md:mt-3",
+                      className:
+                        "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mt-2 md:mt-3",
                       style: { fontFamily: "'Playfair Display', serif", fontWeight: 500 },
                     },
                   ]}
@@ -1110,7 +1112,7 @@ export const Home: React.FC = () => {
       >
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <ScrollReveal variant="fade-up">
-            <h2 className="text-h2">Ready to build tomorrow?</h2>
+            <h2 className="text-h2">Ready to build?</h2>
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={0.1}>
