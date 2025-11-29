@@ -15,172 +15,27 @@ import { Button } from "../components/ui/button";
 import { Separator } from "../components/ui/separator";
 import { Mail, Linkedin, Calendar, ArrowDown, ChevronDown, ArrowRight, Check } from "lucide-react";
 import { sonorCase } from "../data/cases/sonor.case";
-import wttjHero from "@/assets/wttj-hero.png";
-import wttjLogo from "@/assets/wttj-logo.svg";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import { GradientBorderSection } from "@/components/GradientBorderSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { useInlineExpand } from "@/hooks/useInlineExpand";
 import { InlineExpand } from "@/components/InlineExpand";
-import { experiences } from "@/data/experience";
 import { SOCIAL_LINKS } from "@/site.config";
 import { ProgressIndicator } from "@/components/ProgressIndicator";
 import { ScrollProgressBar } from "@/components/ScrollProgressBar";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { TextRevealLines } from "@/components/TextReveal";
-
-interface Project {
-  id: string;
-  title: string;
-  subtitle: string;
-  image: string;
-  tags: string[];
-  category: string;
-  logo?: string;
-  bullets?: string[];
-  longDescription?: string;
-  kicker?: string;
-  tagline?: string;
-  modalTitle?: string;
-  modalSubtitle?: string;
-  hidden?: boolean; // Masquer temporairement du portfolio
-}
-
-const projects: Project[] = [
-  // — SONOR (Open Data) — utilisation des données de sonor.case.ts
-  {
-    id: sonorCase.id,
-    title: "A 2-year entrepreneurship team project",
-    subtitle: "How can cities turn open data into quieter streets?",
-    image: sonorCase.image,
-    logo: sonorCase.logo,
-    tags: [sonorCase.badge],
-    category: "product",
-    longDescription: "Reducing urban noise by transforming open data into actionable city insights.",
-    bullets: sonorCase.bullets || [
-      "20+ stakeholder interviews across city departments",
-      "€20k pre-seed funding secured for the concept",
-      "Map + data pipeline prototype to surface hotspots",
-    ],
-  },
-  // — WTTJ (Conversion seniors) —
-  {
-    id: "wttj-conversion-seniors",
-    title: "A growth-oriented product case study",
-    subtitle: "How might we increase senior-candidate conversion on WTTJ?",
-    image: wttjHero,
-    logo: wttjLogo,
-    tags: ["Growth", "Product Management"],
-    category: "product",
-    longDescription: "Improving conversion for senior candidates through clearer offers and guided activation.",
-    bullets: [
-      "User discovery with senior engineers to surface friction",
-      "Strategy pivot towards a clearer, more focused WTTJ Tech+",
-      "MVP: standardized job pages + guided onboarding + AI helper",
-      "Early signal: CTR 11% → 13% and +300 to +800 activated profiles",
-    ],
-  },
-
-  // — Agents d'évaluation — MASQUÉ temporairement (hidden: true)
-  {
-    id: "agents-eval",
-    title: "Evaluating AI agents at scale",
-    subtitle: "How do we turn trust into an asset?.",
-    image: "/img/samuel-arkwright-unsplash.jpg",
-    tags: ["Agentic Experiences", "Evaluation"],
-    category: "agentic-experiences",
-    longDescription: "From run lifecycle to clear signals, helping teams ship agents with confidence.",
-    bullets: [
-      "Structured lifecycle and dashboard",
-      'Automatic scoring with LLM-as-a-Judge"',
-      "Issues & recommendations captured for fast iteration",
-      "Ready to adapt to any domain (UX, quality, robustness)",
-    ],
-    hidden: true, // Masqué du portfolio - trop "AI slop"
-  },
-
-  // — Agentic Hospitality —
-  {
-    id: "agentic-hospitality",
-    title: "A hospitality agentic experience case study",
-    subtitle: "Can we value agents to predict restaurant and hotel attendance?",
-    image: "/img/photo-by-dylan-calluy-unsplash.jpg",
-    tags: ["Agentic Experiences", "Hackathon"],
-    category: "agentic-experiences",
-    kicker: "CASE STUDY – A HOSPITALITY AGENTIC EXPERIENCE CASE STUDY",
-    tagline: "Building autonomous AI agents for hospitality efficiency",
-    modalTitle: "Can we value agents to predict restaurant and hotel attendance?",
-    modalSubtitle: "Building autonomous AI agents for hospitality efficiency",
-    bullets: [
-      "Autonomous agent for hotel F&B operations",
-      "Attendance and F&B predictability, Staff Management",
-      "Built for Pioneers AILab Hackathon @ Station F",
-      "Tech Stack: Mistral, Google Cloud, Qdrant, n8n, ElevenLabs",
-    ],
-    longDescription: "A hackathon project exploring AI agents for predictive hospitality operations.",
-  },
-
-  // — The Agentic Studio —
-  {
-    id: "agentic-studio",
-    title: "AN EXPERIMENTAL PRODUCT IN AGENTIC DESIGN",
-    subtitle: "How might we bridge human intuition and agent intelligence?",
-    image: "/img/gabriella-clare-marino-unsplash.jpg",
-    tags: ["Experience", "Agentic Experiences"],
-    category: "experience",
-    kicker: "CASE STUDY – AN EXPERIMENTAL PRODUCT IN AGENTIC DESIGN",
-    tagline: "A product exploration in Agent Experience (AX)",
-    modalTitle: "The Agentic Studio — AX design in practice",
-    modalSubtitle:
-      "Exploring how intelligent agents can interpret human intention within a creative environment. This prototype tests how gesture, voice, and context can drive co-creation, while keeping human supervision at the core of the experience.",
-    longDescription: "A product exploration in Agent Experience (AX)",
-    bullets: [
-      "The Agentic Studio serves as a scalable testbed for an agentic architecture that can be deployed across creative or operational environments.",
-      "Designed a multimodal co-creation flow combining gesture and voice inputs",
-      "Built a human-in-the-loop feedback system for supervision and correction",
-      "Implemented adaptive guidance based on user habits and style",
-      "Documented a framework for Agent Experience (AX) design and evaluation",
-    ],
-  },
-
-  // — Spotify / Valence —
-  {
-    id: "spotify-valence-journeys",
-    title: "A musical data-driven experience",
-    subtitle: "Can we value music mood to nudge better daily choices?",
-    image: "/images/projects/spotify-mood/cover.webp", // ajoute un visuel placeholder si besoin
-    tags: ["Experience"],
-    category: "experience",
-    longDescription: "Turning listening signals (valence/arousal) into nudging, helpful suggestions.",
-    bullets: [
-      "Map mood to actionable suggestions (focus, move, social)",
-      "Context-aware flow: time, history, energy",
-      "Solo or social modes (local jam / shared moments)",
-      "Next: mobile wireframes and qualitative testing",
-    ],
-  },
-
-  // — On Air —
-  {
-    id: "on-air",
-    title: "Record and auto-transcribe lyrics & melody in real time?",
-    subtitle: "What if songwriting felt truly live and collaborative?",
-    image: "/images/projects/on-air/cover.webp", // ajoute un visuel placeholder si besoin
-    tags: ["Product"],
-    category: "product",
-    longDescription: "From live rooms to time-coded snippets you can share instantly.",
-    bullets: [
-      "Live rooms that feel immediate and lightweight",
-      "Automatic capture of lyrics and melody/tablature",
-      "Time-coded highlights for quick sharing",
-      "Roadmap: V1 capture → V2 non-destructive editing → V3 creative packs",
-    ],
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import { homeContent } from "@/data/homeContent";
+import { projects as bilingualProjects } from "@/data/projects";
+import { hackathons as bilingualHackathons } from "@/data/hackathons";
+import { continuousLearning as bilingualContinuousLearning } from "@/data/continuousLearning";
+import { education as bilingualEducation } from "@/data/education";
+import { experiences as bilingualExperiences } from "@/data/experience";
 
 // Calculate filter chips dynamically based on visible projects (excluding hidden)
-const getFilterChips = (projects: Project[]) => {
+const getFilterChips = (projects: typeof bilingualProjects, language: 'en' | 'fr') => {
   const visibleProjects = projects.filter((p) => !p.hidden);
 
   const allCount = visibleProjects.length;
@@ -194,10 +49,10 @@ const getFilterChips = (projects: Project[]) => {
   ).length;
 
   const chips = [
-    { id: "all", label: `All (${allCount})` },
-    { id: "agentic-experiences", label: `Agentic Experiences (${agenticExperiencesCount})` },
-    { id: "experience", label: `Expérience (${experienceCount})` },
-    { id: "product", label: `Product (${productCount})` },
+    { id: "all", label: language === 'fr' ? `Tous (${allCount})` : `All (${allCount})` },
+    { id: "agentic-experiences", label: language === 'fr' ? `Expériences Agentiques (${agenticExperiencesCount})` : `Agentic Experiences (${agenticExperiencesCount})` },
+    { id: "experience", label: language === 'fr' ? `Expérience (${experienceCount})` : `Experience (${experienceCount})` },
+    { id: "product", label: language === 'fr' ? `Produit (${productCount})` : `Product (${productCount})` },
   ];
 
   // Only include automatisations if there are projects with this tag/category
@@ -373,6 +228,7 @@ const RippleButton: React.FC<RippleButtonProps> = ({
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const [activeFilter, setActiveFilter] = useState("all");
   const [activeExperienceFilter, setActiveExperienceFilter] = useState("experiences");
   const [selectedProjectIndex, setSelectedProjectIndex] = useState<number | null>(null);
@@ -382,8 +238,25 @@ export const Home: React.FC = () => {
   const contactSectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
+  // Get translated content
+  const content = homeContent[language];
+  
+  // Use bilingual data
+  const projects = bilingualProjects;
+  const hackathons = bilingualHackathons;
+  const continuousLearning = bilingualContinuousLearning;
+  const education = bilingualEducation;
+  const experiences = bilingualExperiences;
+
   // Calculate filter chips dynamically
-  const filterChips = getFilterChips(projects);
+  const filterChips = getFilterChips(projects, language);
+
+  // Experience filter chips with translations
+  const experienceFilterChips = [
+    { id: "experiences", label: content.experience.filterChips.experiences },
+    { id: "continuous-learning", label: content.experience.filterChips.continuousLearning },
+    { id: "education", label: content.experience.filterChips.education },
+  ];
 
   // Intersection Observer pour désactiver le sticky avant la section Contact
   useEffect(() => {
