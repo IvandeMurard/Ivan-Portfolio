@@ -16,13 +16,13 @@ const COLORS = {
   onAccent: designTokens.color.accent.on,
 };
 
-// Enhanced nav link style with better hover/active states
+// Enhanced nav link style with better hover/active states and WCAG AA compliant focus
 const navLinkBase =
   "relative inline-flex items-center px-3 h-9 text-sm font-medium rounded-xl " +
   "text-foreground/70 hover:text-foreground " +
   "hover:bg-black/[0.06] dark:hover:bg-white/[0.10] " +
   "active:scale-[0.97] active:bg-black/[0.10] dark:active:bg-white/[0.15] " +
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 " +
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background " +
   "transition-all duration-200 ease-out";
 
 // Haptic feedback helper (vibration API)
@@ -164,41 +164,51 @@ export const Navigation: FC = () => {
   };
 
   return (
-    <nav
-      role="navigation"
-      aria-label="Primary"
-      className="fixed top-0 w-full z-50 transition-[box-shadow,background] duration-300"
-      style={{
-        backdropFilter: "saturate(1.2) blur(12px)",
-        WebkitBackdropFilter: "saturate(1.2) blur(12px)",
-        background: isScrolled ? BG_SCROLL : BG_TOP,
-        borderBottom: `1px solid ${BORDER}`,
-        boxShadow: SHADOW,
-        transitionTimingFunction: designTokens.motion.easing.product,
-      }}
-    >
-      {/* Aligned with content: max-w-7xl matches Home page sections */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14">
-          {/* Brand - aligned with content */}
-          <Link
-            to="/#hero"
-            onClick={(e) => handleAnchorClick(e, "hero")}
-            className="text-[16px] font-[600] tracking-tight w-[160px] text-left whitespace-nowrap hover:opacity-80 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 rounded-md transition-all duration-200"
-            style={{ color: inkOnContext }}
-            aria-label="Go to top"
-          >
-            {displayText}
-          </Link>
+    <>
+      {/* Skip to main content link for keyboard navigation */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg focus:ring-2 focus:ring-ring focus:ring-offset-2"
+      >
+        {language === 'en' ? 'Skip to main content' : 'Aller au contenu principal'}
+      </a>
+
+      <nav
+        role="navigation"
+        aria-label={language === 'en' ? 'Main navigation' : 'Navigation principale'}
+        className="fixed top-0 w-full z-50 transition-[box-shadow,background] duration-300"
+        style={{
+          backdropFilter: "saturate(1.2) blur(12px)",
+          WebkitBackdropFilter: "saturate(1.2) blur(12px)",
+          background: isScrolled ? BG_SCROLL : BG_TOP,
+          borderBottom: `1px solid ${BORDER}`,
+          boxShadow: SHADOW,
+          transitionTimingFunction: designTokens.motion.easing.product,
+        }}
+      >
+        {/* Aligned with content: max-w-7xl matches Home page sections */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-14">
+            {/* Brand - aligned with content */}
+            <Link
+              to="/#hero"
+              onClick={(e) => handleAnchorClick(e, "hero")}
+              className="text-[16px] font-[600] tracking-tight w-[160px] text-left whitespace-nowrap hover:opacity-80 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-md transition-all duration-200"
+              style={{ color: inkOnContext }}
+              aria-label={language === 'en' ? 'Ivan de Murard - Go to homepage' : 'Ivan de Murard - Aller à l\'accueil'}
+            >
+              {displayText}
+            </Link>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-lg text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 transition-all"
-            aria-label="Open menu"
+            className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-lg text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all"
+            aria-label={language === 'en' ? 'Open navigation menu' : 'Ouvrir le menu de navigation'}
             aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
-            <Menu size={20} />
+            <Menu size={20} aria-hidden="true" />
           </button>
 
           {/* Right side: Links + Lang/Theme */}
@@ -276,15 +286,17 @@ export const Navigation: FC = () => {
               <Link
                 to="/#contact"
                 onClick={handleContactClick}
-                className="group relative inline-flex items-center h-9 px-4 text-sm font-semibold rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-contact/50"
+                className="group relative inline-flex items-center h-9 px-4 text-sm font-semibold rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 style={{
                   background: COLORS.accent,
                   color: COLORS.onAccent,
                   transitionTimingFunction: designTokens.motion.easing.product,
                 }}
+                aria-label={language === 'en' ? 'Go to contact section' : 'Aller à la section contact'}
               >
                 {/* Glow effect on hover */}
                 <span 
+                  aria-hidden="true"
                   className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                   style={{
                     boxShadow: `0 0 20px ${COLORS.accent}60, 0 4px 12px ${COLORS.accent}40`,
@@ -299,19 +311,24 @@ export const Navigation: FC = () => {
 
             {/* Lang / Theme */}
             <div className="flex items-center gap-3">
-              <div className="hidden sm:flex items-center gap-1 text-sm">
+              <div 
+                className="hidden sm:flex items-center gap-1 text-sm"
+                role="group"
+                aria-label={language === 'en' ? 'Language selection' : 'Sélection de la langue'}
+              >
                 <button
                   className={`h-8 px-2.5 rounded-lg font-medium transition-all duration-200 ${
                     language === 'en' 
                       ? 'text-foreground bg-black/[0.08] dark:bg-white/[0.12] font-semibold' 
                       : 'text-foreground/60 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.06]'
-                  } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40`}
+                  } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                   onClick={() => setLanguage('en')}
-                  aria-label="Switch to English"
+                  aria-label={language === 'en' ? 'English (current language)' : 'Switch to English'}
+                  aria-pressed={language === 'en'}
                 >
                   EN
                 </button>
-                <span className="opacity-40 text-xs" style={{ color: inkOnContext }}>
+                <span className="opacity-40 text-xs" style={{ color: inkOnContext }} aria-hidden="true">
                   |
                 </span>
                 <button
@@ -319,9 +336,10 @@ export const Navigation: FC = () => {
                     language === 'fr' 
                       ? 'text-foreground bg-black/[0.08] dark:bg-white/[0.12] font-semibold' 
                       : 'text-foreground/60 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.06]'
-                  } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40`}
+                  } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                   onClick={() => setLanguage('fr')}
-                  aria-label="Passer en français"
+                  aria-label={language === 'fr' ? 'Français (langue actuelle)' : 'Passer en français'}
+                  aria-pressed={language === 'fr'}
                 >
                   FR
                 </button>
@@ -348,6 +366,10 @@ export const Navigation: FC = () => {
 
           {/* Drawer Panel */}
           <motion.div
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label={language === 'en' ? 'Mobile navigation menu' : 'Menu de navigation mobile'}
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
@@ -359,22 +381,25 @@ export const Navigation: FC = () => {
               <div className="flex justify-end mb-8">
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="inline-flex items-center justify-center h-10 w-10 rounded-lg text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 transition-all"
-                  aria-label="Close menu"
+                  className="inline-flex items-center justify-center h-10 w-10 rounded-lg text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all"
+                  aria-label={language === 'en' ? 'Close navigation menu' : 'Fermer le menu de navigation'}
                 >
-                  <X size={24} />
+                  <X size={24} aria-hidden="true" />
                 </button>
               </div>
 
               {/* Navigation Links */}
-              <nav className="flex flex-col gap-2 mb-8">
+              <nav 
+                className="flex flex-col gap-2 mb-8"
+                aria-label={language === 'en' ? 'Mobile navigation' : 'Navigation mobile'}
+              >
                 <Link
                   to="/#hero"
                   onClick={(e) => {
                     handleAnchorClick(e, "hero");
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] transition-all"
+                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all"
                 >
                   {labels.home}
                 </Link>
@@ -385,7 +410,7 @@ export const Navigation: FC = () => {
                     handleAnchorClick(e, "work");
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] transition-all"
+                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all"
                 >
                   {labels.work}
                 </Link>
@@ -397,7 +422,7 @@ export const Navigation: FC = () => {
                     handleAnchorClick(e, "about");
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] transition-all"
+                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all"
                 >
                   {labels.about}
                 </Link>
@@ -409,39 +434,46 @@ export const Navigation: FC = () => {
                     handleAnchorClick(e, "contact");
                     setMobileMenuOpen(false);
                   }}
-                  className="flex items-center justify-center h-12 px-4 text-base font-semibold rounded-xl transition-all active:scale-[0.97]"
+                  className="flex items-center justify-center h-12 px-4 text-base font-semibold rounded-xl transition-all active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   style={{
                     background: COLORS.accent,
                     color: COLORS.onAccent,
                   }}
+                  aria-label={language === 'en' ? 'Go to contact section' : 'Aller à la section contact'}
                 >
-                  Contact
+                  {labels.contact}
                 </Link>
               </nav>
 
               {/* Language Selector */}
               <div className="mt-auto pt-6 border-t border-border">
-                <div className="flex items-center justify-center gap-3">
+                <div 
+                  className="flex items-center justify-center gap-3"
+                  role="group"
+                  aria-label={language === 'en' ? 'Language selection' : 'Sélection de la langue'}
+                >
                   <button
                     className={`h-10 px-4 rounded-lg font-medium transition-all ${
                       language === 'en' 
                         ? 'text-foreground bg-black/[0.08] dark:bg-white/[0.12] font-bold' 
                         : 'text-foreground/70 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.08]'
-                    } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40`}
+                    } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                     onClick={() => setLanguage('en')}
-                    aria-label="Switch to English"
+                    aria-label={language === 'en' ? 'English (current language)' : 'Switch to English'}
+                    aria-pressed={language === 'en'}
                   >
                     EN
                   </button>
-                  <span className="text-foreground/50">|</span>
+                  <span className="text-foreground/50" aria-hidden="true">|</span>
                   <button
                     className={`h-10 px-4 rounded-lg font-medium transition-all ${
                       language === 'fr' 
                         ? 'text-foreground bg-black/[0.08] dark:bg-white/[0.12] font-bold' 
                         : 'text-foreground/70 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.08]'
-                    } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40`}
+                    } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                     onClick={() => setLanguage('fr')}
-                    aria-label="Passer en français"
+                    aria-label={language === 'fr' ? 'Français (langue actuelle)' : 'Passer en français'}
+                    aria-pressed={language === 'fr'}
                   >
                     FR
                   </button>
@@ -452,5 +484,6 @@ export const Navigation: FC = () => {
         </>
       )}
     </nav>
+    </>
   );
 };

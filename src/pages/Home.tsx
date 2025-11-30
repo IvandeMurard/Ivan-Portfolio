@@ -256,7 +256,7 @@ export const Home: React.FC = () => {
   const selectedProject = selectedProjectIndex !== null ? filteredProjects[selectedProjectIndex] : null;
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen bg-background overflow-x-hidden" id="main-content">
       <Navigation />
       <ScrollProgressBar />
 
