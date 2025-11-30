@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface WorkModalProps {
   open: boolean;
@@ -15,6 +16,7 @@ interface WorkModalProps {
   bullets?: string[];
   cta: { label: string; href: string };
   showComingSoon?: boolean;
+  navigationLabel?: string;
 }
 
 export function WorkModal({
@@ -29,7 +31,15 @@ export function WorkModal({
   bullets,
   cta,
   showComingSoon = false,
+  navigationLabel,
 }: WorkModalProps) {
+  const { language } = useLanguage();
+  
+  const modalLabels = {
+    en: { close: "Close", navigate: "Navigate", projectLogo: "Project logo", comingSoon: "Coming soon!", prevProject: "Previous project", nextProject: "Next project" },
+    fr: { close: "Fermer", navigate: "Naviguer", projectLogo: "Logo du projet", comingSoon: "Bientôt disponible !", prevProject: "Projet précédent", nextProject: "Projet suivant" }
+  };
+  const labels = modalLabels[language];
   // Handle keyboard navigation
   useEffect(() => {
     if (!open) return;
@@ -92,7 +102,7 @@ export function WorkModal({
             {/* Close button */}
             <button
               onClick={onClose}
-              aria-label="Fermer"
+              aria-label={labels.close}
               className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-background/50 text-foreground hover:bg-background focus:outline-none focus:ring-2 focus:ring-accent transition-colors"
             >
               <X className="h-5 w-5" />
@@ -101,7 +111,7 @@ export function WorkModal({
             {/* Content */}
             <div className="space-y-4 text-center pt-2">
               {logo && (
-                <img src={logo} alt="Logo du projet" className="mx-auto h-12 w-auto" />
+                <img src={logo} alt={labels.projectLogo} className="mx-auto h-12 w-auto" />
               )}
               <h3 className="text-xl font-semibold leading-tight text-foreground">{title}</h3>
               {subtitle && (
@@ -125,7 +135,7 @@ export function WorkModal({
                     to={cta.href || "/404"}
                     className="inline-flex items-center justify-center rounded-full border-2 border-foreground/30 bg-background hover:bg-accent hover:border-primary/50 px-5 py-2 text-sm font-medium text-foreground transition-all duration-300 shadow-sm hover:shadow-md"
                   >
-                    Coming soon!
+                    {labels.comingSoon}
                   </Link>
                 ) : (
                   <Link
@@ -144,16 +154,16 @@ export function WorkModal({
                 <button
                   onClick={() => onNavigate('prev')}
                   disabled={!canNavigatePrev}
-                  aria-label="Projet précédent"
+                  aria-label={labels.prevProject}
                   className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border bg-background/50 text-muted-foreground hover:bg-background hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </button>
-                <span className="text-xs text-muted-foreground">Naviguer</span>
+                <span className="text-xs text-muted-foreground">{navigationLabel || labels.navigate}</span>
                 <button
                   onClick={() => onNavigate('next')}
                   disabled={!canNavigateNext}
-                  aria-label="Projet suivant"
+                  aria-label={labels.nextProject}
                   className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border bg-background/50 text-muted-foreground hover:bg-background hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                 >
                   <ChevronRight className="h-4 w-4" />

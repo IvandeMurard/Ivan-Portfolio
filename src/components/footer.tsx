@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Mail, Calendar, Linkedin, MessageCircle } from "lucide-react";
 import { SITE, SOCIAL_LINKS, type SocialKey } from "@/site.config";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 type Props = {
   siteName?: string;
@@ -25,6 +26,13 @@ export function Footer({
   className = "",
 }: Props) {
   const [hoveredIcon, setHoveredIcon] = React.useState<string | null>(null);
+  const { language } = useLanguage();
+
+  const footerLabels = {
+    en: { navigation: "Navigation", connect: "Connect", allRights: "All rights reserved", madeWith: "Made with care" },
+    fr: { navigation: "Navigation", connect: "Se connecter", allRights: "Tous droits réservés", madeWith: "Fait avec soin" }
+  };
+  const labels = footerLabels[language];
 
   // Aligne l'ordre d’affichage et mappe les métadonnées depuis la config
   const socialOrder: SocialKey[] = ["mail", "calendar", "linkedin", "whatsapp", "x"];
@@ -49,7 +57,7 @@ export function Footer({
           <div className="md:col-span-2 grid grid-cols-2 gap-8">
             <div>
               <h4 className="text-[13px] font-[600] tracking-[0.15em] uppercase text-white/60 mb-4">
-                Navigation
+                {labels.navigation}
               </h4>
               <nav className="space-y-2">
                 {sections.slice(0, Math.ceil(sections.length / 2)).map((section) => (
@@ -84,7 +92,7 @@ export function Footer({
           {/* Column 4: Social Icons + Tooltips */}
           <div>
             <h4 className="text-[13px] font-[600] tracking-[0.15em] uppercase text-white/60 mb-4">
-              Connect
+              {labels.connect}
             </h4>
 
             <div className="flex items-center gap-4">
@@ -167,10 +175,10 @@ export function Footer({
         {/* Copyright */}
         <div className="text-center md:text-left">
           <p className="text-[13px] font-[400] text-white/60 leading-[1.6]">
-            © {new Date().getFullYear()} {siteName}. All rights reserved.
+            © {new Date().getFullYear()} {siteName}. {labels.allRights}.
             <br className="md:hidden" />
             <span className="hidden md:inline"> • </span>
-            Made with care.
+            {labels.madeWith}.
           </p>
         </div>
       </div>
