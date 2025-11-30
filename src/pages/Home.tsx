@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Navigation } from "../components/Navigation";
 import { Footer } from "@/components/footer";
@@ -33,6 +33,7 @@ import { hackathons as bilingualHackathons } from "@/data/hackathons";
 import { continuousLearning as bilingualContinuousLearning } from "@/data/continuousLearning";
 import { education as bilingualEducation } from "@/data/education";
 import { experiences as bilingualExperiences } from "@/data/experience";
+import ContactForm from "@/components/ContactForm";
 
 // Calculate filter chips dynamically based on visible projects (excluding hidden)
 const getFilterChips = (projects: typeof bilingualProjects, language: 'en' | 'fr') => {
@@ -160,6 +161,7 @@ export const Home: React.FC = () => {
   const [selectedProjectIndex, setSelectedProjectIndex] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStickyDisabled, setIsStickyDisabled] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
   const expExpand = useInlineExpand();
   const contactSectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -906,12 +908,10 @@ export const Home: React.FC = () => {
               <Button
                 size="lg"
                 className="bg-card hover:bg-card/90 text-contact dark:text-white hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
-                asChild
+                onClick={() => setShowContactForm(!showContactForm)}
               >
-                <a href={SOCIAL_LINKS.mail.href}>
-                  <Mail className="mr-2 h-5 w-5" />
-                  Email
-                </a>
+                <Mail className="mr-2 h-5 w-5" />
+                Email
               </Button>
               <Button
                 size="lg"
@@ -935,6 +935,21 @@ export const Home: React.FC = () => {
               </Button>
             </div>
           </ScrollReveal>
+
+          {/* Contact Form - Appears on Email button click */}
+          <AnimatePresence>
+            {showContactForm && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="w-full max-w-md mx-auto mt-8"
+              >
+                <ContactForm />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Action A: Fix Dead End - Back to top CTA */}
           <div className="mt-12 pt-8 border-t border-contact-foreground/20 mb-2">
