@@ -4,11 +4,13 @@ export type Language = 'en' | 'fr';
 export const homeContent = {
   en: {
     hero: {
-      title: "Turning curiosity into products people love.",
+      name: "Ivan de Murard",
+      title: "Zero-to-One Product Manager",
+      subtitle: "From hospitality to AI: I ship fast friction-less products and experiences with care.",
       proofPoints: [
-        "7+ years in product and data",
-        "2 AI Hackathons won",
-        "10+ products delivered"
+        "2 hackathon wins turning ideas into working products",
+        "Currently shipping: AI agents for F&B industry",
+        "5+ years shipping products people use"
       ],
       ctas: {
         viewWork: "View my work",
@@ -17,11 +19,16 @@ export const homeContent = {
     },
     marquee: {
       items: [
-        "7+ / Years in product & data",
-        "2 / AI Hackathons won",
-        "10+ / Products delivered",
-        "€20k / Pre-seed funding",
-        "22 / Public customers"
+        "2 / AI Hackathons Won",
+        "•",
+        "10+ / Products Shipped",
+        "•",
+        "2 / Year Co-founder",
+        "•",
+        "5+ / Years experience",
+        "•",
+        "Paris-based",
+        "•"
       ]
     },
     work: {
@@ -75,11 +82,13 @@ export const homeContent = {
   },
   fr: {
     hero: {
-      title: "Transformer la curiosité en produits que les gens adorent.",
+      name: "Ivan de Murard",
+      title: "Product Manager Zero-to-One",
+      subtitle: "De l'hospitalité à l'IA : je livre rapidement des produits et expériences fluides avec soin.",
       proofPoints: [
-        "7+ ans en produit et data",
-        "2 Hackathons IA gagnés",
-        "10+ produits livrés"
+        "2 hackathons gagnés transformant des idées en produits fonctionnels",
+        "En cours de livraison : agents IA pour l'industrie F&B",
+        "5+ ans à livrer des produits utilisés par les gens"
       ],
       ctas: {
         viewWork: "Voir mon travail",
@@ -88,11 +97,16 @@ export const homeContent = {
     },
     marquee: {
       items: [
-        "7+ / Années en produit & data",
-        "2 / Hackathons IA gagnés",
-        "10+ / Produits livrés",
-        "€20k / Financement pré-seed",
-        "22 / Clients publics"
+        "2 / Hackathons IA Gagnés",
+        "•",
+        "10+ / Produits Livrés",
+        "•",
+        "2 / Ans Co-fondateur",
+        "•",
+        "5+ / Années d'expérience",
+        "•",
+        "Basé à Paris",
+        "•"
       ]
     },
     work: {

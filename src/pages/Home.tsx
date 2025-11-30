@@ -284,27 +284,27 @@ export const Home: React.FC = () => {
                     className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[900] tracking-tight text-white leading-[0.9]"
                     style={{ fontFamily: "Inter" }}
                   >
-                    Ivan de Murard
+                    {content.hero.name}
                   </h1>
                   <p
                     className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mt-2 md:mt-3"
                     style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
                   >
-                    Zero-to-One Product Manager
+                    {content.hero.title}
                   </p>
                 </>
               ) : (
                 <TextRevealLines
                   lines={[
                     {
-                      text: "Ivan de Murard",
+                      text: content.hero.name,
                       as: "h1",
                       className:
                         "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[900] tracking-tight text-white leading-[0.9]",
                       style: { fontFamily: "Inter" },
                     },
                     {
-                      text: "Zero-to-One Product Manager",
+                      text: content.hero.title,
                       as: "p",
                       className:
                         "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mt-2 md:mt-3",
@@ -328,7 +328,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                From hospitality to AI: I ship fast friction-less products and experiences with care.
+                {content.hero.subtitle}
               </motion.p>
 
               {/* Proof Points */}
@@ -342,11 +342,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {[
-                  "2 hackathon wins turning ideas into working products",
-                  "Currently shipping: AI agents for F&B industry",
-                  "5+ years shipping products people use",
-                ].map((point, index) => (
+                {content.hero.proofPoints.map((point, index) => (
                   <div key={index} className="flex items-start gap-2 text-sm sm:text-base text-white/80">
                     <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "rgba(255,255,255,0.8)" }} />
                     <span>{point}</span>
@@ -372,7 +368,7 @@ export const Home: React.FC = () => {
                   className="group bg-background text-foreground border-transparent hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
                   onClick={() => scrollToSection("work")}
                 >
-                  View my work
+                  {content.hero.ctas.viewWork}
                   <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
                 </Button>
 
@@ -384,7 +380,7 @@ export const Home: React.FC = () => {
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 >
-                  Get in touch
+                  {content.hero.ctas.contact}
                   <motion.div
                     animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
                     transition={{
@@ -416,26 +412,26 @@ export const Home: React.FC = () => {
                     className="text-4xl sm:text-5xl font-[900] text-white tracking-tight leading-[0.9]"
                     style={{ fontFamily: "Inter" }}
                   >
-                    Ivan de Murard
+                    {content.hero.name}
                   </h1>
                   <p
                     className="text-xl sm:text-2xl font-serif italic text-white mt-2"
                     style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
                   >
-                    Zero-to-One Product Manager
+                    {content.hero.title}
                   </p>
                 </>
               ) : (
                 <TextRevealLines
                   lines={[
                     {
-                      text: "Ivan de Murard",
+                      text: content.hero.name,
                       as: "h1",
                       className: "text-4xl sm:text-5xl font-[900] text-white tracking-tight leading-[0.9]",
                       style: { fontFamily: "Inter" },
                     },
                     {
-                      text: "Zero-to-One Product Manager",
+                      text: content.hero.title,
                       as: "p",
                       className: "text-xl sm:text-2xl font-serif italic text-white mt-2",
                       style: { fontFamily: "'Playfair Display', serif", fontWeight: 500 },
@@ -458,7 +454,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                From hospitality to AI: I ship fast friction-less products and experiences with care.
+                {content.hero.subtitle}
               </motion.p>
 
               {/* Proof Points */}
@@ -472,11 +468,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {[
-                  "2 hackathon wins turning ideas into working products",
-                  "Currently shipping: AI agents for F&B industry",
-                  "5+ years shipping products people use",
-                ].map((point, index) => (
+                {content.hero.proofPoints.map((point, index) => (
                   <div key={index} className="flex items-start justify-center gap-2 text-sm text-white/80">
                     <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "rgba(255,255,255,0.8)" }} />
                     <span className="text-left">{point}</span>
@@ -502,7 +494,7 @@ export const Home: React.FC = () => {
                   className="w-full group bg-background text-foreground border-transparent hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
                   onClick={() => scrollToSection("work")}
                 >
-                  View my work
+                  {content.hero.ctas.viewWork}
                   <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
                 </Button>
 
@@ -514,7 +506,7 @@ export const Home: React.FC = () => {
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 >
-                  Get in touch
+                  {content.hero.ctas.contact}
                   <motion.div
                     animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
                     transition={{
@@ -540,18 +532,7 @@ export const Home: React.FC = () => {
       {/* Marquee Banner - Transition entre Hero et Work */}
       <div className="relative bg-gradient-to-b from-card/30 via-card/50 to-background dark:from-card/40 dark:via-card/60 dark:to-card border-t border-border/10 border-b border-border/20 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-muted-foreground/15 after:to-transparent">
         <MarqueeBanner
-          phrases={[
-            "2 / AI Hackathons Won",
-            "•",
-            "10+ / Products Shipped",
-            "•",
-            "2 / Year Co-founder",
-            "•",
-            "5+ / Years experience",
-            "•",
-            "Paris-based",
-            "•",
-          ]}
+          phrases={content.marquee.items}
           speed={0.65}
           pauseOnHover
           ariaLabel="Highlights"
