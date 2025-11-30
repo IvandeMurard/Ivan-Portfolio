@@ -40,12 +40,18 @@ const getFilterChips = (projects: typeof bilingualProjects, language: 'en' | 'fr
 
   const allCount = visibleProjects.length;
   const agenticExperiencesCount = visibleProjects.filter(
-    (p) => p.category === "agentic-experiences" || p.tags.some((tag) => tag.toLowerCase() === "agentic experiences"),
+    (p) => {
+      const tags = language === 'en' ? p.tags_en : p.tags_fr;
+      return p.category === "agentic-experiences" || tags?.some((tag) => tag.toLowerCase() === "agentic experiences");
+    }
   ).length;
   const experienceCount = visibleProjects.filter((p) => p.category === "experience").length;
   const productCount = visibleProjects.filter((p) => p.category === "product").length;
   const automatisationsCount = visibleProjects.filter(
-    (p) => p.category === "automatisations" || p.tags.some((tag) => tag.toLowerCase() === "automatisations"),
+    (p) => {
+      const tags = language === 'en' ? p.tags_en : p.tags_fr;
+      return p.category === "automatisations" || tags?.some((tag) => tag.toLowerCase() === "automatisations");
+    }
   ).length;
 
   const chips = [
@@ -63,92 +69,12 @@ const getFilterChips = (projects: typeof bilingualProjects, language: 'en' | 'fr
   return chips;
 };
 
-const experienceFilterChips = [
-  { id: "experiences", label: "Expériences" },
+const getExperienceFilterChips = (language: 'en' | 'fr') => [
+  { id: "experiences", label: language === 'fr' ? "Expériences" : "Experiences" },
   { id: "continuous-learning", label: "Continuous Learning" },
-  { id: "education", label: "Education" },
+  { id: "education", label: language === 'fr' ? "Éducation" : "Education" },
 ];
 
-const hackathons = [
-  {
-    year: "2025",
-    title: "Pioneers AI Lab Hackathon @ Station F",
-    team: "Solo",
-    description: "Built an Autonomous AI Agent for hotels' F&B operations",
-    skills: ["AI Agents", "Hospitality Tech", "Autonomous Systems", "F&B Operations"],
-  },
-  {
-    year: "2025",
-    title: "Windsurf × Mistral × The AI Collective",
-    team: "Team of 4",
-    status: "3rd Place",
-    description: "Built an idea generator + matcher for hackathons with a video avatar.",
-    skills: ["Prompt engineering", "Content creation", "Social media"],
-  },
-  {
-    year: "2025",
-    title: "Lion du Samedi — Promptathon #1",
-    team: "Team of 5",
-    description: "Prompted a functional tool to automate market-intel research and social publishing.",
-    skills: ["Prompt engineering", "Automation", "Make", "Market intelligence", "Social media", "AI"],
-  },
-  {
-    year: "2020",
-    title: "Recoder l'Habitat #2",
-    team: "Team of 4",
-    status: "1st Place 🏆",
-    description: "Prototyped an open-data SaaS for city noise-pollution diagnostics.",
-    skills: ["Prototyping", "Open data", "Product management", "Noise pollution", "Data visualization"],
-  },
-  {
-    year: "2020",
-    title: "Hack The Crisis",
-    team: "Team of 5",
-    status: "Finalists",
-    description: "Prototyped a digital training & coordination tool for caregivers to ease hospital load.",
-    skills: ["Service design", "Prototyping", "HealthTech", "User journey"],
-  },
-];
-
-const continuousLearning = [
-  {
-    year: "2025",
-    title: "Product Management Intensive Program",
-    source: "MAESTRO",
-    description: "I honed my 0→1 product lifecycle management skills. Use cases: Carrefour, Welcome To The Jungle",
-    link: "https://maestro.mariaschools.com/formations/devenez-product-manager-formation-a-temps-plein-en-presentiel",
-  },
-  {
-    year: "2025",
-    title: "Building Strategic Foresight Capabilities",
-    source: "EDHEC Business School & UNESCO",
-    description: "I learned strategic foresight methods to anticipate and shape future scenarios",
-    link: "https://www.coursera.org/learn/strategic-foresight",
-  },
-  {
-    year: "2020",
-    title: "Service Design: Delivering Integrated Service Design Experiences.",
-    source: "The Interaction Design Foundation",
-    description: "I learned how to value design to conceive full-stack business-oriented experiences",
-    link: "https://www.interaction-design.org/courses/service-design-how-to-design-integrated-service-experiences",
-  },
-  {
-    year: "2019",
-    title: "Lion du Samedi (it became Le Promptathon in 2025, which I also attended)",
-    source: "Join Lion",
-    description: "I learned how to work in the start-up universe and innovate better",
-    link: "https://medium.com/join-lion/une-1%C3%A8re-journ%C3%A9e-chez-lion-66040cf097b2",
-  },
-];
-
-const education = [
-  {
-    year: "2017",
-    title: "Master's in Agri-food Business and Entrepreneurship.",
-    school: "IHEDREA",
-    description: "Focus on food and agricultural entrepreneurship and product strategy",
-  },
-];
 
 // RippleButton component with ripple effect
 interface RippleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -292,9 +218,11 @@ export const Home: React.FC = () => {
     activeFilter === "all"
       ? visibleProjects
       : visibleProjects.filter(
-          (project) =>
-            project.category === activeFilter ||
-            project.tags.some((tag) => tag.toLowerCase() === activeFilter.toLowerCase()),
+          (project) => {
+            const tags = language === 'en' ? project.tags_en : project.tags_fr;
+            return project.category === activeFilter ||
+              tags?.some((tag) => tag.toLowerCase() === activeFilter.toLowerCase());
+          }
         );
 
   const scrollToSection = (id: string) => {
@@ -662,10 +590,10 @@ export const Home: React.FC = () => {
                   {project.id === "sonor" ? (
                     <MediaCard
                       id={project.id}
-                      kicker={project.kicker || `Case Study – ${project.title}`}
-                      title={project.subtitle}
-                      tagline={project.tagline || "De l'idée au produit validé"}
-                      badge={project.tags[0] || "Project"}
+                      kicker={(language === 'en' ? project.kicker_en : project.kicker_fr) || `Case Study – ${language === 'en' ? project.title_en : project.title_fr}`}
+                      title={language === 'en' ? project.subtitle_en : project.subtitle_fr}
+                      tagline={(language === 'en' ? project.tagline_en : project.tagline_fr) || (language === 'fr' ? "De l'idée au produit validé" : "From idea to validated product")}
+                      badge={(language === 'en' ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                       image={project.image}
                       onClick={() => openModal(index)}
                       showComingSoon={isComingSoon}
@@ -674,10 +602,10 @@ export const Home: React.FC = () => {
                   ) : (
                     <CardImmersive
                       id={project.id}
-                      kicker={project.kicker || `Case Study – ${project.title}`}
-                      title={project.subtitle}
-                      tagline={project.tagline || "De l'idée au produit validé"}
-                      badge={project.tags[0] || "Project"}
+                      kicker={(language === 'en' ? project.kicker_en : project.kicker_fr) || `Case Study – ${language === 'en' ? project.title_en : project.title_fr}`}
+                      title={language === 'en' ? project.subtitle_en : project.subtitle_fr}
+                      tagline={(language === 'en' ? project.tagline_en : project.tagline_fr) || (language === 'fr' ? "De l'idée au produit validé" : "From idea to validated product")}
+                      badge={(language === 'en' ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                       image={project.image}
                       onClick={() => openModal(index)}
                       showComingSoon={isComingSoon}
@@ -702,10 +630,10 @@ export const Home: React.FC = () => {
                   <MediaCard
                     key={project.id}
                     id={project.id}
-                    kicker={project.kicker || `Case Study – ${project.title}`}
-                    title={project.subtitle}
-                    tagline={project.tagline || "De l'idée au produit validé"}
-                    badge={project.tags[0] || "Project"}
+                    kicker={(language === 'en' ? project.kicker_en : project.kicker_fr) || `Case Study – ${language === 'en' ? project.title_en : project.title_fr}`}
+                    title={language === 'en' ? project.subtitle_en : project.subtitle_fr}
+                    tagline={(language === 'en' ? project.tagline_en : project.tagline_fr) || (language === 'fr' ? "De l'idée au produit validé" : "From idea to validated product")}
+                    badge={(language === 'en' ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                     image={project.image}
                     onClick={() => openModal(index)}
                     showComingSoon={isComingSoon}
@@ -715,10 +643,10 @@ export const Home: React.FC = () => {
                   <CardImmersive
                     key={project.id}
                     id={project.id}
-                    kicker={project.kicker || `Case Study – ${project.title}`}
-                    title={project.subtitle}
-                    tagline={project.tagline || "De l'idée au produit validé"}
-                    badge={project.tags[0] || "Project"}
+                    kicker={(language === 'en' ? project.kicker_en : project.kicker_fr) || `Case Study – ${language === 'en' ? project.title_en : project.title_fr}`}
+                    title={language === 'en' ? project.subtitle_en : project.subtitle_fr}
+                    tagline={(language === 'en' ? project.tagline_en : project.tagline_fr) || (language === 'fr' ? "De l'idée au produit validé" : "From idea to validated product")}
+                    badge={(language === 'en' ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                     image={project.image}
                     onClick={() => openModal(index)}
                     showComingSoon={isComingSoon}
@@ -768,11 +696,11 @@ export const Home: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold text-foreground">{hack.title}</h3>
+                        <h3 className="font-semibold text-foreground">{language === 'en' ? hack.title_en : hack.title_fr}</h3>
                         <p className="text-sm text-accent font-medium">
-                          {hack.team} people <span className="text-muted-foreground">•</span> {hack.status}
+                          {language === 'en' ? hack.team_en : hack.team_fr} <span className="text-muted-foreground">•</span> {language === 'en' ? hack.status_en : hack.status_fr}
                         </p>
-                        <p className="text-sm text-muted-foreground mt-1">{hack.description}</p>
+                        <p className="text-sm text-muted-foreground mt-1">{language === 'en' ? hack.description_en : hack.description_fr}</p>
                       </div>
                     </div>
                   </div>
@@ -908,9 +836,9 @@ export const Home: React.FC = () => {
                       <div className="flex items-start gap-2">
                         <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                         <div>
-                          <h4 className="font-semibold text-foreground">{item.title}</h4>
+                          <h4 className="font-semibold text-foreground">{language === 'en' ? item.title_en : item.title_fr}</h4>
                           <p className="text-sm text-accent font-medium uppercase tracking-wider">{item.source}</p>
-                          <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                          <p className="text-sm text-muted-foreground mt-1">{language === 'en' ? item.description_en : item.description_fr}</p>
                         </div>
                       </div>
                     </div>
@@ -931,9 +859,9 @@ export const Home: React.FC = () => {
                       <div className="flex items-start gap-2">
                         <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                         <div>
-                          <h4 className="font-semibold text-foreground">{edu.title}</h4>
+                          <h4 className="font-semibold text-foreground">{language === 'en' ? edu.title_en : edu.title_fr}</h4>
                           <p className="text-sm text-accent font-medium uppercase tracking-wider">{edu.school}</p>
-                          <p className="text-sm text-muted-foreground mt-1">{edu.description}</p>
+                          <p className="text-sm text-muted-foreground mt-1">{language === 'en' ? edu.description_en : edu.description_fr}</p>
                         </div>
                       </div>
                     </div>
@@ -1074,11 +1002,11 @@ export const Home: React.FC = () => {
           canNavigatePrev={selectedProjectIndex !== null && selectedProjectIndex > 0}
           canNavigateNext={selectedProjectIndex !== null && selectedProjectIndex < filteredProjects.length - 1}
           logo={selectedProject.logo}
-          title={selectedProject.modalTitle || selectedProject.title}
-          subtitle={selectedProject.modalSubtitle || selectedProject.longDescription}
-          bullets={selectedProject.bullets}
+          title={(language === 'en' ? selectedProject?.modalTitle_en : selectedProject?.modalTitle_fr) || (language === 'en' ? selectedProject?.title_en : selectedProject?.title_fr) || ""}
+          subtitle={(language === 'en' ? selectedProject?.modalSubtitle_en : selectedProject?.modalSubtitle_fr) || (language === 'en' ? selectedProject?.longDescription_en : selectedProject?.longDescription_fr) || ""}
+          bullets={(language === 'en' ? selectedProject?.bullets_en : selectedProject?.bullets_fr) || []}
           cta={{
-            label: "Discover the case study!",
+            label: (language === 'en' ? selectedProject.ctaLabel_en : selectedProject.ctaLabel_fr) || (language === 'fr' ? "Découvrir l'étude de cas !" : "Discover the case study!"),
             href:
               selectedProject.id === "sonor"
                 ? "/case-study/sonor"
