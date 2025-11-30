@@ -44,7 +44,7 @@ export const FeedbackWidget: React.FC<FeedbackWidgetProps> = ({
   
   // --- Translations
   const t = {
-    buttonLabel: isFrench ? "✍️ Avis" : "✍️ Tips",
+    buttonLabel: isFrench ? "✍️ Avis" : "✍️ Feedback",
     modalTitle: isFrench ? "Qu'est-ce qu'on peut améliorer ?" : "Please, share any feedback you may have!",
     feedbackPlaceholder: isFrench ? "Votre retour (libre)..." : "Your feedback...",
     namePlaceholder: isFrench ? "Nom (facultatif)" : "Name (optional)",
