@@ -37,6 +37,12 @@ export const Navigation: FC = () => {
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
 
+  const navLabels = {
+    en: { home: "Home", work: "Work", about: "About", contact: "Contact" },
+    fr: { home: "Accueil", work: "Travaux", about: "À propos", contact: "Contact" }
+  };
+  const labels = navLabels[language];
+
   // --- Mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -207,7 +213,7 @@ export const Navigation: FC = () => {
                 aria-current={heroVisible ? "page" : undefined}
                 style={{ color: heroVisible ? inkOnContext : undefined, fontWeight: heroVisible ? 600 : undefined }}
               >
-                Home
+                {labels.home}
                 {/* Animated underline */}
                 <motion.span
                   aria-hidden
@@ -230,7 +236,7 @@ export const Navigation: FC = () => {
                 aria-current={workActive ? "page" : undefined}
                 style={{ color: workActive ? inkOnContext : undefined, fontWeight: workActive ? 600 : undefined }}
               >
-                Work
+                {labels.work}
                 <motion.span
                   aria-hidden
                   className="pointer-events-none absolute left-3 right-3 -bottom-[6px] h-[2px] rounded-full bg-foreground/80"
@@ -252,7 +258,7 @@ export const Navigation: FC = () => {
                 aria-current={aboutActive ? "page" : undefined}
                 style={{ color: aboutActive ? inkOnContext : undefined, fontWeight: aboutActive ? 600 : undefined }}
               >
-                About
+                {labels.about}
                 <motion.span
                   aria-hidden
                   className="pointer-events-none absolute left-3 right-3 -bottom-[6px] h-[2px] rounded-full bg-foreground/80"
@@ -286,7 +292,7 @@ export const Navigation: FC = () => {
                 />
                 {/* Scale and brightness on hover */}
                 <span className="relative z-10 group-hover:scale-[1.02] group-active:scale-[0.96] transition-transform duration-150">
-                  Contact
+                  {labels.contact}
                 </span>
               </Link>
             </div>
@@ -370,7 +376,7 @@ export const Navigation: FC = () => {
                   }}
                   className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] transition-all"
                 >
-                  Home
+                  {labels.home}
                 </Link>
 
                 <Link
@@ -381,7 +387,7 @@ export const Navigation: FC = () => {
                   }}
                   className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] transition-all"
                 >
-                  Work
+                  {labels.work}
                 </Link>
 
                 {/* ABOUT (NEW - Mobile) */}
@@ -393,7 +399,7 @@ export const Navigation: FC = () => {
                   }}
                   className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] transition-all"
                 >
-                  About
+                  {labels.about}
                 </Link>
 
                 <Link
