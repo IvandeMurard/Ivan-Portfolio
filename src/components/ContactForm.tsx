@@ -7,10 +7,20 @@ import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/hooks/useLanguage";
 import { z } from "zod";
 
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100),
-  email: z.string().trim().email("Invalid email address").max(255),
-  message: z.string().trim().min(1, "Message is required").max(2000),
+const createContactSchema = (language: 'en' | 'fr') => z.object({
+  name: z.string()
+    .trim()
+    .min(1, language === 'en' ? "Name is required" : "Le nom est requis")
+    .max(100, language === 'en' ? "Name must be less than 100 characters" : "Le nom doit faire moins de 100 caractères"),
+  email: z.string()
+    .trim()
+    .min(1, language === 'en' ? "Email is required" : "L'email est requis")
+    .email(language === 'en' ? "Invalid email address" : "Adresse email invalide")
+    .max(255, language === 'en' ? "Email must be less than 255 characters" : "L'email doit faire moins de 255 caractères"),
+  message: z.string()
+    .trim()
+    .min(1, language === 'en' ? "Message is required" : "Le message est requis")
+    .max(2000, language === 'en' ? "Message must be less than 2000 characters" : "Le message doit faire moins de 2000 caractères"),
 });
 
 const ContactForm = () => {
@@ -55,7 +65,8 @@ const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Validate with Zod
+      // Validate with Zod using language-specific schema
+      const contactSchema = createContactSchema(language);
       const validatedData = contactSchema.parse(formData);
 
       // Call Supabase edge function
