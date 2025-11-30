@@ -911,7 +911,7 @@ export const Home: React.FC = () => {
             >
               <Button
                 size="lg"
-                className="bg-card hover:bg-card/90 text-contact dark:text-white hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
+                className="bg-card text-contact dark:text-white hover:bg-background hover:text-foreground hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
                 onClick={() => {
                   const newState = !showContactForm;
                   setShowContactForm(newState);
@@ -936,7 +936,7 @@ export const Home: React.FC = () => {
               </Button>
               <Button
                 size="lg"
-                className="bg-card hover:bg-card/90 text-contact dark:text-white hover:text-[#0077B5] hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 group"
+                className="bg-card text-contact dark:text-white hover:bg-background hover:text-[#0077B5] hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 group"
                 asChild
               >
                 <a 
@@ -945,13 +945,13 @@ export const Home: React.FC = () => {
                   rel="noopener noreferrer"
                   aria-label={language === 'en' ? 'Connect on LinkedIn (opens in new window)' : 'Se connecter sur LinkedIn (ouvre dans une nouvelle fenêtre)'}
                 >
-                  <Linkedin className="mr-2 h-5 w-5 group-hover:text-[#0077B5] transition-colors" aria-hidden="true" />
+                  <Linkedin className="mr-2 h-5 w-5 transition-colors" aria-hidden="true" />
                   LinkedIn
                 </a>
               </Button>
               <Button
                 size="lg"
-                className="bg-card hover:bg-card/90 text-contact dark:text-white hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
+                className="bg-card text-contact dark:text-white hover:bg-background hover:text-foreground hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
                 asChild
               >
                 <a 
