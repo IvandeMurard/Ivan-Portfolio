@@ -532,7 +532,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Marquee Banner - Transition entre Hero et Work */}
-      <div className="relative bg-gradient-to-b from-card/30 via-card/50 to-background dark:from-card/40 dark:via-card/60 dark:to-card border-t border-border/10 border-b border-border/20 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-muted-foreground/15 after:to-transparent">
+      <div className="relative bg-gradient-to-b from-card/30 via-card/50 to-background dark:from-card/40 dark:via-card/60 dark:to-card border-t border-border/10 border-b border-border/40 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-muted-foreground/25 after:to-transparent">
         <MarqueeBanner
           phrases={content.marquee.items}
           speed={0.65}
