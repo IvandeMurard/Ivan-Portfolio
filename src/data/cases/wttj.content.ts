@@ -1,15 +1,15 @@
 // src/data/cases/wttj.content.ts
 export const wttjContent = {
   en: {
-    progressLabels: [
-      { id: 'context-problem', label: '1. Context' },
-      { id: 'discovery', label: '2. Discovery' },
-      { id: 'pivot', label: '3. Pivot' },
-      { id: 'process', label: '4. Process' },
-      { id: 'solution', label: '5. Solution' },
-      { id: 'learnings', label: '6. Learnings' },
-      { id: 'go-further', label: '7. More' },
-    ],
+    progressIndicator: {
+      context: '1. Context',
+      discovery: '2. Discovery',
+      pivot: '3. Pivot',
+      process: '4. Process',
+      solution: '5. Solution',
+      learnings: '6. Learnings',
+      more: '7. More',
+    },
     hero: {
       title: "Increasing senior-candidate conversion on WTTJ",
     },
@@ -21,68 +21,65 @@ export const wttjContent = {
       industry: "HR Tech / Job Platform",
       context: "PM Maestro Training",
     },
-    tldr: {
-      items: [
-        {
-          label: 'Context',
-          content: 'Training project completed as part of Product Management Maestro (12 days)',
-        },
-        {
-          label: 'Challenge',
-          content: 'Senior profiles CTR at 11% vs 20% for junior profiles',
-        },
-        {
-          label: 'Strategic Pivot',
-          content: 'Focus on tech profiles with 5-8 years of experience as core segment',
-        },
-        {
-          label: 'MVP Solution',
-          content: 'Standardization + AI-powered recommendations + Advanced filters',
-        },
-        {
-          label: 'Target Impact',
-          content: 'Increase senior CTR from 11% to 13% within 6 months',
-        },
-        {
-          label: 'Key Constraints',
-          content: '12-day project timeline (training context) ; Focus on quick wins and realistic MVP scope',
-        },
-      ],
-      disclaimer: {
-        type: 'academic' as const,
-        message: 'This is an academic case study completed during Product Management Maestro training. No contractual relationship exists with Welcome to the Jungle.',
+    tldr: [
+      {
+        label: 'Context',
+        content: 'Training project completed as part of Product Management Maestro (12 days)',
       },
-    },
+      {
+        label: 'Challenge',
+        content: 'Senior profiles CTR at 11% vs 20% for junior profiles',
+      },
+      {
+        label: 'Strategic Pivot',
+        content: 'Focus on tech profiles with 5-8 years of experience as core segment',
+      },
+      {
+        label: 'MVP Solution',
+        content: 'Standardization + AI-powered recommendations + Advanced filters',
+      },
+      {
+        label: 'Target Impact',
+        content: 'Increase senior CTR from 11% to 13% within 6 months',
+      },
+      {
+        label: 'Key Constraints',
+        content: '12-day project timeline (training context) ; Focus on quick wins and realistic MVP scope',
+      },
+    ],
+    disclaimer: 'This is an academic case study completed during Product Management Maestro training. No contractual relationship exists with Welcome to the Jungle.',
     sections: {
       contextProblem: {
         title: "1. Context & Problem",
         challenge: "The Challenge",
-        challengeText: "Welcome to the Jungle (WTTJ) is a leading HR tech platform connecting job seekers with companies. While junior profiles achieved a 20% click-through rate (CTR), senior profiles with 5+ years of experience struggled at only 11% CTR.",
+        description: "Welcome to the Jungle (WTTJ) is a leading HR tech platform connecting job seekers with companies. While junior profiles achieved a 20% click-through rate (CTR), senior profiles with 5+ years of experience struggled at only 11% CTR.",
         whyMatters: "Why It Matters",
-        bullets: [
+        reasons: [
           "Senior profiles represent higher-value placements for WTTJ",
           "Companies specifically seek experienced talent for strategic roles",
           "Low engagement suggests platform mismatch with senior expectations",
         ],
-        caption: "Data and market signals",
+        imageAlt: "Data and market signals showing senior profile engagement metrics",
+        imageCaption: "Data and market signals",
       },
       discovery: {
         title: "2. Discovery",
-        intro: "We conducted 8 qualitative video interviews with senior profiles (tech and other industries) to understand their job search behavior and pain points.",
-        bullets: [
+        description: "We conducted 8 qualitative video interviews with senior profiles (tech and other industries) to understand their job search behavior and pain points.",
+        insights: [
           "Insights: transparency (salary, missions), relevant filters, guidance",
           "CTR seniors ≈ 11% vs 20% juniors; need for offer clarity",
           "Senior profiles seek stability and clear career progression",
         ],
-        captions: {
-          jtbd: "JTBD and key verbatims",
-          journey: "User journey mapping",
-        },
+        image1Alt: "JTBD and key verbatims from user interviews",
+        image1Caption: "JTBD and key verbatims",
+        image2Alt: "User journey mapping for senior profiles",
+        image2Caption: "User journey mapping",
       },
       pivot: {
         title: "3. Strategic Pivot",
-        intro: "Based on our research, we identified that tech profiles with 5-8 years of experience represent the highest-value segment for WTTJ. This strategic pivot allowed us to focus our solution on a well-defined target audience.",
-        caption: "Strategic pivot: Focus on tech seniors 5-8 years",
+        description: "Based on our research, we identified that tech profiles with 5-8 years of experience represent the highest-value segment for WTTJ. This strategic pivot allowed us to focus our solution on a well-defined target audience.",
+        imageAlt: "Strategic pivot analysis showing target segment selection",
+        imageCaption: "Strategic pivot: Focus on tech seniors 5-8 years",
       },
       process: {
         title: "4. Process & Key Decisions",
