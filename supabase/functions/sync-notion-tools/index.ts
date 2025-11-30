@@ -3,12 +3,43 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-webhook-secret',
 };
 
 serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  // Secret-based authorization check
+  const authHeader = req.headers.get('x-webhook-secret');
+  const expectedSecret = Deno.env.get('WEBHOOK_SECRET');
+  
+  if (!expectedSecret) {
+    console.error('WEBHOOK_SECRET environment variable is not set');
+    return new Response(
+      JSON.stringify({ 
+        success: false, 
+        error: 'Server configuration error' 
+      }),
+      { 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 500 
+      }
+    );
+  }
+
+  if (authHeader !== expectedSecret) {
+    return new Response(
+      JSON.stringify({ 
+        success: false, 
+        error: 'Unauthorized' 
+      }),
+      { 
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 401 
+      }
+    );
   }
 
   try {
@@ -102,11 +133,11 @@ serve(async (req) => {
 
   } catch (error) {
     console.error('Sync error:', error);
+    // Don't expose stack traces in response - errors are logged server-side
     return new Response(
       JSON.stringify({ 
         success: false, 
-        error: error instanceof Error ? error.message : 'Unknown error',
-        details: error instanceof Error ? error.stack : undefined
+        error: error instanceof Error ? error.message : 'Unknown error'
       }),
       { 
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
