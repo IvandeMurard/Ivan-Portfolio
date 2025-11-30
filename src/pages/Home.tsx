@@ -896,7 +896,7 @@ export const Home: React.FC = () => {
       >
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <ScrollReveal variant="fade-up">
-            <h2 className="text-h2">Ready to build?</h2>
+            <h2 className="text-h2" id="contact-heading">Ready to build?</h2>
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={0.1}>
@@ -904,22 +904,48 @@ export const Home: React.FC = () => {
           </ScrollReveal>
 
           <ScrollReveal variant="scale" delay={0.2}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+              role="group"
+              aria-labelledby="contact-heading"
+            >
               <Button
                 size="lg"
                 className="bg-card hover:bg-card/90 text-contact dark:text-white hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
-                onClick={() => setShowContactForm(!showContactForm)}
+                onClick={() => {
+                  const newState = !showContactForm;
+                  setShowContactForm(newState);
+                  // Focus first form field when opening
+                  if (newState) {
+                    setTimeout(() => {
+                      const firstInput = document.querySelector('#contact form input') as HTMLElement;
+                      firstInput?.focus();
+                    }, 350);
+                  }
+                }}
+                aria-expanded={showContactForm}
+                aria-controls="contact-form-container"
               >
-                <Mail className="mr-2 h-5 w-5" />
-                Email
+                <Mail className="mr-2 h-5 w-5" aria-hidden="true" />
+                {language === 'en' ? 'Email' : 'Email'}
+                <span className="sr-only">
+                  {showContactForm 
+                    ? (language === 'en' ? '(form open)' : '(formulaire ouvert)')
+                    : (language === 'en' ? '(click to open form)' : '(cliquer pour ouvrir le formulaire)')}
+                </span>
               </Button>
               <Button
                 size="lg"
                 className="bg-card hover:bg-card/90 text-contact dark:text-white hover:text-[#0077B5] hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 group"
                 asChild
               >
-                <a href={SOCIAL_LINKS.linkedin.href} target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="mr-2 h-5 w-5 group-hover:text-[#0077B5] transition-colors" />
+                <a 
+                  href={SOCIAL_LINKS.linkedin.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label={language === 'en' ? 'Connect on LinkedIn (opens in new window)' : 'Se connecter sur LinkedIn (ouvre dans une nouvelle fenêtre)'}
+                >
+                  <Linkedin className="mr-2 h-5 w-5 group-hover:text-[#0077B5] transition-colors" aria-hidden="true" />
                   LinkedIn
                 </a>
               </Button>
@@ -928,9 +954,14 @@ export const Home: React.FC = () => {
                 className="bg-card hover:bg-card/90 text-contact dark:text-white hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
                 asChild
               >
-                <a href={SOCIAL_LINKS.calendar.href} target="_blank" rel="noopener noreferrer">
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Calendar
+                <a 
+                  href={SOCIAL_LINKS.calendar.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label={language === 'en' ? 'Schedule a meeting (opens in new window)' : 'Planifier une réunion (ouvre dans une nouvelle fenêtre)'}
+                >
+                  <Calendar className="mr-2 h-5 w-5" aria-hidden="true" />
+                  {language === 'en' ? 'Calendar' : 'Calendrier'}
                 </a>
               </Button>
             </div>
@@ -940,11 +971,14 @@ export const Home: React.FC = () => {
           <AnimatePresence>
             {showContactForm && (
               <motion.div
+                id="contact-form-container"
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 className="w-full max-w-md mx-auto mt-8"
+                role="region"
+                aria-label={language === 'en' ? 'Contact form' : 'Formulaire de contact'}
               >
                 <ContactForm />
               </motion.div>
@@ -958,8 +992,9 @@ export const Home: React.FC = () => {
               size="lg"
               className="text-contact-foreground/80 hover:text-contact-foreground hover:bg-contact-foreground/10 transition-all duration-300"
               onClick={() => scrollToSection("hero")}
+              aria-label={language === 'en' ? 'Back to top of page' : 'Retour en haut de la page'}
             >
-              Back to top ↑
+              {language === 'en' ? 'Back to top' : 'Retour en haut'} ↑
             </Button>
           </div>
         </div>
