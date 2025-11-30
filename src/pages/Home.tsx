@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Navigation } from "../components/Navigation";
 import { Footer } from "@/components/footer";
@@ -15,189 +15,51 @@ import { Button } from "../components/ui/button";
 import { Separator } from "../components/ui/separator";
 import { Mail, Linkedin, Calendar, ArrowDown, ChevronDown, ArrowRight, Check } from "lucide-react";
 import { sonorCase } from "../data/cases/sonor.case";
-import wttjHero from "@/assets/wttj-hero.png";
-import wttjLogo from "@/assets/wttj-logo.svg";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import { GradientBorderSection } from "@/components/GradientBorderSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { useInlineExpand } from "@/hooks/useInlineExpand";
 import { InlineExpand } from "@/components/InlineExpand";
-import { experiences } from "@/data/experience";
 import { SOCIAL_LINKS } from "@/site.config";
 import { ProgressIndicator } from "@/components/ProgressIndicator";
 import { ScrollProgressBar } from "@/components/ScrollProgressBar";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { TextRevealLines } from "@/components/TextReveal";
-
-interface Project {
-  id: string;
-  title: string;
-  subtitle: string;
-  image: string;
-  tags: string[];
-  category: string;
-  logo?: string;
-  bullets?: string[];
-  longDescription?: string;
-  kicker?: string;
-  tagline?: string;
-  modalTitle?: string;
-  modalSubtitle?: string;
-  hidden?: boolean; // Masquer temporairement du portfolio
-}
-
-const projects: Project[] = [
-  // — SONOR (Open Data) — utilisation des données de sonor.case.ts
-  {
-    id: sonorCase.id,
-    title: "A 2-year entrepreneurship team project",
-    subtitle: "How can cities turn open data into quieter streets?",
-    image: sonorCase.image,
-    logo: sonorCase.logo,
-    tags: [sonorCase.badge],
-    category: "product",
-    longDescription: "Reducing urban noise by transforming open data into actionable city insights.",
-    bullets: sonorCase.bullets || [
-      "20+ stakeholder interviews across city departments",
-      "€20k pre-seed funding secured for the concept",
-      "Map + data pipeline prototype to surface hotspots",
-    ],
-  },
-  // — WTTJ (Conversion seniors) —
-  {
-    id: "wttj-conversion-seniors",
-    title: "A growth-oriented product case study",
-    subtitle: "How might we increase senior-candidate conversion on WTTJ?",
-    image: wttjHero,
-    logo: wttjLogo,
-    tags: ["Growth", "Product Management"],
-    category: "product",
-    longDescription: "Improving conversion for senior candidates through clearer offers and guided activation.",
-    bullets: [
-      "User discovery with senior engineers to surface friction",
-      "Strategy pivot towards a clearer, more focused WTTJ Tech+",
-      "MVP: standardized job pages + guided onboarding + AI helper",
-      "Early signal: CTR 11% → 13% and +300 to +800 activated profiles",
-    ],
-  },
-
-  // — Agents d'évaluation — MASQUÉ temporairement (hidden: true)
-  {
-    id: "agents-eval",
-    title: "Evaluating AI agents at scale",
-    subtitle: "How do we turn trust into an asset?.",
-    image: "/img/samuel-arkwright-unsplash.jpg",
-    tags: ["Agentic Experiences", "Evaluation"],
-    category: "agentic-experiences",
-    longDescription: "From run lifecycle to clear signals, helping teams ship agents with confidence.",
-    bullets: [
-      "Structured lifecycle and dashboard",
-      'Automatic scoring with LLM-as-a-Judge"',
-      "Issues & recommendations captured for fast iteration",
-      "Ready to adapt to any domain (UX, quality, robustness)",
-    ],
-    hidden: true, // Masqué du portfolio - trop "AI slop"
-  },
-
-  // — Agentic Hospitality —
-  {
-    id: "agentic-hospitality",
-    title: "A hospitality agentic experience case study",
-    subtitle: "Can we value agents to predict restaurant and hotel attendance?",
-    image: "/img/photo-by-dylan-calluy-unsplash.jpg",
-    tags: ["Agentic Experiences", "Hackathon"],
-    category: "agentic-experiences",
-    kicker: "CASE STUDY – A HOSPITALITY AGENTIC EXPERIENCE CASE STUDY",
-    tagline: "Building autonomous AI agents for hospitality efficiency",
-    modalTitle: "Can we value agents to predict restaurant and hotel attendance?",
-    modalSubtitle: "Building autonomous AI agents for hospitality efficiency",
-    bullets: [
-      "Autonomous agent for hotel F&B operations",
-      "Attendance and F&B predictability, Staff Management",
-      "Built for Pioneers AILab Hackathon @ Station F",
-      "Tech Stack: Mistral, Google Cloud, Qdrant, n8n, ElevenLabs",
-    ],
-    longDescription: "A hackathon project exploring AI agents for predictive hospitality operations.",
-  },
-
-  // — The Agentic Studio —
-  {
-    id: "agentic-studio",
-    title: "AN EXPERIMENTAL PRODUCT IN AGENTIC DESIGN",
-    subtitle: "How might we bridge human intuition and agent intelligence?",
-    image: "/img/gabriella-clare-marino-unsplash.jpg",
-    tags: ["Experience", "Agentic Experiences"],
-    category: "experience",
-    kicker: "CASE STUDY – AN EXPERIMENTAL PRODUCT IN AGENTIC DESIGN",
-    tagline: "A product exploration in Agent Experience (AX)",
-    modalTitle: "The Agentic Studio — AX design in practice",
-    modalSubtitle:
-      "Exploring how intelligent agents can interpret human intention within a creative environment. This prototype tests how gesture, voice, and context can drive co-creation, while keeping human supervision at the core of the experience.",
-    longDescription: "A product exploration in Agent Experience (AX)",
-    bullets: [
-      "The Agentic Studio serves as a scalable testbed for an agentic architecture that can be deployed across creative or operational environments.",
-      "Designed a multimodal co-creation flow combining gesture and voice inputs",
-      "Built a human-in-the-loop feedback system for supervision and correction",
-      "Implemented adaptive guidance based on user habits and style",
-      "Documented a framework for Agent Experience (AX) design and evaluation",
-    ],
-  },
-
-  // — Spotify / Valence —
-  {
-    id: "spotify-valence-journeys",
-    title: "A musical data-driven experience",
-    subtitle: "Can we value music mood to nudge better daily choices?",
-    image: "/images/projects/spotify-mood/cover.webp", // ajoute un visuel placeholder si besoin
-    tags: ["Experience"],
-    category: "experience",
-    longDescription: "Turning listening signals (valence/arousal) into nudging, helpful suggestions.",
-    bullets: [
-      "Map mood to actionable suggestions (focus, move, social)",
-      "Context-aware flow: time, history, energy",
-      "Solo or social modes (local jam / shared moments)",
-      "Next: mobile wireframes and qualitative testing",
-    ],
-  },
-
-  // — On Air —
-  {
-    id: "on-air",
-    title: "Record and auto-transcribe lyrics & melody in real time?",
-    subtitle: "What if songwriting felt truly live and collaborative?",
-    image: "/images/projects/on-air/cover.webp", // ajoute un visuel placeholder si besoin
-    tags: ["Product"],
-    category: "product",
-    longDescription: "From live rooms to time-coded snippets you can share instantly.",
-    bullets: [
-      "Live rooms that feel immediate and lightweight",
-      "Automatic capture of lyrics and melody/tablature",
-      "Time-coded highlights for quick sharing",
-      "Roadmap: V1 capture → V2 non-destructive editing → V3 creative packs",
-    ],
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import { homeContent } from "@/data/homeContent";
+import { projects as bilingualProjects } from "@/data/projects";
+import { hackathons as bilingualHackathons } from "@/data/hackathons";
+import { continuousLearning as bilingualContinuousLearning } from "@/data/continuousLearning";
+import { education as bilingualEducation } from "@/data/education";
+import { experiences as bilingualExperiences } from "@/data/experience";
+import ContactForm from "@/components/ContactForm";
 
 // Calculate filter chips dynamically based on visible projects (excluding hidden)
-const getFilterChips = (projects: Project[]) => {
+const getFilterChips = (projects: typeof bilingualProjects, language: 'en' | 'fr') => {
   const visibleProjects = projects.filter((p) => !p.hidden);
 
   const allCount = visibleProjects.length;
   const agenticExperiencesCount = visibleProjects.filter(
-    (p) => p.category === "agentic-experiences" || p.tags.some((tag) => tag.toLowerCase() === "agentic experiences"),
+    (p) => {
+      const tags = language === 'en' ? p.tags_en : p.tags_fr;
+      return p.category === "agentic-experiences" || tags?.some((tag) => tag.toLowerCase() === "agentic experiences");
+    }
   ).length;
   const experienceCount = visibleProjects.filter((p) => p.category === "experience").length;
   const productCount = visibleProjects.filter((p) => p.category === "product").length;
   const automatisationsCount = visibleProjects.filter(
-    (p) => p.category === "automatisations" || p.tags.some((tag) => tag.toLowerCase() === "automatisations"),
+    (p) => {
+      const tags = language === 'en' ? p.tags_en : p.tags_fr;
+      return p.category === "automatisations" || tags?.some((tag) => tag.toLowerCase() === "automatisations");
+    }
   ).length;
 
   const chips = [
-    { id: "all", label: `All (${allCount})` },
-    { id: "agentic-experiences", label: `Agentic Experiences (${agenticExperiencesCount})` },
-    { id: "experience", label: `Expérience (${experienceCount})` },
-    { id: "product", label: `Product (${productCount})` },
+    { id: "all", label: language === 'fr' ? `Tous (${allCount})` : `All (${allCount})` },
+    { id: "agentic-experiences", label: language === 'fr' ? `Expériences Agentiques (${agenticExperiencesCount})` : `Agentic Experiences (${agenticExperiencesCount})` },
+    { id: "experience", label: language === 'fr' ? `Expérience (${experienceCount})` : `Experience (${experienceCount})` },
+    { id: "product", label: language === 'fr' ? `Produit (${productCount})` : `Product (${productCount})` },
   ];
 
   // Only include automatisations if there are projects with this tag/category
@@ -208,92 +70,12 @@ const getFilterChips = (projects: Project[]) => {
   return chips;
 };
 
-const experienceFilterChips = [
-  { id: "experiences", label: "Expériences" },
+const getExperienceFilterChips = (language: 'en' | 'fr') => [
+  { id: "experiences", label: language === 'fr' ? "Expériences" : "Experiences" },
   { id: "continuous-learning", label: "Continuous Learning" },
-  { id: "education", label: "Education" },
+  { id: "education", label: language === 'fr' ? "Éducation" : "Education" },
 ];
 
-const hackathons = [
-  {
-    year: "2025",
-    title: "Pioneers AI Lab Hackathon @ Station F",
-    team: "Solo",
-    description: "Built an Autonomous AI Agent for hotels' F&B operations",
-    skills: ["AI Agents", "Hospitality Tech", "Autonomous Systems", "F&B Operations"],
-  },
-  {
-    year: "2025",
-    title: "Windsurf × Mistral × The AI Collective",
-    team: "Team of 4",
-    status: "3rd Place",
-    description: "Built an idea generator + matcher for hackathons with a video avatar.",
-    skills: ["Prompt engineering", "Content creation", "Social media"],
-  },
-  {
-    year: "2025",
-    title: "Lion du Samedi — Promptathon #1",
-    team: "Team of 5",
-    description: "Prompted a functional tool to automate market-intel research and social publishing.",
-    skills: ["Prompt engineering", "Automation", "Make", "Market intelligence", "Social media", "AI"],
-  },
-  {
-    year: "2020",
-    title: "Recoder l'Habitat #2",
-    team: "Team of 4",
-    status: "1st Place 🏆",
-    description: "Prototyped an open-data SaaS for city noise-pollution diagnostics.",
-    skills: ["Prototyping", "Open data", "Product management", "Noise pollution", "Data visualization"],
-  },
-  {
-    year: "2020",
-    title: "Hack The Crisis",
-    team: "Team of 5",
-    status: "Finalists",
-    description: "Prototyped a digital training & coordination tool for caregivers to ease hospital load.",
-    skills: ["Service design", "Prototyping", "HealthTech", "User journey"],
-  },
-];
-
-const continuousLearning = [
-  {
-    year: "2025",
-    title: "Product Management Intensive Program",
-    source: "MAESTRO",
-    description: "I honed my 0→1 product lifecycle management skills. Use cases: Carrefour, Welcome To The Jungle",
-    link: "https://maestro.mariaschools.com/formations/devenez-product-manager-formation-a-temps-plein-en-presentiel",
-  },
-  {
-    year: "2025",
-    title: "Building Strategic Foresight Capabilities",
-    source: "EDHEC Business School & UNESCO",
-    description: "I learned strategic foresight methods to anticipate and shape future scenarios",
-    link: "https://www.coursera.org/learn/strategic-foresight",
-  },
-  {
-    year: "2020",
-    title: "Service Design: Delivering Integrated Service Design Experiences.",
-    source: "The Interaction Design Foundation",
-    description: "I learned how to value design to conceive full-stack business-oriented experiences",
-    link: "https://www.interaction-design.org/courses/service-design-how-to-design-integrated-service-experiences",
-  },
-  {
-    year: "2019",
-    title: "Lion du Samedi (it became Le Promptathon in 2025, which I also attended)",
-    source: "Join Lion",
-    description: "I learned how to work in the start-up universe and innovate better",
-    link: "https://medium.com/join-lion/une-1%C3%A8re-journ%C3%A9e-chez-lion-66040cf097b2",
-  },
-];
-
-const education = [
-  {
-    year: "2017",
-    title: "Master's in Agri-food Business and Entrepreneurship.",
-    school: "IHEDREA",
-    description: "Focus on food and agricultural entrepreneurship and product strategy",
-  },
-];
 
 // RippleButton component with ripple effect
 interface RippleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -373,17 +155,36 @@ const RippleButton: React.FC<RippleButtonProps> = ({
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const [activeFilter, setActiveFilter] = useState("all");
   const [activeExperienceFilter, setActiveExperienceFilter] = useState("experiences");
   const [selectedProjectIndex, setSelectedProjectIndex] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStickyDisabled, setIsStickyDisabled] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
   const expExpand = useInlineExpand();
   const contactSectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
 
+  // Get translated content
+  const content = homeContent[language];
+  
+  // Use bilingual data
+  const projects = bilingualProjects;
+  const hackathons = bilingualHackathons;
+  const continuousLearning = bilingualContinuousLearning;
+  const education = bilingualEducation;
+  const experiences = bilingualExperiences;
+
   // Calculate filter chips dynamically
-  const filterChips = getFilterChips(projects);
+  const filterChips = getFilterChips(projects, language);
+
+  // Experience filter chips with translations
+  const experienceFilterChips = [
+    { id: "experiences", label: content.experience.filterChips.experiences },
+    { id: "continuous-learning", label: content.experience.filterChips.continuousLearning },
+    { id: "education", label: content.experience.filterChips.education },
+  ];
 
   // Intersection Observer pour désactiver le sticky avant la section Contact
   useEffect(() => {
@@ -419,15 +220,20 @@ export const Home: React.FC = () => {
     activeFilter === "all"
       ? visibleProjects
       : visibleProjects.filter(
-          (project) =>
-            project.category === activeFilter ||
-            project.tags.some((tag) => tag.toLowerCase() === activeFilter.toLowerCase()),
+          (project) => {
+            const tags = language === 'en' ? project.tags_en : project.tags_fr;
+            return project.category === activeFilter ||
+              tags?.some((tag) => tag.toLowerCase() === activeFilter.toLowerCase());
+          }
         );
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      // Gestion du focus pour l'accessibilité
+      element.setAttribute('tabindex', '-1');
+      element.focus({ preventScroll: true });
     }
   };
 
@@ -453,7 +259,7 @@ export const Home: React.FC = () => {
   const selectedProject = selectedProjectIndex !== null ? filteredProjects[selectedProjectIndex] : null;
 
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <div className="min-h-screen bg-background overflow-x-hidden" id="main-content">
       <Navigation />
       <ScrollProgressBar />
 
@@ -483,28 +289,30 @@ export const Home: React.FC = () => {
                     className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[900] tracking-tight text-white leading-[0.9]"
                     style={{ fontFamily: "Inter" }}
                   >
-                    Ivan de Murard
+                    {content.hero.name}
                   </h1>
                   <p
                     className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mt-2 md:mt-3"
                     style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
                   >
-                    Zero-to-One Product Manager
+                    {content.hero.title}
                   </p>
                 </>
               ) : (
                 <TextRevealLines
                   lines={[
                     {
-                      text: "Ivan de Murard",
+                      text: content.hero.name,
                       as: "h1",
-                      className: "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[900] tracking-tight text-white leading-[0.9]",
+                      className:
+                        "text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-[900] tracking-tight text-white leading-[0.9]",
                       style: { fontFamily: "Inter" },
                     },
                     {
-                      text: "Zero-to-One Product Manager",
+                      text: content.hero.title,
                       as: "p",
-                      className: "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mt-2 md:mt-3",
+                      className:
+                        "text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif italic text-white mt-2 md:mt-3",
                       style: { fontFamily: "'Playfair Display', serif", fontWeight: 500 },
                     },
                   ]}
@@ -525,7 +333,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                From hospitality to AI: I ship fast friction-less products and experiences with care.
+                {content.hero.subtitle}
               </motion.p>
 
               {/* Proof Points */}
@@ -539,11 +347,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {[
-                  "2 hackathon wins turning ideas into working products",
-                  "Currently shipping: AI agents for F&B industry",
-                  "5+ years shipping products people use",
-                ].map((point, index) => (
+                {content.hero.proofPoints.map((point, index) => (
                   <div key={index} className="flex items-start gap-2 text-sm sm:text-base text-white/80">
                     <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "rgba(255,255,255,0.8)" }} />
                     <span>{point}</span>
@@ -562,19 +366,16 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {/* Bouton primaire - fond blanc avec ripple et glow */}
-                <RippleButton
+                {/* Bouton primaire */}
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="group bg-background text-foreground border-transparent hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
                   onClick={() => scrollToSection("work")}
-                  className="relative inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg font-medium rounded-lg bg-background text-foreground hover:bg-background/90 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden group"
-                  prefersReducedMotion={prefersReducedMotion}
                 >
-                  <span className="relative z-10">View my work</span>
-                  {/* Glow effect */}
-                  <span
-                    className="absolute inset-0 rounded-lg bg-background opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"
-                    style={{ willChange: "opacity", transform: "translateZ(0)" }}
-                  />
-                </RippleButton>
+                  {content.hero.ctas.viewWork}
+                  <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
+                </Button>
 
                 {/* CTA secondaire - texte blanc avec flèche animée */}
                 <motion.button
@@ -584,7 +385,7 @@ export const Home: React.FC = () => {
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 >
-                  Get in touch
+                  {content.hero.ctas.contact}
                   <motion.div
                     animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
                     transition={{
@@ -616,26 +417,26 @@ export const Home: React.FC = () => {
                     className="text-4xl sm:text-5xl font-[900] text-white tracking-tight leading-[0.9]"
                     style={{ fontFamily: "Inter" }}
                   >
-                    Ivan de Murard
+                    {content.hero.name}
                   </h1>
                   <p
                     className="text-xl sm:text-2xl font-serif italic text-white mt-2"
                     style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
                   >
-                    Zero-to-One Product Manager
+                    {content.hero.title}
                   </p>
                 </>
               ) : (
                 <TextRevealLines
                   lines={[
                     {
-                      text: "Ivan de Murard",
+                      text: content.hero.name,
                       as: "h1",
                       className: "text-4xl sm:text-5xl font-[900] text-white tracking-tight leading-[0.9]",
                       style: { fontFamily: "Inter" },
                     },
                     {
-                      text: "Zero-to-One Product Manager",
+                      text: content.hero.title,
                       as: "p",
                       className: "text-xl sm:text-2xl font-serif italic text-white mt-2",
                       style: { fontFamily: "'Playfair Display', serif", fontWeight: 500 },
@@ -658,7 +459,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                From hospitality to AI: I ship fast friction-less products and experiences with care.
+                {content.hero.subtitle}
               </motion.p>
 
               {/* Proof Points */}
@@ -672,11 +473,7 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {[
-                  "2 hackathon wins turning ideas into working products",
-                  "Currently shipping: AI agents for F&B industry",
-                  "5+ years shipping products people use",
-                ].map((point, index) => (
+                {content.hero.proofPoints.map((point, index) => (
                   <div key={index} className="flex items-start justify-center gap-2 text-sm text-white/80">
                     <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "rgba(255,255,255,0.8)" }} />
                     <span className="text-left">{point}</span>
@@ -695,19 +492,16 @@ export const Home: React.FC = () => {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                {/* Bouton primaire - fond blanc avec ripple et glow */}
-                <RippleButton
+                {/* Bouton primaire */}
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full group bg-background text-foreground border-transparent hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
                   onClick={() => scrollToSection("work")}
-                  className="w-full relative inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg bg-background text-foreground hover:bg-background/90 transition-all duration-300 shadow-lg hover:shadow-xl overflow-hidden group"
-                  prefersReducedMotion={prefersReducedMotion}
                 >
-                  <span className="relative z-10">View my work</span>
-                  {/* Glow effect */}
-                  <span
-                    className="absolute inset-0 rounded-lg bg-background opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"
-                    style={{ willChange: "opacity", transform: "translateZ(0)" }}
-                  />
-                </RippleButton>
+                  {content.hero.ctas.viewWork}
+                  <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
+                </Button>
 
                 {/* CTA secondaire - texte blanc avec flèche animée */}
                 <motion.button
@@ -717,7 +511,7 @@ export const Home: React.FC = () => {
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 >
-                  Get in touch
+                  {content.hero.ctas.contact}
                   <motion.div
                     animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
                     transition={{
@@ -741,20 +535,9 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Marquee Banner - Transition entre Hero et Work */}
-      <div className="relative bg-gradient-to-b from-card/30 via-card/50 to-background dark:from-card/40 dark:via-card/60 dark:to-card border-t border-border/10 border-b border-border/20 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-muted-foreground/15 after:to-transparent">
+      <div className="relative bg-gradient-to-b from-card/30 via-card/50 to-background dark:from-card/40 dark:via-card/60 dark:to-card border-t border-border/10 border-b border-border/40 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-muted-foreground/25 after:to-transparent">
         <MarqueeBanner
-          phrases={[
-            "2 / AI Hackathons Won",
-            "•",
-            "10+ / Products Shipped",
-            "•",
-            "2 / Year Co-founder",
-            "•",
-            "5+ / Years experience",
-            "•",
-            "Paris-based",
-            "•",
-          ]}
+          phrases={content.marquee.items}
           speed={0.65}
           pauseOnHover
           ariaLabel="Highlights"
@@ -793,10 +576,10 @@ export const Home: React.FC = () => {
                   {project.id === "sonor" ? (
                     <MediaCard
                       id={project.id}
-                      kicker={project.kicker || `Case Study – ${project.title}`}
-                      title={project.subtitle}
-                      tagline={project.tagline || "De l'idée au produit validé"}
-                      badge={project.tags[0] || "Project"}
+                      kicker={(language === 'en' ? project.kicker_en : project.kicker_fr) || `Case Study – ${language === 'en' ? project.title_en : project.title_fr}`}
+                      title={language === 'en' ? project.subtitle_en : project.subtitle_fr}
+                      tagline={(language === 'en' ? project.tagline_en : project.tagline_fr) || (language === 'fr' ? "De l'idée au produit validé" : "From idea to validated product")}
+                      badge={(language === 'en' ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                       image={project.image}
                       onClick={() => openModal(index)}
                       showComingSoon={isComingSoon}
@@ -805,10 +588,10 @@ export const Home: React.FC = () => {
                   ) : (
                     <CardImmersive
                       id={project.id}
-                      kicker={project.kicker || `Case Study – ${project.title}`}
-                      title={project.subtitle}
-                      tagline={project.tagline || "De l'idée au produit validé"}
-                      badge={project.tags[0] || "Project"}
+                      kicker={(language === 'en' ? project.kicker_en : project.kicker_fr) || `Case Study – ${language === 'en' ? project.title_en : project.title_fr}`}
+                      title={language === 'en' ? project.subtitle_en : project.subtitle_fr}
+                      tagline={(language === 'en' ? project.tagline_en : project.tagline_fr) || (language === 'fr' ? "De l'idée au produit validé" : "From idea to validated product")}
+                      badge={(language === 'en' ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                       image={project.image}
                       onClick={() => openModal(index)}
                       showComingSoon={isComingSoon}
@@ -833,10 +616,10 @@ export const Home: React.FC = () => {
                   <MediaCard
                     key={project.id}
                     id={project.id}
-                    kicker={project.kicker || `Case Study – ${project.title}`}
-                    title={project.subtitle}
-                    tagline={project.tagline || "De l'idée au produit validé"}
-                    badge={project.tags[0] || "Project"}
+                    kicker={(language === 'en' ? project.kicker_en : project.kicker_fr) || `Case Study – ${language === 'en' ? project.title_en : project.title_fr}`}
+                    title={language === 'en' ? project.subtitle_en : project.subtitle_fr}
+                    tagline={(language === 'en' ? project.tagline_en : project.tagline_fr) || (language === 'fr' ? "De l'idée au produit validé" : "From idea to validated product")}
+                    badge={(language === 'en' ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                     image={project.image}
                     onClick={() => openModal(index)}
                     showComingSoon={isComingSoon}
@@ -846,10 +629,10 @@ export const Home: React.FC = () => {
                   <CardImmersive
                     key={project.id}
                     id={project.id}
-                    kicker={project.kicker || `Case Study – ${project.title}`}
-                    title={project.subtitle}
-                    tagline={project.tagline || "De l'idée au produit validé"}
-                    badge={project.tags[0] || "Project"}
+                    kicker={(language === 'en' ? project.kicker_en : project.kicker_fr) || `Case Study – ${language === 'en' ? project.title_en : project.title_fr}`}
+                    title={language === 'en' ? project.subtitle_en : project.subtitle_fr}
+                    tagline={(language === 'en' ? project.tagline_en : project.tagline_fr) || (language === 'fr' ? "De l'idée au produit validé" : "From idea to validated product")}
+                    badge={(language === 'en' ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                     image={project.image}
                     onClick={() => openModal(index)}
                     showComingSoon={isComingSoon}
@@ -899,11 +682,11 @@ export const Home: React.FC = () => {
                     <div className="flex items-start gap-2">
                       <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold text-foreground">{hack.title}</h3>
+                        <h3 className="font-semibold text-foreground">{language === 'en' ? hack.title_en : hack.title_fr}</h3>
                         <p className="text-sm text-accent font-medium">
-                          {hack.team} people <span className="text-muted-foreground">•</span> {hack.status}
+                          {language === 'en' ? hack.team_en : hack.team_fr} <span className="text-muted-foreground">•</span> {language === 'en' ? hack.status_en : hack.status_fr}
                         </p>
-                        <p className="text-sm text-muted-foreground mt-1">{hack.description}</p>
+                        <p className="text-sm text-muted-foreground mt-1">{language === 'en' ? hack.description_en : hack.description_fr}</p>
                       </div>
                     </div>
                   </div>
@@ -1039,9 +822,9 @@ export const Home: React.FC = () => {
                       <div className="flex items-start gap-2">
                         <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                         <div>
-                          <h4 className="font-semibold text-foreground">{item.title}</h4>
+                          <h4 className="font-semibold text-foreground">{language === 'en' ? item.title_en : item.title_fr}</h4>
                           <p className="text-sm text-accent font-medium uppercase tracking-wider">{item.source}</p>
-                          <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                          <p className="text-sm text-muted-foreground mt-1">{language === 'en' ? item.description_en : item.description_fr}</p>
                         </div>
                       </div>
                     </div>
@@ -1062,9 +845,9 @@ export const Home: React.FC = () => {
                       <div className="flex items-start gap-2">
                         <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                         <div>
-                          <h4 className="font-semibold text-foreground">{edu.title}</h4>
+                          <h4 className="font-semibold text-foreground">{language === 'en' ? edu.title_en : edu.title_fr}</h4>
                           <p className="text-sm text-accent font-medium uppercase tracking-wider">{edu.school}</p>
-                          <p className="text-sm text-muted-foreground mt-1">{edu.description}</p>
+                          <p className="text-sm text-muted-foreground mt-1">{language === 'en' ? edu.description_en : edu.description_fr}</p>
                         </div>
                       </div>
                     </div>
@@ -1116,7 +899,7 @@ export const Home: React.FC = () => {
       >
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <ScrollReveal variant="fade-up">
-            <h2 className="text-h2">Ready to build tomorrow?</h2>
+            <h2 className="text-h2" id="contact-heading">Ready to build?</h2>
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={0.1}>
@@ -1124,39 +907,86 @@ export const Home: React.FC = () => {
           </ScrollReveal>
 
           <ScrollReveal variant="scale" delay={0.2}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <div 
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
+              role="group"
+              aria-labelledby="contact-heading"
+            >
               <Button
                 size="lg"
-                className="bg-card hover:bg-card/90 text-contact dark:text-white hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
-                asChild
+                className="bg-card text-contact dark:text-white hover:bg-background hover:text-foreground hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
+                onClick={() => {
+                  const newState = !showContactForm;
+                  setShowContactForm(newState);
+                  // Focus first form field when opening
+                  if (newState) {
+                    setTimeout(() => {
+                      const firstInput = document.querySelector('#contact form input') as HTMLElement;
+                      firstInput?.focus();
+                    }, 350);
+                  }
+                }}
+                aria-expanded={showContactForm}
+                aria-controls="contact-form-container"
               >
-                <a href={SOCIAL_LINKS.mail.href}>
-                  <Mail className="mr-2 h-5 w-5" />
-                  Email
-                </a>
+                <Mail className="mr-2 h-5 w-5" aria-hidden="true" />
+                {language === 'en' ? 'Email' : 'Email'}
+                <span className="sr-only">
+                  {showContactForm 
+                    ? (language === 'en' ? '(form open)' : '(formulaire ouvert)')
+                    : (language === 'en' ? '(click to open form)' : '(cliquer pour ouvrir le formulaire)')}
+                </span>
               </Button>
               <Button
                 size="lg"
-                className="bg-card hover:bg-card/90 text-contact dark:text-white hover:text-[#0077B5] hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 group"
+                className="bg-card text-contact dark:text-white hover:bg-background hover:text-[#0077B5] hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 group"
                 asChild
               >
-                <a href={SOCIAL_LINKS.linkedin.href} target="_blank" rel="noopener noreferrer">
-                  <Linkedin className="mr-2 h-5 w-5 group-hover:text-[#0077B5] transition-colors" />
+                <a 
+                  href={SOCIAL_LINKS.linkedin.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label={language === 'en' ? 'Connect on LinkedIn (opens in new window)' : 'Se connecter sur LinkedIn (ouvre dans une nouvelle fenêtre)'}
+                >
+                  <Linkedin className="mr-2 h-5 w-5 transition-colors" aria-hidden="true" />
                   LinkedIn
                 </a>
               </Button>
               <Button
                 size="lg"
-                className="bg-card hover:bg-card/90 text-contact dark:text-white hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
+                className="bg-card text-contact dark:text-white hover:bg-background hover:text-foreground hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
                 asChild
               >
-                <a href={SOCIAL_LINKS.calendar.href} target="_blank" rel="noopener noreferrer">
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Calendar
+                <a 
+                  href={SOCIAL_LINKS.calendar.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label={language === 'en' ? 'Schedule a meeting (opens in new window)' : 'Planifier une réunion (ouvre dans une nouvelle fenêtre)'}
+                >
+                  <Calendar className="mr-2 h-5 w-5" aria-hidden="true" />
+                  {language === 'en' ? 'Calendar' : 'Calendrier'}
                 </a>
               </Button>
             </div>
           </ScrollReveal>
+
+          {/* Contact Form - Appears on Email button click */}
+          <AnimatePresence>
+            {showContactForm && (
+              <motion.div
+                id="contact-form-container"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="w-full max-w-md mx-auto mt-8"
+                role="region"
+                aria-label={language === 'en' ? 'Contact form' : 'Formulaire de contact'}
+              >
+                <ContactForm />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Action A: Fix Dead End - Back to top CTA */}
           <div className="mt-12 pt-8 border-t border-contact-foreground/20 mb-2">
@@ -1165,8 +995,9 @@ export const Home: React.FC = () => {
               size="lg"
               className="text-contact-foreground/80 hover:text-contact-foreground hover:bg-contact-foreground/10 transition-all duration-300"
               onClick={() => scrollToSection("hero")}
+              aria-label={language === 'en' ? 'Back to top of page' : 'Retour en haut de la page'}
             >
-              Back to top ↑
+              {language === 'en' ? 'Back to top' : 'Retour en haut'} ↑
             </Button>
           </div>
         </div>
@@ -1205,11 +1036,11 @@ export const Home: React.FC = () => {
           canNavigatePrev={selectedProjectIndex !== null && selectedProjectIndex > 0}
           canNavigateNext={selectedProjectIndex !== null && selectedProjectIndex < filteredProjects.length - 1}
           logo={selectedProject.logo}
-          title={selectedProject.modalTitle || selectedProject.title}
-          subtitle={selectedProject.modalSubtitle || selectedProject.longDescription}
-          bullets={selectedProject.bullets}
+          title={(language === 'en' ? selectedProject?.modalTitle_en : selectedProject?.modalTitle_fr) || (language === 'en' ? selectedProject?.title_en : selectedProject?.title_fr) || ""}
+          subtitle={(language === 'en' ? selectedProject?.modalSubtitle_en : selectedProject?.modalSubtitle_fr) || (language === 'en' ? selectedProject?.longDescription_en : selectedProject?.longDescription_fr) || ""}
+          bullets={(language === 'en' ? selectedProject?.bullets_en : selectedProject?.bullets_fr) || []}
           cta={{
-            label: "Discover the case study!",
+            label: (language === 'en' ? selectedProject.ctaLabel_en : selectedProject.ctaLabel_fr) || (language === 'fr' ? "Découvrir l'étude de cas !" : "Discover the case study!"),
             href:
               selectedProject.id === "sonor"
                 ? "/case-study/sonor"

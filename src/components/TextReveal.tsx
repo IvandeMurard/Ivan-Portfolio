@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface TextRevealProps {
   children: string;
@@ -26,12 +27,17 @@ export const TextReveal: React.FC<TextRevealProps> = ({
   const [isComplete, setIsComplete] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          // Si reduced motion, considérer l'animation comme terminée
+          if (prefersReducedMotion) {
+            setIsComplete(true);
+          }
           observer.disconnect();
         }
       },
@@ -43,17 +49,17 @@ export const TextReveal: React.FC<TextRevealProps> = ({
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [prefersReducedMotion]);
 
   useEffect(() => {
-    if (isVisible) {
+    if (isVisible && !prefersReducedMotion) {
       controls.start({
         clipPath: "inset(0 0% 0 0)",
       }).then(() => {
         setIsComplete(true);
       });
     }
-  }, [isVisible, controls]);
+  }, [isVisible, controls, prefersReducedMotion]);
 
   return (
     <div ref={ref} className="relative">

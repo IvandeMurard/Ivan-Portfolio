@@ -48,7 +48,7 @@ export function CardImmersive({
       className={[
         "work-card group/card relative overflow-hidden rounded-token bg-card shadow-overlay",
         "transition-transform duration-300 will-change-transform hover:-translate-y-1",
-        "focus:outline-none focus:ring-2 focus:ring-offset-2 ring-brand",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
         "w-[360px] h-[480px] cursor-pointer",
         className,
       ].join(" ")}
@@ -80,7 +80,7 @@ export function CardImmersive({
             <h3 className="text-[24px] md:text-[26px] font-[900] tracking-[-0.01em] leading-[1.15] text-white max-w-[280px] [filter:drop-shadow(0_1px_1px_rgba(0,0,0,.6))]">
               {title}
             </h3>
-            <p className="text-[15px] font-[400] leading-[1.4] text-white/80 max-w-[280px] [filter:drop-shadow(0_1px_1px_rgba(0,0,0,.5))]">
+            <p className="text-[15px] font-[400] leading-[1.4] text-white/80 max-w-[280px] [filter:drop-shadow(0_1px_1px_rgba(0,0,0,.5))]" id={`tagline-${id}`}>
               {tagline}
             </p>
 

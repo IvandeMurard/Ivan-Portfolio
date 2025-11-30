@@ -116,7 +116,7 @@ const NotFound = () => {
               >
                 <Button
                   variant="outline"
-                  className="px-6 py-3 rounded-lg border-2 border-foreground/20 hover:border-primary hover:bg-primary/10 transition-all duration-300"
+                  className="px-6 py-3 rounded-lg border-2 border-foreground/20 hover:border-primary hover:bg-primary/10 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                   onClick={() => scrollToSection("resources")}
                   aria-label="View my approach"
                 >
@@ -124,7 +124,7 @@ const NotFound = () => {
                 </Button>
                 <Button
                   variant="outline"
-                  className="px-6 py-3 rounded-lg border-2 border-foreground/20 hover:border-primary hover:bg-primary/10 transition-all duration-300"
+                  className="px-6 py-3 rounded-lg border-2 border-foreground/20 hover:border-primary hover:bg-primary/10 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                   onClick={() => navigate("/")}
                   aria-label="View my work"
                 >
@@ -132,7 +132,7 @@ const NotFound = () => {
                 </Button>
                 <Button
                   variant="outline"
-                  className="px-6 py-3 rounded-lg border-2 border-foreground/20 hover:border-primary hover:bg-primary/10 transition-all duration-300"
+                  className="px-6 py-3 rounded-lg border-2 border-foreground/20 hover:border-primary hover:bg-primary/10 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                   onClick={() => scrollToSection("contact")}
                   aria-label="Let's connect"
                 >

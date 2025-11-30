@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { SectionHeader } from "@/components/SectionHeader";
 import { myApproachContent } from "@/data/myApproach";
 import { useReducedMotion } from "@/hooks/useReducedMotion";

@@ -1,5 +1,5 @@
 import { SectionHeader } from "@/components/SectionHeader";
-import { useLanguage } from "@/hooks/useLanguage";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { ComingSoonBadge } from "@/components/ComingSoonBadge";
 
 interface WhatDrivesMeSectionProps {

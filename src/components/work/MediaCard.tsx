@@ -34,7 +34,7 @@ export function MediaCard({
   const [imgError, setImgError] = React.useState(false);
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
 
-  // Pause la vidéo si la carte sort de l’écran
+  // Pause la vidéo si la carte sort de l'écran
   React.useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
@@ -63,6 +63,7 @@ export function MediaCard({
       role="button"
       tabIndex={0}
       aria-label={`${kicker} – ${title}`}
+      aria-describedby={`tagline-${id}`}
       onKeyDown={(e) => e.key === "Enter" && onClick?.()}
       onClick={onClick}
       onMouseEnter={() => {
@@ -78,7 +79,7 @@ export function MediaCard({
         "work-card group/card",
         "relative overflow-hidden rounded-token bg-card shadow-overlay",
         "transition-transform duration-300 will-change-transform hover:-translate-y-1",
-        "focus:outline-none focus:ring-2 focus:ring-offset-2 ring-brand",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
         "w-[360px] h-[480px] cursor-pointer",
         className,
       ].join(" ")}
@@ -91,12 +92,13 @@ export function MediaCard({
         {/* Image poster */}
         <img
           src={imgError ? "/placeholder.svg" : image}
-          alt={title || "Case study"}
+          alt=""
           className="absolute inset-0 h-full w-full object-cover"
           loading="eager"
           fetchPriority="high"
           decoding="async"
           onError={() => setImgError(true)}
+          aria-hidden="true"
         />
 
         {/* Vidéo (optionnelle) */}
@@ -110,7 +112,8 @@ export function MediaCard({
             loop
             playsInline
             preload="auto"
-            // Sur mobile, autorise l’autoplay silencieux
+            aria-label={`${title} video demonstration`}
+            // Sur mobile, autorise l'autoplay silencieux
             autoPlay={typeof window !== "undefined" && /Mobi|Android/i.test(navigator.userAgent)}
           />
         )}
@@ -138,7 +141,7 @@ export function MediaCard({
             <h3 className="text-[24px] md:text-[26px] font-[900] tracking-[-0.01em] leading-[1.15] text-white max-w-[280px] [filter:drop-shadow(0_1px_1px_rgba(0,0,0,.6))]">
               {title}
             </h3>
-            <p className="text-[15px] font-[400] leading-[1.4] text-white/80 max-w-[280px] [filter:drop-shadow(0_1px_1px_rgba(0,0,0,.5))]">
+            <p id={`tagline-${id}`} className="text-[15px] font-[400] leading-[1.4] text-white/80 max-w-[280px] [filter:drop-shadow(0_1px_1px_rgba(0,0,0,.5))]">
               {tagline}
             </p>
 

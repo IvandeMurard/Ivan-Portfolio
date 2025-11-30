@@ -1,138 +1,138 @@
-import { useState } from "react";
+import { useState, useId } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/hooks/useLanguage";
 import { z } from "zod";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 
-// Zod schema for contact form validation
-const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required").max(100, "Name is too long"),
-  email: z.string().trim().email("Invalid email address"),
-  message: z.string().trim().min(10, "Message must be at least 10 characters").max(2000, "Message is too long"),
+const createContactSchema = (language: 'en' | 'fr') => z.object({
+  name: z.string()
+    .trim()
+    .min(1, language === 'en' ? "Name is required" : "Le nom est requis")
+    .max(100, language === 'en' ? "Name must be less than 100 characters" : "Le nom doit faire moins de 100 caractères"),
+  email: z.string()
+    .trim()
+    .min(1, language === 'en' ? "Email is required" : "L'email est requis")
+    .email(language === 'en' ? "Invalid email address" : "Adresse email invalide")
+    .max(255, language === 'en' ? "Email must be less than 255 characters" : "L'email doit faire moins de 255 caractères"),
+  message: z.string()
+    .trim()
+    .min(1, language === 'en' ? "Message is required" : "Le message est requis")
+    .max(2000, language === 'en' ? "Message must be less than 2000 characters" : "Le message doit faire moins de 2000 caractères"),
 });
 
 const ContactForm = () => {
   const { toast } = useToast();
   const { language } = useLanguage();
+  const nameId = useId();
+  const emailId = useId();
+  const messageId = useId();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  // Bilingual translations
-  const t = {
-    placeholders: {
-      name: language === 'fr' ? 'Votre nom' : 'Your name',
-      email: language === 'fr' ? 'Votre email' : 'Your email',
-      message: language === 'fr' ? 'Votre message' : 'Your message',
+  const messages = {
+    en: {
+      formTitle: "Contact Form",
+      formDescription: "Fill out this form to send me a message. All fields are required.",
+      nameLabel: "Your name",
+      emailLabel: "Email address",
+      messageLabel: "Your message",
+      namePlaceholder: "John Doe",
+      emailPlaceholder: "john@example.com",
+      messagePlaceholder: "Tell me about your project...",
+      success: "Message sent! I'll get back to you soon.",
+      error: "Failed to send message. Please try again.",
+      sending: "Sending...",
+      send: "Send message",
+      requiredField: "Required field",
     },
-    button: {
-      send: language === 'fr' ? 'Envoyer le message' : 'Send message',
-      sending: language === 'fr' ? 'Envoi...' : 'Sending...',
-    },
-    errors: {
-      nameRequired: language === 'fr' ? 'Le nom est requis' : 'Name is required',
-      nameTooLong: language === 'fr' ? 'Le nom est trop long (max 100 caractères)' : 'Name is too long (max 100 characters)',
-      emailInvalid: language === 'fr' ? 'Adresse email invalide' : 'Invalid email address',
-      messageRequired: language === 'fr' ? 'Le message est requis' : 'Message is required',
-      messageTooShort: language === 'fr' ? 'Le message doit contenir au moins 10 caractères' : 'Message must be at least 10 characters',
-      messageTooLong: language === 'fr' ? 'Le message est trop long (max 2000 caractères)' : 'Message is too long (max 2000 characters)',
-      missingFields: language === 'fr' ? 'Veuillez remplir tous les champs' : 'Please fill in all fields',
-      generic: language === 'fr' ? 'Erreur lors de l\'envoi. Veuillez réessayer.' : 'Failed to send message. Please try again.',
-    },
-    success: {
-      title: language === 'fr' ? 'Message envoyé !' : 'Message sent!',
-      description: language === 'fr' ? 'Je vous répondrai dans les plus brefs délais.' : "I'll get back to you soon.",
+    fr: {
+      formTitle: "Formulaire de contact",
+      formDescription: "Remplissez ce formulaire pour m'envoyer un message. Tous les champs sont requis.",
+      nameLabel: "Votre nom",
+      emailLabel: "Adresse email",
+      messageLabel: "Votre message",
+      namePlaceholder: "Jean Dupont",
+      emailPlaceholder: "jean@exemple.fr",
+      messagePlaceholder: "Parlez-moi de votre projet...",
+      success: "Message envoyé ! Je vous répondrai bientôt.",
+      error: "Échec de l'envoi. Veuillez réessayer.",
+      sending: "Envoi...",
+      send: "Envoyer le message",
+      requiredField: "Champ obligatoire",
     },
   };
+
+  const t = messages[language];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrors({});
+    setSubmitStatus('idle');
 
     try {
-      // Validate with Zod
-      const validated = contactSchema.parse({
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
+      // Validate with Zod using language-specific schema
+      const contactSchema = createContactSchema(language);
+      const validatedData = contactSchema.parse(formData);
+
+      // Call Supabase edge function
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: validatedData,
       });
 
-      // Get Supabase URL for edge function
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      if (!supabaseUrl) {
-        throw new Error("Supabase URL not configured");
+      if (error) {
+        console.error("Edge function error:", error);
+        throw new Error(error.message);
       }
 
-      // Get session for authenticated request
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      // Call the edge function with language
-      const response = await fetch(`${supabaseUrl}/functions/v1/send-contact-email`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...(session && {
-            Authorization: `Bearer ${session.access_token}`,
-          }),
-        },
-        body: JSON.stringify({
-          name: validated.name,
-          email: validated.email,
-          message: validated.message,
-          language: language,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.error || t.errors.generic);
-      }
-
+      setSubmitStatus('success');
       toast({
-        title: t.success.title,
-        description: t.success.description,
+        title: language === "en" ? "Message sent!" : "Message envoyé !",
+        description: t.success,
       });
+
       setFormData({ name: "", email: "", message: "" });
-      setErrors({});
-    } catch (error) {
-      console.error("Contact form error:", error);
+      
+      // Return focus to first field after success
+      setTimeout(() => {
+        document.getElementById(nameId)?.focus();
+      }, 100);
+    } catch (error: any) {
+      console.error("Form submission error:", error);
+      setSubmitStatus('error');
       
       if (error instanceof z.ZodError) {
-        // Handle Zod validation errors
+        // Map Zod errors to field-specific errors
         const fieldErrors: Record<string, string> = {};
         error.errors.forEach((err) => {
-          const field = err.path[0] as string;
-          if (field === 'name') {
-            fieldErrors.name = err.message === 'Name is required' ? t.errors.nameRequired :
-                              err.message === 'Name is too long' ? t.errors.nameTooLong : err.message;
-          } else if (field === 'email') {
-            fieldErrors.email = err.message === 'Invalid email address' ? t.errors.emailInvalid : err.message;
-          } else if (field === 'message') {
-            fieldErrors.message = err.message === 'Message must be at least 10 characters' ? t.errors.messageTooShort :
-                                 err.message === 'Message is too long' ? t.errors.messageTooLong :
-                                 err.message === 'String must contain at least 10 character(s)' ? t.errors.messageTooShort : err.message;
+          if (err.path[0]) {
+            fieldErrors[err.path[0] as string] = err.message;
           }
         });
         setErrors(fieldErrors);
         
-        toast({
-          title: language === 'fr' ? 'Erreur de validation' : 'Validation error',
-          description: Object.values(fieldErrors)[0] || t.errors.generic,
-          variant: "destructive",
-        });
+        // Focus first error field
+        const firstErrorField = error.errors[0]?.path[0];
+        if (firstErrorField) {
+          setTimeout(() => {
+            document.getElementById(`${firstErrorField}Id`)?.focus();
+          }, 100);
+        }
       } else {
         toast({
-          title: language === 'fr' ? 'Erreur' : 'Error',
-          description: error instanceof Error ? error.message : t.errors.generic,
+          title: language === "en" ? "Error" : "Erreur",
+          description: t.error,
           variant: "destructive",
         });
       }
@@ -142,60 +142,160 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
+    <form 
+      onSubmit={handleSubmit} 
+      className="space-y-6 bg-card/10 backdrop-blur-sm p-6 rounded-lg border border-contact-foreground/20"
+      aria-labelledby="contact-form-title"
+      aria-describedby="contact-form-description"
+      noValidate
+    >
+      {/* Form header with sr-only for screen readers */}
+      <div className="sr-only">
+        <h3 id="contact-form-title">{t.formTitle}</h3>
+        <p id="contact-form-description">{t.formDescription}</p>
+      </div>
+
+      {/* Live region for status announcements */}
+      <div 
+        role="status" 
+        aria-live="polite" 
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {submitStatus === 'success' && t.success}
+        {submitStatus === 'error' && t.error}
+        {isSubmitting && t.sending}
+      </div>
+
+      {/* Name field */}
+      <div className="space-y-2">
+        <Label 
+          htmlFor={nameId}
+          className="text-contact-foreground font-medium"
+        >
+          {t.nameLabel} <span className="text-destructive" aria-label={t.requiredField}>*</span>
+        </Label>
         <Input
+          id={nameId}
           type="text"
-          placeholder={t.placeholders.name}
+          name="name"
+          placeholder={t.namePlaceholder}
           value={formData.name}
           onChange={(e) => {
             setFormData({ ...formData, name: e.target.value });
-            if (errors.name) setErrors({ ...errors, name: '' });
+            if (errors.name) {
+              setErrors({ ...errors, name: '' });
+            }
           }}
-          className={`bg-input-background border-border ${errors.name ? 'border-destructive' : ''}`}
-          required
+          className={`bg-card/80 border-contact-foreground/30 text-foreground placeholder:text-muted-foreground ${
+            errors.name ? 'border-destructive focus-visible:ring-destructive' : ''
+          }`}
+          aria-required="true"
+          aria-invalid={!!errors.name}
+          aria-describedby={errors.name ? `${nameId}-error` : undefined}
+          autoComplete="name"
         />
         {errors.name && (
-          <p className="text-sm text-destructive mt-1">{errors.name}</p>
+          <p 
+            id={`${nameId}-error`} 
+            className="text-sm text-destructive flex items-center gap-1"
+            role="alert"
+          >
+            <AlertCircle className="w-4 h-4" aria-hidden="true" />
+            {errors.name}
+          </p>
         )}
       </div>
-      <div>
+
+      {/* Email field */}
+      <div className="space-y-2">
+        <Label 
+          htmlFor={emailId}
+          className="text-contact-foreground font-medium"
+        >
+          {t.emailLabel} <span className="text-destructive" aria-label={t.requiredField}>*</span>
+        </Label>
         <Input
+          id={emailId}
           type="email"
-          placeholder={t.placeholders.email}
+          name="email"
+          placeholder={t.emailPlaceholder}
           value={formData.email}
           onChange={(e) => {
             setFormData({ ...formData, email: e.target.value });
-            if (errors.email) setErrors({ ...errors, email: '' });
+            if (errors.email) {
+              setErrors({ ...errors, email: '' });
+            }
           }}
-          className={`bg-input-background border-border ${errors.email ? 'border-destructive' : ''}`}
-          required
+          className={`bg-card/80 border-contact-foreground/30 text-foreground placeholder:text-muted-foreground ${
+            errors.email ? 'border-destructive focus-visible:ring-destructive' : ''
+          }`}
+          aria-required="true"
+          aria-invalid={!!errors.email}
+          aria-describedby={errors.email ? `${emailId}-error` : undefined}
+          autoComplete="email"
         />
         {errors.email && (
-          <p className="text-sm text-destructive mt-1">{errors.email}</p>
+          <p 
+            id={`${emailId}-error`} 
+            className="text-sm text-destructive flex items-center gap-1"
+            role="alert"
+          >
+            <AlertCircle className="w-4 h-4" aria-hidden="true" />
+            {errors.email}
+          </p>
         )}
       </div>
-      <div>
+
+      {/* Message field */}
+      <div className="space-y-2">
+        <Label 
+          htmlFor={messageId}
+          className="text-contact-foreground font-medium"
+        >
+          {t.messageLabel} <span className="text-destructive" aria-label={t.requiredField}>*</span>
+        </Label>
         <Textarea
-          placeholder={t.placeholders.message}
+          id={messageId}
+          name="message"
+          placeholder={t.messagePlaceholder}
           value={formData.message}
           onChange={(e) => {
             setFormData({ ...formData, message: e.target.value });
-            if (errors.message) setErrors({ ...errors, message: '' });
+            if (errors.message) {
+              setErrors({ ...errors, message: '' });
+            }
           }}
-          className={`bg-input-background border-border min-h-[120px] ${errors.message ? 'border-destructive' : ''}`}
-          required
+          className={`bg-card/80 border-contact-foreground/30 text-foreground placeholder:text-muted-foreground min-h-[120px] ${
+            errors.message ? 'border-destructive focus-visible:ring-destructive' : ''
+          }`}
+          aria-required="true"
+          aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? `${messageId}-error` : undefined}
         />
         {errors.message && (
-          <p className="text-sm text-destructive mt-1">{errors.message}</p>
+          <p 
+            id={`${messageId}-error`} 
+            className="text-sm text-destructive flex items-center gap-1"
+            role="alert"
+          >
+            <AlertCircle className="w-4 h-4" aria-hidden="true" />
+            {errors.message}
+          </p>
         )}
       </div>
+
+      {/* Submit button */}
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-contact text-contact-foreground hover:bg-contact/90"
+        className="w-full bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+        aria-busy={isSubmitting}
       >
-        {isSubmitting ? t.button.sending : t.button.send}
+        {isSubmitting && (
+          <span className="mr-2 animate-spin" aria-hidden="true">⏳</span>
+        )}
+        {isSubmitting ? t.sending : t.send}
       </Button>
     </form>
   );
