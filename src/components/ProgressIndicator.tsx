@@ -13,6 +13,16 @@ interface ProgressIndicatorProps {
 export function ProgressIndicator({ sections }: ProgressIndicatorProps) {
   const [activeSection, setActiveSection] = useState<string>(sections[0]?.id || "");
 
+  const getActiveSectionIndex = () => {
+    const index = sections.findIndex(s => s.id === activeSection);
+    return index >= 0 ? index : 0;
+  };
+
+  const getActiveSectionLabel = () => {
+    const section = sections.find(s => s.id === activeSection);
+    return section ? section.label : sections[0]?.label || "";
+  };
+
   useEffect(() => {
     const observerOptions = {
       root: null,
@@ -46,13 +56,16 @@ export function ProgressIndicator({ sections }: ProgressIndicatorProps) {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      // Gestion du focus pour l'accessibilité
+      element.setAttribute('tabindex', '-1');
+      element.focus({ preventScroll: true });
     }
   };
 
   return (
     <nav
       className="fixed lg:right-6 xl:right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:block"
-      aria-label="Page navigation"
+      aria-label={`Page navigation - Currently at ${getActiveSectionLabel()}, section ${getActiveSectionIndex() + 1} of ${sections.length}`}
     >
       <ul className="space-y-4">
         {sections.map((section) => {

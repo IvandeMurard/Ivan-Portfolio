@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface Tool {
   name: string;
@@ -12,6 +13,7 @@ export const BuiltWithBanner = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   // Gestion du thème
   useEffect(() => {
@@ -122,10 +124,10 @@ export const BuiltWithBanner = () => {
   return (
     <motion.div 
       className="w-full py-16 bg-transparent"
-      initial={{ opacity: 0, y: 20 }}
+      initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
     >
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         {/* Titre discret */}
@@ -161,11 +163,11 @@ export const BuiltWithBanner = () => {
                     <motion.div
                       key={tool.name}
                       custom={globalIndex}
-                      variants={toolVariants}
-                      initial="hidden"
-                      whileInView="visible"
+                      variants={prefersReducedMotion ? {} : toolVariants}
+                      initial={prefersReducedMotion ? {} : "hidden"}
+                      whileInView={prefersReducedMotion ? {} : "visible"}
                       viewport={{ once: true, margin: "-50px" }}
-                      whileHover="hover"
+                      whileHover={prefersReducedMotion ? {} : "hover"}
                       className={`flex items-center gap-3 cursor-pointer group relative z-0 ${
                         isElevenLabs ? "px-2 py-1" : ""
                       }`}
@@ -177,8 +179,8 @@ export const BuiltWithBanner = () => {
                     >
                       <motion.div
                         custom={globalIndex}
-                        variants={floatVariants(globalIndex)}
-                        animate="float"
+                        variants={prefersReducedMotion ? {} : floatVariants(globalIndex)}
+                        animate={prefersReducedMotion ? {} : "float"}
                         initial={false}
                         style={{
                           willChange: "transform",

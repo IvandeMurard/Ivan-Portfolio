@@ -34,21 +34,7 @@ export const CarouselRow: React.FC<CarouselRowProps> = ({ children, className = 
     }
   };
 
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') {
-        e.preventDefault();
-        scroll('left');
-      } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        scroll('right');
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  // Removed global keyboard trap - navigation handled by individual cards
 
   useEffect(() => {
     const scrollEl = scrollRef.current;
@@ -65,35 +51,37 @@ export const CarouselRow: React.FC<CarouselRowProps> = ({ children, className = 
   }, []);
 
   return (
-    <div className={`relative group ${className}`}>
+    <div className={`relative group ${className}`} role="region" aria-label="Project carousel" aria-roledescription="carousel">
       {/* Left Fade Gradient */}
       {canScrollLeft && (
-        <div className="absolute left-0 top-0 bottom-4 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-4 w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" aria-hidden="true" />
       )}
 
       {/* Right Fade Gradient */}
       {canScrollRight && (
-        <div className="absolute right-0 top-0 bottom-4 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-4 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" aria-hidden="true" />
       )}
 
       {/* Left Arrow - Always visible */}
       <button
         onClick={() => scroll('left')}
+        aria-disabled={!canScrollLeft}
         disabled={!canScrollLeft}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-card border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:bg-secondary disabled:opacity-40 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
-        aria-label="Scroll left"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-card border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:bg-secondary disabled:opacity-40 disabled:cursor-not-allowed shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        aria-label="Scroll carousel left"
       >
-        <ChevronLeft className="w-5 h-5 text-foreground" />
+        <ChevronLeft className="w-5 h-5 text-foreground" aria-hidden="true" />
       </button>
 
       {/* Right Arrow - Always visible */}
       <button
         onClick={() => scroll('right')}
+        aria-disabled={!canScrollRight}
         disabled={!canScrollRight}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-card border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:bg-secondary disabled:opacity-40 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
-        aria-label="Scroll right"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-card border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:bg-secondary disabled:opacity-40 disabled:cursor-not-allowed shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        aria-label="Scroll carousel right"
       >
-        <ChevronRight className="w-5 h-5 text-foreground" />
+        <ChevronRight className="w-5 h-5 text-foreground" aria-hidden="true" />
       </button>
 
       {/* Carousel Container */}
@@ -101,6 +89,7 @@ export const CarouselRow: React.FC<CarouselRowProps> = ({ children, className = 
         ref={scrollRef}
         className="flex gap-6 overflow-x-auto scrollbar-hide snap-x pb-4"
         style={{ scrollPaddingLeft: '1.5rem' }}
+        aria-live="polite"
       >
         {React.Children.map(children, (child, index) => (
           <div 

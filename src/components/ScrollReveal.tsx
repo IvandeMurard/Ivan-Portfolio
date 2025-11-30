@@ -5,6 +5,7 @@
 
 import { motion, type Variants } from 'framer-motion';
 import { ReactNode } from 'react';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 type RevealVariant = 'fade-up' | 'fade-in' | 'slide-left' | 'slide-right' | 'scale';
 
@@ -56,6 +57,13 @@ export const ScrollReveal = ({
   className = '',
   once = true,
 }: ScrollRevealProps) => {
+  const prefersReducedMotion = useReducedMotion();
+
+  // Si l'utilisateur préfère moins d'animation, afficher directement le contenu
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       className={className}
@@ -106,6 +114,13 @@ export const StaggerContainer = ({
   className = '',
   once = true,
 }: StaggerContainerProps) => {
+  const prefersReducedMotion = useReducedMotion();
+
+  // Si l'utilisateur préfère moins d'animation, afficher directement le contenu
+  if (prefersReducedMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       className={className}
