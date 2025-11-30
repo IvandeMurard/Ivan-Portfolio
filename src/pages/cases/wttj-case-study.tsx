@@ -19,9 +19,13 @@ import { ImageLightbox } from '@/components/ImageLightbox';
 import { SOCIAL_LINKS } from '@/site.config';
 import wttjHero from '@/assets/wttj-hero.png';
 import wttjLogo from '@/assets/wttj-logo.svg';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { wttjContent } from '@/data/cases/wttj.content';
 
 export default function WTTJCaseStudy() {
   const navigate = useNavigate();
+  const { language } = useLanguage();
+  const content = wttjContent[language];
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -69,13 +73,13 @@ export default function WTTJCaseStudy() {
       <Navigation />
       <ProgressIndicator
         sections={[
-          { id: 'context-problem', label: '1. Context' },
-          { id: 'discovery', label: '2. Discovery' },
-          { id: 'pivot', label: '3. Pivot' },
-          { id: 'process', label: '4. Process' },
-          { id: 'solution', label: '5. Solution' },
-          { id: 'learnings', label: '6. Learnings' },
-          { id: 'go-further', label: '7. More' },
+          { id: 'context-problem', label: content.progressIndicator.context },
+          { id: 'discovery', label: content.progressIndicator.discovery },
+          { id: 'pivot', label: content.progressIndicator.pivot },
+          { id: 'process', label: content.progressIndicator.process },
+          { id: 'solution', label: content.progressIndicator.solution },
+          { id: 'learnings', label: content.progressIndicator.learnings },
+          { id: 'go-further', label: content.progressIndicator.more },
         ]}
       />
 
@@ -88,7 +92,7 @@ export default function WTTJCaseStudy() {
           {/* Hero Section - Aligned with TL;DR */}
           <div className="lg:col-start-2 mb-4">
             <CaseStudyHero
-              title="Increasing senior-candidate conversion on WTTJ"
+              title={content.hero.title}
               backgroundImage={wttjHero}
               tools={[
                 { name: 'Slack', icon: '/img/slack-icon.svg' },
@@ -106,12 +110,12 @@ export default function WTTJCaseStudy() {
         <div className="grid lg:grid-cols-[280px_1fr] gap-8">
           {/* Sidebar - Metadata */}
           <CaseStudySidebar
-            role="Product Manager"
-            duration="12 jours (Oct 2024)"
-            team="4 PMs"
-            client="Welcome to the Jungle"
-            industry="HR Tech / Job Platform"
-            context="Formation PM Maestro"
+            role={content.sidebar.role}
+            duration={content.sidebar.duration}
+            team={content.sidebar.team}
+            client={content.sidebar.client}
+            industry={content.sidebar.industry}
+            context={content.sidebar.context}
           />
 
           {/* Main Content */}
@@ -119,36 +123,10 @@ export default function WTTJCaseStudy() {
             {/* TL;DR avec Disclaimer Formation */}
             <section className="mb-16">
               <CaseStudyTLDR
-                items={[
-                  {
-                    label: 'Context',
-                    content: 'Training project completed as part of Product Management Maestro (12 days)',
-                  },
-                  {
-                    label: 'Challenge',
-                    content: 'Senior profiles CTR at 11% vs 20% for junior profiles',
-                  },
-                  {
-                    label: 'Strategic Pivot',
-                    content: 'Focus on tech profiles with 5-8 years of experience as core segment',
-                  },
-                  {
-                    label: 'MVP Solution',
-                    content: 'Standardization + AI-powered recommendations + Advanced filters',
-                  },
-                {
-                  label: 'Target Impact',
-                  content: 'Increase senior CTR from 11% to 13% within 6 months',
-                },
-                {
-                  label: 'Key Constraints',
-                  content: '12-day project timeline (training context) ; Focus on quick wins and realistic MVP scope',
-                },
-              ]}
+                items={content.tldr}
                 disclaimer={{
                   type: 'academic',
-                  message:
-                    'This is an academic case study completed during Product Management Maestro training. No contractual relationship exists with Welcome to the Jungle.',
+                  message: content.disclaimer,
                 }}
                 accentColor="blue"
               />
@@ -157,39 +135,31 @@ export default function WTTJCaseStudy() {
             {/* Section 1: Context & Problem */}
             <section className="mb-16" id="context-problem" aria-labelledby="context-problem-heading">
               <h2 id="context-problem-heading" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">
-                1. Context & Problem
+                {content.sections.contextProblem.title}
               </h2>
 
               <div className="mb-8">
-                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">The Challenge</h3>
+                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">{content.sections.contextProblem.challenge}</h3>
                 <p className="text-base text-gray-800 dark:text-gray-200 mb-6 leading-relaxed">
-                  Welcome to the Jungle (WTTJ) is a leading HR tech platform connecting job seekers
-                  with companies. While junior profiles achieved a 20% click-through rate (CTR),
-                  senior profiles with 5+ years of experience struggled at only 11% CTR.
+                  {content.sections.contextProblem.description}
                 </p>
-                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Why It Matters</h3>
+                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">{content.sections.contextProblem.whyMatters}</h3>
                 <ul className="space-y-2 text-base text-gray-800 dark:text-gray-200 mb-8 list-none">
-                  <li className="flex items-start">
-                    <span className="text-gray-900 dark:text-gray-100 mr-3 mt-1 font-bold" aria-hidden="true">•</span>
-                    <span>Senior profiles represent higher-value placements for WTTJ</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-gray-900 dark:text-gray-100 mr-3 mt-1 font-bold" aria-hidden="true">•</span>
-                    <span>Companies specifically seek experienced talent for strategic roles</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-gray-900 dark:text-gray-100 mr-3 mt-1 font-bold" aria-hidden="true">•</span>
-                    <span>Low engagement suggests platform mismatch with senior expectations</span>
-                  </li>
+                  {content.sections.contextProblem.reasons.map((reason, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <span className="text-gray-900 dark:text-gray-100 mr-3 mt-1 font-bold" aria-hidden="true">•</span>
+                      <span>{reason}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
               {/* Context Image */}
               <div className="mb-8 max-w-xl mx-auto">
                 <CaseImage
-                  alt="Data and market signals showing senior profile engagement metrics"
+                  alt={content.sections.contextProblem.imageAlt}
                   desktopSrc="/WTTJ/contexte-desktop.png"
-                  caption="Data and market signals"
+                  caption={content.sections.contextProblem.imageCaption}
                 />
               </div>
             </section>
@@ -197,33 +167,32 @@ export default function WTTJCaseStudy() {
             {/* Section 2: Discovery */}
             <section className="mb-16" id="discovery" aria-labelledby="discovery-heading">
               <h2 id="discovery-heading" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">
-                2. Discovery
+                {content.sections.discovery.title}
               </h2>
 
               <div className="mb-8">
                 <p className="text-base text-gray-800 dark:text-gray-200 mb-6 leading-relaxed">
-                  We conducted 8 qualitative video interviews with senior profiles (tech and other
-                  industries) to understand their job search behavior and pain points.
+                  {content.sections.discovery.description}
                 </p>
                 <ul className="space-y-2 text-base text-gray-800 dark:text-gray-200 mb-8">
-                  <li>Insights: transparency (salary, missions), relevant filters, guidance</li>
-                  <li>CTR seniors ≈ 11% vs 20% juniors; need for offer clarity</li>
-                  <li>Senior profiles seek stability and clear career progression</li>
+                  {content.sections.discovery.insights.map((insight, idx) => (
+                    <li key={idx}>{insight}</li>
+                  ))}
                 </ul>
               </div>
 
               {/* Discovery Images */}
               <div className="space-y-8 max-w-xl mx-auto">
                 <CaseImage
-                  alt="JTBD and key verbatims from user interviews"
+                  alt={content.sections.discovery.image1Alt}
                   desktopSrc="/WTTJ/jtbd-desktop.png"
-                  caption="JTBD and key verbatims"
+                  caption={content.sections.discovery.image1Caption}
                   onClick={() => openLightbox(0)}
                 />
                 <CaseImage
-                  alt="User journey mapping for senior profiles"
+                  alt={content.sections.discovery.image2Alt}
                   desktopSrc="/WTTJ/etude_de_cas_p31_desktop.png"
-                  caption="User journey mapping"
+                  caption={content.sections.discovery.image2Caption}
                   onClick={() => openLightbox(1)}
                 />
               </div>
@@ -232,23 +201,21 @@ export default function WTTJCaseStudy() {
             {/* Section 3: Strategic Pivot */}
             <section className="mb-16" id="pivot" aria-labelledby="pivot-heading">
               <h2 id="pivot-heading" className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">
-                3. Strategic Pivot
+                {content.sections.pivot.title}
               </h2>
 
               <div className="mb-8">
                 <p className="text-base text-gray-800 dark:text-gray-200 mb-6 leading-relaxed">
-                  Based on our research, we identified that tech profiles with 5-8 years of
-                  experience represent the highest-value segment for WTTJ. This strategic pivot
-                  allowed us to focus our solution on a well-defined target audience.
+                  {content.sections.pivot.description}
                 </p>
               </div>
 
               {/* Pivot Image */}
               <div className="mb-8 max-w-xl mx-auto">
                 <CaseImage
-                  alt="Strategic pivot analysis showing target segment selection"
+                  alt={content.sections.pivot.imageAlt}
                   desktopSrc="/WTTJ/pivot-desktop.png"
-                  caption="Strategic pivot: Focus on tech seniors 5-8 years"
+                  caption={content.sections.pivot.imageCaption}
                   onClick={() => openLightbox(2)}
                 />
               </div>
