@@ -31,6 +31,9 @@ const ContactForm = () => {
       error: "Failed to send message. Please try again.",
       sending: "Sending...",
       send: "Send message",
+      namePlaceholder: "Your name",
+      emailPlaceholder: "Your email",
+      messagePlaceholder: "Your message",
     },
     fr: {
       missingFields: "Veuillez remplir tous les champs.",
@@ -39,6 +42,9 @@ const ContactForm = () => {
       error: "Échec de l'envoi. Veuillez réessayer.",
       sending: "Envoi...",
       send: "Envoyer le message",
+      namePlaceholder: "Votre nom",
+      emailPlaceholder: "Votre email",
+      messagePlaceholder: "Votre message",
     },
   };
 
@@ -91,40 +97,40 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 bg-card/10 backdrop-blur-sm p-6 rounded-lg border border-contact-foreground/20">
       <div>
         <Input
           type="text"
-          placeholder="Your name"
+          placeholder={t.namePlaceholder}
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="bg-input-background border-border"
+          className="bg-card/80 border-contact-foreground/30 text-foreground placeholder:text-muted-foreground"
           required
         />
       </div>
       <div>
         <Input
           type="email"
-          placeholder="Your email"
+          placeholder={t.emailPlaceholder}
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="bg-input-background border-border"
+          className="bg-card/80 border-contact-foreground/30 text-foreground placeholder:text-muted-foreground"
           required
         />
       </div>
       <div>
         <Textarea
-          placeholder="Your message"
+          placeholder={t.messagePlaceholder}
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          className="bg-input-background border-border min-h-[120px]"
+          className="bg-card/80 border-contact-foreground/30 text-foreground placeholder:text-muted-foreground min-h-[120px]"
           required
         />
       </div>
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-contact text-contact-foreground hover:bg-contact/90"
+        className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
       >
         {isSubmitting ? t.sending : t.send}
       </Button>
