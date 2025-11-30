@@ -225,15 +225,15 @@ export const wttjContent = {
     },
   },
   fr: {
-    progressLabels: [
-      { id: 'context-problem', label: '1. Contexte' },
-      { id: 'discovery', label: '2. Discovery' },
-      { id: 'pivot', label: '3. Pivot' },
-      { id: 'process', label: '4. Processus' },
-      { id: 'solution', label: '5. Solution' },
-      { id: 'learnings', label: '6. Apprentissages' },
-      { id: 'go-further', label: '7. Plus' },
-    ],
+    progressIndicator: {
+      context: '1. Contexte',
+      discovery: '2. Discovery',
+      pivot: '3. Pivot',
+      process: '4. Processus',
+      solution: '5. Solution',
+      learnings: '6. Apprentissages',
+      more: '7. Plus',
+    },
     hero: {
       title: "Augmenter la conversion des candidats seniors sur WTTJ",
     },
@@ -245,68 +245,65 @@ export const wttjContent = {
       industry: "HR Tech / Plateforme d'emploi",
       context: "Formation PM Maestro",
     },
-    tldr: {
-      items: [
-        {
-          label: 'Contexte',
-          content: 'Projet de formation réalisé dans le cadre de Product Management Maestro (12 jours)',
-        },
-        {
-          label: 'Challenge',
-          content: 'CTR des profils seniors à 11% vs 20% pour les profils juniors',
-        },
-        {
-          label: 'Pivot Stratégique',
-          content: "Focus sur les profils tech avec 5-8 ans d'expérience comme segment cible",
-        },
-        {
-          label: 'Solution MVP',
-          content: 'Standardisation + recommandations IA + filtres avancés',
-        },
-        {
-          label: 'Impact Visé',
-          content: 'Augmenter le CTR senior de 11% à 13% en 6 mois',
-        },
-        {
-          label: 'Contraintes Clés',
-          content: 'Projet sur 12 jours (contexte formation) ; Focus sur quick wins et scope MVP réaliste',
-        },
-      ],
-      disclaimer: {
-        type: 'academic' as const,
-        message: "Ceci est une étude de cas académique réalisée pendant la formation Product Management Maestro. Aucune relation contractuelle n'existe avec Welcome to the Jungle.",
+    tldr: [
+      {
+        label: 'Contexte',
+        content: 'Projet de formation réalisé dans le cadre de Product Management Maestro (12 jours)',
       },
-    },
+      {
+        label: 'Challenge',
+        content: 'CTR des profils seniors à 11% vs 20% pour les profils juniors',
+      },
+      {
+        label: 'Pivot Stratégique',
+        content: "Focus sur les profils tech avec 5-8 ans d'expérience comme segment cible",
+      },
+      {
+        label: 'Solution MVP',
+        content: 'Standardisation + recommandations IA + filtres avancés',
+      },
+      {
+        label: 'Impact Visé',
+        content: 'Augmenter le CTR senior de 11% à 13% en 6 mois',
+      },
+      {
+        label: 'Contraintes Clés',
+        content: 'Projet sur 12 jours (contexte formation) ; Focus sur quick wins et scope MVP réaliste',
+      },
+    ],
+    disclaimer: "Ceci est une étude de cas académique réalisée pendant la formation Product Management Maestro. Aucune relation contractuelle n'existe avec Welcome to the Jungle.",
     sections: {
       contextProblem: {
         title: "1. Contexte & Problème",
         challenge: "Le Challenge",
-        challengeText: "Welcome to the Jungle (WTTJ) est une plateforme HR tech leader connectant chercheurs d'emploi et entreprises. Alors que les profils juniors atteignent un CTR de 20%, les profils seniors avec 5+ ans d'expérience plafonnent à seulement 11% de CTR.",
+        description: "Welcome to the Jungle (WTTJ) est une plateforme HR tech leader connectant chercheurs d'emploi et entreprises. Alors que les profils juniors atteignent un CTR de 20%, les profils seniors avec 5+ ans d'expérience plafonnent à seulement 11% de CTR.",
         whyMatters: "Pourquoi C'est Important",
-        bullets: [
+        reasons: [
           "Les profils seniors représentent des placements à plus haute valeur pour WTTJ",
           "Les entreprises recherchent spécifiquement des talents expérimentés pour des rôles stratégiques",
           "Le faible engagement suggère un décalage entre la plateforme et les attentes des seniors",
         ],
-        caption: "Données et signaux marché",
+        imageAlt: "Données et signaux marché montrant les métriques d'engagement des profils seniors",
+        imageCaption: "Données et signaux marché",
       },
       discovery: {
         title: "2. Discovery",
-        intro: "Nous avons mené 8 entretiens vidéo qualitatifs avec des profils seniors (tech et autres secteurs) pour comprendre leur comportement de recherche d'emploi et leurs points de friction.",
-        bullets: [
+        description: "Nous avons mené 8 entretiens vidéo qualitatifs avec des profils seniors (tech et autres secteurs) pour comprendre leur comportement de recherche d'emploi et leurs points de friction.",
+        insights: [
           "Insights : transparence (salaire, missions), filtres pertinents, guidage",
           "CTR seniors ≈ 11% vs 20% juniors ; besoin de clarté sur les offres",
           "Les profils seniors recherchent stabilité et progression de carrière claire",
         ],
-        captions: {
-          jtbd: "JTBD et verbatims clés",
-          journey: "Cartographie du parcours utilisateur",
-        },
+        image1Alt: "JTBD et verbatims clés des entretiens utilisateurs",
+        image1Caption: "JTBD et verbatims clés",
+        image2Alt: "Cartographie du parcours utilisateur pour les profils seniors",
+        image2Caption: "Cartographie du parcours utilisateur",
       },
       pivot: {
         title: "3. Pivot Stratégique",
-        intro: "D'après notre recherche, nous avons identifié que les profils tech avec 5-8 ans d'expérience représentent le segment à plus haute valeur pour WTTJ. Ce pivot stratégique nous a permis de concentrer notre solution sur une audience cible bien définie.",
-        caption: "Pivot stratégique : Focus sur tech seniors 5-8 ans",
+        description: "D'après notre recherche, nous avons identifié que les profils tech avec 5-8 ans d'expérience représentent le segment à plus haute valeur pour WTTJ. Ce pivot stratégique nous a permis de concentrer notre solution sur une audience cible bien définie.",
+        imageAlt: "Analyse du pivot stratégique montrant la sélection du segment cible",
+        imageCaption: "Pivot stratégique : Focus sur tech seniors 5-8 ans",
       },
       process: {
         title: "4. Processus & Décisions Clés",
