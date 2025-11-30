@@ -6,6 +6,7 @@ interface SectionHeaderProps {
   description?: string;
   className?: string;
   alignment?: 'left' | 'center';
+  id?: string;
 }
 
 export const SectionHeader: React.FC<SectionHeaderProps> = ({ 
@@ -13,7 +14,8 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   title, 
   description, 
   className = "",
-  alignment = "left"
+  alignment = "left",
+  id
 }) => {
   const alignmentClasses = alignment === 'center' ? 'text-center items-center' : 'text-left';
   
@@ -24,11 +26,11 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
           {kicker}
         </p>
       )}
-      <h2 className="text-h2 text-foreground">
+      <h2 id={id} className="text-h2 text-foreground">
         {title}
       </h2>
       {description && (
-        <p className={`text-body text-muted-foreground ${alignment === 'center' ? 'max-w-3xl mx-auto' : 'max-w-2xl'}`}>
+        <p className={`text-body text-muted-foreground ${alignment === 'center' ? 'max-w-3xl mx-auto' : 'max-w-2xl'}`} aria-describedby={id}>
           {description}
         </p>
       )}

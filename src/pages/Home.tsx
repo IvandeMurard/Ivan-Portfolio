@@ -231,6 +231,9 @@ export const Home: React.FC = () => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      // Gestion du focus pour l'accessibilité
+      element.setAttribute('tabindex', '-1');
+      element.focus({ preventScroll: true });
     }
   };
 

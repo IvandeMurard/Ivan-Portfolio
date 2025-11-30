@@ -29,8 +29,8 @@ export function Footer({
   const { language } = useLanguage();
 
   const footerLabels = {
-    en: { navigation: "Navigation", connect: "Connect", allRights: "All rights reserved", madeWith: "Made with care" },
-    fr: { navigation: "Navigation", connect: "Se connecter", allRights: "Tous droits réservés", madeWith: "Fait avec soin" }
+    en: { navigation: "Navigation", connect: "Connect", allRights: "All rights reserved", madeWith: "Made with care", opensNewTab: "opens in new tab" },
+    fr: { navigation: "Navigation", connect: "Se connecter", allRights: "Tous droits réservés", madeWith: "Fait avec soin", opensNewTab: "s'ouvre dans un nouvel onglet" }
   };
   const labels = footerLabels[language];
 
@@ -41,7 +41,7 @@ export function Footer({
     .filter((s) => Boolean(s.href));
 
   return (
-    <footer className={["w-full bg-[#0B1220] text-white", className].join(" ")}>
+    <footer role="contentinfo" className={["w-full bg-[#0B1220] text-white", className].join(" ")}>
       <div className="w-full px-6 md:px-12 lg:px-16 py-12">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-8">
@@ -55,63 +55,67 @@ export function Footer({
 
           {/* Column 2: Sections - Split into 2 columns */}
           <div className="md:col-span-2 grid grid-cols-2 gap-8">
-            <div>
+            <nav aria-label={labels.navigation}>
               <h4 className="text-[13px] font-[600] tracking-[0.15em] uppercase text-white/60 mb-4">
                 {labels.navigation}
               </h4>
-              <nav className="space-y-2">
+              <ul className="space-y-2">
                 {sections.slice(0, Math.ceil(sections.length / 2)).map((section) => (
-                  <button
-                    key={section.id}
-                    onClick={() => onSectionClick?.(section.id)}
-                    className="block text-[15px] font-[400] text-white/80 hover:text-[#065f46] transition-colors duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-                  >
-                    {section.label}
-                  </button>
+                  <li key={section.id}>
+                    <button
+                      onClick={() => onSectionClick?.(section.id)}
+                      className="block text-[15px] font-[400] text-white/80 hover:text-[#065f46] transition-colors duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#065f46] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1220] rounded-sm"
+                      aria-label={`Navigate to ${section.label}`}
+                    >
+                      {section.label}
+                    </button>
+                  </li>
                 ))}
-              </nav>
-            </div>
-            <div>
+              </ul>
+            </nav>
+            <nav aria-label={`${labels.navigation} (continued)`}>
               <h4 className="text-[13px] font-[600] tracking-[0.15em] uppercase text-white/60 mb-4">
                 &nbsp;
               </h4>
-              <nav className="space-y-2">
+              <ul className="space-y-2">
                 {sections.slice(Math.ceil(sections.length / 2)).map((section) => (
-                  <button
-                    key={section.id}
-                    onClick={() => onSectionClick?.(section.id)}
-                    className="block text-[15px] font-[400] text-white/80 hover:text-[#065f46] transition-colors duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-                  >
-                    {section.label}
-                  </button>
+                  <li key={section.id}>
+                    <button
+                      onClick={() => onSectionClick?.(section.id)}
+                      className="block text-[15px] font-[400] text-white/80 hover:text-[#065f46] transition-colors duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#065f46] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1220] rounded-sm"
+                      aria-label={`Navigate to ${section.label}`}
+                    >
+                      {section.label}
+                    </button>
+                  </li>
                 ))}
-              </nav>
-            </div>
+              </ul>
+            </nav>
           </div>
 
           {/* Column 4: Social Icons + Tooltips */}
-          <div>
+          <nav aria-label={labels.connect}>
             <h4 className="text-[13px] font-[600] tracking-[0.15em] uppercase text-white/60 mb-4">
               {labels.connect}
             </h4>
 
-            <div className="flex items-center gap-4">
+            <ul className="flex items-center gap-4">
               {socialItems.map((social) => {
                 const isX = social.id === "x";
                 const Icon = !isX ? ICONS[social.id as Exclude<SocialKey, "x">] : null;
 
                 return (
-                  <a
-                    key={social.id}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative group outline-none"
-                    onMouseEnter={() => setHoveredIcon(social.id)}
-                    onMouseLeave={() => setHoveredIcon(null)}
-                    aria-label={social.label}
-                    title={social.label}
-                  >
+                  <li key={social.id}>
+                    <a
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative group outline-none focus-visible:ring-2 focus-visible:ring-[#065f46] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1220] rounded-sm"
+                      onMouseEnter={() => setHoveredIcon(social.id)}
+                      onMouseLeave={() => setHoveredIcon(null)}
+                      aria-label={`${social.label} (${labels.opensNewTab})`}
+                      title={social.label}
+                    >
                     {/* Icon */}
                     {!isX ? (
                       <Icon
@@ -147,7 +151,7 @@ export function Footer({
                     <span
                       className={[
                         "pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2",
-                        "rounded-md bg-white/10 px-2 py-1 text-[11px] text-white",
+                        "rounded-md bg-black/80 px-2 py-1 text-[11px] text-white",
                         "opacity-0 shadow-lg backdrop-blur-md ring-1 ring-white/15",
                         "transition-opacity duration-200",
                         "group-hover:opacity-100 group-focus-visible:opacity-100",
@@ -158,15 +162,16 @@ export function Footer({
                       {social.label}
                       {/* petit caret */}
                       <span
-                        className="absolute left-1/2 top-full -translate-x-1/2 h-2 w-2 rotate-45 bg-white/10 ring-1 ring-white/15"
+                        className="absolute left-1/2 top-full -translate-x-1/2 h-2 w-2 rotate-45 bg-black/80 ring-1 ring-white/15"
                         aria-hidden="true"
                       />
                     </span>
                   </a>
+                  </li>
                 );
               })}
-            </div>
-          </div>
+            </ul>
+          </nav>
         </div>
 
         {/* Separator */}
