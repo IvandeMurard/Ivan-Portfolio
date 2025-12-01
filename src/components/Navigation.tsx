@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "./ThemeToggle";
+import { HighContrastToggle } from "./HighContrastToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { designTokens } from "@/design-tokens";
 
@@ -344,7 +345,10 @@ export const Navigation: FC = () => {
                   FR
                 </button>
               </div>
-              <ThemeToggle />
+              <div className="flex items-center gap-2">
+                <ThemeToggle />
+                <HighContrastToggle />
+              </div>
             </div>
           </div>
         </div>
@@ -445,8 +449,15 @@ export const Navigation: FC = () => {
                 </Link>
               </nav>
 
-              {/* Language Selector */}
-              <div className="mt-auto pt-6 border-t border-border">
+              {/* Language Selector & Accessibility */}
+              <div className="mt-auto pt-6 border-t border-border space-y-4">
+                {/* Accessibility toggles */}
+                <div className="flex items-center justify-center gap-3">
+                  <ThemeToggle />
+                  <HighContrastToggle />
+                </div>
+                
+                {/* Language selection */}
                 <div 
                   className="flex items-center justify-center gap-3"
                   role="group"

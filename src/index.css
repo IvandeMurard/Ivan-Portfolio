@@ -111,7 +111,7 @@
   }
 
   .dark {
-    /* New Color Palette - Dark Mode */
+    /* New Color Palette - Dark Mode (WCAG AA compliant) */
     --background: 221 39% 11%; /* #0f172a */
     --foreground: 213 31% 95%; /* #F1F6FB */
 
@@ -128,9 +128,9 @@
     --secondary-foreground: 213 31% 95%; /* #F1F6FB */
 
     --muted: 217 26% 22%; /* #223250 */
-    --muted-foreground: 220 17% 77%; /* #B6BED8 */
+    --muted-foreground: 220 17% 82%; /* Improved from 77% → 82% for WCAG AA */
 
-    --description: 217 14% 53%; /* #7B859A */
+    --description: 217 14% 65%; /* Improved from 53% → 65% for WCAG AA */
 
     --contact: 164 88% 20%; /* #065f46 - Unified green from light mode */
     --contact-foreground: 0 0% 100%; /* #FFFFFF */
@@ -156,6 +156,84 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* High Contrast Mode - Light (WCAG AAA) */
+  .high-contrast {
+    --background: 0 0% 100%;      /* Pure white #FFFFFF */
+    --foreground: 0 0% 0%;        /* Pure black #000000 */
+    
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    
+    --primary: 240 100% 25%;      /* Dark blue for high contrast */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 0%;
+    
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 20%; /* Very dark gray - 10:1 ratio */
+    
+    --description: 0 0% 25%;      /* 8.6:1 ratio */
+    
+    --contact: 160 100% 20%;      /* Dark green for high contrast */
+    --contact-foreground: 0 0% 100%;
+    
+    --accent: 240 100% 25%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 100% 30%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 0%;            /* Black borders */
+    --input: 0 0% 0%;
+    --input-background: 0 0% 98%;
+    --ring: 240 100% 25%;
+    
+    --switch-background: 0 0% 60%;
+  }
+
+  /* High Contrast Mode - Dark (WCAG AAA) */
+  .dark.high-contrast {
+    --background: 0 0% 0%;        /* Pure black #000000 */
+    --foreground: 0 0% 100%;      /* Pure white #FFFFFF */
+    
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+    
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    
+    --primary: 210 100% 70%;      /* Bright blue for visibility */
+    --primary-foreground: 0 0% 0%;
+    
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 85%; /* 12:1 ratio */
+    
+    --description: 0 0% 80%;      /* 10:1 ratio */
+    
+    --contact: 160 100% 60%;      /* Bright green for visibility */
+    --contact-foreground: 0 0% 0%;
+    
+    --accent: 210 100% 70%;
+    --accent-foreground: 0 0% 0%;
+    
+    --destructive: 0 100% 70%;
+    --destructive-foreground: 0 0% 0%;
+    
+    --border: 0 0% 100%;          /* White borders */
+    --input: 0 0% 80%;
+    --input-background: 0 0% 5%;
+    --ring: 210 100% 70%;
+    
+    --switch-background: 0 0% 20%;
   }
 }
 
@@ -346,6 +424,22 @@
   
   .snap-start {
     scroll-snap-align: start;
+  }
+
+  /* High Contrast Mode Enhancements */
+  .high-contrast *:focus-visible {
+    outline: 3px solid currentColor !important;
+    outline-offset: 3px !important;
+  }
+
+  .high-contrast .card-modern,
+  .high-contrast .chip-filter {
+    border-width: 2px;
+  }
+
+  .high-contrast a:not(.no-underline):not([class*="Button"]) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 }
 

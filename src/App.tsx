@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { HighContrastProvider } from "@/contexts/HighContrastContext";
 import { FeedbackWidget } from "@/components/FeedbackWidget";
 import { Home } from "./pages/Home";
 import Sonor from "./pages/Sonor";
@@ -19,8 +20,9 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-      <LanguageProvider>
-        <TooltipProvider>
+      <HighContrastProvider>
+        <LanguageProvider>
+          <TooltipProvider>
           <Toaster />
           <Sonner />
           <BrowserRouter>
@@ -44,6 +46,7 @@ const App = () => (
           </BrowserRouter>
         </TooltipProvider>
       </LanguageProvider>
+      </HighContrastProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );
