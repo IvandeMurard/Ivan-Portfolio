@@ -20,7 +20,7 @@ const COLORS = {
 // Enhanced nav link style with better hover/active states and WCAG AA compliant focus
 const navLinkBase =
   "relative inline-flex items-center px-3 h-9 text-sm font-medium rounded-xl " +
-  "text-foreground/70 hover:text-foreground " +
+  "text-foreground/85 hover:text-foreground " +
   "hover:bg-black/[0.06] dark:hover:bg-white/[0.10] " +
   "active:scale-[0.97] active:bg-black/[0.10] dark:active:bg-white/[0.15] " +
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background " +
@@ -321,7 +321,7 @@ export const Navigation: FC = () => {
                   className={`h-8 px-2.5 rounded-lg font-medium transition-all duration-200 ${
                     language === 'en' 
                       ? 'text-foreground bg-black/[0.08] dark:bg-white/[0.12] font-semibold' 
-                      : 'text-foreground/60 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.06]'
+                      : 'text-foreground/75 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.06]'
                   } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                   onClick={() => setLanguage('en')}
                   aria-label={language === 'en' ? 'English (current language)' : 'Switch to English'}
@@ -336,7 +336,7 @@ export const Navigation: FC = () => {
                   className={`h-8 px-2.5 rounded-lg font-medium transition-all duration-200 ${
                     language === 'fr' 
                       ? 'text-foreground bg-black/[0.08] dark:bg-white/[0.12] font-semibold' 
-                      : 'text-foreground/60 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.06]'
+                      : 'text-foreground/75 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.06]'
                   } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                   onClick={() => setLanguage('fr')}
                   aria-label={language === 'fr' ? 'Français (langue actuelle)' : 'Passer en français'}
@@ -467,7 +467,7 @@ export const Navigation: FC = () => {
                     className={`h-10 px-4 rounded-lg font-medium transition-all ${
                       language === 'en' 
                         ? 'text-foreground bg-black/[0.08] dark:bg-white/[0.12] font-bold' 
-                        : 'text-foreground/70 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.08]'
+                        : 'text-foreground/85 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.08]'
                     } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                     onClick={() => setLanguage('en')}
                     aria-label={language === 'en' ? 'English (current language)' : 'Switch to English'}
@@ -475,12 +475,12 @@ export const Navigation: FC = () => {
                   >
                     EN
                   </button>
-                  <span className="text-foreground/50" aria-hidden="true">|</span>
+                  <span className="text-foreground/65" aria-hidden="true">|</span>
                   <button
                     className={`h-10 px-4 rounded-lg font-medium transition-all ${
                       language === 'fr' 
                         ? 'text-foreground bg-black/[0.08] dark:bg-white/[0.12] font-bold' 
-                        : 'text-foreground/70 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.08]'
+                        : 'text-foreground/85 hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.08]'
                     } active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background`}
                     onClick={() => setLanguage('fr')}
                     aria-label={language === 'fr' ? 'Français (langue actuelle)' : 'Passer en français'}
