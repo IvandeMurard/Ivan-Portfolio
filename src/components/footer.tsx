@@ -48,7 +48,7 @@ export function Footer({
           {/* Column 1: Name & Tagline */}
           <div>
             <h3 className="text-[20px] font-[700] text-white mb-2">{siteName}</h3>
-            <p className="text-[14px] font-[400] leading-[1.6] text-white/70">
+            <p className="text-[14px] font-[400] leading-[1.6] text-white/85">
               {tagline}
             </p>
           </div>
@@ -56,7 +56,7 @@ export function Footer({
           {/* Column 2: Sections - Split into 2 columns */}
           <div className="md:col-span-2 grid grid-cols-2 gap-8">
             <nav aria-label={labels.navigation}>
-              <h4 className="text-[13px] font-[600] tracking-[0.15em] uppercase text-white/60 mb-4">
+              <h4 className="text-[13px] font-[600] tracking-[0.15em] uppercase text-white/75 mb-4">
                 {labels.navigation}
               </h4>
               <ul className="space-y-2">
@@ -74,7 +74,7 @@ export function Footer({
               </ul>
             </nav>
             <nav aria-label={`${labels.navigation} (continued)`}>
-              <h4 className="text-[13px] font-[600] tracking-[0.15em] uppercase text-white/60 mb-4">
+              <h4 className="text-[13px] font-[600] tracking-[0.15em] uppercase text-white/75 mb-4">
                 &nbsp;
               </h4>
               <ul className="space-y-2">
@@ -95,7 +95,7 @@ export function Footer({
 
           {/* Column 4: Social Icons + Tooltips */}
           <nav aria-label={labels.connect}>
-            <h4 className="text-[13px] font-[600] tracking-[0.15em] uppercase text-white/60 mb-4">
+            <h4 className="text-[13px] font-[600] tracking-[0.15em] uppercase text-white/75 mb-4">
               {labels.connect}
             </h4>
 
@@ -125,7 +125,7 @@ export function Footer({
                           "transition-colors duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
                           hoveredIcon === social.id
                             ? "text-[#065f46]"
-                            : "text-white/70",
+                            : "text-white/85",
                         ].join(" ")}
                       />
                     ) : (
@@ -136,7 +136,7 @@ export function Footer({
                         fill="none"
                         className={[
                           "transition-colors duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)]",
-                          hoveredIcon === "x" ? "stroke-[#065f46]" : "stroke-white/70",
+                          hoveredIcon === "x" ? "stroke-[#065f46]" : "stroke-white/85",
                         ].join(" ")}
                         strokeWidth="1.5"
                         strokeLinecap="round"
@@ -179,7 +179,7 @@ export function Footer({
 
         {/* Copyright */}
         <div className="text-center md:text-left">
-          <p className="text-[13px] font-[400] text-white/60 leading-[1.6]">
+          <p className="text-[13px] font-[400] text-white/75 leading-[1.6]">
             © {new Date().getFullYear()} {siteName}. {labels.allRights}.
             <br className="md:hidden" />
             <span className="hidden md:inline"> • </span>
