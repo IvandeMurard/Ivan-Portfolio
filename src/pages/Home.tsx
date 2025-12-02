@@ -955,7 +955,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={0.1}>
-            <p className="text-lg max-w-2xl mx-auto opacity-90">Let's explore opportunities together.</p>
+            <p className="text-lg max-w-2xl mx-auto opacity-90">Let's talk.</p>
           </ScrollReveal>
 
           <ScrollReveal variant="scale" delay={0.2}>
