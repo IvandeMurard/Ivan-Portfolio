@@ -950,7 +950,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <ScrollReveal variant="fade-up">
             <h2 className="text-h2" id="contact-heading">
-              Ready to build?
+              Ready to build the future?
             </h2>
           </ScrollReveal>
 
