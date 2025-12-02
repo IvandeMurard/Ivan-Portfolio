@@ -91,15 +91,15 @@ export function KeyboardShortcutsHelp({ isOpen, onClose }: KeyboardShortcutsHelp
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
-            className="fixed right-0 top-1/2 -translate-y-1/2 w-full max-w-[280px] z-[100] shadow-2xl"
+            className="fixed right-0 top-1/2 -translate-y-1/2 w-full max-w-[240px] z-[100] shadow-2xl"
             role="dialog"
             aria-modal="true"
             aria-labelledby="keyboard-shortcuts-title"
             aria-describedby="keyboard-shortcuts-description"
           >
-            <div className="bg-background border-l border-t border-b border-border rounded-l-2xl flex flex-col max-h-[80vh]">
+            <div className="bg-background border-l border-t border-b border-border rounded-l-2xl flex flex-col max-h-[90vh]">
               {/* Header */}
-              <div className="flex items-center justify-between px-4 py-3 border-b border-border">
+              <div className="flex items-center justify-between px-3 py-2 border-b border-border">
                 <h2 id="keyboard-shortcuts-title" className="text-base font-semibold text-foreground">
                   {language === "en" ? "Shortcuts" : "Raccourcis"}
                 </h2>
@@ -116,7 +116,7 @@ export function KeyboardShortcutsHelp({ isOpen, onClose }: KeyboardShortcutsHelp
               </div>
 
               {/* Content */}
-              <div className="flex-1 overflow-y-auto px-4 py-3">
+              <div className="flex-1 overflow-y-auto px-3 py-2">
                 <p id="keyboard-shortcuts-description" className="sr-only">
                   {language === "en"
                     ? "List of available keyboard shortcuts for navigation"
