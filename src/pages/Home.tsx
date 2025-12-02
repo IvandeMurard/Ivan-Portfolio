@@ -153,7 +153,7 @@ const RippleButton: React.FC<RippleButtonProps> = ({
   );
 };
 
-export const Home: React.FC = () => {
+export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboardHelpToggle }) => {
   const navigate = useNavigate();
   const { language } = useLanguage();
   const [activeFilter, setActiveFilter] = useState("all");
@@ -260,7 +260,7 @@ export const Home: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden" id="main-content">
-      <Navigation />
+      <Navigation onKeyboardHelpToggle={onKeyboardHelpToggle} />
       <ScrollProgressBar />
 
       <ProgressIndicator
