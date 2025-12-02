@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Keyboard } from "lucide-react";
+import { X } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "./ui/button";
 import { useEffect, useRef } from "react";
@@ -79,41 +79,36 @@ export function KeyboardShortcutsHelp({ isOpen, onClose }: KeyboardShortcutsHelp
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90]"
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90]"
             onClick={onClose}
             aria-hidden="true"
           />
 
-          {/* Panel */}
+          {/* Right Drawer Panel */}
           <motion.div
             ref={dialogRef}
-            initial={{ opacity: 0, scale: 0.95, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 10 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md z-[100] p-4"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
+            className="fixed right-0 top-0 h-full w-full max-w-[280px] z-[100] shadow-2xl"
             role="dialog"
             aria-modal="true"
             aria-labelledby="keyboard-shortcuts-title"
             aria-describedby="keyboard-shortcuts-description"
           >
-            <div className="bg-background border-2 border-border rounded-2xl shadow-2xl overflow-hidden">
+            <div className="bg-background border-l border-border h-full flex flex-col">
               {/* Header */}
-              <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary/15 dark:bg-primary/20">
-                    <Keyboard className="w-5 h-5 text-primary" aria-hidden="true" />
-                  </div>
-                  <h2 id="keyboard-shortcuts-title" className="text-lg font-semibold text-foreground">
-                    {language === "en" ? "Keyboard Shortcuts" : "Raccourcis Clavier"}
-                  </h2>
-                </div>
+              <div className="flex items-center justify-between px-4 py-3 border-b border-border">
+                <h2 id="keyboard-shortcuts-title" className="text-base font-semibold text-foreground">
+                  {language === "en" ? "Shortcuts" : "Raccourcis"}
+                </h2>
                 <Button
                   ref={closeButtonRef}
                   variant="ghost"
                   size="icon"
                   onClick={onClose}
-                  className="h-9 w-9 rounded-lg hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  className="h-8 w-8 rounded-lg hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
                   aria-label={language === "en" ? "Close shortcuts help" : "Fermer l'aide des raccourcis"}
                 >
                   <X className="h-4 w-4" aria-hidden="true" />
@@ -121,39 +116,32 @@ export function KeyboardShortcutsHelp({ isOpen, onClose }: KeyboardShortcutsHelp
               </div>
 
               {/* Content */}
-              <div className="px-6 py-5 space-y-1">
+              <div className="flex-1 overflow-y-auto px-4 py-3">
                 <p id="keyboard-shortcuts-description" className="sr-only">
                   {language === "en"
                     ? "List of available keyboard shortcuts for navigation"
                     : "Liste des raccourcis clavier disponibles pour la navigation"}
                 </p>
-                {SHORTCUTS.map((shortcut, index) => (
-                  <div
-                    key={shortcut.key}
-                    className="flex items-center justify-between gap-4 py-3 px-2 rounded-lg hover:bg-muted/50 transition-colors"
-                    role="listitem"
-                    aria-label={`${shortcut.label[language]}: ${language === "en" ? "Press" : "Appuyez sur"} ${shortcut.key}`}
-                  >
-                    <span className="text-sm font-medium text-foreground">
-                      {shortcut.label[language]}
-                    </span>
-                    <kbd 
-                      className="inline-flex items-center justify-center min-w-[36px] h-9 px-3 text-sm font-bold text-foreground bg-muted border-2 border-border rounded-lg shadow-sm"
-                      aria-label={`${language === "en" ? "Key" : "Touche"} ${shortcut.key}`}
+                <div className="space-y-0.5">
+                  {SHORTCUTS.map((shortcut) => (
+                    <div
+                      key={shortcut.key}
+                      className="flex items-center justify-between gap-2 py-2 px-2 rounded-lg hover:bg-muted/50 transition-colors"
+                      role="listitem"
+                      aria-label={`${shortcut.label[language]}: ${language === "en" ? "Press" : "Appuyez sur"} ${shortcut.key}`}
                     >
-                      {shortcut.key}
-                    </kbd>
-                  </div>
-                ))}
-              </div>
-
-              {/* Footer */}
-              <div className="px-6 py-4 bg-muted/40 border-t border-border">
-                <p className="text-xs text-muted-foreground text-center leading-relaxed">
-                  {language === "en"
-                    ? "Shortcuts work when not typing in a form field. Press Escape or click outside to close."
-                    : "Les raccourcis fonctionnent quand vous ne tapez pas dans un champ. Appuyez sur Échap ou cliquez à l'extérieur pour fermer."}
-                </p>
+                      <span className="text-sm text-foreground">
+                        {shortcut.label[language]}
+                      </span>
+                      <kbd 
+                        className="inline-flex items-center justify-center min-w-[28px] h-7 px-2 text-xs font-bold text-foreground bg-muted border border-border rounded shadow-sm"
+                        aria-label={`${language === "en" ? "Key" : "Touche"} ${shortcut.key}`}
+                      >
+                        {shortcut.key}
+                      </kbd>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>
