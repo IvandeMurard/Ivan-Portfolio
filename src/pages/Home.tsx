@@ -549,7 +549,16 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
       <section id="work" className="relative pt-24 md:pt-28 pb-16 md:pb-20 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal variant="fade-up">
-            <SectionHeader title="Work" alignment="left" className="mb-8" />
+            <SectionHeader title="Work" alignment="left" className="mb-4" />
+          </ScrollReveal>
+
+          {/* Subtitle */}
+          <ScrollReveal variant="fade-up" delay={0.1}>
+            <p className="text-base md:text-lg text-muted-foreground mb-8 max-w-2xl">
+              {language === 'en' 
+                ? 'Turning ideas into insights, insights into solutions' 
+                : 'Transformer les idées en insights, les insights en solutions'}
+            </p>
           </ScrollReveal>
 
           <FilterChips
