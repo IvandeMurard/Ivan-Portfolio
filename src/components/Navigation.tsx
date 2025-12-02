@@ -7,6 +7,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { HighContrastToggle } from "./HighContrastToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { designTokens } from "@/design-tokens";
+import { SkipLinks } from "./SkipLinks";
 
 const COLORS = {
   bg: designTokens.color.bg.base,
@@ -166,13 +167,8 @@ export const Navigation: FC = () => {
 
   return (
     <>
-      {/* Skip to main content link for keyboard navigation */}
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-lg focus:ring-2 focus:ring-ring focus:ring-offset-2"
-      >
-        {language === 'en' ? 'Skip to main content' : 'Aller au contenu principal'}
-      </a>
+      {/* Enhanced skip links with navigation to all main sections */}
+      <SkipLinks />
 
       <nav
         role="navigation"
