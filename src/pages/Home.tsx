@@ -760,7 +760,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
 
       {/* CTA Banner */}
       <CTABanner
-        title="Ready to build the future?"
+        title="Ready to build?"
         description="Let's discuss your product vision and build something great together"
         ctaText="Let's talk!"
         onClick={() => scrollToSection("contact")}

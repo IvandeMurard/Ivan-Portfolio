@@ -63,11 +63,11 @@ export default function AgentsEvalCase() {
             subtitle="An autonomous system that tests your AI agents with enterprise-grade rigor"
             backgroundImage={undefined}
             tools={[
-              { name: 'Supabase', icon: '/img/supabase-icon.png' },
-              { name: 'OpenAI', icon: '/img/openai-icon.svg' },
-              { name: 'n8n', icon: '/img/n8n-icon.svg' },
-              { name: 'GitHub', icon: '/img/github-icon.svg' },
-              { name: 'Figma', icon: '/img/figma-icon.svg' },
+              { name: "Supabase", icon: "/img/supabase-icon.png" },
+              { name: "OpenAI", icon: "/img/openai-icon.svg" },
+              { name: "n8n", icon: "/img/n8n-icon.svg" },
+              { name: "GitHub", icon: "/img/github-icon.svg" },
+              { name: "Figma", icon: "/img/figma-icon.svg" },
             ]}
           />
         </div>
@@ -88,20 +88,23 @@ export default function AgentsEvalCase() {
             <CaseStudyTLDR
               items={[
                 {
-                  label: 'Context',
-                  content: 'Modern AI agents are powerful but unpredictable. Without structured evaluation, you cannot safely deploy them in production.',
+                  label: "Context",
+                  content:
+                    "Modern AI agents are powerful but unpredictable. Without structured evaluation, you cannot safely deploy them in production.",
                 },
                 {
-                  label: 'Challenge',
-                  content: 'Unpredictability, subjective manual review, and no shared standard for evaluation',
+                  label: "Challenge",
+                  content: "Unpredictability, subjective manual review, and no shared standard for evaluation",
                 },
                 {
-                  label: 'Solution',
-                  content: 'The Evaluation Engine™: an autonomous system that scores agents against a structured rubric with safety, privacy, reliability, and auditability',
+                  label: "Solution",
+                  content:
+                    "The Evaluation Engine™: an autonomous system that scores agents against a structured rubric with safety, privacy, reliability, and auditability",
                 },
                 {
-                  label: 'Impact',
-                  content: '80% reduction in evaluation time, repeatability, industrial-grade trust layer, reusable foundation',
+                  label: "Impact",
+                  content:
+                    "80% reduction in evaluation time, repeatability, industrial-grade trust layer, reusable foundation",
                 },
               ]}
             />
@@ -110,18 +113,23 @@ export default function AgentsEvalCase() {
 
         {/* Main Content - Full width after sidebar */}
         <main className="w-full space-y-16">
-
           {/* Section 1: The problem - Ada structure with blue background and accent bar */}
-          <section id="problem" className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-12 md:py-16 bg-[#C9DDFF] dark:bg-[#0F1416]">
+          <section
+            id="problem"
+            className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-12 md:py-16 bg-[#C9DDFF] dark:bg-[#0F1416]"
+          >
             <div className="w-full px-4 md:px-8 lg:px-12">
               <div className="relative pl-6 md:pl-8 space-y-8">
                 {/* Accent bar */}
                 <div className="absolute left-0 top-4 bottom-4 w-[4px] rounded-full bg-[#5B7CFF]" />
-                
+
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-slate-900 dark:text-slate-100">1. The problem</h2>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-4 text-slate-900 dark:text-slate-100">
+                    1. The problem
+                  </h2>
                   <p className="text-base md:text-lg text-slate-700 dark:text-slate-300 max-w-3xl">
-                    Modern AI agents are powerful — but unpredictable. Without structured evaluation, you can't safely deploy them in production.
+                    Modern AI agents are powerful — but unpredictable. Without structured evaluation, you can't safely
+                    deploy them in production.
                   </p>
                 </div>
 
@@ -146,7 +154,9 @@ export default function AgentsEvalCase() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: 0.1 }}
                   >
-                    <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Subjective manual review</h3>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+                      Subjective manual review
+                    </h3>
                     <p className="text-sm text-slate-600 dark:text-slate-400">
                       Results vary depending on who evaluates, when, and using which criteria.
                     </p>
@@ -189,7 +199,8 @@ export default function AgentsEvalCase() {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-4">2. My Role & Approach</h2>
               <p className="text-base md:text-lg text-muted-foreground max-w-3xl">
-                As Product Manager & Technical Lead, I designed and built this autonomous evaluation system from the ground up.
+                As Product Manager & Technical Lead, I designed and built this autonomous evaluation system from the
+                ground up.
               </p>
             </div>
 
@@ -236,7 +247,8 @@ export default function AgentsEvalCase() {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-4">3. The solution</h2>
               <p className="text-base md:text-lg text-muted-foreground max-w-3xl">
-                The Evaluation Engine™ is an autonomous evaluation system that scores agents against a structured rubric.
+                The Evaluation Engine™ is an autonomous evaluation system that scores agents against a structured
+                rubric.
               </p>
             </div>
 
@@ -301,7 +313,8 @@ export default function AgentsEvalCase() {
               transition={{ duration: 0.3, delay: 0.4 }}
             >
               <p className="text-base md:text-lg">
-                It reads full conversations, scores them, detects issues, produces recommendations, and emits a final verdict.
+                It reads full conversations, scores them, detects issues, produces recommendations, and emits a final
+                verdict.
               </p>
             </motion.div>
           </section>
@@ -311,7 +324,8 @@ export default function AgentsEvalCase() {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-4">4. How it works</h2>
               <p className="text-base md:text-lg text-muted-foreground max-w-3xl">
-                The Engine processes every evaluation through a structured flow: agent output → reasoning → scoring → structured storage → verdict.
+                The Engine processes every evaluation through a structured flow: agent output → reasoning → scoring →
+                structured storage → verdict.
               </p>
             </div>
 
@@ -407,7 +421,8 @@ export default function AgentsEvalCase() {
                   </div>
                   <h3 className="text-xl font-bold text-white">Safety-by-design</h3>
                   <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
-                    Detects risky output, flags PII, and enforces constraints with built-in safeguards to minimize hallucinations and ensure safe responses.
+                    Detects risky output, flags PII, and enforces constraints with built-in safeguards to minimize
+                    hallucinations and ensure safe responses.
                   </p>
                 </div>
 
@@ -432,7 +447,8 @@ export default function AgentsEvalCase() {
                   </div>
                   <h3 className="text-xl font-bold text-white">Privacy-by-design</h3>
                   <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
-                    High standards for data protection with minimal data retention, structured output only, and controlled logs with zero data retention policies.
+                    High standards for data protection with minimal data retention, structured output only, and
+                    controlled logs with zero data retention policies.
                   </p>
                 </div>
 
@@ -462,7 +478,8 @@ export default function AgentsEvalCase() {
                   </div>
                   <h3 className="text-xl font-bold text-white">Reliability</h3>
                   <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
-                    5-score rubric with composite scoring and deterministic gating lane for consistent, repeatable evaluation results.
+                    5-score rubric with composite scoring and deterministic gating lane for consistent, repeatable
+                    evaluation results.
                   </p>
                 </div>
 
@@ -496,7 +513,8 @@ export default function AgentsEvalCase() {
                   </div>
                   <h3 className="text-xl font-bold text-white">Auditability</h3>
                   <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
-                    Every run is stored with issues, recommendations, structured scores, a clear verdict, and a complete trace of decisions.
+                    Every run is stored with issues, recommendations, structured scores, a clear verdict, and a complete
+                    trace of decisions.
                   </p>
                 </div>
               </div>
@@ -527,9 +545,7 @@ export default function AgentsEvalCase() {
           <section id="architecture" className="py-12 md:py-16 space-y-8">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-4">5. Process: Architecture</h2>
-              <p className="text-base md:text-lg text-muted-foreground max-w-3xl">
-                How the evaluation pipeline runs
-              </p>
+              <p className="text-base md:text-lg text-muted-foreground max-w-3xl">How the evaluation pipeline runs</p>
             </div>
             <ArchitectureStepper />
           </section>
@@ -591,7 +607,10 @@ export default function AgentsEvalCase() {
           </section>
 
           {/* Section 7: Impact - Ada style */}
-          <section id="impact" className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-12 md:py-16 bg-[#F8FAFC] dark:bg-slate-950">
+          <section
+            id="impact"
+            className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-12 md:py-16 bg-[#F8FAFC] dark:bg-slate-950"
+          >
             <div className="w-full px-4 md:px-8 lg:px-12 space-y-8">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100">7. Impact & Results</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -657,7 +676,8 @@ export default function AgentsEvalCase() {
               >
                 <h3 className="text-lg font-semibold mb-3">Agent-as-Evaluator works</h3>
                 <p className="text-sm text-muted-foreground">
-                  Using LLMs to evaluate other LLMs provides structured, reproducible assessments when given clear rubrics.
+                  Using LLMs to evaluate other LLMs provides structured, reproducible assessments when given clear
+                  rubrics.
                 </p>
               </motion.div>
               <motion.div
@@ -697,7 +717,9 @@ export default function AgentsEvalCase() {
                 <ul className="space-y-3 text-base md:text-lg">
                   <li className="flex items-start gap-3">
                     <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#5B7CFF] flex-shrink-0" />
-                    <span>Plug customers' SOPs (policies, playbooks) to score agents against these specific procedures.</span>
+                    <span>
+                      Plug customers' SOPs (policies, playbooks) to score agents against these specific procedures.
+                    </span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#5B7CFF] flex-shrink-0" />
@@ -719,12 +741,11 @@ export default function AgentsEvalCase() {
               </div>
             </div>
           </section>
-
         </main>
 
         {/* CTA Banner - Full width */}
         <CTABanner
-          title="Ready to build the future?"
+          title="Ready to build?"
           description="Let's discuss your product vision and build something great together"
           ctaText="Let's talk!"
           onClick={() => navigate("/#contact")}
@@ -746,7 +767,8 @@ export default function AgentsEvalCase() {
           {
             src: "",
             alt: "Evaluation Engine™ Workflow Diagram",
-            caption: "The Evaluation Engine™ processes conversations through a structured workflow: user input → safety check → normalization → evaluation → issues/recommendations/scores → Supabase dashboard → CI gate",
+            caption:
+              "The Evaluation Engine™ processes conversations through a structured workflow: user input → safety check → normalization → evaluation → issues/recommendations/scores → Supabase dashboard → CI gate",
           },
         ]}
         currentIndex={0}
@@ -757,7 +779,8 @@ export default function AgentsEvalCase() {
           <div className="max-w-[95vw] max-h-[90vh] overflow-auto p-8 flex flex-col items-center">
             <EvaluationEngineDiagram size="full" />
             <p className="mt-6 text-white text-center text-base md:text-lg max-w-4xl">
-              The Evaluation Engine™ processes conversations through a structured workflow: user input → safety check → normalization → evaluation → issues/recommendations/scores → Supabase dashboard → CI gate
+              The Evaluation Engine™ processes conversations through a structured workflow: user input → safety check →
+              normalization → evaluation → issues/recommendations/scores → Supabase dashboard → CI gate
             </p>
           </div>
         }
