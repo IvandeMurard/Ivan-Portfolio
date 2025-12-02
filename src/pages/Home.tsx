@@ -36,30 +36,35 @@ import { experiences as bilingualExperiences } from "@/data/experience";
 import ContactForm from "@/components/ContactForm";
 
 // Calculate filter chips dynamically based on visible projects (excluding hidden)
-const getFilterChips = (projects: typeof bilingualProjects, language: 'en' | 'fr') => {
+const getFilterChips = (projects: typeof bilingualProjects, language: "en" | "fr") => {
   const visibleProjects = projects.filter((p) => !p.hidden);
 
   const allCount = visibleProjects.length;
-  const agenticExperiencesCount = visibleProjects.filter(
-    (p) => {
-      const tags = language === 'en' ? p.tags_en : p.tags_fr;
-      return p.category === "agentic-experiences" || tags?.some((tag) => tag.toLowerCase() === "agentic experiences");
-    }
-  ).length;
+  const agenticExperiencesCount = visibleProjects.filter((p) => {
+    const tags = language === "en" ? p.tags_en : p.tags_fr;
+    return p.category === "agentic-experiences" || tags?.some((tag) => tag.toLowerCase() === "agentic experiences");
+  }).length;
   const experienceCount = visibleProjects.filter((p) => p.category === "experience").length;
   const productCount = visibleProjects.filter((p) => p.category === "product").length;
-  const automatisationsCount = visibleProjects.filter(
-    (p) => {
-      const tags = language === 'en' ? p.tags_en : p.tags_fr;
-      return p.category === "automatisations" || tags?.some((tag) => tag.toLowerCase() === "automatisations");
-    }
-  ).length;
+  const automatisationsCount = visibleProjects.filter((p) => {
+    const tags = language === "en" ? p.tags_en : p.tags_fr;
+    return p.category === "automatisations" || tags?.some((tag) => tag.toLowerCase() === "automatisations");
+  }).length;
 
   const chips = [
-    { id: "all", label: language === 'fr' ? `Tous (${allCount})` : `All (${allCount})` },
-    { id: "agentic-experiences", label: language === 'fr' ? `Expériences Agentiques (${agenticExperiencesCount})` : `Agentic Experiences (${agenticExperiencesCount})` },
-    { id: "experience", label: language === 'fr' ? `Expérience (${experienceCount})` : `Experience (${experienceCount})` },
-    { id: "product", label: language === 'fr' ? `Produit (${productCount})` : `Product (${productCount})` },
+    { id: "all", label: language === "fr" ? `Tous (${allCount})` : `All (${allCount})` },
+    {
+      id: "agentic-experiences",
+      label:
+        language === "fr"
+          ? `Expériences Agentiques (${agenticExperiencesCount})`
+          : `Agentic Experiences (${agenticExperiencesCount})`,
+    },
+    {
+      id: "experience",
+      label: language === "fr" ? `Expérience (${experienceCount})` : `Experience (${experienceCount})`,
+    },
+    { id: "product", label: language === "fr" ? `Produit (${productCount})` : `Product (${productCount})` },
   ];
 
   // Only include automatisations if there are projects with this tag/category
@@ -70,12 +75,11 @@ const getFilterChips = (projects: typeof bilingualProjects, language: 'en' | 'fr
   return chips;
 };
 
-const getExperienceFilterChips = (language: 'en' | 'fr') => [
-  { id: "experiences", label: language === 'fr' ? "Expériences" : "Experiences" },
+const getExperienceFilterChips = (language: "en" | "fr") => [
+  { id: "experiences", label: language === "fr" ? "Expériences" : "Experiences" },
   { id: "continuous-learning", label: "Continuous Learning" },
-  { id: "education", label: language === 'fr' ? "Éducation" : "Education" },
+  { id: "education", label: language === "fr" ? "Éducation" : "Education" },
 ];
-
 
 // RippleButton component with ripple effect
 interface RippleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -168,7 +172,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
 
   // Get translated content
   const content = homeContent[language];
-  
+
   // Use bilingual data
   const projects = bilingualProjects;
   const hackathons = bilingualHackathons;
@@ -219,20 +223,19 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
   const filteredProjects =
     activeFilter === "all"
       ? visibleProjects
-      : visibleProjects.filter(
-          (project) => {
-            const tags = language === 'en' ? project.tags_en : project.tags_fr;
-            return project.category === activeFilter ||
-              tags?.some((tag) => tag.toLowerCase() === activeFilter.toLowerCase());
-          }
-        );
+      : visibleProjects.filter((project) => {
+          const tags = language === "en" ? project.tags_en : project.tags_fr;
+          return (
+            project.category === activeFilter || tags?.some((tag) => tag.toLowerCase() === activeFilter.toLowerCase())
+          );
+        });
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
       // Gestion du focus pour l'accessibilité
-      element.setAttribute('tabindex', '-1');
+      element.setAttribute("tabindex", "-1");
       element.focus({ preventScroll: true });
     }
   };
@@ -555,9 +558,9 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           {/* Subtitle */}
           <ScrollReveal variant="fade-up" delay={0.1}>
             <p className="text-base md:text-lg text-muted-foreground mb-6 max-w-2xl">
-              {language === 'en' 
-                ? 'Turning ideas into insights, insights into solutions' 
-                : 'Transformer les idées en insights, les insights en solutions'}
+              {language === "en"
+                ? "Turning ideas into insights, insights into solutions"
+                : "Transformer les idées en insights, les insights en solutions"}
             </p>
           </ScrollReveal>
 
@@ -585,10 +588,16 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                   {project.id === "sonor" ? (
                     <MediaCard
                       id={project.id}
-                      kicker={(language === 'en' ? project.kicker_en : project.kicker_fr) || `Case Study – ${language === 'en' ? project.title_en : project.title_fr}`}
-                      title={language === 'en' ? project.subtitle_en : project.subtitle_fr}
-                      tagline={(language === 'en' ? project.tagline_en : project.tagline_fr) || (language === 'fr' ? "De l'idée au produit validé" : "From idea to validated product")}
-                      badge={(language === 'en' ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
+                      kicker={
+                        (language === "en" ? project.kicker_en : project.kicker_fr) ||
+                        `Case Study – ${language === "en" ? project.title_en : project.title_fr}`
+                      }
+                      title={language === "en" ? project.subtitle_en : project.subtitle_fr}
+                      tagline={
+                        (language === "en" ? project.tagline_en : project.tagline_fr) ||
+                        (language === "fr" ? "De l'idée au produit validé" : "From idea to validated product")
+                      }
+                      badge={(language === "en" ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                       image={project.image}
                       onClick={() => openModal(index)}
                       showComingSoon={isComingSoon}
@@ -597,10 +606,16 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                   ) : (
                     <CardImmersive
                       id={project.id}
-                      kicker={(language === 'en' ? project.kicker_en : project.kicker_fr) || `Case Study – ${language === 'en' ? project.title_en : project.title_fr}`}
-                      title={language === 'en' ? project.subtitle_en : project.subtitle_fr}
-                      tagline={(language === 'en' ? project.tagline_en : project.tagline_fr) || (language === 'fr' ? "De l'idée au produit validé" : "From idea to validated product")}
-                      badge={(language === 'en' ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
+                      kicker={
+                        (language === "en" ? project.kicker_en : project.kicker_fr) ||
+                        `Case Study – ${language === "en" ? project.title_en : project.title_fr}`
+                      }
+                      title={language === "en" ? project.subtitle_en : project.subtitle_fr}
+                      tagline={
+                        (language === "en" ? project.tagline_en : project.tagline_fr) ||
+                        (language === "fr" ? "De l'idée au produit validé" : "From idea to validated product")
+                      }
+                      badge={(language === "en" ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                       image={project.image}
                       onClick={() => openModal(index)}
                       showComingSoon={isComingSoon}
@@ -625,10 +640,16 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                   <MediaCard
                     key={project.id}
                     id={project.id}
-                    kicker={(language === 'en' ? project.kicker_en : project.kicker_fr) || `Case Study – ${language === 'en' ? project.title_en : project.title_fr}`}
-                    title={language === 'en' ? project.subtitle_en : project.subtitle_fr}
-                    tagline={(language === 'en' ? project.tagline_en : project.tagline_fr) || (language === 'fr' ? "De l'idée au produit validé" : "From idea to validated product")}
-                    badge={(language === 'en' ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
+                    kicker={
+                      (language === "en" ? project.kicker_en : project.kicker_fr) ||
+                      `Case Study – ${language === "en" ? project.title_en : project.title_fr}`
+                    }
+                    title={language === "en" ? project.subtitle_en : project.subtitle_fr}
+                    tagline={
+                      (language === "en" ? project.tagline_en : project.tagline_fr) ||
+                      (language === "fr" ? "De l'idée au produit validé" : "From idea to validated product")
+                    }
+                    badge={(language === "en" ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                     image={project.image}
                     onClick={() => openModal(index)}
                     showComingSoon={isComingSoon}
@@ -638,10 +659,16 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                   <CardImmersive
                     key={project.id}
                     id={project.id}
-                    kicker={(language === 'en' ? project.kicker_en : project.kicker_fr) || `Case Study – ${language === 'en' ? project.title_en : project.title_fr}`}
-                    title={language === 'en' ? project.subtitle_en : project.subtitle_fr}
-                    tagline={(language === 'en' ? project.tagline_en : project.tagline_fr) || (language === 'fr' ? "De l'idée au produit validé" : "From idea to validated product")}
-                    badge={(language === 'en' ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
+                    kicker={
+                      (language === "en" ? project.kicker_en : project.kicker_fr) ||
+                      `Case Study – ${language === "en" ? project.title_en : project.title_fr}`
+                    }
+                    title={language === "en" ? project.subtitle_en : project.subtitle_fr}
+                    tagline={
+                      (language === "en" ? project.tagline_en : project.tagline_fr) ||
+                      (language === "fr" ? "De l'idée au produit validé" : "From idea to validated product")
+                    }
+                    badge={(language === "en" ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                     image={project.image}
                     onClick={() => openModal(index)}
                     showComingSoon={isComingSoon}
@@ -691,11 +718,17 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                     <div className="flex items-start gap-2">
                       <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                       <div>
-                        <h3 className="font-semibold text-foreground">{language === 'en' ? hack.title_en : hack.title_fr}</h3>
+                        <h3 className="font-semibold text-foreground">
+                          {language === "en" ? hack.title_en : hack.title_fr}
+                        </h3>
                         <p className="text-sm text-accent font-medium">
-                          {language === 'en' ? hack.team_en : hack.team_fr} <span className="text-muted-foreground">•</span> {language === 'en' ? hack.status_en : hack.status_fr}
+                          {language === "en" ? hack.team_en : hack.team_fr}{" "}
+                          <span className="text-muted-foreground">•</span>{" "}
+                          {language === "en" ? hack.status_en : hack.status_fr}
                         </p>
-                        <p className="text-sm text-muted-foreground mt-1">{language === 'en' ? hack.description_en : hack.description_fr}</p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {language === "en" ? hack.description_en : hack.description_fr}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -831,9 +864,13 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                       <div className="flex items-start gap-2">
                         <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                         <div>
-                          <h4 className="font-semibold text-foreground">{language === 'en' ? item.title_en : item.title_fr}</h4>
+                          <h4 className="font-semibold text-foreground">
+                            {language === "en" ? item.title_en : item.title_fr}
+                          </h4>
                           <p className="text-sm text-accent font-medium uppercase tracking-wider">{item.source}</p>
-                          <p className="text-sm text-muted-foreground mt-1">{language === 'en' ? item.description_en : item.description_fr}</p>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            {language === "en" ? item.description_en : item.description_fr}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -854,9 +891,13 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                       <div className="flex items-start gap-2">
                         <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                         <div>
-                          <h4 className="font-semibold text-foreground">{language === 'en' ? edu.title_en : edu.title_fr}</h4>
+                          <h4 className="font-semibold text-foreground">
+                            {language === "en" ? edu.title_en : edu.title_fr}
+                          </h4>
                           <p className="text-sm text-accent font-medium uppercase tracking-wider">{edu.school}</p>
-                          <p className="text-sm text-muted-foreground mt-1">{language === 'en' ? edu.description_en : edu.description_fr}</p>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            {language === "en" ? edu.description_en : edu.description_fr}
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -877,7 +918,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
             {/* Inter-section teaser */}
             <div className="text-center mb-6">
               <p className="text-sm text-muted-foreground">
-                🔧 <span className="font-medium">Curious about my stack?</span>
+                <span className="font-medium">Discover my stack</span>
               </p>
             </div>
 
@@ -908,7 +949,9 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
       >
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <ScrollReveal variant="fade-up">
-            <h2 className="text-h2" id="contact-heading">Ready to build?</h2>
+            <h2 className="text-h2" id="contact-heading">
+              Ready to build?
+            </h2>
           </ScrollReveal>
 
           <ScrollReveal variant="fade-up" delay={0.1}>
@@ -916,7 +959,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           </ScrollReveal>
 
           <ScrollReveal variant="scale" delay={0.2}>
-            <div 
+            <div
               className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
               role="group"
               aria-labelledby="contact-heading"
@@ -930,7 +973,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                   // Focus first form field when opening
                   if (newState) {
                     setTimeout(() => {
-                      const firstInput = document.querySelector('#contact form input') as HTMLElement;
+                      const firstInput = document.querySelector("#contact form input") as HTMLElement;
                       firstInput?.focus();
                     }, 350);
                   }
@@ -939,11 +982,15 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                 aria-controls="contact-form-container"
               >
                 <Mail className="mr-2 h-5 w-5" aria-hidden="true" />
-                {language === 'en' ? 'Email' : 'Email'}
+                {language === "en" ? "Email" : "Email"}
                 <span className="sr-only">
-                  {showContactForm 
-                    ? (language === 'en' ? '(form open)' : '(formulaire ouvert)')
-                    : (language === 'en' ? '(click to open form)' : '(cliquer pour ouvrir le formulaire)')}
+                  {showContactForm
+                    ? language === "en"
+                      ? "(form open)"
+                      : "(formulaire ouvert)"
+                    : language === "en"
+                      ? "(click to open form)"
+                      : "(cliquer pour ouvrir le formulaire)"}
                 </span>
               </Button>
               <Button
@@ -951,11 +998,15 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                 className="bg-card text-contact dark:text-white hover:bg-background hover:text-[#0077B5] hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 group"
                 asChild
               >
-                <a 
-                  href={SOCIAL_LINKS.linkedin.href} 
-                  target="_blank" 
+                <a
+                  href={SOCIAL_LINKS.linkedin.href}
+                  target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={language === 'en' ? 'Connect on LinkedIn (opens in new window)' : 'Se connecter sur LinkedIn (ouvre dans une nouvelle fenêtre)'}
+                  aria-label={
+                    language === "en"
+                      ? "Connect on LinkedIn (opens in new window)"
+                      : "Se connecter sur LinkedIn (ouvre dans une nouvelle fenêtre)"
+                  }
                 >
                   <Linkedin className="mr-2 h-5 w-5 transition-colors" aria-hidden="true" />
                   LinkedIn
@@ -966,14 +1017,18 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                 className="bg-card text-contact dark:text-white hover:bg-background hover:text-foreground hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
                 asChild
               >
-                <a 
-                  href={SOCIAL_LINKS.calendar.href} 
-                  target="_blank" 
+                <a
+                  href={SOCIAL_LINKS.calendar.href}
+                  target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={language === 'en' ? 'Schedule a meeting (opens in new window)' : 'Planifier une réunion (ouvre dans une nouvelle fenêtre)'}
+                  aria-label={
+                    language === "en"
+                      ? "Schedule a meeting (opens in new window)"
+                      : "Planifier une réunion (ouvre dans une nouvelle fenêtre)"
+                  }
                 >
                   <Calendar className="mr-2 h-5 w-5" aria-hidden="true" />
-                  {language === 'en' ? 'Calendar' : 'Calendrier'}
+                  {language === "en" ? "Calendar" : "Calendrier"}
                 </a>
               </Button>
             </div>
@@ -990,7 +1045,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 className="w-full max-w-md mx-auto mt-8"
                 role="region"
-                aria-label={language === 'en' ? 'Contact form' : 'Formulaire de contact'}
+                aria-label={language === "en" ? "Contact form" : "Formulaire de contact"}
               >
                 <ContactForm />
               </motion.div>
@@ -1004,9 +1059,9 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
               size="lg"
               className="text-contact-foreground/80 hover:text-contact-foreground hover:bg-contact-foreground/10 transition-all duration-300"
               onClick={() => scrollToSection("hero")}
-              aria-label={language === 'en' ? 'Back to top of page' : 'Retour en haut de la page'}
+              aria-label={language === "en" ? "Back to top of page" : "Retour en haut de la page"}
             >
-              {language === 'en' ? 'Back to top' : 'Retour en haut'} ↑
+              {language === "en" ? "Back to top" : "Retour en haut"} ↑
             </Button>
           </div>
         </div>
@@ -1045,11 +1100,21 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           canNavigatePrev={selectedProjectIndex !== null && selectedProjectIndex > 0}
           canNavigateNext={selectedProjectIndex !== null && selectedProjectIndex < filteredProjects.length - 1}
           logo={selectedProject.logo}
-          title={(language === 'en' ? selectedProject?.modalTitle_en : selectedProject?.modalTitle_fr) || (language === 'en' ? selectedProject?.title_en : selectedProject?.title_fr) || ""}
-          subtitle={(language === 'en' ? selectedProject?.modalSubtitle_en : selectedProject?.modalSubtitle_fr) || (language === 'en' ? selectedProject?.longDescription_en : selectedProject?.longDescription_fr) || ""}
-          bullets={(language === 'en' ? selectedProject?.bullets_en : selectedProject?.bullets_fr) || []}
+          title={
+            (language === "en" ? selectedProject?.modalTitle_en : selectedProject?.modalTitle_fr) ||
+            (language === "en" ? selectedProject?.title_en : selectedProject?.title_fr) ||
+            ""
+          }
+          subtitle={
+            (language === "en" ? selectedProject?.modalSubtitle_en : selectedProject?.modalSubtitle_fr) ||
+            (language === "en" ? selectedProject?.longDescription_en : selectedProject?.longDescription_fr) ||
+            ""
+          }
+          bullets={(language === "en" ? selectedProject?.bullets_en : selectedProject?.bullets_fr) || []}
           cta={{
-            label: (language === 'en' ? selectedProject.ctaLabel_en : selectedProject.ctaLabel_fr) || (language === 'fr' ? "Découvrir l'étude de cas !" : "Discover the case study!"),
+            label:
+              (language === "en" ? selectedProject.ctaLabel_en : selectedProject.ctaLabel_fr) ||
+              (language === "fr" ? "Découvrir l'étude de cas !" : "Discover the case study!"),
             href:
               selectedProject.id === "sonor"
                 ? "/case-study/sonor"
