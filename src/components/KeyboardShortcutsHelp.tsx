@@ -91,13 +91,13 @@ export function KeyboardShortcutsHelp({ isOpen, onClose }: KeyboardShortcutsHelp
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
-            className="fixed right-0 top-0 h-full w-full max-w-[280px] z-[100] shadow-2xl"
+            className="fixed right-6 top-1/2 -translate-y-1/2 w-full max-w-[280px] z-[100] shadow-2xl"
             role="dialog"
             aria-modal="true"
             aria-labelledby="keyboard-shortcuts-title"
             aria-describedby="keyboard-shortcuts-description"
           >
-            <div className="bg-background border-l border-border h-full flex flex-col">
+            <div className="bg-background border border-border rounded-2xl flex flex-col max-h-[80vh]">
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-3 border-b border-border">
                 <h2 id="keyboard-shortcuts-title" className="text-base font-semibold text-foreground">
