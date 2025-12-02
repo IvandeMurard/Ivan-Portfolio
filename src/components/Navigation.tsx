@@ -1,13 +1,14 @@
 // src/components/Navigation.tsx
 import React, { type FC, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Keyboard } from "lucide-react";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "./ThemeToggle";
 import { HighContrastToggle } from "./HighContrastToggle";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { designTokens } from "@/design-tokens";
 import { SkipLinks } from "./SkipLinks";
+import { Button } from "./ui/button";
 
 const COLORS = {
   bg: designTokens.color.bg.base,
@@ -34,7 +35,11 @@ const triggerHaptic = (pattern: number | number[] = 10) => {
   }
 };
 
-export const Navigation: FC = () => {
+interface NavigationProps {
+  onKeyboardHelpToggle?: () => void;
+}
+
+export const Navigation: FC<NavigationProps> = ({ onKeyboardHelpToggle }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { language, setLanguage } = useLanguage();
@@ -344,6 +349,16 @@ export const Navigation: FC = () => {
               <div className="flex items-center gap-2">
                 <ThemeToggle />
                 <HighContrastToggle />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={onKeyboardHelpToggle}
+                  className="h-9 w-9 rounded-lg"
+                  aria-label={language === 'en' ? 'Show keyboard shortcuts' : 'Afficher les raccourcis clavier'}
+                  title={language === 'en' ? 'Keyboard shortcuts (?)' : 'Raccourcis clavier (?)'}
+                >
+                  <Keyboard className="h-4 w-4" aria-hidden="true" />
+                </Button>
               </div>
             </div>
           </div>
@@ -451,6 +466,18 @@ export const Navigation: FC = () => {
                 <div className="flex items-center justify-center gap-3">
                   <ThemeToggle />
                   <HighContrastToggle />
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => {
+                      onKeyboardHelpToggle?.();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="h-9 w-9 rounded-lg"
+                    aria-label={language === 'en' ? 'Show keyboard shortcuts' : 'Afficher les raccourcis clavier'}
+                  >
+                    <Keyboard className="h-4 w-4" aria-hidden="true" />
+                  </Button>
                 </div>
                 
                 {/* Language selection */}
