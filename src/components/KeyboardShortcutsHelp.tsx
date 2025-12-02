@@ -91,7 +91,7 @@ export function KeyboardShortcutsHelp({ isOpen, onClose }: KeyboardShortcutsHelp
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
-            className="fixed right-0 top-1/2 -translate-y-1/2 w-full max-w-[240px] z-[100] shadow-2xl"
+            className="fixed right-0 top-20 w-full max-w-[240px] z-[100] shadow-2xl"
             role="dialog"
             aria-modal="true"
             aria-labelledby="keyboard-shortcuts-title"
