@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Mail, Calendar, Linkedin, MessageCircle } from "lucide-react";
+import { Mail, Calendar, Linkedin, Github } from "lucide-react";
 import { SITE, SOCIAL_LINKS, type SocialKey } from "@/site.config";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -15,7 +15,7 @@ const ICONS: Record<Exclude<SocialKey, "x">, React.ComponentType<any>> = {
   mail: Mail,
   calendar: Calendar,
   linkedin: Linkedin,
-  whatsapp: MessageCircle,
+  github: Github,
 };
 
 export function Footer({
@@ -35,7 +35,7 @@ export function Footer({
   const labels = footerLabels[language];
 
   // Aligne l'ordre d’affichage et mappe les métadonnées depuis la config
-  const socialOrder: SocialKey[] = ["mail", "calendar", "linkedin", "whatsapp", "x"];
+  const socialOrder: SocialKey[] = ["mail", "calendar", "linkedin", "github", "x"];
   const socialItems = socialOrder
     .map((id) => ({ id, ...SOCIAL_LINKS[id] }))
     .filter((s) => Boolean(s.href));

@@ -18,9 +18,9 @@ export const SOCIAL_LINKS = {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/ivandemurard/",
   },
-  whatsapp: {
-    label: "WhatsApp",
-    href: "https://wa.me/33767677953",
+  github: {
+    label: "GitHub",
+    href: "https://github.com/IvandeMurard",
   },
   x: {
     label: "X (Twitter)",
