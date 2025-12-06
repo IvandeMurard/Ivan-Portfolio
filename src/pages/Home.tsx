@@ -327,7 +327,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
 
               {/* Sous-titre - taille réduite pour meilleure hiérarchie */}
               <motion.p
-                className="text-base sm:text-lg md:text-xl text-white/85 mt-6 md:mt-8 leading-relaxed max-w-2xl"
+                className="text-base sm:text-lg md:text-xl text-white mt-6 md:mt-8 leading-relaxed max-w-2xl"
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
@@ -351,8 +351,8 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                 }}
               >
                 {content.hero.proofPoints.map((point, index) => (
-                  <div key={index} className="flex items-start gap-2 text-sm sm:text-base text-white/80">
-                    <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "rgba(255,255,255,0.8)" }} />
+                  <div key={index} className="flex items-start gap-2 text-sm sm:text-base text-white">
+                    <Check className="w-4 h-4 flex-shrink-0 mt-0.5 text-white" />
                     <span>{point}</span>
                   </div>
                 ))}
@@ -383,10 +383,9 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                 {/* CTA secondaire - texte blanc avec flèche animée */}
                 <motion.button
                   onClick={() => scrollToSection("contact")}
-                  className="inline-flex items-center gap-2 text-base sm:text-lg font-medium text-white/90 hover:text-white transition-colors duration-300 group"
+                  className="inline-flex items-center gap-2 text-base sm:text-lg font-medium text-white hover:text-white/90 transition-colors duration-300 group"
                   whileHover={prefersReducedMotion ? {} : { x: 2 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
-                  style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 >
                   {content.hero.ctas.contact}
                   <motion.div
@@ -453,7 +452,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
 
               {/* Sous-titre - taille réduite pour meilleure hiérarchie */}
               <motion.p
-                className="text-sm sm:text-base text-white/85 mt-5 leading-relaxed px-2"
+                className="text-sm sm:text-base text-white mt-5 leading-relaxed px-2"
                 initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
@@ -477,8 +476,8 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                 }}
               >
                 {content.hero.proofPoints.map((point, index) => (
-                  <div key={index} className="flex items-start justify-center gap-2 text-sm text-white/80">
-                    <Check className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: "rgba(255,255,255,0.8)" }} />
+                  <div key={index} className="flex items-start justify-center gap-2 text-sm text-white">
+                    <Check className="w-4 h-4 flex-shrink-0 mt-0.5 text-white" />
                     <span className="text-left">{point}</span>
                   </div>
                 ))}
@@ -509,10 +508,9 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                 {/* CTA secondaire - texte blanc avec flèche animée */}
                 <motion.button
                   onClick={() => scrollToSection("contact")}
-                  className="w-full inline-flex items-center justify-center gap-2 text-base font-medium text-white/90 hover:text-white transition-colors duration-300 group"
+                  className="w-full inline-flex items-center justify-center gap-2 text-base font-medium text-white hover:text-white/90 transition-colors duration-300 group"
                   whileHover={prefersReducedMotion ? {} : { x: 2 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
-                  style={{ color: "rgba(255, 255, 255, 0.9)" }}
                 >
                   {content.hero.ctas.contact}
                   <motion.div
