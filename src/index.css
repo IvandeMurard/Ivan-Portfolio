@@ -132,7 +132,7 @@
 
     --description: 217 12% 78%; /* Increased from 65% → 78% for AAA - ratio ~8:1 */
 
-    --contact: 160 80% 40%; /* Lighter green for better contrast */
+    --contact: 164 88% 20%; /* Same green as light mode #065f46 */
     --contact-foreground: 0 0% 100%; /* #FFFFFF */
 
     --accent: 200 70% 65%; /* Increased from 53% → 65% for AAA - ratio ~7.2:1 */
