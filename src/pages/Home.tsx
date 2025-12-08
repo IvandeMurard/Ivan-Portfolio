@@ -34,6 +34,7 @@ import { continuousLearning as bilingualContinuousLearning } from "@/data/contin
 import { education as bilingualEducation } from "@/data/education";
 import { experiences as bilingualExperiences } from "@/data/experience";
 import ContactForm from "@/components/ContactForm";
+import { useHapticFeedback } from "@/hooks/useHapticFeedback";
 
 // Calculate filter chips dynamically based on visible projects (excluding hidden)
 const getFilterChips = (projects: typeof bilingualProjects, language: "en" | "fr") => {
@@ -169,6 +170,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
   const expExpand = useInlineExpand();
   const contactSectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
+  const { triggerHaptic } = useHapticFeedback();
 
   // Get translated content
   const content = homeContent[language];
@@ -966,6 +968,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                 size="lg"
                 className="bg-card text-contact dark:text-white hover:bg-background hover:text-foreground hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
                 onClick={() => {
+                  triggerHaptic('light');
                   const newState = !showContactForm;
                   setShowContactForm(newState);
                   // Focus first form field when opening
@@ -994,6 +997,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
               <Button
                 size="lg"
                 className="bg-card text-contact dark:text-white hover:bg-background hover:text-[#0077B5] hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300 group"
+                onClick={() => triggerHaptic('light')}
                 asChild
               >
                 <a
@@ -1013,6 +1017,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
               <Button
                 size="lg"
                 className="bg-card text-contact dark:text-white hover:bg-background hover:text-foreground hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
+                onClick={() => triggerHaptic('light')}
                 asChild
               >
                 <a
@@ -1056,7 +1061,10 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
               variant="ghost"
               size="lg"
               className="text-contact-foreground/80 hover:text-contact-foreground hover:bg-contact-foreground/10 transition-all duration-300"
-              onClick={() => scrollToSection("hero")}
+              onClick={() => {
+                triggerHaptic('light');
+                scrollToSection("hero");
+              }}
               aria-label={language === "en" ? "Back to top of page" : "Retour en haut de la page"}
             >
               {language === "en" ? "Back to top" : "Retour en haut"} ↑
