@@ -18,9 +18,9 @@ export type ExperienceItem = {
 
 export const experiences: ExperienceItem[] = [
   {
-    title_en: "Consultant IT Project Manager",
-    title_fr: "Consultant Chef de Projet IT",
-    title: "Consultant IT Project Manager",
+    title_en: "Consultant SaaS Product Manager",
+    title_fr: "Consultant Product Manager SaaS",
+    title: "Consultant SaaS Product Manager",
     company: "DOMUSVI",
     companyUrl: "https://www.domusvi.com/",
     year: "2024",
