@@ -1051,7 +1051,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           </AnimatePresence>
 
           {/* Action A: Fix Dead End - Back to top CTA */}
-          <div className="mt-6 pt-4 border-t border-contact-foreground/20 mb-2">
+          <div className="mt-4 pt-2 border-t border-contact-foreground/20 mb-2">
             <Button
               variant="ghost"
               size="lg"
