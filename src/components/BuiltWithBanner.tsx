@@ -118,12 +118,6 @@ export const BuiltWithBanner = () => {
       url: "https://lovable.dev",
       description: "AI-powered web app builder and deployment platform"
     },
-    { 
-      name: "GitHub", 
-      icon: "/img/github-icon.svg",
-      url: "https://github.com",
-      description: "Code hosting platform for version control and collaboration"
-    },
   ];
 
   const lines = [line1, line2, line3];
