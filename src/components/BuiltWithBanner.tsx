@@ -1,11 +1,13 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { 
   Tooltip, 
   TooltipContent, 
   TooltipProvider, 
   TooltipTrigger 
 } from "@/components/ui/tooltip";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface Tool {
   name: string;
@@ -18,6 +20,27 @@ export const BuiltWithBanner = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.08,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.1 : 0.4, ease: "easeOut" as const },
+    },
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -152,32 +175,45 @@ export const BuiltWithBanner = () => {
   };
 
   return (
-    <div className="w-full py-12 md:py-16 bg-transparent">
+    <motion.div 
+      className="w-full py-12 md:py-16 bg-transparent"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      variants={containerVariants}
+    >
       <div className="max-w-4xl mx-auto px-4 md:px-6">
         {/* Title */}
-        <h3 className="text-lg md:text-xl text-foreground/60 font-medium mb-8 md:mb-10 text-center">
+        <motion.h3 
+          className="text-lg md:text-xl text-foreground/60 font-medium mb-8 md:mb-10 text-center"
+          variants={itemVariants}
+        >
           Site built with
-        </h3>
+        </motion.h3>
         
         <div className="flex flex-col items-center gap-8 md:gap-10">
           {/* Featured Tools Row */}
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
             {featuredTools.map((tool) => (
-              <ToolItem key={tool.name} tool={tool} size="featured" />
+              <motion.div key={tool.name} variants={itemVariants}>
+                <ToolItem tool={tool} size="featured" />
+              </motion.div>
             ))}
           </div>
 
           {/* Divider */}
-          <div className="w-16 h-px bg-border/30" />
+          <motion.div className="w-16 h-px bg-border/30" variants={itemVariants} />
 
           {/* Supporting Tools Row */}
           <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10">
             {supportingTools.map((tool) => (
-              <ToolItem key={tool.name} tool={tool} size="supporting" />
+              <motion.div key={tool.name} variants={itemVariants}>
+                <ToolItem tool={tool} size="supporting" />
+              </motion.div>
             ))}
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
