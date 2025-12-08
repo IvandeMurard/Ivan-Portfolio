@@ -111,7 +111,7 @@ export const BuiltWithBanner = () => {
       : "w-9 h-9 md:w-10 md:h-10";
 
     return (
-      <TooltipProvider>
+      <TooltipProvider delayDuration={100}>
         <Tooltip>
           <TooltipTrigger asChild>
             <a
