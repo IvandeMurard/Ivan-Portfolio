@@ -2,11 +2,19 @@ import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { 
+  Tooltip, 
+  TooltipContent, 
+  TooltipProvider, 
+  TooltipTrigger 
+} from "@/components/ui/tooltip";
 
 interface Tool {
   name: string;
   icon: string;
   iconSize?: "normal" | "large";
+  url?: string;
+  description?: string;
 }
 
 export const BuiltWithBanner = () => {
@@ -42,23 +50,80 @@ export const BuiltWithBanner = () => {
 
   // Organisation en 3 lignes équilibrées
   const line1: Tool[] = [
-    { name: "Claude AI", icon: "/img/claude_icon.svg" },
-    { name: "Obsidian", icon: "/img/obsidian-icon.svg" },
-    { name: "Figma", icon: "/img/figma-icon.svg" },
-    { name: "Mobbin", icon: "/img/mobbin_icon.svg", iconSize: "large" },
+    { 
+      name: "Claude AI", 
+      icon: "/img/claude_icon.svg",
+      url: "https://claude.ai",
+      description: "AI assistant for coding, analysis, and creative tasks"
+    },
+    { 
+      name: "Obsidian", 
+      icon: "/img/obsidian-icon.svg",
+      url: "https://obsidian.md",
+      description: "Knowledge management and note-taking tool"
+    },
+    { 
+      name: "Figma", 
+      icon: "/img/figma-icon.svg",
+      url: "https://figma.com",
+      description: "Design tool for UI/UX prototyping and collaboration"
+    },
+    { 
+      name: "Mobbin", 
+      icon: "/img/mobbin_icon.svg", 
+      iconSize: "large",
+      url: "https://mobbin.com",
+      description: "Mobile design patterns and UI inspiration library"
+    },
   ];
 
   const line2: Tool[] = [
-    { name: "Cursor", icon: getCursorIcon() },
-    { name: "React", icon: "/img/react-native-icon.png" },
-    { name: "TypeScript", icon: "/img/typescript_icon.png" },
-    { name: "Tailwind CSS", icon: "/img/tailwind-icon.svg" },
+    { 
+      name: "Cursor", 
+      icon: getCursorIcon(),
+      url: "https://cursor.sh",
+      description: "AI-powered code editor for faster development"
+    },
+    { 
+      name: "React", 
+      icon: "/img/react-native-icon.png",
+      url: "https://react.dev",
+      description: "JavaScript library for building user interfaces"
+    },
+    { 
+      name: "TypeScript", 
+      icon: "/img/typescript_icon.png",
+      url: "https://www.typescriptlang.org",
+      description: "Typed superset of JavaScript for safer code"
+    },
+    { 
+      name: "Tailwind CSS", 
+      icon: "/img/tailwind-icon.svg",
+      url: "https://tailwindcss.com",
+      description: "Utility-first CSS framework for rapid UI development"
+    },
   ];
 
   const line3: Tool[] = [
-    { name: "Eleven Labs", icon: "/img/elevenlabs-icon.svg", iconSize: "large" },
-    { name: "Lovable", icon: "/img/lovable_icon.svg" },
-    { name: "GitHub", icon: "/img/github-icon.svg" },
+    { 
+      name: "Eleven Labs", 
+      icon: "/img/elevenlabs-icon.svg", 
+      iconSize: "large",
+      url: "https://elevenlabs.io",
+      description: "AI voice generation and text-to-speech platform"
+    },
+    { 
+      name: "Lovable", 
+      icon: "/img/lovable_icon.svg",
+      url: "https://lovable.dev",
+      description: "AI-powered web app builder and deployment platform"
+    },
+    { 
+      name: "GitHub", 
+      icon: "/img/github-icon.svg",
+      url: "https://github.com",
+      description: "Code hosting platform for version control and collaboration"
+    },
   ];
 
   const lines = [line1, line2, line3];
@@ -159,7 +224,7 @@ export const BuiltWithBanner = () => {
                   
                   const isElevenLabs = tool.name === "Eleven Labs";
                   
-                  return (
+                  const toolContent = (
                     <motion.div
                       key={tool.name}
                       custom={globalIndex}
@@ -175,7 +240,6 @@ export const BuiltWithBanner = () => {
                         zIndex: 1,
                       }}
                       aria-label={tool.name}
-                      title={tool.name}
                     >
                       <motion.div
                         custom={globalIndex}
@@ -220,6 +284,35 @@ export const BuiltWithBanner = () => {
                         {tool.name}
                       </motion.span>
                     </motion.div>
+                  );
+
+                  return (
+                    <TooltipProvider key={tool.name}>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          {tool.url ? (
+                            <a
+                              href={tool.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-block"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {toolContent}
+                            </a>
+                          ) : (
+                            <div className="inline-block cursor-help">
+                              {toolContent}
+                            </div>
+                          )}
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p className="max-w-xs">
+                            {tool.description || tool.name}
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   );
                 })}
               </div>
