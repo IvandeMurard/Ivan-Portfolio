@@ -98,7 +98,7 @@ export const experiences: ExperienceItem[] = [
   {
     title_en: "Open Data SaaS Co-founder",
     title_fr: "Co-fondateur Open Data SaaS",
-    title: "Co-founder",
+    title: "Open Data SaaS Co-founder",
     company: "SONOR",
     companyUrl: "https://sonor.dorik.io/",
     year: "2020",
