@@ -916,7 +916,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
             {/* Inter-section teaser */}
             <div className="text-center mb-6">
               <p className="text-sm text-muted-foreground">
-                <span className="font-medium">Discover my stack</span>
+                <span className="font-medium"></span>
               </p>
             </div>
 
