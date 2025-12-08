@@ -70,9 +70,9 @@ export const experiences: ExperienceItem[] = [
     ],
   },
   {
-    title_en: "Data Project Manager",
-    title_fr: "Chef de Projet Data",
-    title: "Data Project Manager",
+    title_en: "SaaS Data Project Manager",
+    title_fr: "Chef de Projet Data SaaS",
+    title: "SaaS Data Project Manager",
     company: "HUWISE",
     companyUrl: "https://www.data.gouv.fr/organizations/huwise/",
     year: "2022",
@@ -96,8 +96,8 @@ export const experiences: ExperienceItem[] = [
     ],
   },
   {
-    title_en: "Co-founder",
-    title_fr: "Co-fondateur",
+    title_en: "Open Data SaaS Co-founder",
+    title_fr: "Co-fondateur Open Data SaaS",
     title: "Co-founder",
     company: "SONOR",
     companyUrl: "https://sonor.dorik.io/",
@@ -106,7 +106,7 @@ export const experiences: ExperienceItem[] = [
     description_fr: "SaaS open-data pour aider les villes à réduire la pollution sonore",
     description: "Open-data SaaS to help cities reduce noise pollution",
     details_en: [
-      "Team of 4 with Matrice Incubator & Banque des Territoires",
+      "Team of 4 in partnerships with Matrice Incubator & Banque des Territoires",
       "Discovery, PRD, backlog; led a dev/data-scientist",
       "2 public grants (€20k), prototype delivered",
     ],
