@@ -12,18 +12,17 @@ import {
 interface Tool {
   name: string;
   icon: string;
-  iconSize?: "normal" | "large";
   url?: string;
-  description?: string;
+  description: string;
 }
 
 export const BuiltWithBanner = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [hoveredTool, setHoveredTool] = useState<string | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
-  // Gestion du thème
   useEffect(() => {
     setMounted(true);
     
@@ -42,276 +41,183 @@ export const BuiltWithBanner = () => {
     }
   }, [theme]);
 
-  // Calcul de l'icon Cursor selon le thème
   const getCursorIcon = () => {
     if (!mounted) return "/img/cursor-icon.svg";
     return isDark ? "/img/cursor-icon2.svg" : "/img/cursor-icon.svg";
   };
 
-  // Organisation en 3 lignes équilibrées
-  const line1: Tool[] = [
+  // Featured tools (larger, primary)
+  const featuredTools: Tool[] = [
     { 
       name: "Claude AI", 
       icon: "/img/claude_icon.svg",
       url: "https://claude.ai",
-      description: "AI assistant for coding, analysis, and creative tasks"
+      description: "AI assistant for coding & analysis"
     },
     { 
-      name: "Obsidian", 
-      icon: "/img/obsidian-icon.svg",
-      url: "https://obsidian.md",
-      description: "Knowledge management and note-taking tool"
+      name: "Cursor", 
+      icon: getCursorIcon(),
+      url: "https://cursor.sh",
+      description: "AI-powered code editor"
     },
     { 
       name: "Figma", 
       icon: "/img/figma-icon.svg",
       url: "https://figma.com",
-      description: "Design tool for UI/UX prototyping and collaboration"
-    },
-    { 
-      name: "Mobbin", 
-      icon: "/img/mobbin_icon.svg", 
-      iconSize: "large",
-      url: "https://mobbin.com",
-      description: "Mobile design patterns and UI inspiration library"
-    },
-  ];
-
-  const line2: Tool[] = [
-    { 
-      name: "Cursor", 
-      icon: getCursorIcon(),
-      url: "https://cursor.sh",
-      description: "AI-powered code editor for faster development"
-    },
-    { 
-      name: "React", 
-      icon: "/img/react-native-icon.png",
-      url: "https://react.dev",
-      description: "JavaScript library for building user interfaces"
-    },
-    { 
-      name: "TypeScript", 
-      icon: "/img/typescript_icon.png",
-      url: "https://www.typescriptlang.org",
-      description: "Typed superset of JavaScript for safer code"
-    },
-    { 
-      name: "Tailwind CSS", 
-      icon: "/img/tailwind-icon.svg",
-      url: "https://tailwindcss.com",
-      description: "Utility-first CSS framework for rapid UI development"
-    },
-  ];
-
-  const line3: Tool[] = [
-    { 
-      name: "Eleven Labs", 
-      icon: "/img/elevenlabs-icon.svg", 
-      iconSize: "large",
-      url: "https://elevenlabs.io",
-      description: "AI voice generation and text-to-speech platform"
+      description: "UI/UX design & prototyping"
     },
     { 
       name: "Lovable", 
       icon: "/img/lovable_icon.svg",
       url: "https://lovable.dev",
-      description: "AI-powered web app builder and deployment platform"
+      description: "AI web app builder"
     },
   ];
 
-  const lines = [line1, line2, line3];
+  // Supporting tools (smaller, secondary)
+  const supportingTools: Tool[] = [
+    { 
+      name: "React", 
+      icon: "/img/react-native-icon.png",
+      url: "https://react.dev",
+      description: "UI library"
+    },
+    { 
+      name: "TypeScript", 
+      icon: "/img/typescript_icon.png",
+      url: "https://www.typescriptlang.org",
+      description: "Typed JavaScript"
+    },
+    { 
+      name: "Tailwind", 
+      icon: "/img/tailwind-icon.svg",
+      url: "https://tailwindcss.com",
+      description: "Utility-first CSS"
+    },
+    { 
+      name: "Eleven Labs", 
+      icon: "/img/elevenlabs-icon.svg",
+      url: "https://elevenlabs.io",
+      description: "AI voice generation"
+    },
+  ];
 
-  // Animation variants améliorées avec courbes d'easing plus fluides
-  const toolVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      scale: 0.8,
-    },
-    visible: (index: number) => ({
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        delay: index * 0.1,
-        ease: [0.16, 1, 0.3, 1] as const, // Courbe d'easing plus naturelle
-      },
-    }),
-    rest: {
-      scale: 1,
-      y: 0,
-      transition: {
-        duration: 0.4,
-        ease: [0.4, 0, 0.2, 1] as const,
-      },
-    },
-    hover: {
-      scale: 1.2,
-      y: -12,
-      zIndex: 10,
-      transition: {
-        duration: 0.5,
-        ease: [0.34, 1.56, 0.64, 1] as const, // Courbe d'easing avec rebond subtil
-      },
-    },
-  };
+  const ToolItem = ({ 
+    tool, 
+    size = "featured" 
+  }: { 
+    tool: Tool; 
+    size?: "featured" | "supporting";
+  }) => {
+    const isHovered = hoveredTool === tool.name;
+    const isFeatured = size === "featured";
+    const iconSize = isFeatured ? "w-10 h-10 md:w-12 md:h-12" : "w-7 h-7 md:w-8 md:h-8";
 
-  // Animation continue fluide avec mouvement multidirectionnel
-  const floatVariants = (index: number) => {
-    const phase = (index * 0.5) % (Math.PI * 2);
-    const amplitude = 4;
-    const xOffset = Math.sin(phase) * 2;
-    const rotation = Math.cos(phase) * 1.5;
-    
-    return {
-      float: {
-        y: [0, -amplitude, 0],
-        x: [0, xOffset, 0],
-        rotate: [0, rotation, 0],
-        transition: {
-          duration: 3 + (index % 3) * 0.4, // Durée variable entre 3 et 4.2s
-          repeat: Infinity,
-          ease: [0.42, 0, 0.58, 1] as const, // Courbe d'easing très fluide (ease-in-out)
-          repeatDelay: 0,
-        },
-      },
-    };
+    return (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <a
+              href={tool.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block"
+              onMouseEnter={() => setHoveredTool(tool.name)}
+              onMouseLeave={() => setHoveredTool(null)}
+            >
+              <motion.div
+                className="flex items-center gap-2 cursor-pointer group relative overflow-hidden"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
+              >
+                {/* Icon container with slide animation */}
+                <motion.div
+                  className="relative flex-shrink-0"
+                  animate={prefersReducedMotion ? {} : {
+                    x: isHovered ? -4 : 0,
+                  }}
+                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  <img 
+                    src={tool.icon} 
+                    alt={`${tool.name} logo`}
+                    className={`${iconSize} object-contain transition-all duration-300 group-hover:drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)]`}
+                    loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.opacity = '0.4';
+                    }}
+                  />
+                </motion.div>
+
+                {/* Description slide-in (desktop only) */}
+                <motion.div
+                  className="hidden md:block overflow-hidden"
+                  initial={{ width: 0, opacity: 0 }}
+                  animate={{
+                    width: isHovered ? "auto" : 0,
+                    opacity: isHovered ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                >
+                  <motion.span
+                    className={`whitespace-nowrap ${
+                      isFeatured 
+                        ? "text-sm font-medium text-foreground/80" 
+                        : "text-xs font-medium text-foreground/70"
+                    }`}
+                    initial={{ x: -10 }}
+                    animate={{ x: isHovered ? 0 : -10 }}
+                    transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                  >
+                    {tool.description}
+                  </motion.span>
+                </motion.div>
+              </motion.div>
+            </a>
+          </TooltipTrigger>
+          <TooltipContent side="bottom" className="md:hidden">
+            <p className="text-sm">{tool.description}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
   };
 
   return (
     <motion.div 
-      className="w-full py-16 bg-transparent"
-      initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      className="w-full py-12 md:py-16 bg-transparent"
+      initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
     >
-      <div className="max-w-6xl mx-auto px-4 md:px-6">
-        {/* Titre discret */}
-        <h3 className="text-xl text-foreground/60 font-[500] mb-12 text-center">
+      <div className="max-w-4xl mx-auto px-4 md:px-6">
+        {/* Title */}
+        <h3 className="text-lg md:text-xl text-foreground/60 font-medium mb-8 md:mb-10 text-center">
           Site built with
         </h3>
         
-        {/* 3 lignes équilibrées */}
         <div className="flex flex-col items-center gap-8 md:gap-10">
-          {lines.map((line, lineIndex) => {
-            let toolIndex = 0;
-            // Calculer l'index global pour le stagger
-            for (let i = 0; i < lineIndex; i++) {
-              toolIndex += lines[i].length;
-            }
-            
-            return (
-              <div
-                key={lineIndex}
-                className="flex flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:gap-x-6 sm:gap-y-4 md:gap-x-6 md:gap-y-4 w-full"
-              >
-                {line.map((tool, toolIndexInLine) => {
-                  const globalIndex = toolIndex + toolIndexInLine;
-                  
-                  // Taille des logos : responsive avec taille réduite sur mobile
-                  const logoSize = tool.iconSize === "large" 
-                    ? "w-10 h-10 sm:w-12 sm:h-12" 
-                    : "w-8 h-8 sm:w-10 sm:h-10";
-                  
-                  const isElevenLabs = tool.name === "Eleven Labs";
-                  
-                  const toolContent = (
-                    <motion.div
-                      key={tool.name}
-                      custom={globalIndex}
-                      variants={prefersReducedMotion ? {} : toolVariants}
-                      initial={prefersReducedMotion ? {} : "hidden"}
-                      whileInView={prefersReducedMotion ? {} : "visible"}
-                      viewport={{ once: true, margin: "-50px" }}
-                      whileHover={prefersReducedMotion ? {} : "hover"}
-                      className={`flex items-center gap-3 cursor-pointer group relative z-0 ${
-                        isElevenLabs ? "px-2 py-1" : ""
-                      }`}
-                      style={{
-                        zIndex: 1,
-                      }}
-                      aria-label={tool.name}
-                    >
-                      <motion.div
-                        custom={globalIndex}
-                        variants={prefersReducedMotion ? {} : floatVariants(globalIndex)}
-                        animate={prefersReducedMotion ? {} : "float"}
-                        initial={false}
-                        style={{
-                          willChange: "transform",
-                        }}
-                      >
-                        <img 
-                          src={tool.icon} 
-                          alt={`${tool.name} logo`}
-                          className={`${logoSize} object-contain flex-shrink-0 transition-all duration-500 group-hover:drop-shadow-[0_10px_20px_rgba(0,0,0,0.2)]`}
-                          loading="lazy"
-                          style={{ willChange: "transform" }}
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            console.error(`Failed to load logo for ${tool.name}: ${tool.icon}`);
-                            target.style.opacity = '0.4';
-                            target.style.filter = 'grayscale(100%)';
-                          }}
-                          onLoad={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.opacity = '1';
-                            target.style.filter = 'none';
-                          }}
-                        />
-                      </motion.div>
-                      <motion.span 
-                        className="text-sm sm:text-base md:text-lg font-[500] text-foreground/80 whitespace-nowrap transition-colors duration-500 group-hover:text-foreground"
-                        initial={{ opacity: 0.8 }}
-                        whileHover={{ 
-                          opacity: 1,
-                          x: 2,
-                        }}
-                        transition={{ 
-                          duration: 0.4,
-                          ease: [0.34, 1.56, 0.64, 1] as const,
-                        }}
-                      >
-                        {tool.name}
-                      </motion.span>
-                    </motion.div>
-                  );
+          {/* Featured Tools Row */}
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
+            {featuredTools.map((tool) => (
+              <ToolItem key={tool.name} tool={tool} size="featured" />
+            ))}
+          </div>
 
-                  return (
-                    <TooltipProvider key={tool.name}>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          {tool.url ? (
-                            <a
-                              href={tool.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-block"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              {toolContent}
-                            </a>
-                          ) : (
-                            <div className="inline-block cursor-help">
-                              {toolContent}
-                            </div>
-                          )}
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p className="max-w-xs">
-                            {tool.description || tool.name}
-                          </p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TooltipProvider>
-                  );
-                })}
-              </div>
-            );
-          })}
+          {/* Divider */}
+          <div className="w-16 h-px bg-border/30" />
+
+          {/* Supporting Tools Row */}
+          <div className="flex flex-wrap items-center justify-center gap-5 md:gap-6">
+            {supportingTools.map((tool) => (
+              <ToolItem key={tool.name} tool={tool} size="supporting" />
+            ))}
+          </div>
         </div>
       </div>
     </motion.div>
