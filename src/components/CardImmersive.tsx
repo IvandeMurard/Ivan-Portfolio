@@ -16,6 +16,7 @@ type Props = {
   className?: string;
   showComingSoon?: boolean;
   showBuilding?: boolean;
+  language?: "en" | "fr";
 };
 
 export function CardImmersive({
@@ -26,13 +27,16 @@ export function CardImmersive({
   badge,
   image,
   alt = "",
-  ctaLabel = "Discover the case study!",
+  ctaLabel,
   ariaLabel,
   onClick,
   className = "",
   showComingSoon = false,
   showBuilding = false,
+  language = "en",
 }: Props) {
+  const defaultCtaLabel = language === "en" ? "Discover the case study!" : "Découvrir l'étude de cas !";
+  const finalCtaLabel = ctaLabel || defaultCtaLabel;
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (
@@ -41,6 +45,8 @@ export function CardImmersive({
       tabIndex={0}
       role="button"
       aria-label={ariaLabel ?? `${kicker} – ${title}`}
+      aria-haspopup="dialog"
+      aria-describedby={`tagline-${id}`}
       onKeyDown={(e) => e.key === "Enter" && onClick?.()}
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
@@ -57,10 +63,11 @@ export function CardImmersive({
       <div className="relative h-full w-full rounded-[inherit] overflow-hidden transform-gpu will-change-transform transition-transform duration-500 group-hover/card:scale-[1.02] saturate-[1.25] contrast-[1.10] brightness-[1.02] group-hover/card:saturate-[1.5] group-hover/card:brightness-[1.06]">
         <img
           src={image}
-          alt={alt || title}
+          alt=""
           className="absolute inset-0 h-full w-full object-cover"
           loading="lazy"
           decoding="async"
+          aria-hidden="true"
         />
         <div
           className="absolute inset-0 transition-opacity duration-[320ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
@@ -117,9 +124,12 @@ export function CardImmersive({
                       "text-[13px] font-[600] text-white whitespace-nowrap transition-opacity duration-200",
                       isHovered ? "opacity-100" : "opacity-0",
                     ].join(" ")}
+                    aria-hidden="true"
                   >
-                    {ctaLabel}
+                    {finalCtaLabel}
                   </span>
+                  {/* CTA accessible pour lecteurs d'écran */}
+                  <span className="sr-only">{finalCtaLabel}</span>
                 </div>
               )}
             </div>

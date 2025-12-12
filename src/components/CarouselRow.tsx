@@ -84,25 +84,35 @@ export const CarouselRow: React.FC<CarouselRowProps> = ({ children, className = 
         <ChevronRight className="w-5 h-5 text-foreground" aria-hidden="true" />
       </button>
 
+      {/* Compteur de slides accessible */}
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        {`Project carousel with ${React.Children.count(children)} items`}
+      </div>
+
       {/* Carousel Container */}
       <div
         ref={scrollRef}
         className="flex gap-6 overflow-x-auto scrollbar-hide snap-x pb-4"
         style={{ scrollPaddingLeft: '1.5rem' }}
-        aria-live="polite"
       >
-        {React.Children.map(children, (child, index) => (
-          <div 
-            key={index} 
-            className="snap-start flex-shrink-0 animate-fade-in"
-            style={{ 
-              animationDelay: `${index * 80}ms`,
-              animationFillMode: 'backwards'
-            }}
-          >
-            {child}
-          </div>
-        ))}
+        {React.Children.map(children, (child, index) => {
+          const total = React.Children.count(children);
+          return (
+            <div 
+              key={index} 
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`Project ${index + 1} of ${total}`}
+              className="snap-start flex-shrink-0 animate-fade-in"
+              style={{ 
+                animationDelay: `${index * 80}ms`,
+                animationFillMode: 'backwards'
+              }}
+            >
+              {child}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
