@@ -15,6 +15,8 @@ type MediaCardProps = {
   className?: string;
   showComingSoon?: boolean;
   showBuilding?: boolean;
+  ctaLabel?: string;       // CTA accessible bilingue
+  language?: "en" | "fr";  // Pour labels bilingues
 };
 
 export function MediaCard({
@@ -29,7 +31,11 @@ export function MediaCard({
   className = "",
   showComingSoon = false,
   showBuilding = false,
+  ctaLabel,
+  language = "en",
 }: MediaCardProps) {
+  const defaultCtaLabel = language === "en" ? "Discover the case study!" : "Découvrir l'étude de cas !";
+  const finalCtaLabel = ctaLabel || defaultCtaLabel;
   const [hover, setHover] = React.useState(false);
   const [imgError, setImgError] = React.useState(false);
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
@@ -64,6 +70,7 @@ export function MediaCard({
       tabIndex={0}
       aria-label={`${kicker} – ${title}`}
       aria-describedby={`tagline-${id}`}
+      aria-haspopup="dialog"
       onKeyDown={(e) => e.key === "Enter" && onClick?.()}
       onClick={onClick}
       onMouseEnter={() => {
@@ -112,7 +119,7 @@ export function MediaCard({
             loop
             playsInline
             preload="auto"
-            aria-label={`${title} video demonstration`}
+            aria-label={language === "en" ? `${title} video demonstration` : `Démonstration vidéo de ${title}`}
             // Sur mobile, autorise l'autoplay silencieux
             autoPlay={typeof window !== "undefined" && /Mobi|Android/i.test(navigator.userAgent)}
           />
@@ -164,9 +171,11 @@ export function MediaCard({
                   >
                     <path d="M8 3.5V12.5M3.5 8H12.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
-                  <span className="text-[13px] font-[600] text-white whitespace-nowrap opacity-0 transition-opacity duration-200 group-hover/card:opacity-100">
-                    Discover the case study!
+                  <span className="text-[13px] font-[600] text-white whitespace-nowrap opacity-0 transition-opacity duration-200 group-hover/card:opacity-100" aria-hidden="true">
+                    {finalCtaLabel}
                   </span>
+                  {/* CTA accessible pour lecteurs d'écran */}
+                  <span className="sr-only">{finalCtaLabel}</span>
                 </div>
               )}
             </div>
