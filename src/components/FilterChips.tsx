@@ -26,6 +26,7 @@ export const FilterChips: React.FC<FilterChipsProps> = ({
         {chips.map((chip) => (
           <button
             key={chip.id}
+            id={`tab-${chip.id}`}
             role="tab"
             aria-selected={activeChip === chip.id}
             aria-controls={`panel-${chip.id}`}

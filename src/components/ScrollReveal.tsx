@@ -95,6 +95,12 @@ interface StaggerContainerProps {
   className?: string;
   /** Whether to animate only once */
   once?: boolean;
+  /** Optional id for ARIA accessibility */
+  id?: string;
+  /** Optional role for ARIA accessibility */
+  role?: string;
+  /** Optional aria-labelledby for ARIA accessibility */
+  'aria-labelledby'?: string;
 }
 
 const containerVariants: Variants = {
@@ -113,17 +119,23 @@ export const StaggerContainer = ({
   initialDelay = 0,
   className = '',
   once = true,
+  id,
+  role,
+  'aria-labelledby': ariaLabelledby,
 }: StaggerContainerProps) => {
   const prefersReducedMotion = useReducedMotion();
 
   // Si l'utilisateur préfère moins d'animation, afficher directement le contenu
   if (prefersReducedMotion) {
-    return <div className={className}>{children}</div>;
+    return <div className={className} id={id} role={role} aria-labelledby={ariaLabelledby}>{children}</div>;
   }
 
   return (
     <motion.div
       className={className}
+      id={id}
+      role={role}
+      aria-labelledby={ariaLabelledby}
       initial="hidden"
       whileInView="visible"
       viewport={{ once, amount: 0.1 }}
