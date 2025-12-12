@@ -574,6 +574,9 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
 
           {/* Mobile/Tablet: Grid Layout with staggered animations */}
           <StaggerContainer
+            id={`panel-${activeFilter}`}
+            role="tabpanel"
+            aria-labelledby={`tab-${activeFilter}`}
             className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 justify-items-center"
             staggerDelay={0.1}
           >
@@ -630,7 +633,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           </StaggerContainer>
 
           {/* Desktop: Carousel Layout */}
-          <div className="hidden lg:block mb-12">
+          <div id={`panel-${activeFilter}-desktop`} role="tabpanel" aria-labelledby={`tab-${activeFilter}`} className="hidden lg:block mb-12">
             <CarouselRow>
               {filteredProjects.map((project, index) => {
                 const originalIndex = projects.findIndex((p) => p.id === project.id);
@@ -789,7 +792,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           <div className="space-y-6">
             {/* Onglet Experiences — version expand inline */}
             {activeExperienceFilter === "experiences" && (
-              <div className="space-y-8">
+              <div id="panel-experiences" role="tabpanel" aria-labelledby="tab-experiences" className="space-y-8">
                 {experiences.map((exp, index) => {
                   const id = `exp-${index}`;
                   const isOpen = expExpand.isOpen(id);
@@ -799,29 +802,31 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                         <span className="text-sm font-medium text-muted-foreground">{exp.year}</span>
                       </div>
                       <div className="flex-1 space-y-2">
-                        <button
-                          className="w-full text-left p-3 -m-3 rounded-lg hover:bg-card/50 hover:shadow-sm transition-all duration-300 cursor-pointer"
-                          onClick={() => expExpand.toggle(id)}
-                          aria-expanded={isOpen}
-                          aria-controls={`${id}-panel`}
+                        {/* Bouton expand séparé du lien company */}
+                        <div
+                          className="p-3 -m-3 rounded-lg hover:bg-card/50 hover:shadow-sm transition-all duration-300"
                         >
                           <div className="flex items-start gap-2">
                             <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                             <div className="flex-1">
-                              <div className="flex items-center gap-2">
+                              <button
+                                className="w-full text-left cursor-pointer flex items-center gap-2"
+                                onClick={() => expExpand.toggle(id)}
+                                aria-expanded={isOpen}
+                                aria-controls={`${id}-panel`}
+                              >
                                 <h4 className="font-semibold text-foreground">{exp.title}</h4>
                                 <ChevronDown
                                   className={`w-5 h-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${
                                     isOpen ? "rotate-180" : ""
                                   }`}
                                 />
-                              </div>
+                              </button>
                               {exp.companyUrl ? (
                                 <a
                                   href={exp.companyUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  onClick={(e) => e.stopPropagation()}
                                   className="text-sm text-accent font-medium uppercase tracking-wider hover:underline hover:text-accent/80 transition-colors inline-block"
                                 >
                                   {exp.company}
@@ -834,7 +839,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                               <p className="text-sm text-muted-foreground mt-1">{exp.description}</p>
                             </div>
                           </div>
-                        </button>
+                        </div>
 
                         <InlineExpand open={isOpen} ariaId={id}>
                           <div id={`${id}-panel`} className="pt-3 pl-4">
@@ -858,7 +863,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
 
             {/* Onglet Continuous Learning */}
             {activeExperienceFilter === "continuous-learning" && (
-              <div className="space-y-8">
+              <div id="panel-continuous-learning" role="tabpanel" aria-labelledby="tab-continuous-learning" className="space-y-8">
                 {continuousLearning.map((item, index) => (
                   <div key={index} className="flex gap-8 pb-8 last:pb-0">
                     <div className="w-20 flex-shrink-0">
@@ -885,7 +890,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
 
             {/* Onglet Education */}
             {activeExperienceFilter === "education" && (
-              <div className="space-y-8">
+              <div id="panel-education" role="tabpanel" aria-labelledby="tab-education" className="space-y-8">
                 {education.map((edu, index) => (
                   <div key={index} className="flex gap-8 pb-8 last:pb-0">
                     <div className="w-20 flex-shrink-0">
