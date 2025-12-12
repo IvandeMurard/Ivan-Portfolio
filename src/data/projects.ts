@@ -72,7 +72,8 @@ export const projects: Project[] = [
     tags_fr: ["Croissance", "Product Management"],
     category: "product",
     longDescription_en: "Improving conversion for senior candidates through clearer offers and guided activation.",
-    longDescription_fr: "Améliorer la conversion des candidats seniors via des offres plus claires et une activation guidée.",
+    longDescription_fr:
+      "Améliorer la conversion des candidats seniors via des offres plus claires et une activation guidée.",
     bullets_en: [
       "User discovery with senior engineers to surface friction",
       "Strategy pivot towards a clearer, more focused WTTJ Tech+",
@@ -100,7 +101,8 @@ export const projects: Project[] = [
     tags_fr: ["Expériences Agentiques", "Évaluation"],
     category: "agentic-experiences",
     longDescription_en: "From run lifecycle to clear signals, helping teams ship agents with confidence.",
-    longDescription_fr: "Du cycle de vie des exécutions aux signaux clairs, aider les équipes à livrer des agents avec confiance.",
+    longDescription_fr:
+      "Du cycle de vie des exécutions aux signaux clairs, aider les équipes à livrer des agents avec confiance.",
     bullets_en: [
       "Structured lifecycle and dashboard",
       'Automatic scoring with LLM-as-a-Judge"',
@@ -122,8 +124,8 @@ export const projects: Project[] = [
     id: "agentic-hospitality",
     title_en: "A hospitality agentic experience case study",
     title_fr: "Une étude de cas d'expérience agentique en hôtellerie",
-    subtitle_en: "Can we value agents to predict restaurant and hotel attendance?",
-    subtitle_fr: "Peut-on valoriser les agents pour prédire la fréquentation des restaurants et hôtels ?",
+    subtitle_en: "Can we value agents to predict hotels' staff and F&B needs?",
+    subtitle_fr: "Peut-on valoriser les agents pour prédire les besoins en staff et F&B des hôtels ?",
     image: "/img/photo-by-dylan-calluy-unsplash.jpg",
     tags_en: ["Agentic Experiences", "Hackathon"],
     tags_fr: ["Expériences Agentiques", "Hackathon"],
@@ -170,8 +172,10 @@ export const projects: Project[] = [
     tagline_fr: "Une exploration produit en Agent Experience (AX)",
     modalTitle_en: "The Agentic Studio — AX design in practice",
     modalTitle_fr: "Le Studio Agentique — AX design en pratique",
-    modalSubtitle_en: "Exploring how intelligent agents can interpret human intention within a creative environment. This prototype tests how gesture, voice, and context can drive co-creation, while keeping human supervision at the core of the experience.",
-    modalSubtitle_fr: "Explorer comment les agents intelligents peuvent interpréter l'intention humaine dans un environnement créatif. Ce prototype teste comment le geste, la voix et le contexte peuvent piloter la co-création, tout en gardant la supervision humaine au cœur de l'expérience.",
+    modalSubtitle_en:
+      "Exploring how intelligent agents can interpret human intention within a creative environment. This prototype tests how gesture, voice, and context can drive co-creation, while keeping human supervision at the core of the experience.",
+    modalSubtitle_fr:
+      "Explorer comment les agents intelligents peuvent interpréter l'intention humaine dans un environnement créatif. Ce prototype teste comment le geste, la voix et le contexte peuvent piloter la co-création, tout en gardant la supervision humaine au cœur de l'expérience.",
     longDescription_en: "A product exploration in Agent Experience (AX)",
     longDescription_fr: "Une exploration produit en Agent Experience (AX)",
     bullets_en: [
