@@ -602,6 +602,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                       onClick={() => openModal(index)}
                       showComingSoon={isComingSoon}
                       showBuilding={isBuilding}
+                      language={language}
                     />
                   ) : (
                     <CardImmersive
@@ -620,6 +621,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                       onClick={() => openModal(index)}
                       showComingSoon={isComingSoon}
                       showBuilding={isBuilding}
+                      language={language}
                     />
                   )}
                 </StaggerItem>
@@ -654,6 +656,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                     onClick={() => openModal(index)}
                     showComingSoon={isComingSoon}
                     showBuilding={isBuilding}
+                    language={language}
                   />
                 ) : (
                   <CardImmersive
@@ -673,6 +676,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                     onClick={() => openModal(index)}
                     showComingSoon={isComingSoon}
                     showBuilding={isBuilding}
+                    language={language}
                   />
                 );
               })}
