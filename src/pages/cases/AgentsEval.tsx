@@ -25,31 +25,63 @@ const triggerHaptic = (pattern: number | number[] = 10) => {
 const evolutionContent = {
   en: {
     title: "From single agents to agent ecosystems",
-    intro: `By 2026, in hospitality, multi-agent systems integrated into complex IT infrastructures will be the norm: agents coordinate, delegate, negotiate, and act together.
-
-We expect them to be autonomous, to read and anticipate our intentions, our needs, and to react and alert via the right channel at the right moment.
-
-Pricing agents talk to demand agents, staffing agents react to forecasting agents, and evaluation agents supervise execution.
-
-To be effective, an agent must be specialized, multiplying needs and interactions.
-
-So when agents coordinate, failures become silent, intentions unclear, delegation unsafe, and decisions conflicting.
-
-Through this project, I explore a turnkey Agent-to-Agent Evaluation method, Safe by design and SOC-2 compatible.`,
+    steps: [
+      {
+        number: "01",
+        title: "Vision 2026",
+        content: "In hospitality, multi-agent systems integrated into complex IT infrastructures will be the norm: agents coordinate, delegate, negotiate, and act together."
+      },
+      {
+        number: "02",
+        title: "Autonomy",
+        content: "We expect them to be autonomous, to read and anticipate our intentions, our needs, and to react and alert via the right channel at the right moment."
+      },
+      {
+        number: "03",
+        title: "Coordination",
+        content: "Pricing agents talk to demand agents, staffing agents react to forecasting agents, and evaluation agents supervise execution. To be effective, an agent must be specialized, multiplying needs and interactions."
+      },
+      {
+        number: "04",
+        title: "The Risk",
+        content: "When agents coordinate, failures become silent, intentions unclear, delegation unsafe, and decisions conflicting."
+      },
+      {
+        number: "05",
+        title: "My Approach",
+        content: "Through this project, I explore a turnkey Agent-to-Agent Evaluation method, Safe by design and SOC-2 compatible."
+      },
+    ],
   },
   fr: {
     title: "Des agents isolés aux écosystèmes multi-agents",
-    intro: `En 2026, en hôtellerie, les systèmes multi-agents intégrées à des SI complexes seront la norme : les agents coordonnent, délèguent, négocient et agissent ensemble.
-
-L'on attend d'eux qu'ils soient autonomes, qu'ils lisent et anticipent nos intentions, nos besoins, et réagissent et alertent via le bon canal au bon moment.
-
-Les agents de pricing dialoguent avec les agents de demande, les agents de staffing réagissent aux agents de prévision, et les agents d'évaluation supervisent l'exécution.
-
-Car pour être efficace, un agent doit être spécialisé, multipliant les besoins et les interactions.
-
-Alors quand les agents se coordonnent, les défaillances deviennent silencieuses, les intention floues, la délégation non sécurisée et les décisions conflictuelles.
-
-Ainsi, via ce projet, j'explore une méthode d'Évaluation Agent-to-Agent Clé en main, Safe by design et SOC-2 compatible.`,
+    steps: [
+      {
+        number: "01",
+        title: "Vision 2026",
+        content: "En hôtellerie, les systèmes multi-agents intégrés à des SI complexes seront la norme : les agents coordonnent, délèguent, négocient et agissent ensemble."
+      },
+      {
+        number: "02",
+        title: "Autonomie",
+        content: "L'on attend d'eux qu'ils soient autonomes, qu'ils lisent et anticipent nos intentions, nos besoins, et réagissent et alertent via le bon canal au bon moment."
+      },
+      {
+        number: "03",
+        title: "Coordination",
+        content: "Les agents de pricing dialoguent avec les agents de demande, les agents de staffing réagissent aux agents de prévision, et les agents d'évaluation supervisent l'exécution. Car pour être efficace, un agent doit être spécialisé, multipliant les besoins et les interactions."
+      },
+      {
+        number: "04",
+        title: "Le Risque",
+        content: "Quand les agents se coordonnent, les défaillances deviennent silencieuses, les intentions floues, la délégation non sécurisée et les décisions conflictuelles."
+      },
+      {
+        number: "05",
+        title: "Mon Approche",
+        content: "Via ce projet, j'explore une méthode d'Évaluation Agent-to-Agent clé en main, Safe by design et SOC-2 compatible."
+      },
+    ],
   },
 };
 
@@ -115,24 +147,48 @@ export default function AgentsEvalCase() {
           id="evolution"
           className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-12 md:py-16 mb-12 bg-gradient-to-br from-[#E8F0FF] to-[#C9DDFF] dark:from-[#0F1416] dark:to-[#1a1f24]"
         >
-          <div className="w-full px-4 md:px-8 lg:px-12">
-            <motion.div 
-              className="relative pl-6 md:pl-8 space-y-6"
+          <div className="w-full px-4 md:px-8 lg:px-12 max-w-4xl mx-auto">
+            <motion.h2 
+              className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              {/* Accent bar */}
-              <div className="absolute left-0 top-4 bottom-4 w-[4px] rounded-full bg-[#5B7CFF]" />
-
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100">
-                {t.title}
-              </h2>
-
-              <p className="text-lg text-slate-700 dark:text-slate-300 max-w-3xl leading-relaxed">
-                {t.intro}
-              </p>
-            </motion.div>
+              {t.title}
+            </motion.h2>
+            
+            <div className="relative">
+              {/* Vertical connecting line */}
+              <div className="absolute left-[15px] top-4 bottom-4 w-[2px] bg-primary/30" />
+              
+              <div className="space-y-8">
+                {t.steps.map((step, index) => (
+                  <motion.div
+                    key={step.number}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ delay: index * 0.1, duration: 0.4 }}
+                    className="relative pl-12"
+                  >
+                    {/* Number circle */}
+                    <div className="absolute left-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-md">
+                      <span className="text-primary-foreground text-sm font-bold">{step.number}</span>
+                    </div>
+                    
+                    {/* Content */}
+                    <div>
+                      <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2">
+                        {step.title}
+                      </h3>
+                      <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                        {step.content}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
