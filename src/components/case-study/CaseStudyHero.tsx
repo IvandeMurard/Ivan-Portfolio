@@ -4,9 +4,9 @@
  * Avec effet parallax amélioré
  */
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { heroAnimationPreset } from '@/config/case-study/case-study-animations';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 interface Tool {
   name: string;
@@ -18,6 +18,7 @@ interface CaseStudyHeroProps {
   subtitle?: string;
   category?: string;
   backgroundImage?: string;
+  imageCredit?: string;
   tools?: Tool[];
 }
 
@@ -26,9 +27,12 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
   subtitle,
   category,
   backgroundImage,
+  imageCredit,
   tools = [],
 }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
   
   // Parallax effect amélioré pour l'image de fond
   const { scrollYProgress } = useScroll({
@@ -39,6 +43,10 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.9, 0.7]);
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setTooltipPos({ x: e.clientX + 12, y: e.clientY + 12 });
+  };
+
   return (
     <section 
       ref={ref}
@@ -47,8 +55,11 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
       {/* Background Image avec Parallax amélioré et Blur */}
       {backgroundImage && (
         <motion.div 
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 cursor-default"
           style={{ y }}
+          onMouseEnter={() => imageCredit && setShowTooltip(true)}
+          onMouseLeave={() => setShowTooltip(false)}
+          onMouseMove={handleMouseMove}
         >
           <motion.img
             src={backgroundImage}
@@ -59,6 +70,22 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
           />
         </motion.div>
       )}
+
+      {/* Tooltip crédit photo */}
+      <AnimatePresence>
+        {showTooltip && imageCredit && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.15 }}
+            className="fixed z-50 px-2.5 py-1 text-xs text-white/90 bg-black/60 backdrop-blur-sm rounded-md pointer-events-none"
+            style={{ left: tooltipPos.x, top: tooltipPos.y }}
+          >
+            {imageCredit}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Dark Overlay pour accessibilité - plus sombre pour meilleur contraste */}
       <div 

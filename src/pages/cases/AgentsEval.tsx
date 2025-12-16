@@ -132,6 +132,7 @@ export default function AgentsEvalCase() {
               ? "An autonomous system that tests your AI agents with enterprise-grade rigor" 
               : "Un système autonome qui teste vos agents IA avec une rigueur industrielle"}
             backgroundImage="/img/jeremy-bishop-xua0NYSuTF4-unsplash.jpg"
+            imageCredit="photo by Jeremy Bishop"
             tools={[
               { name: "Supabase", icon: "/img/supabase-icon.png" },
               { name: "OpenAI", icon: "/img/openai-icon.svg" },
