@@ -67,10 +67,10 @@ export const CarouselRow: React.FC<CarouselRowProps> = ({ children, className = 
         onClick={() => scroll('left')}
         aria-disabled={!canScrollLeft}
         disabled={!canScrollLeft}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-card border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:bg-secondary disabled:opacity-40 disabled:cursor-not-allowed shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        className="group/arrow absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-card border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:bg-primary hover:border-primary disabled:opacity-40 disabled:cursor-not-allowed shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         aria-label="Scroll carousel left"
       >
-        <ChevronLeft className="w-5 h-5 text-foreground" aria-hidden="true" />
+        <ChevronLeft className="w-5 h-5 text-foreground transition-colors duration-200 group-hover/arrow:text-primary-foreground" aria-hidden="true" />
       </button>
 
       {/* Right Arrow - Always visible, offset on lg+ to avoid ProgressIndicator */}
@@ -78,10 +78,10 @@ export const CarouselRow: React.FC<CarouselRowProps> = ({ children, className = 
         onClick={() => scroll('right')}
         aria-disabled={!canScrollRight}
         disabled={!canScrollRight}
-        className="absolute right-4 lg:right-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-card border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:bg-secondary disabled:opacity-40 disabled:cursor-not-allowed shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        className="group/arrow absolute right-4 lg:right-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-card border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:bg-primary hover:border-primary disabled:opacity-40 disabled:cursor-not-allowed shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         aria-label="Scroll carousel right"
       >
-        <ChevronRight className="w-5 h-5 text-foreground" aria-hidden="true" />
+        <ChevronRight className="w-5 h-5 text-foreground transition-colors duration-200 group-hover/arrow:text-primary-foreground" aria-hidden="true" />
       </button>
 
       {/* Compteur de slides accessible */}
