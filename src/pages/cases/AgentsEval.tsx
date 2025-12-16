@@ -123,7 +123,7 @@ export default function AgentsEvalCase() {
       />
 
       {/* Main Container */}
-      <div className="container mx-auto px-4 lg:px-8 pt-20 pb-16 max-w-7xl">
+      <div className="mx-auto px-4 lg:px-8 pt-20 pb-16 max-w-7xl">
         {/* Hero Section - Full width */}
         <div className="mb-8">
           <CaseStudyHero
@@ -145,7 +145,7 @@ export default function AgentsEvalCase() {
         {/* Evolution Section - Horizontal Timeline */}
         <section
           id="evolution"
-          className="w-full -mx-4 lg:-mx-8 py-12 md:py-16 mb-12 bg-gradient-to-br from-[#E8F0FF] to-[#C9DDFF] dark:from-[#0F1416] dark:to-[#1a1f24]"
+          className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-12 md:py-16 mb-12 bg-gradient-to-br from-[#E8F0FF] to-[#C9DDFF] dark:from-[#0F1416] dark:to-[#1a1f24]"
         >
           <div className="w-full max-w-7xl mx-auto px-4 lg:px-8">
             <motion.h2 
@@ -249,7 +249,7 @@ export default function AgentsEvalCase() {
           {/* Section 1: The problem - Ada structure with blue background and accent bar */}
           <section
             id="problem"
-            className="w-full -mx-4 lg:-mx-8 py-12 md:py-16 bg-[#C9DDFF] dark:bg-[#0F1416]"
+            className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-12 md:py-16 bg-[#C9DDFF] dark:bg-[#0F1416]"
           >
             <div className="w-full max-w-7xl mx-auto px-4 lg:px-8">
               <div className="relative pl-6 md:pl-8 space-y-8">
@@ -655,8 +655,8 @@ export default function AgentsEvalCase() {
           </section>
 
           {/* CTA Ribbon after Section 4 */}
-          <section className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-6 md:py-8 bg-contact/10 dark:bg-contact/20">
-            <div className="w-full px-4 md:px-8 lg:px-12">
+          <section className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-6 md:py-8 bg-contact/10 dark:bg-contact/20">
+            <div className="w-full max-w-7xl mx-auto px-4 lg:px-8">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
                 <p className="text-base md:text-lg text-slate-700 dark:text-slate-300 font-medium">
                   Ready to boost your agents safety?

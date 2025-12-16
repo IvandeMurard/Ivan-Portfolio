@@ -7,57 +7,47 @@ import { motion } from "framer-motion";
 const steps = [
   {
     number: 1,
-    title: "Webhook → run created",
-    description: "A request triggers a new normalized run.",
+    title: "Webhook → run",
+    description: "Request triggers a new normalized run.",
   },
   {
     number: 2,
-    title: "Agent A generates answer",
+    title: "Agent A generates",
     description: "Main agent produces its initial response.",
   },
   {
     number: 3,
-    title: "Agent B performs counter-analysis",
-    description: "A second agent provides complementary or adversarial coverage.",
+    title: "Agent B counter-analysis",
+    description: "Second agent provides adversarial coverage.",
   },
   {
     number: 4,
-    title: "Evaluator scores conversation",
-    description: "Evaluates across 5 criteria (coverage, feasibility, risks, testability, user_value).",
+    title: "Evaluator scores",
+    description: "5 criteria: coverage, feasibility, risks, testability, value.",
   },
   {
     number: 5,
-    title: "Issues & recommendations detected",
+    title: "Issues detected",
     description: "Extracted into structured outputs.",
   },
   {
     number: 6,
-    title: "Structured data stored & surfaced",
-    description: "Supabase stores all metrics for dashboards and the Reasoning Engine.",
+    title: "Data stored",
+    description: "Supabase stores metrics for dashboards.",
   },
 ];
 
 const stepVariants = {
-  hidden: { opacity: 0, y: 12 },
+  hidden: { opacity: 0, y: 16 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.08,
+      delay: i * 0.1,
       duration: 0.4,
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   }),
-};
-
-const lineVariants = {
-  hidden: { height: 0 },
-  visible: {
-    height: "100%",
-    transition: {
-      duration: 0.5,
-      delay: 0.2,
-    },
-  },
 };
 
 export function ArchitectureStepper() {
@@ -65,55 +55,45 @@ export function ArchitectureStepper() {
 
   return (
     <>
+      {/* Horizontal Timeline Grid */}
       <motion.div
-        className="space-y-8"
+        className="relative"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: "-50px" }}
       >
-        {steps.map((step, index) => (
-          <motion.div
-            key={step.number}
-            className="flex gap-6"
-            variants={stepVariants}
-            custom={index}
-          >
-            {/* Step number */}
-            <div className="flex-shrink-0 relative">
+        {/* Horizontal line connecting all steps (desktop only) */}
+        <div className="hidden lg:block absolute top-5 left-[8.33%] right-[8.33%] h-[2px] bg-gradient-to-r from-transparent via-[#5B7CFF] to-transparent" />
+
+        {/* Steps grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.number}
+              className="relative text-center p-4 rounded-xl bg-white/50 dark:bg-slate-800/50 border border-slate-200/50 dark:border-slate-700/50 hover:bg-white/80 dark:hover:bg-slate-800/80 transition-colors"
+              variants={stepVariants}
+              custom={index}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
+            >
+              {/* Step number circle */}
               <motion.div
-                className="w-10 h-10 rounded-full border-2 border-[#A8B8FF] bg-white dark:bg-background flex items-center justify-center font-semibold text-sm text-[#3D56CC] dark:text-[#5B7CFF]"
-                whileHover={{ scale: 1.05 }}
+                className="w-10 h-10 mx-auto rounded-full border-2 border-[#A8B8FF] bg-white dark:bg-background flex items-center justify-center font-bold text-sm text-[#3D56CC] dark:text-[#5B7CFF] relative z-10"
+                whileHover={{ scale: 1.1 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
                 {step.number}
               </motion.div>
-              {index < steps.length - 1 && (
-                <motion.div
-                  className="absolute left-1/2 -translate-x-1/2 top-10 w-[3px] rounded-full bg-[#5B7CFF] mt-2"
-                  style={{ minHeight: "60px" }}
-                  variants={lineVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                />
-              )}
-            </div>
 
-            {/* Step content */}
-            <motion.div
-              className="flex-1 pb-8"
-              whileHover={{ x: 4 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2">
+              {/* Step content */}
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mt-3 mb-1 leading-tight">
                 {step.title}
               </h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 {step.description}
               </p>
             </motion.div>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </motion.div>
 
       {/* Optional diagram */}
@@ -181,4 +161,3 @@ export function ArchitectureStepper() {
     </>
   );
 }
-
