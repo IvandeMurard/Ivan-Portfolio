@@ -145,9 +145,11 @@ export function MediaCard({
           </p>
 
           <div className="space-y-4">
-            <h3 className="text-[24px] md:text-[26px] font-[900] tracking-[-0.01em] leading-[1.15] text-white max-w-[280px] [filter:drop-shadow(0_1px_1px_rgba(0,0,0,.6))]">
-              {title}
-            </h3>
+            <div className="min-h-[72px] flex items-end">
+              <h3 className="text-[24px] md:text-[26px] font-[900] tracking-[-0.01em] leading-[1.15] text-white max-w-[280px] [filter:drop-shadow(0_1px_1px_rgba(0,0,0,.6))]">
+                {title}
+              </h3>
+            </div>
             <p id={`tagline-${id}`} className="text-[15px] font-[400] leading-[1.4] text-white/80 max-w-[280px] [filter:drop-shadow(0_1px_1px_rgba(0,0,0,.5))]">
               {tagline}
             </p>
