@@ -25,11 +25,31 @@ const triggerHaptic = (pattern: number | number[] = 10) => {
 const evolutionContent = {
   en: {
     title: "From single agents to agent ecosystems",
-    intro: "In hospitality, operations are becoming multi-agent systems by default: pricing agents talk to demand agents, staffing agents react to forecasting agents. When agents coordinate, failures become silent—unclear intent, unsafe delegation, conflicting decisions. This project introduces an Evaluation Agent that audits how agents communicate.",
+    intro: `By 2026, in hospitality, multi-agent systems integrated into complex IT infrastructures will be the norm: agents coordinate, delegate, negotiate, and act together.
+
+We expect them to be autonomous, to read and anticipate our intentions, our needs, and to react and alert via the right channel at the right moment.
+
+Pricing agents talk to demand agents, staffing agents react to forecasting agents, and evaluation agents supervise execution.
+
+To be effective, an agent must be specialized, multiplying needs and interactions.
+
+So when agents coordinate, failures become silent, intentions unclear, delegation unsafe, and decisions conflicting.
+
+Through this project, I explore a turnkey Agent-to-Agent Evaluation method, Safe by design and SOC-2 compatible.`,
   },
   fr: {
     title: "Des agents isolés aux écosystèmes multi-agents",
-    intro: "En hôtellerie, les opérations deviennent des systèmes multi-agents par défaut : les agents de pricing dialoguent avec les agents de demande, les agents de staffing réagissent aux agents de prévision. Quand les agents se coordonnent, les défaillances deviennent silencieuses—intention floue, délégation non sécurisée, décisions conflictuelles. Ce projet introduit un Agent d'Évaluation qui audite comment les agents communiquent.",
+    intro: `En 2026, en hôtellerie, les systèmes multi-agents intégrées à des SI complexes seront la norme : les agents coordonnent, délèguent, négocient et agissent ensemble.
+
+L'on attend d'eux qu'ils soient autonomes, qu'ils lisent et anticipent nos intentions, nos besoins, et réagissent et alertent via le bon canal au bon moment.
+
+Les agents de pricing dialoguent avec les agents de demande, les agents de staffing réagissent aux agents de prévision, et les agents d'évaluation supervisent l'exécution.
+
+Car pour être efficace, un agent doit être spécialisé, multipliant les besoins et les interactions.
+
+Alors quand les agents se coordonnent, les défaillances deviennent silencieuses, les intention floues, la délégation non sécurisée et les décisions conflictuelles.
+
+Ainsi, via ce projet, j'explore une méthode d'Évaluation Agent-to-Agent Clé en main, Safe by design et SOC-2 compatible.`,
   },
 };
 
