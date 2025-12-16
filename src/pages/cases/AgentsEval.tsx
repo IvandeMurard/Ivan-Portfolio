@@ -249,9 +249,9 @@ export default function AgentsEvalCase() {
           {/* Section 1: The problem - Ada structure with blue background and accent bar */}
           <section
             id="problem"
-            className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-12 md:py-16 bg-[#C9DDFF] dark:bg-[#0F1416]"
+            className="w-full -mx-4 lg:-mx-8 py-12 md:py-16 bg-[#C9DDFF] dark:bg-[#0F1416]"
           >
-            <div className="w-full px-4 md:px-8 lg:px-12">
+            <div className="w-full max-w-7xl mx-auto px-4 lg:px-8">
               <div className="relative pl-6 md:pl-8 space-y-8">
                 {/* Accent bar */}
                 <div className="absolute left-0 top-4 bottom-4 w-[4px] rounded-full bg-[#5B7CFF]" />
