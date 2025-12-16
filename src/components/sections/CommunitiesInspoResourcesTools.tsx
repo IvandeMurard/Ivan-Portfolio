@@ -11,8 +11,10 @@ import {
   inspirations,
   resources,
   tools,
+  BaseItem,
 } from "@/data/inspirationsToolsMerged";
 import { ToolsTable } from "./ToolsTable";
+import { CategoryType, ItemWithCategory } from "@/utils/getRecommendations";
 
 const TABS = [
   { id: "communities", label: "Communities" },
@@ -34,8 +36,8 @@ export function CommunitiesInspoResourcesTools({ disableSticky = false }: Commun
   const { language } = useLanguage();
   
   const sectionTitle = language === 'fr' 
-    ? "Ce qui me motive"
-    : "What Drives Me";
+    ? "Curated Library"
+    : "Curated Library";
 
   // Fermer l'item ouvert lorsqu'on change d'onglet
   useEffect(() => {
@@ -56,6 +58,87 @@ export function CommunitiesInspoResourcesTools({ disableSticky = false }: Commun
         return [];
     }
   }, [active]);
+
+  // Créer la liste complète de tous les items avec leurs catégories pour les recommandations
+  const allItemsWithCategory = useMemo<ItemWithCategory[]>(() => {
+    const items: ItemWithCategory[] = [];
+    
+    communities.forEach(item => {
+      items.push({ ...item, category: "communities" as CategoryType });
+    });
+    
+    inspirations.forEach(item => {
+      items.push({ ...item, category: "inspirations" as CategoryType });
+    });
+    
+    resources.forEach(item => {
+      items.push({ ...item, category: "resources" as CategoryType });
+    });
+    
+    tools.forEach(item => {
+      items.push({ ...item, category: "tools" as CategoryType });
+    });
+    
+    return items;
+  }, []);
+
+  // Fonction helper pour scroll smooth vers une recommandation
+  const scrollToRecommendation = (itemId: string) => {
+    const targetElement = document.getElementById(`zc-${itemId}`);
+    if (targetElement) {
+      const elementTop = targetElement.getBoundingClientRect().top;
+      const offset = 120; // Offset pour le header/sticky
+      const scrollPosition = window.scrollY + elementTop - offset;
+      
+      window.scrollTo({
+        top: scrollPosition,
+        behavior: "smooth",
+      });
+      
+      // Focus pour l'accessibilité
+      targetElement.setAttribute('tabindex', '-1');
+      targetElement.focus({ preventScroll: true });
+    }
+  };
+
+  // Gérer le clic sur une recommandation : fermer l'actuelle, changer de catégorie si nécessaire, ouvrir la nouvelle, smooth scroll
+  const handleRecommendationClick = (itemId: string) => {
+    // Trouver l'item recommandé pour déterminer sa catégorie
+    const recommendedItem = allItemsWithCategory.find(item => item.id === itemId);
+    if (!recommendedItem) return;
+    
+    // Fermer la carte actuelle
+    close();
+    
+    // Si l'item est dans une autre catégorie, changer d'onglet
+    const needsCategorySwitch = recommendedItem.category !== active;
+    
+    if (needsCategorySwitch) {
+      // Changer de catégorie d'abord
+      setActive(recommendedItem.category);
+      
+      // Attendre que le changement de catégorie soit effectué (le useEffect fermera automatiquement)
+      setTimeout(() => {
+        // Ouvrir la nouvelle carte
+        toggle(itemId);
+        
+        // Smooth scroll vers la nouvelle carte
+        setTimeout(() => {
+          scrollToRecommendation(itemId);
+        }, 300); // Plus de délai pour laisser le temps au changement de catégorie
+      }, 300);
+    } else {
+      // Même catégorie, juste fermer/ouvrir
+      setTimeout(() => {
+        toggle(itemId);
+        
+        // Smooth scroll vers la nouvelle carte
+        setTimeout(() => {
+          scrollToRecommendation(itemId);
+        }, 150);
+      }, 200);
+    }
+  };
 
   return (
     <section id="resources" className="py-24 px-4 bg-secondary">
@@ -97,6 +180,9 @@ export function CommunitiesInspoResourcesTools({ disableSticky = false }: Commun
                   tags={item.tags}
                   open={openId === item.id}
                   onToggle={toggle}
+                  allItems={allItemsWithCategory}
+                  currentCategory={active}
+                  onRecommendationClick={handleRecommendationClick}
                 />
               ))}
             </div>
@@ -117,6 +203,9 @@ export function CommunitiesInspoResourcesTools({ disableSticky = false }: Commun
                 tags={item.tags}
                 open={openId === item.id}
                 onToggle={toggle}
+                allItems={allItemsWithCategory}
+                currentCategory={active}
+                onRecommendationClick={handleRecommendationClick}
               />
             ))}
           </div>

@@ -47,7 +47,7 @@ export function CTABanner({
       viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
       transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="max-w-[1100px] mx-auto px-4 md:px-6">          {/* ← largeur contenue */}
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6">          {/* ← largeur contenue */}
         <div
           className="relative overflow-hidden rounded-[16px] shadow-[0_6px_20px_-8px_hsl(var(--overlay))]"
           onMouseEnter={() => setHover(true)}

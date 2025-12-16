@@ -1,6 +1,11 @@
 import { InlineExpand } from "@/components/InlineExpand";
 import { useLightAudio } from "@/hooks/useLightAudio";
 import { Play, Pause, ExternalLink } from "lucide-react";
+import { BaseItem } from "@/data/inspirationsToolsMerged";
+import { CategoryType, ItemWithCategory, getRecommendations } from "@/utils/getRecommendations";
+import { RecommendationCard } from "./RecommendationCard";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useMemo } from "react";
 
 type Media = {
   type?: "audio" | "video";
@@ -21,6 +26,10 @@ type Props = {
   tags?: string[];
   open: boolean;
   onToggle: (id: string) => void;
+  // Recommandations props
+  allItems?: ItemWithCategory[];
+  currentCategory?: CategoryType;
+  onRecommendationClick?: (itemId: string) => void;
 };
 
 export function ZoomContextCard({
@@ -35,10 +44,33 @@ export function ZoomContextCard({
   tags,
   open,
   onToggle,
+  allItems = [],
+  currentCategory,
+  onRecommendationClick,
 }: Props) {
   const { currentId, isPlaying, play, stop } = useLightAudio();
+  const { language } = useLanguage();
   const playingThis = currentId === id && isPlaying;
   const ariaId = `zc-${id}`;
+
+  // Calculer les recommandations
+  const recommendations = useMemo(() => {
+    if (!allItems.length || !currentCategory) return [];
+    
+    const currentItem: BaseItem = {
+      id,
+      title,
+      subtitle,
+      logo,
+      excerpt,
+      comment,
+      link,
+      media,
+      tags,
+    };
+    
+    return getRecommendations(currentItem, currentCategory, allItems, 3);
+  }, [id, title, subtitle, logo, excerpt, comment, link, media, tags, allItems, currentCategory]);
 
   return (
     <div className="py-4">
@@ -125,6 +157,26 @@ export function ZoomContextCard({
             >
               Open resource <ExternalLink size={14} />
             </a>
+          )}
+
+          {/* Recommandations */}
+          {recommendations.length > 0 && onRecommendationClick && (
+            <div className="pt-4 mt-4 border-t border-border">
+              <h4 className="text-sm font-semibold text-foreground mb-3">
+                You might also like
+              </h4>
+              <div className="space-y-2">
+                {recommendations.map((rec) => (
+                  <RecommendationCard
+                    key={rec.id}
+                    item={rec}
+                    category={rec.category}
+                    onClick={() => onRecommendationClick(rec.id)}
+                    language={language}
+                  />
+                ))}
+              </div>
+            </div>
           )}
         </div>
       </InlineExpand>

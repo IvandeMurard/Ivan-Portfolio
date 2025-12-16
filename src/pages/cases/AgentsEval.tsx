@@ -123,7 +123,7 @@ export default function AgentsEvalCase() {
       />
 
       {/* Main Container */}
-      <div className="mx-auto px-4 lg:px-8 pt-20 pb-16 max-w-7xl">
+      <div className="container mx-auto px-4 lg:px-8 pt-20 pb-16 max-w-[1400px]">
         {/* Hero Section - Full width */}
         <div className="mb-8">
           <CaseStudyHero
@@ -146,9 +146,9 @@ export default function AgentsEvalCase() {
         {/* Evolution Section - Horizontal Timeline */}
         <section
           id="evolution"
-          className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-12 md:py-16 mb-12 bg-gradient-to-br from-[#E8F0FF] to-[#C9DDFF] dark:from-[#0F1416] dark:to-[#1a1f24]"
+          className="w-full py-12 md:py-16 mb-12 bg-gradient-to-br from-[#E8F0FF] to-[#C9DDFF] dark:from-[#0F1416] dark:to-[#1a1f24]"
         >
-          <div className="w-full max-w-7xl mx-auto px-4 lg:px-8">
+          <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
             <motion.h2 
               className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-8 text-center"
               initial={{ opacity: 0, y: 20 }}
@@ -250,9 +250,9 @@ export default function AgentsEvalCase() {
           {/* Section 1: The problem - Ada structure with blue background and accent bar */}
           <section
             id="problem"
-            className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-12 md:py-16 bg-[#C9DDFF] dark:bg-[#0F1416]"
+            className="w-full py-12 md:py-16 bg-[#C9DDFF] dark:bg-[#0F1416]"
           >
-            <div className="w-full max-w-7xl mx-auto px-4 lg:px-8">
+            <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
               <div className="relative pl-6 md:pl-8 space-y-8">
                 {/* Accent bar */}
                 <div className="absolute left-0 top-4 bottom-4 w-[4px] rounded-full bg-[#5B7CFF]" />
@@ -519,7 +519,7 @@ export default function AgentsEvalCase() {
 
           {/* Section 3 continued: Battle-tested evaluation (part of Solution) */}
           <section className="py-20 md:py-24 px-4 md:px-8 bg-zinc-900 dark:bg-zinc-950 rounded-3xl my-8">
-            <div className="max-w-6xl mx-auto space-y-12">
+            <div className="max-w-[1400px] mx-auto space-y-12">
               {/* Header */}
               <div className="text-center space-y-4">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
@@ -656,8 +656,8 @@ export default function AgentsEvalCase() {
           </section>
 
           {/* CTA Ribbon after Section 4 */}
-          <section className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-6 md:py-8 bg-contact/10 dark:bg-contact/20">
-            <div className="w-full max-w-7xl mx-auto px-4 lg:px-8">
+          <section className="w-full py-6 md:py-8 bg-contact/10 dark:bg-contact/20">
+            <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12">
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
                 <p className="text-base md:text-lg text-slate-700 dark:text-slate-300 font-medium">
                   Ready to boost your agents safety?
@@ -743,9 +743,9 @@ export default function AgentsEvalCase() {
           {/* Section 7: Impact - Ada style */}
           <section
             id="impact"
-            className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-12 md:py-16 bg-[#F8FAFC] dark:bg-slate-950"
+            className="w-full py-12 md:py-16 bg-[#F8FAFC] dark:bg-slate-950"
           >
-            <div className="w-full px-4 md:px-8 lg:px-12 space-y-8">
+            <div className="max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12 space-y-8">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-slate-100">7. Impact & Results</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <motion.div

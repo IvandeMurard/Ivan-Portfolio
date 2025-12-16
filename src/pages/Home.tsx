@@ -18,6 +18,7 @@ import { sonorCase } from "../data/cases/sonor.case";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import { GradientBorderSection } from "@/components/GradientBorderSection";
 import { AboutSection } from "@/components/sections/AboutSection";
+import { ResourceLibraryTeaser } from "@/components/sections/ResourceLibraryTeaser";
 import { useInlineExpand } from "@/hooks/useInlineExpand";
 import { InlineExpand } from "@/components/InlineExpand";
 import { SOCIAL_LINKS } from "@/site.config";
@@ -550,7 +551,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
 
       {/* Work Section */}
       <section id="work" className="relative pt-24 md:pt-28 pb-16 md:pb-20 px-4 bg-background">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-[1400px] mx-auto">
           <ScrollReveal variant="fade-up">
             <SectionHeader title="Work" alignment="left" className="mb-6" />
           </ScrollReveal>
@@ -774,8 +775,8 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
       />
 
       {/* Experience & Education Section - Left Aligned */}
-      <section id="experience" className="py-24 px-4">
-        <div className="max-w-7xl mx-auto">
+      <section id="experience" className="py-24 px-4 bg-background">
+        <div className="max-w-[1400px] mx-auto">
           <ScrollReveal variant="fade-up">
             <SectionHeader title="Experience & Education" alignment="left" className="mb-8" />
           </ScrollReveal>
@@ -918,12 +919,37 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
         </div>
       </section>
 
+      {/* Transition teaser between Experience and About */}
+      <ScrollReveal variant="fade-up" delay={0.1}>
+        <section className="py-12 px-4 bg-secondary">
+          <div className="max-w-[1400px] mx-auto text-center">
+            <p className="text-sm text-muted-foreground mb-4">
+              💭 <span className="font-medium">Want to know what drives me?</span>
+            </p>
+          </div>
+        </section>
+      </ScrollReveal>
+
       <AboutSection />
+
+      {/* Transition teaser between About and Curated Library */}
+      <ScrollReveal variant="fade-up" delay={0.1}>
+        <section className="py-12 px-4 bg-background">
+          <div className="max-w-[1400px] mx-auto text-center">
+            <p className="text-sm text-muted-foreground mb-4">
+              📚 <span className="font-medium">Explore what inspires me</span>
+            </p>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* Curated Library Teaser */}
+      <ResourceLibraryTeaser disableSticky={isStickyDisabled} />
 
       {/* CTA Section after About */}
       <ScrollReveal variant="fade-up" delay={0.2}>
         <section className="py-12 px-4">
-          <div className="max-w-7xl mx-auto">
+          <div className="max-w-[1400px] mx-auto">
             {/* Inter-section teaser */}
             <div className="text-center mb-6">
               <p className="text-sm text-muted-foreground">

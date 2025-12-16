@@ -176,16 +176,94 @@ export function ToolsTable() {
                 >
                   {/* Logo */}
                   <td className="px-4 py-3">
-                    <img 
-                      src={tool.logo_url || "/placeholder.svg"} 
-                      alt={tool.name}
-                      className="w-8 h-8 rounded object-contain"
-                    />
+                    {tool.url ? (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <a
+                              href={tool.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block cursor-pointer hover:opacity-80 transition-opacity"
+                              aria-label={`Visit ${tool.name} website`}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <img 
+                                src={tool.logo_url || "/placeholder.svg"} 
+                                alt={tool.name}
+                                className="w-8 h-8 rounded object-contain"
+                              />
+                            </a>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p className="max-w-xs">
+                              {tool.description_long || tool.description || tool.name}
+                            </p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    ) : (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div className="cursor-help">
+                              <img 
+                                src={tool.logo_url || "/placeholder.svg"} 
+                                alt={tool.name}
+                                className="w-8 h-8 rounded object-contain"
+                              />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p className="max-w-xs">
+                              {tool.description_long || tool.description || tool.name}
+                            </p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
                   </td>
                   
                   {/* Name */}
                   <td className="px-4 py-3 font-medium">
-                    {tool.name}
+                    {tool.url ? (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <a
+                              href={tool.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="cursor-pointer hover:text-accent hover:underline transition-colors"
+                              aria-label={`Visit ${tool.name} website`}
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {tool.name}
+                            </a>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p className="max-w-xs">
+                              {tool.description_long || tool.description || tool.name}
+                            </p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    ) : (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <span className="cursor-help">
+                              {tool.name}
+                            </span>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p className="max-w-xs">
+                              {tool.description_long || tool.description || tool.name}
+                            </p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    )}
                   </td>
                   
                   {/* Type (badge) */}
