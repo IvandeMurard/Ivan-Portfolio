@@ -66,7 +66,7 @@ export const projects: Project[] = [
     id: "wttj-conversion-seniors",
     title_en: "A growth-oriented product case study",
     title_fr: "Une étude de cas produit orientée croissance",
-    subtitle_en: "How can we improve candidate conversions on WTTJ?",
+    subtitle_en: "How can we improve candidate\u00A0conversions on WTTJ?",
     subtitle_fr: "Comment augmenter la conversion des candidats seniors sur WTTJ ?",
     image: wttjHero,
     logo: wttjLogo,
