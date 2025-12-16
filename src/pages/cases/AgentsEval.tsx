@@ -147,7 +147,7 @@ export default function AgentsEvalCase() {
           id="evolution"
           className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-12 md:py-16 mb-12 bg-gradient-to-br from-[#E8F0FF] to-[#C9DDFF] dark:from-[#0F1416] dark:to-[#1a1f24]"
         >
-          <div className="w-full px-4 md:px-8 lg:px-12">
+          <div className="w-full max-w-6xl mx-auto px-4 md:px-8 lg:px-12">
             <motion.h2 
               className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-8 text-center"
               initial={{ opacity: 0, y: 20 }}
