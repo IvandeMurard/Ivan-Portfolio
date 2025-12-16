@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { BaseItem, CategoryType } from "@/data/inspirationsToolsMerged";
+import { BaseItem } from "@/data/inspirationsToolsMerged";
+import { CategoryType } from "@/utils/getRecommendations";
 
 interface ResourceCardTeaserProps {
   item: BaseItem;

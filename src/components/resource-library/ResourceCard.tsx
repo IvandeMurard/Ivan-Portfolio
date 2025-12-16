@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Resource } from "@/data/resource-library/resources";
 
+export type { Resource };
+
 interface ResourceCardProps {
   resource: Resource;
   onClick: () => void;
@@ -34,7 +36,6 @@ export function ResourceCard({ resource, onClick, isFocused = false, cardRef }: 
         className={`relative bg-white rounded-lg overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_2px_8px_rgba(0,0,0,0.08)] transition-all duration-300 ${
           isFocused ? "ring-2 ring-[#0A0A0A] ring-offset-2" : ""
         }`}
-        style={{ elevation: 1 }}
       >
         {/* Image - Image-first design */}
         <div className="relative aspect-[3/4] bg-[#F5F5F5] overflow-hidden">
