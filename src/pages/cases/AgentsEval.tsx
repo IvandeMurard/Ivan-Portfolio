@@ -142,14 +142,14 @@ export default function AgentsEvalCase() {
           />
         </div>
 
-        {/* Evolution Section - Agent-to-Agent Introduction */}
+        {/* Evolution Section - Horizontal Timeline */}
         <section
           id="evolution"
           className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-12 md:py-16 mb-12 bg-gradient-to-br from-[#E8F0FF] to-[#C9DDFF] dark:from-[#0F1416] dark:to-[#1a1f24]"
         >
-          <div className="w-full px-4 md:px-8 lg:px-12 max-w-4xl mx-auto">
+          <div className="w-full px-4 md:px-8 lg:px-12">
             <motion.h2 
-              className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-10"
+              className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-8 text-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -157,31 +157,33 @@ export default function AgentsEvalCase() {
               {t.title}
             </motion.h2>
             
+            {/* Horizontal timeline container */}
             <div className="relative">
-              {/* Vertical connecting line */}
-              <div className="absolute left-[15px] top-4 bottom-4 w-[2px] bg-primary/30" />
+              {/* Horizontal connecting line - desktop only */}
+              <div className="hidden md:block absolute top-4 left-0 right-0 h-[2px] bg-primary/30" />
               
-              <div className="space-y-8">
+              {/* Steps grid */}
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-4">
                 {t.steps.map((step, index) => (
                   <motion.div
                     key={step.number}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
-                    transition={{ delay: index * 0.1, duration: 0.4 }}
-                    className="relative pl-12"
+                    transition={{ delay: index * 0.08, duration: 0.4 }}
+                    className="relative"
                   >
                     {/* Number circle */}
-                    <div className="absolute left-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-md">
+                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-md mb-3 mx-auto md:mx-0">
                       <span className="text-primary-foreground text-sm font-bold">{step.number}</span>
                     </div>
                     
                     {/* Content */}
-                    <div>
-                      <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mb-2">
+                    <div className="text-center md:text-left">
+                      <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100 mb-1">
                         {step.title}
                       </h3>
-                      <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
+                      <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                         {step.content}
                       </p>
                     </div>
