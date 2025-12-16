@@ -73,12 +73,12 @@ export const CarouselRow: React.FC<CarouselRowProps> = ({ children, className = 
         <ChevronLeft className="w-5 h-5 text-foreground" aria-hidden="true" />
       </button>
 
-      {/* Right Arrow - Always visible */}
+      {/* Right Arrow - Always visible, offset on lg+ to avoid ProgressIndicator */}
       <button
         onClick={() => scroll('right')}
         aria-disabled={!canScrollRight}
         disabled={!canScrollRight}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-card border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:bg-secondary disabled:opacity-40 disabled:cursor-not-allowed shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        className="absolute right-4 lg:right-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 bg-card border border-border rounded-full flex items-center justify-center transition-all duration-200 hover:bg-secondary disabled:opacity-40 disabled:cursor-not-allowed shadow-lg hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         aria-label="Scroll carousel right"
       >
         <ChevronRight className="w-5 h-5 text-foreground" aria-hidden="true" />
