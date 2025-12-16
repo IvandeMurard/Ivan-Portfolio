@@ -129,8 +129,8 @@ export default function AgentsEvalCase() {
           <CaseStudyHero
             title="Agentic Evaluation"
             subtitle={language === 'en' 
-              ? "An autonomous system that tests your AI agents with enterprise-grade rigor" 
-              : "Un système autonome qui teste vos agents IA avec une rigueur industrielle"}
+              ? "An autonomous system that tests your AI agents\nwith enterprise-grade rigor" 
+              : "Un système autonome qui teste vos agents IA\navec une rigueur industrielle"}
             backgroundImage="/img/jeremy-bishop-xua0NYSuTF4-unsplash.jpg"
             imageCredit="photo by Jeremy Bishop"
             tools={[
