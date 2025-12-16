@@ -44,6 +44,8 @@ export const projects: Project[] = [
     tags_en: [sonorCase.badge_en || "Open Data"],
     tags_fr: [sonorCase.badge_fr || "Open Data"],
     category: "product",
+    tagline_en: "Making the invisible visible",
+    tagline_fr: "Rendre visible l'invisible",
     longDescription_en: "Reducing urban noise by transforming open data into actionable city insights.",
     longDescription_fr: "Réduire le bruit urbain en transformant l'open data en insights actionnables pour les villes.",
     bullets_en: [
