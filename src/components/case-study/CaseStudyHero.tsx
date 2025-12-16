@@ -51,15 +51,13 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
     <section 
       ref={ref}
       className="relative h-[40vh] min-h-[350px] w-full flex items-center overflow-hidden rounded-2xl"
+      onMouseMove={imageCredit ? handleMouseMove : undefined}
     >
       {/* Background Image avec Parallax amélioré et Blur */}
       {backgroundImage && (
         <motion.div 
-          className="absolute inset-0 z-0 cursor-default"
+          className="absolute inset-0 z-0"
           style={{ y }}
-          onMouseEnter={() => imageCredit && setShowTooltip(true)}
-          onMouseLeave={() => setShowTooltip(false)}
-          onMouseMove={handleMouseMove}
         >
           <motion.img
             src={backgroundImage}
@@ -71,7 +69,15 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
         </motion.div>
       )}
 
-      {/* Tooltip crédit photo */}
+      {/* Dark Overlay pour accessibilité - capture les events souris pour le tooltip */}
+      <div 
+        className="absolute inset-0 bg-black/60 z-10 cursor-default"
+        aria-hidden="true"
+        onMouseEnter={() => imageCredit && setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+      />
+
+      {/* Tooltip crédit photo - z-index très élevé */}
       <AnimatePresence>
         {showTooltip && imageCredit && (
           <motion.div
@@ -79,19 +85,13 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.15 }}
-            className="fixed z-50 px-2.5 py-1 text-xs text-white/90 bg-black/60 backdrop-blur-sm rounded-md pointer-events-none"
+            className="fixed z-[9999] px-2.5 py-1 text-xs text-white/90 bg-black/70 backdrop-blur-sm rounded-md pointer-events-none shadow-lg"
             style={{ left: tooltipPos.x, top: tooltipPos.y }}
           >
             {imageCredit}
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Dark Overlay pour accessibilité - plus sombre pour meilleur contraste */}
-      <div 
-        className="absolute inset-0 bg-black/60 z-10"
-        aria-hidden="true"
-      />
 
       {/* Content - Aligné à gauche */}
       <motion.div
@@ -115,7 +115,7 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
           {/* Subtitle */}
           {subtitle && (
             <motion.p
-              className="text-lg md:text-xl text-white/90 mb-6 max-w-2xl"
+              className="text-lg md:text-xl text-white/90 mb-6 max-w-2xl whitespace-pre-line"
               style={{
                 textShadow: '0 1px 4px rgba(0, 0, 0, 0.5)',
               }}
