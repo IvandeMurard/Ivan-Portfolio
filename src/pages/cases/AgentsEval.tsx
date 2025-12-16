@@ -131,7 +131,7 @@ export default function AgentsEvalCase() {
             subtitle={language === 'en' 
               ? "An autonomous system that tests your AI agents with enterprise-grade rigor" 
               : "Un système autonome qui teste vos agents IA avec une rigueur industrielle"}
-            backgroundImage="/img/samuel-arkwright-unsplash.jpg"
+            backgroundImage="/img/jeremy-bishop-xua0NYSuTF4-unsplash.jpg"
             tools={[
               { name: "Supabase", icon: "/img/supabase-icon.png" },
               { name: "OpenAI", icon: "/img/openai-icon.svg" },
