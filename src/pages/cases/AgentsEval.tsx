@@ -10,8 +10,9 @@ import { ProgressIndicator } from "@/components/ProgressIndicator";
 import { CaseStudyHero } from "@/components/case-study/CaseStudyHero";
 import { CaseStudySidebar } from "@/components/case-study/CaseStudySidebar";
 import { CaseStudyTLDR } from "@/components/case-study/CaseStudyTLDR";
-import { ZoomIn } from "lucide-react";
+import { ZoomIn, ShieldCheck, AlertTriangle } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Haptic feedback helper (vibration API for mobile)
 const triggerHaptic = (pattern: number | number[] = 10) => {
@@ -20,9 +21,47 @@ const triggerHaptic = (pattern: number | number[] = 10) => {
   }
 };
 
+// Bilingual content for evolution section
+const evolutionContent = {
+  en: {
+    title: "From single agents to agent ecosystems.",
+    intro: "AI agents are no longer isolated executors. They coordinate, delegate, negotiate, and act together. In sectors like hospitality, operations are becoming multi-agent systems by default: pricing agents talk to demand agents, staffing agents react to forecasting agents, safety agents supervise execution.",
+    riskTitle: "The real risk is no longer execution. It's coordination.",
+    riskIntro: "When agents talk to each other, failures are silent:",
+    risks: ["unclear intent", "unsafe delegation", "conflicting decisions", "non-explainable actions"],
+    stackProblem: "Most stacks monitor outputs.",
+    stackSolution: "Almost none evaluate agent-to-agent communication itself.",
+    solutionTitle: "This project introduces an Evaluation Agent designed as a Supervisor.",
+    solutionIntro: "An autonomous agent that audits how agents communicate:",
+    solutionPoints: ["what they say", "why they say it", "who they delegate to", "whether it's safe, consistent, and actionable"],
+    privacyTitle: "Privacy & safety are not added later. They are built in.",
+    privacyDesc: "Every interaction is evaluated through safety-by-design rules, SOC-2 compatible constraints, and explainable scoring.",
+    finalLine1: "This is not a marketplace.",
+    finalLine2: "This is the missing quality layer for multi-agent systems.",
+  },
+  fr: {
+    title: "Des agents isolés aux écosystèmes multi-agents.",
+    intro: "Les agents IA ne sont plus des exécutants isolés. Ils coordonnent, délèguent, négocient et agissent ensemble. Dans des secteurs comme l'hôtellerie, les opérations deviennent des systèmes multi-agents par défaut : les agents de pricing dialoguent avec les agents de demande, les agents de staffing réagissent aux agents de prévision, les agents de sécurité supervisent l'exécution.",
+    riskTitle: "Le vrai risque n'est plus l'exécution. C'est la coordination.",
+    riskIntro: "Quand les agents communiquent entre eux, les défaillances sont silencieuses :",
+    risks: ["intention floue", "délégation non sécurisée", "décisions conflictuelles", "actions non explicables"],
+    stackProblem: "La plupart des stacks surveillent les outputs.",
+    stackSolution: "Presque aucun n'évalue la communication agent-à-agent elle-même.",
+    solutionTitle: "Ce projet introduit un Agent d'Évaluation conçu comme Superviseur.",
+    solutionIntro: "Un agent autonome qui audite comment les agents communiquent :",
+    solutionPoints: ["ce qu'ils disent", "pourquoi ils le disent", "à qui ils délèguent", "si c'est sûr, cohérent et actionnable"],
+    privacyTitle: "Privacy & safety ne sont pas ajoutés après coup. Ils sont intégrés dès la conception.",
+    privacyDesc: "Chaque interaction est évaluée via des règles safety-by-design, des contraintes compatibles SOC-2, et un scoring explicable.",
+    finalLine1: "Ce n'est pas une marketplace.",
+    finalLine2: "C'est la couche qualité manquante pour les systèmes multi-agents.",
+  },
+};
+
 export default function AgentsEvalCase() {
   const navigate = useNavigate();
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const { language } = useLanguage();
+  const t = evolutionContent[language];
 
   const scrollToSection = (id: string) => {
     if (id === "home") {
@@ -42,6 +81,7 @@ export default function AgentsEvalCase() {
       <Navigation />
       <ProgressIndicator
         sections={[
+          { id: "evolution", label: "0. Evolution" },
           { id: "problem", label: "1. Problem" },
           { id: "role-approach", label: "2. Role" },
           { id: "solution", label: "3. Solution" },
@@ -59,8 +99,10 @@ export default function AgentsEvalCase() {
         {/* Hero Section - Full width */}
         <div className="mb-8">
           <CaseStudyHero
-            title="The Evaluation Engine™"
-            subtitle="An autonomous system that tests your AI agents with enterprise-grade rigor"
+            title="Agentic Evaluation"
+            subtitle={language === 'en' 
+              ? "An autonomous system that tests your AI agents with enterprise-grade rigor" 
+              : "Un système autonome qui teste vos agents IA avec une rigueur industrielle"}
             backgroundImage={undefined}
             tools={[
               { name: "Supabase", icon: "/img/supabase-icon.png" },
@@ -71,6 +113,120 @@ export default function AgentsEvalCase() {
             ]}
           />
         </div>
+
+        {/* Evolution Section - Agent-to-Agent Introduction */}
+        <section
+          id="evolution"
+          className="w-full -mx-4 md:-mx-8 lg:-mx-12 py-12 md:py-16 mb-12 bg-gradient-to-br from-[#E8F0FF] to-[#C9DDFF] dark:from-[#0F1416] dark:to-[#1a1f24]"
+        >
+          <div className="w-full px-4 md:px-8 lg:px-12">
+            <motion.div 
+              className="relative pl-6 md:pl-8 space-y-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              {/* Accent bar */}
+              <div className="absolute left-0 top-4 bottom-4 w-[4px] rounded-full bg-[#5B7CFF]" />
+
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100">
+                {t.title}
+              </h2>
+
+              <p className="text-lg text-slate-700 dark:text-slate-300 max-w-3xl">
+                {t.intro}
+              </p>
+
+              {/* The real risk highlight */}
+              <motion.div 
+                className="p-6 rounded-2xl bg-white/90 dark:bg-slate-800/90 border-l-4 border-[#FF6B6B]"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+              >
+                <h3 className="text-xl font-bold text-[#FF6B6B] mb-4 flex items-center gap-2">
+                  <AlertTriangle className="w-5 h-5" />
+                  {t.riskTitle}
+                </h3>
+                <p className="text-slate-700 dark:text-slate-300 mb-3">{t.riskIntro}</p>
+                <ul className="grid md:grid-cols-2 gap-2">
+                  {t.risks.map((risk, i) => (
+                    <li key={i} className="text-slate-600 dark:text-slate-400">• {risk}</li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* Solution block */}
+              <motion.div 
+                className="p-6 rounded-2xl bg-white/90 dark:bg-slate-800/90"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+              >
+                <p className="text-base text-slate-700 dark:text-slate-300">
+                  {t.stackProblem}<br/>
+                  <strong className="text-slate-900 dark:text-slate-100">{t.stackSolution}</strong>
+                </p>
+              </motion.div>
+
+              {/* The Evaluation Agent as Supervisor */}
+              <motion.div 
+                className="p-8 rounded-3xl bg-[#5B7CFF]/10 border border-[#5B7CFF]/30"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.3 }}
+              >
+                <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-4">
+                  {t.solutionTitle}
+                </h3>
+                <p className="text-slate-700 dark:text-slate-300 mb-4">{t.solutionIntro}</p>
+                <ul className="space-y-2">
+                  {t.solutionPoints.map((point, i) => (
+                    <li key={i} className="text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                      <span className="text-[#5B7CFF]">✓</span> {point}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* Privacy & Safety callout */}
+              <motion.div 
+                className="p-6 rounded-2xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-700/30"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.4 }}
+              >
+                <p className="text-lg font-semibold text-emerald-700 dark:text-emerald-300 flex items-center gap-2">
+                  <ShieldCheck className="w-5 h-5" />
+                  {t.privacyTitle}
+                </p>
+                <p className="text-sm text-emerald-600 dark:text-emerald-400 mt-2">
+                  {t.privacyDesc}
+                </p>
+              </motion.div>
+
+              {/* Final statement */}
+              <motion.div 
+                className="text-center py-8"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.5 }}
+              >
+                <p className="text-xl font-bold text-slate-900 dark:text-slate-100">
+                  {t.finalLine1}
+                </p>
+                <p className="text-lg text-[#5B7CFF] mt-2 font-medium">
+                  {t.finalLine2}
+                </p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
 
         <div className="grid lg:grid-cols-[260px_1fr] gap-8 lg:gap-12">
           {/* Sidebar - Metadata */}
