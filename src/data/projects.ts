@@ -37,7 +37,7 @@ export const projects: Project[] = [
     id: sonorCase.id,
     title_en: "A 2-year entrepreneurship team project",
     title_fr: "Un projet entrepreneurial en équipe de 2 ans",
-    subtitle_en: "Making the invisible visible",
+    subtitle_en: "How can cities turn open data into quieter streets?",
     subtitle_fr: "Comment les villes peuvent-elles transformer l'open data en rues plus calmes ?",
     image: sonorCase.image,
     logo: sonorCase.logo,
