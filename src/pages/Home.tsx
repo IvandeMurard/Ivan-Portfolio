@@ -1130,12 +1130,12 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
             label:
               (language === "en" ? selectedProject.ctaLabel_en : selectedProject.ctaLabel_fr) ||
               (language === "fr" ? "Découvrir l'étude de cas !" : "Discover the case study!"),
-            href:
+          href:
               selectedProject.id === "sonor"
                 ? "/case-study/sonor"
                 : selectedProject.id === "wttj-conversion-seniors"
                   ? "/cases/wttj"
-                  : selectedProject.id === "agents-eval"
+                  : selectedProject.id === "agentic-evaluation"
                     ? "/case-study/agents-eval"
                     : selectedProject.id === "agentic-hospitality" ||
                         selectedProject.id === "agentic-studio" ||
@@ -1146,7 +1146,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           }}
           showComingSoon={
             projects.findIndex((p) => p.id === selectedProject.id) >= 4 &&
-            selectedProject.id !== "agents-eval" &&
+            selectedProject.id !== "agentic-evaluation" &&
             selectedProject.id !== "agentic-hospitality"
           }
         />
