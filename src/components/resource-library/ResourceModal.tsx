@@ -36,7 +36,7 @@ export function ResourceModal({ resource, onClose, allResources, onResourceClick
     .filter(
       (r) =>
         r.id !== resource.id &&
-        (r.category === resource.category || r.tags.some((tag) => resource.tags.includes(tag)))
+        r.category === resource.category
     )
     .slice(0, 4);
 
@@ -114,18 +114,12 @@ export function ResourceModal({ resource, onClose, allResources, onResourceClick
                     {resource.description}
                   </p>
 
-                  <div className="mb-10">
-                    <h3 className="text-black mb-3 font-semibold tracking-tight">Why it matters to me</h3>
-                    <p className="text-[#2A2A2A] text-[15px] leading-relaxed">{resource.whyItMatters}</p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-12">
-                    {resource.tags.map((tag) => (
-                      <span key={tag} className="px-4 py-2 bg-[#E8E8E8] text-[#2A2A2A] rounded-full text-sm">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  {resource.commentary && (
+                    <div className="mb-10">
+                      <h3 className="text-black mb-3 font-semibold tracking-tight">Why it matters to me</h3>
+                      <p className="text-[#2A2A2A] text-[15px] leading-relaxed">{resource.commentary}</p>
+                    </div>
+                  )}
 
                   {relatedResources.length > 0 && (
                     <div className="pt-10 border-t border-gray-200">

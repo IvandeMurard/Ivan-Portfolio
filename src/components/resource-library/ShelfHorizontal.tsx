@@ -37,7 +37,6 @@ export function ShelfHorizontal({ categoryName, resources, onResourceClick, dela
               key={resource.id}
               resource={resource}
               onClick={() => onResourceClick(resource)}
-              isExpanded={expandedResourceId === resource.id}
               isFocused={isFocused}
               cardRef={onCardRef ? (node) => onCardRef(resource.id, node) : undefined}
             />

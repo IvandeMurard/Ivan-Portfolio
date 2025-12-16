@@ -932,7 +932,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
 
       <AboutSection />
 
-      {/* Transition teaser between About and Curated Library */}
+      {/* MASQUÉ - Transition teaser between About and Curated Library
       <ScrollReveal variant="fade-up" delay={0.1}>
         <section className="py-12 px-4 bg-background">
           <div className="max-w-[1400px] mx-auto text-center">
@@ -942,9 +942,11 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           </div>
         </section>
       </ScrollReveal>
+      */}
 
-      {/* Curated Library Teaser */}
+      {/* MASQUÉ - Curated Library Teaser
       <ResourceLibraryTeaser disableSticky={isStickyDisabled} />
+      */}
 
       {/* CTA Section after About */}
       <ScrollReveal variant="fade-up" delay={0.2}>
