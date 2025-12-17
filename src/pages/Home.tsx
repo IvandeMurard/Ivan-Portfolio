@@ -1165,8 +1165,9 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                   ? "/cases/wttj"
                   : selectedProject.id === "agentic-evaluation"
                     ? "/case-study/agents-eval"
-                    : selectedProject.id === "agentic-hospitality" ||
-                        selectedProject.id === "agentic-studio" ||
+                    : selectedProject.id === "agentic-hospitality"
+                      ? "/case-study/fb-agent"
+                      : selectedProject.id === "agentic-studio" ||
                         selectedProject.id === "spotify-valence-journeys" ||
                         selectedProject.id === "on-air"
                       ? "/404"

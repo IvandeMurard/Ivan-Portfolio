@@ -15,6 +15,7 @@ import { Home } from "./pages/Home";
 import Sonor from "./pages/Sonor";
 import WTTJCaseStudy from "./pages/cases/wttj-case-study";
 import AgentsEval from "./pages/cases/AgentsEval";
+import FBAgentCaseStudy from "./pages/cases/FBAgentCaseStudy";
 import ResourceLibrary from "./pages/ResourceLibrary";
 import NotFound from "./pages/NotFound";
 
@@ -52,6 +53,8 @@ const App = () => {
               <Route path="/case-study/wttj-conversion-seniors" element={<WTTJCaseStudy />} />
               <Route path="/case-study/agentic-evaluation" element={<AgentsEval />} />
               <Route path="/case-study/agents-eval" element={<AgentsEval />} />
+              <Route path="/case-study/fb-agent" element={<FBAgentCaseStudy />} />
+              <Route path="/case-study/f-and-b-agent" element={<FBAgentCaseStudy />} />
               <Route path="/resource-library" element={<ResourceLibrary />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
