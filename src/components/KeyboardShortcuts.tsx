@@ -20,6 +20,11 @@ export function KeyboardShortcuts({ onHelpToggle }: KeyboardShortcutsProps) {
         return;
       }
 
+      // Ignore if modifier key is pressed (Ctrl, Alt, Meta/Cmd)
+      if (e.ctrlKey || e.altKey || e.metaKey) {
+        return;
+      }
+
       // Only work on home page
       if (location.pathname !== "/") return;
 
