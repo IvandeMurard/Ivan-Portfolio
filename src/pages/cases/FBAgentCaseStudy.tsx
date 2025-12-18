@@ -318,7 +318,6 @@ const FBAgentCaseStudy: React.FC = () => {
                   <strong>Ambient Agentic Experience</strong>
                   The dashboard brings transparency, adoption and data visualisation. Voice enables speed and natural
                   language queries: <em>"How many servers do I need for Saturday XX/XX/XX dinner?"</em>
-                  The dashboard remains critical for human-in-the-loop oversight and audit trails.
                 </p>
               </div>
             </Section>
