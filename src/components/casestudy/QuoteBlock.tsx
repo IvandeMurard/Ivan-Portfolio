@@ -12,7 +12,7 @@ export const QuoteBlock: React.FC<QuoteBlockProps> = ({
   authorImage,
   companyLogo
 }) => (
-  <div className="my-16 py-12 px-8 md:px-12 bg-background">
+  <div className="my-10">
     <blockquote className="text-3xl md:text-4xl font-semibold text-foreground leading-tight mb-8 max-w-4xl">
       "{quote}"
     </blockquote>
