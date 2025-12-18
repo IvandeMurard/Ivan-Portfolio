@@ -82,7 +82,7 @@ const FBAgentCaseStudy: React.FC = () => {
           {/* Content */}
           <div>
             {/* TL;DR */}
-            <div className="py-12 border-b border-border mb-12">
+            <div className="py-10 border-b border-border mb-8">
               <div className="bg-primary/10 rounded-2xl p-8 border border-primary/20">
                 <h3 className="text-sm font-bold text-foreground uppercase tracking-wide mb-4">
                   TL;DR
@@ -154,7 +154,7 @@ const FBAgentCaseStudy: React.FC = () => {
 
             {/* Section 1: Context & Problem */}
             <Section id="problem" title="Context & Problem" number="1">
-              <div className="prose prose-lg max-w-none bg-muted -mx-8 px-8 py-12 rounded-2xl border border-border/50">
+              <div className="prose prose-lg max-w-none bg-muted -mx-8 px-8 py-8 rounded-2xl border border-border/50">
                 <p className="text-foreground leading-relaxed mb-6">
                   Hotels and restaurants generate vast amounts of data: booking patterns,
                   occupancy rates, historical demand, yet current Property Management Systems (PMS) lack predictive capabilities that account for external factors.
@@ -287,7 +287,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
             </Section>
 
             {/* Battle-tested section */}
-            <section className="py-20 md:py-24 px-4 md:px-8 bg-zinc-900 dark:bg-zinc-950 rounded-3xl mt-4 border border-zinc-800">
+            <section className="py-16 md:py-20 px-4 md:px-8 bg-zinc-900 dark:bg-zinc-950 rounded-3xl mt-8 border border-zinc-800">
               <div className="max-w-[1400px] mx-auto space-y-12">
                 <div className="text-center space-y-4">
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
@@ -515,7 +515,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
 
             {/* Section 5: Architecture */}
             <Section id="architecture" title="Architecture & Technical Implementation" number="5">
-              <div className="prose prose-lg max-w-none bg-muted -mx-8 px-8 py-12 rounded-2xl border border-border/50">
+              <div className="prose prose-lg max-w-none bg-muted -mx-8 px-8 py-8 rounded-2xl border border-border/50">
                 <h3 className="text-2xl font-semibold text-foreground mb-6">
                   System Architecture: Modular Agent Pipeline
                 </h3>
@@ -678,7 +678,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
             </Section>
 
             {/* CTA Section */}
-            <div className="py-16 text-center">
+            <div className="py-12 text-center">
               <div className="bg-gradient-to-br from-contact to-contact/80 text-contact-foreground p-12 rounded-2xl border border-contact/20">
                 <h3 className="text-3xl font-bold mb-4">Ready to discuss this project?</h3>
                 <p className="text-xl text-contact-foreground/90 mb-8">
