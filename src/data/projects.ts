@@ -148,7 +148,7 @@ export const projects: Project[] = [
       "Agent autonome pour les opérations F&B d'hôtels",
       "Prédictibilité des besoins en staff et F&B",
       "Construit pour le Hackathon Pioneers AILab @ Station F",
-      "Stack technique : Claude, Google Cloud, Qdrant, n8n, ElevenLabs",
+      "Tech Stack: Claude, Cursor, Qdrant, ElevenLabs, Warp, Obsidian",
     ],
     longDescription_en: "A hackathon project exploring AI agents for predictive hospitality operations.",
     longDescription_fr: "Un projet de hackathon explorant les agents IA pour les opérations hôtelières prédictives.",
