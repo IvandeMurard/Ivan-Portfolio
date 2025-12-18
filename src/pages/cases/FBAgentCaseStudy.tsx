@@ -330,9 +330,7 @@ Phase 2: Conversational layer for clarity and spontaneity.
                       </svg>
                     </div>
                     <h4 className="text-lg font-bold text-white">Context-Aware Architecture</h4>
-                    <p className="text-base text-zinc-400 leading-relaxed">
-                      Bridges external signals (events, weather) with internal truth (PMS, calendars, occupancy, ...) into unified predictions.
-                    </p>
+                    <p className="text-base text-zinc-400 leading-relaxed">Bridges external signals (events, weather) with internal truth (PMS, calendars, occupancy, ...) into unified prediction.</p>
                   </div>
 
                   <div className="space-y-4">
