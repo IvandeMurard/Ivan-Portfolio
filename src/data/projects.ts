@@ -142,7 +142,7 @@ export const projects: Project[] = [
       "Autonomous agent for hotel F&B operations",
       "Attendance and F&B predictability, Staff Management",
       "Built for Pioneers AILab Hackathon @ Station F",
-      "Tech Stack: Claude, Cursor, Qdrant, ElevenLabs",
+      "Tech Stack: Claude, Cursor, Qdrant, ElevenLabs, Warp, Obsidian",
     ],
     bullets_fr: [
       "Agent autonome pour les opérations F&B d'hôtels",
