@@ -274,8 +274,8 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
 
             {/* Section 3: Solution */}
             <Section id="solution" title="Solution: Ambient Agentic Experience" number="3">
-              <div className="prose prose-lg max-w-none bg-muted -mx-8 px-8 py-12 rounded-2xl border border-border/50">
-                <div className="bg-gradient-to-r from-primary to-accent text-primary-foreground p-8 rounded-2xl mb-12 border border-primary/20">
+              <div className="prose prose-lg max-w-none bg-muted -mx-8 px-8 py-8 rounded-2xl border border-border/50">
+                <div className="bg-gradient-to-r from-primary to-accent text-primary-foreground p-8 rounded-2xl border border-primary/20">
                   <p className="text-xl leading-relaxed">Conversational interface prototyping (Phase 2 plan)<strong>conversational-first system with visual transparency</strong>. Phase 1 uses a dashboard for rapid input and oversight, managers see predictions, confidence scores, and reasoning chains. Phase 2 adds natural language queries: <em>"How many servers do I need for Saturday XX/XX/XX dinner?"</em> The dashboard remains critical for human-in-the-loop oversight and audit trails.
                   </p>
                 </div>
@@ -287,7 +287,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
             </Section>
 
             {/* Battle-tested section */}
-            <section className="py-20 md:py-24 px-4 md:px-8 bg-zinc-900 dark:bg-zinc-950 rounded-3xl my-8 border border-zinc-800">
+            <section className="py-20 md:py-24 px-4 md:px-8 bg-zinc-900 dark:bg-zinc-950 rounded-3xl mt-4 border border-zinc-800">
               <div className="max-w-[1400px] mx-auto space-y-12">
                 <div className="text-center space-y-4">
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
