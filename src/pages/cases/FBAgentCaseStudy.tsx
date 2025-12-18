@@ -248,7 +248,7 @@ const FBAgentCaseStudy: React.FC = () => {
                     <ul className="space-y-3 text-foreground">
                       <li>Market research via industry reports and sustainability studies</li>
                       <li>User journey mapping for F&B managers</li>
-                      <li>MVP scope definition for hackathon constraints</li>
+                      <li>MVP scope definition</li>
                       <li>Human-in-the-loop philosophy by design</li>
                     </ul>
                   </div>
