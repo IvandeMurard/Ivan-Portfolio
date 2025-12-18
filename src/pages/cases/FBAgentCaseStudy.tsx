@@ -160,7 +160,7 @@ const FBAgentCaseStudy: React.FC = () => {
                 {[
                   {
                     title: "Where We Are",
-                    desc: "Managers rely on intuition + basic occupancy data",
+                    desc: "Managers rely on pattern recognition + basic occupancy data",
                   },
                   {
                     title: "The Gap",
