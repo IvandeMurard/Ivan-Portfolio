@@ -466,7 +466,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                   </div>
 
                   {/* Food Waste Quote */}
-                  <QuoteBlock quote="Food waste is one of the biggest challenges in hospitality. It is one of the most immediate and measurable ways we can reduce our impact as a hotel group, from how we source ingredients to how we repurpose scraps and donate surplus food." author="Toni Stoeckl" role="Chief Marketing Officer, Starwood Hotels (1 Hotels)" source="The future of hotels: innovations shaping hospitality | Roadbook" sourceUrl="https://roadbook.com/travel/super-hotels-of-the-future/" authorImage="/img/toni_stoeckl.webp" />
+                  <QuoteBlock quote="Food waste is one of the biggest challenges in hospitality. It is one of the most immediate and measurable ways we can reduce our impact as a hotel group, from how we source ingredients to how we repurpose scraps and donate surplus food." author="Toni Stoeckl" role="Chief Marketing Officer, Starwood Hotels (1 Hotels)" sourceUrl="https://roadbook.com/travel/super-hotels-of-the-future/" authorImage="/img/toni_stoeckl.webp" />
 
                 </div>
 
