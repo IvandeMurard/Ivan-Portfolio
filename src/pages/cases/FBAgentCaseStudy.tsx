@@ -479,7 +479,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                   {[{
                   number: '1',
                   title: 'Dashboard-First, Then Conversational',
-                  rationale: 'Phase 1 validates RAG architecture and prediction quality with visual interface. Managers need to see reasoning chains, confidence scores, and pattern matches to trust AI recommendations. Phase 2 approach: Layer conversational input (voice/text) on top of dashboard. Quick queries route through API, but managers review predictions in dashboard before finalizing decisions.',
+                  rationale: 'Dashboard to ease trust and adoption.',
                   tradeoff: 'Delayed conversational interface, but de-risks trust issues.'
                 }, {
                   number: '2',
