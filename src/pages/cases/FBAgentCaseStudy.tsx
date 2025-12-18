@@ -246,10 +246,15 @@ const FBAgentCaseStudy: React.FC = () => {
                       Product Strategy
                     </h3>
                     <ul className="space-y-3 text-foreground">
-                      <li>Market research via industry reports and sustainability studies</li>
+                      <li>Market research via Mews reports and sustainability studies</li>
                       <li>User journey mapping for F&B managers</li>
-                      <li>MVP scope definition</li>
-                      <li>Human-in-the-loop philosophy by design</li>
+                      <li>MVP scope definition for hackathon constraints</li>
+                      <li>Product Strategy
+Market research via industry reports and sustainability studies
+User journey mapping for F&B managers
+MVP scope definition
+Human-in-the-loop philosophy by design
+Front-end design (Phase 2)</li>
                     </ul>
                   </div>
                   <div className="p-6 bg-card rounded-xl border border-border shadow-sm">
@@ -257,7 +262,7 @@ const FBAgentCaseStudy: React.FC = () => {
                       Technical Execution
                     </h3>
                     <ul className="space-y-3 text-foreground">
-                      <li>RAG architecture with Qdrant vector database</li>
+                      <li>Human-in-the-loop philosophy by design</li>
                       <li>FastAPI backend + Claude reasoning integration</li>
                       <li>Dashboard development: Streamlit interface for transparent prediction display and pattern visualization</li>
                       <li>Conversational interface prototyping (Phase 2 planned)</li>
