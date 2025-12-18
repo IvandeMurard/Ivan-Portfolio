@@ -280,35 +280,9 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                   </p>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-foreground mb-6">
-                  Product Architecture: Four Core Principles
-                </h3>
+                
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {[{
-                  number: '1',
-                  title: 'Dashboard-First with Conversational Vision',
-                  content: 'Phase 1: Visual dashboard (Streamlit) for prediction input and transparent reasoning display. Managers input date/context via form, receive predictions with confidence scores and pattern explanations. Phase 2 (Planned): Conversational interface layer for rapid queries during service prep—"How many servers Saturday?" The dashboard persists for oversight, audit trails, and pattern review.'
-                }, {
-                  number: '2',
-                  title: 'Context-Aware: Bridging External & Internal Signals',
-                  content: 'External context (city events, weather, holidays) + Internal context (PMS occupancy, staff availability, property events). Current tools treat these in silos.'
-                }, {
-                  number: '3',
-                  title: 'Explainable Predictions via RAG',
-                  content: 'Qdrant stores historical patterns as embeddings. Similarity search retrieves comparable scenarios. Claude analyzes patterns and explains why this prediction makes sense.'
-                }, {
-                  number: '4',
-                  title: 'Human-in-the-Loop: Augmentation, Not Automation',
-                  content: 'The agent recommends, it doesn\'t decide. Managers approve, adjust, or override based on local knowledge and edge cases.'
-                }].map(principle => <div key={principle.number} className="p-6 bg-card rounded-xl border-l-4 border-primary border border-border shadow-sm">
-                      <h4 className="text-lg font-bold text-foreground mb-3">
-                        <span className="text-primary">{principle.number}.</span>{' '}
-                        {principle.title}
-                      </h4>
-                      <p className="text-foreground text-sm">{principle.content}</p>
-                    </div>)}
-                </div>
+                
               </div>
             </Section>
 
