@@ -18,10 +18,6 @@ const FBAgentCaseStudy: React.FC = () => {
   const { language } = useLanguage();
   const sections = [
     {
-      id: "evolution",
-      label: "0. Evolution",
-    },
-    {
       id: "problem",
       label: "1. Problem",
     },
@@ -147,54 +143,50 @@ const FBAgentCaseStudy: React.FC = () => {
               </div>
             </div>
 
-            {/* From Reactive to Predictive */}
-            <Section id="evolution">
-              <div className="text-center mb-8">
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                  From Reactive to Predictive Operations
-                </h2>
-                <p className="text-lg text-muted-foreground">The Industry Evolution</p>
-              </div>
-
-              <div className="grid md:grid-cols-5 gap-6">
-                {[
-                  {
-                    title: "Where We Are",
-                    desc: "Managers rely on pattern recognition and occupancy data",
-                  },
-                  {
-                    title: "The Gap",
-                    desc: "External context lives in silos. No predictive layer.",
-                  },
-                  {
-                    title: "The Vision",
-                    desc: "Unified prediction combining ALL operational signals",
-                  },
-                  {
-                    title: "The Challenge",
-                    desc: "Data integration + explainability + human expertise",
-                  },
-                  {
-                    title: "My Approach",
-                    desc: "Agentic architecture + RAG + dashboard-first with conversational vision",
-                  },
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="p-6 bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold mb-4">
-                      {idx + 1}
-                    </div>
-                    <h4 className="text-lg font-bold text-foreground mb-2">{item.title}</h4>
-                    <p className="text-base text-muted-foreground">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </Section>
-
             {/* Section 1: Context & Problem */}
             <Section id="problem" title="Context & Problem" number="1">
+              {/* The Industry Evolution - Integrated block */}
+              <div className="mb-8">
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6">
+                  The Industry Evolution: From Reactive to Predictive Operations
+                </h3>
+                <div className="grid md:grid-cols-5 gap-6">
+                  {[
+                    {
+                      title: "Where We Are",
+                      desc: "Managers rely on pattern recognition and occupancy data",
+                    },
+                    {
+                      title: "The Gap",
+                      desc: "External context lives in silos. No predictive layer.",
+                    },
+                    {
+                      title: "The Vision",
+                      desc: "Unified prediction combining ALL operational signals",
+                    },
+                    {
+                      title: "The Challenge",
+                      desc: "Data integration + explainability + human expertise",
+                    },
+                    {
+                      title: "My Approach",
+                      desc: "Agentic architecture + RAG + dashboard-first with conversational vision",
+                    },
+                  ].map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="p-6 bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold mb-4">
+                        {idx + 1}
+                      </div>
+                      <h4 className="text-lg font-bold text-foreground mb-2">{item.title}</h4>
+                      <p className="text-base text-muted-foreground">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               <div className="prose prose-lg max-w-none bg-muted -mx-8 px-8 py-8 rounded-2xl border border-border/50">
                 <p className="text-foreground leading-relaxed mb-6">
                   Hotels and restaurants generate vast amounts of data: booking patterns, occupancy rates, historical
