@@ -312,10 +312,10 @@ const FBAgentCaseStudy: React.FC = () => {
             </Section>
 
             {/* Section 3: Solution */}
-            <Section id="solution" title="Solution: Ambient Agentic Experience" number="3">
+            <Section id="solution" title="Solution: Hands-on reliable Predictions." number="3">
               <div className="bg-gradient-to-r from-primary to-accent text-primary-foreground p-8 rounded-2xl border border-primary/20">
                 <p className="text-lg leading-relaxed">
-                  <strong>Conversational-first system with visual transparency</strong>
+                  <strong>Ambient Agentic Experience</strong>
                   The dashboard brings transparency, adoption and data visualisation. Voice enables speed and natural
                   language queries: <em>"How many servers do I need for Saturday XX/XX/XX dinner?"</em>
                   The dashboard remains critical for human-in-the-loop oversight and audit trails.
