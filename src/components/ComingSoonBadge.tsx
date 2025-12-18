@@ -1,15 +1,9 @@
 export function ComingSoonBadge() {
-  // Rotation aléatoire légère pour effet tampon
-  const rotation = Math.random() * 12 - 6; // entre -6 et +6 degrés
-
   return (
     <div
       role="status"
       aria-label="Coming soon"
       className="relative inline-flex items-center justify-center"
-      style={{
-        transform: `rotate(${rotation}deg)`,
-      }}
     >
       <div className="relative w-[60px] h-[60px] rounded-full bg-red-600/40 border-[2px] border-red-600/50 flex items-center justify-center shadow-[0_2px_8px_rgba(220,38,38,0.15)]">
         {/* Effet texture/overlay pour le look "tampon" */}

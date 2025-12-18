@@ -14,7 +14,7 @@ interface WorkModalProps {
   title: string;
   subtitle?: string;
   bullets?: string[];
-  cta: { label: string; href: string };
+  cta: { label: string; href?: string };
   showComingSoon?: boolean;
   navigationLabel?: string;
 }
@@ -131,15 +131,17 @@ export function WorkModal({
 
               <div className="pt-4">
                 {showComingSoon ? (
-                  <Link
-                    to={cta.href || "/404"}
-                    className="inline-flex items-center justify-center rounded-full border-2 border-foreground/30 bg-background hover:bg-accent hover:border-primary/50 px-5 py-2 text-sm font-medium text-foreground transition-all duration-300 shadow-sm hover:shadow-md"
-                  >
+                  <span className="inline-flex items-center justify-center rounded-full border-2 border-foreground/30 bg-background px-5 py-2 text-sm font-medium text-foreground shadow-sm">
                     {labels.comingSoon}
-                  </Link>
+                  </span>
                 ) : (
                   <Link
-                    to={cta.href}
+                    to={cta.href || "#"}
+                    aria-disabled={!cta.href}
+                    tabIndex={cta.href ? 0 : -1}
+                    onClick={(e) => {
+                      if (!cta.href) e.preventDefault();
+                    }}
                     className="inline-flex items-center justify-center rounded-full bg-primary hover:bg-primary/90 px-5 py-2 text-sm font-medium text-primary-foreground transition-colors"
                   >
                     {cta.label}

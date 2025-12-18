@@ -68,10 +68,15 @@ export function MediaCard({
       key={id}
       role="button"
       tabIndex={0}
-      aria-label={`${kicker} – ${title}`}
+      aria-label={kicker ? `${kicker} – ${title}` : title}
       aria-describedby={`tagline-${id}`}
       aria-haspopup="dialog"
-      onKeyDown={(e) => e.key === "Enter" && onClick?.()}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault(); // prevent Space from scrolling the page
+          onClick?.();
+        }
+      }}
       onClick={onClick}
       onMouseEnter={() => {
         setHover(true);

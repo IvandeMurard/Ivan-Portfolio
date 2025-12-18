@@ -13,6 +13,7 @@ export interface Project {
   tags_en: string[];
   tags_fr: string[];
   category: string;
+  workType: "entrepreneurial" | "product_training" | "side_project";
   logo?: string;
   bullets_en?: string[];
   bullets_fr?: string[];
@@ -44,6 +45,7 @@ export const projects: Project[] = [
     tags_en: [sonorCase.badge_en || "Open Data"],
     tags_fr: [sonorCase.badge_fr || "Open Data"],
     category: "product",
+    workType: "entrepreneurial",
     tagline_en: "Making the invisible visible",
     tagline_fr: "Rendre visible l'invisible",
     longDescription_en: "Reducing urban noise by transforming open data into actionable city insights.",
@@ -73,6 +75,7 @@ export const projects: Project[] = [
     tags_en: ["Growth", "Product Management"],
     tags_fr: ["Croissance", "Product Management"],
     category: "product",
+    workType: "product_training",
     longDescription_en: "Improving conversion for senior candidates through clearer offers and guided activation.",
     longDescription_fr:
       "Améliorer la conversion des candidats seniors via des offres plus claires et une activation guidée.",
@@ -98,10 +101,11 @@ export const projects: Project[] = [
     title_fr: "La couche qualité manquante pour les systèmes multi-agents",
     subtitle_en: "How do we value agentic trust?",
     subtitle_fr: "Comment évaluer la confiance agentique ?",
-    image: "/img/samuel-arkwright-unsplash.jpg",
+    image: "/img/jeremy-bishop-xua0NYSuTF4-unsplash.jpg",
     tags_en: ["Agentic Experiences", "Multi-Agent", "Evaluation"],
     tags_fr: ["Expériences Agentiques", "Multi-Agent", "Évaluation"],
     category: "agentic-experiences",
+    workType: "side_project",
     longDescription_en: "An Evaluation Agent designed as Supervisor for multi-agent systems.",
     longDescription_fr: "Un Agent d'Évaluation conçu comme Superviseur pour les systèmes multi-agents.",
     bullets_en: [
@@ -130,6 +134,7 @@ export const projects: Project[] = [
     tags_en: ["Agentic Experiences", "Hackathon"],
     tags_fr: ["Expériences Agentiques", "Hackathon"],
     category: "agentic-experiences",
+    workType: "side_project",
     kicker_en: "CASE STUDY – A HOSPITALITY AGENTIC EXPERIENCE CASE STUDY",
     kicker_fr: "ÉTUDE DE CAS – EXPÉRIENCE AGENTIQUE EN HÔTELLERIE",
     tagline_en: "AI agents for operational hospitality efficiency",
@@ -166,6 +171,7 @@ export const projects: Project[] = [
     tags_en: ["Experience", "Agentic Experiences"],
     tags_fr: ["Expérience", "Expériences Agentiques"],
     category: "experience",
+    workType: "side_project",
     kicker_en: "CASE STUDY – AN EXPERIMENTAL PRODUCT IN AGENTIC DESIGN",
     kicker_fr: "ÉTUDE DE CAS – PRODUIT EXPÉRIMENTAL EN DESIGN AGENTIQUE",
     tagline_en: "A product exploration in Agent Experience (AX)",
@@ -206,6 +212,7 @@ export const projects: Project[] = [
     tags_en: ["Experience"],
     tags_fr: ["Expérience"],
     category: "experience",
+    workType: "side_project",
     longDescription_en: "Turning listening signals (valence/arousal) into nudging, helpful suggestions.",
     longDescription_fr: "Transformer les signaux d'écoute (valence/activation) en suggestions utiles et incitatives.",
     bullets_en: [
@@ -234,6 +241,7 @@ export const projects: Project[] = [
     tags_en: ["Product"],
     tags_fr: ["Produit"],
     category: "product",
+    workType: "side_project",
     longDescription_en: "From live rooms to time-coded snippets you can share instantly.",
     longDescription_fr: "Des rooms live aux extraits horodatés que vous pouvez partager instantanément.",
     bullets_en: [

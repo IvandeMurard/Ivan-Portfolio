@@ -34,6 +34,17 @@ export const homeContent = {
     work: {
       title: "Work",
       subtitle: "A selection of recent projects",
+      tabs: {
+        spotlight: "Spotlight",
+        entrepreneurial: "Entrepreneurial",
+        productTraining: "Product training",
+        sideProjects: "Side projects",
+      },
+      exploration: {
+        title: "Exploration",
+        subtitle: "Experiments and side builds — with the same product rigor.",
+        seeAllCta: "See all projects",
+      },
       transition: {
         title: "More coming soon.",
         subtitle: "I'm currently documenting additional case studies from past projects."
@@ -44,6 +55,14 @@ export const homeContent = {
         buttonText: "Get in touch",
         buttonLink: "#contact"
       }
+    },
+    sideProjects: {
+      title: "Side projects",
+      subtitle: "Short builds, experiments, and agentic prototypes — documented as I go.",
+      showMore: "Show more",
+      showLess: "Show less",
+      comingSoon: "Coming soon",
+      viewDetails: "View summary",
     },
     hackathons: {
       title: "Hackathons & Competitions",
@@ -112,6 +131,17 @@ export const homeContent = {
     work: {
       title: "Travaux",
       subtitle: "Une sélection de projets récents",
+      tabs: {
+        spotlight: "À la une",
+        entrepreneurial: "Entrepreneuriat",
+        productTraining: "Formation produit",
+        sideProjects: "Side projects",
+      },
+      exploration: {
+        title: "Exploration",
+        subtitle: "Expériences et side builds — avec la même rigueur produit.",
+        seeAllCta: "Voir tous les projets",
+      },
       transition: {
         title: "D'autres arrivent bientôt.",
         subtitle: "Je documente actuellement des études de cas supplémentaires de projets passés."
@@ -122,6 +152,14 @@ export const homeContent = {
         buttonText: "Me contacter",
         buttonLink: "#contact"
       }
+    },
+    sideProjects: {
+      title: "Side projects",
+      subtitle: "Prototypes, expérimentations, et projets agentiques — documentés au fil de l’eau.",
+      showMore: "Voir plus",
+      showLess: "Voir moins",
+      comingSoon: "Bientôt disponible",
+      viewDetails: "Voir le résumé",
     },
     hackathons: {
       title: "Hackathons & Compétitions",

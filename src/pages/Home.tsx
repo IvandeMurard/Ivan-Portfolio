@@ -37,46 +37,6 @@ import { experiences as bilingualExperiences } from "@/data/experience";
 import ContactForm from "@/components/ContactForm";
 import { useHapticFeedback } from "@/hooks/useHapticFeedback";
 
-// Calculate filter chips dynamically based on visible projects (excluding hidden)
-const getFilterChips = (projects: typeof bilingualProjects, language: "en" | "fr") => {
-  const visibleProjects = projects.filter((p) => !p.hidden);
-
-  const allCount = visibleProjects.length;
-  const agenticExperiencesCount = visibleProjects.filter((p) => {
-    const tags = language === "en" ? p.tags_en : p.tags_fr;
-    return p.category === "agentic-experiences" || tags?.some((tag) => tag.toLowerCase() === "agentic experiences");
-  }).length;
-  const experienceCount = visibleProjects.filter((p) => p.category === "experience").length;
-  const productCount = visibleProjects.filter((p) => p.category === "product").length;
-  const automatisationsCount = visibleProjects.filter((p) => {
-    const tags = language === "en" ? p.tags_en : p.tags_fr;
-    return p.category === "automatisations" || tags?.some((tag) => tag.toLowerCase() === "automatisations");
-  }).length;
-
-  const chips = [
-    { id: "all", label: language === "fr" ? `Tous (${allCount})` : `All (${allCount})` },
-    {
-      id: "agentic-experiences",
-      label:
-        language === "fr"
-          ? `Expériences Agentiques (${agenticExperiencesCount})`
-          : `Agentic Experiences (${agenticExperiencesCount})`,
-    },
-    {
-      id: "experience",
-      label: language === "fr" ? `Expérience (${experienceCount})` : `Experience (${experienceCount})`,
-    },
-    { id: "product", label: language === "fr" ? `Produit (${productCount})` : `Product (${productCount})` },
-  ];
-
-  // Only include automatisations if there are projects with this tag/category
-  if (automatisationsCount > 0) {
-    chips.push({ id: "automatisations", label: `Automatisations (${automatisationsCount})` });
-  }
-
-  return chips;
-};
-
 const getExperienceFilterChips = (language: "en" | "fr") => [
   { id: "experiences", label: language === "fr" ? "Expériences" : "Experiences" },
   { id: "continuous-learning", label: "Continuous Learning" },
@@ -162,12 +122,13 @@ const RippleButton: React.FC<RippleButtonProps> = ({
 export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboardHelpToggle }) => {
   const navigate = useNavigate();
   const { language } = useLanguage();
-  const [activeFilter, setActiveFilter] = useState("all");
   const [activeExperienceFilter, setActiveExperienceFilter] = useState("experiences");
   const [selectedProjectIndex, setSelectedProjectIndex] = useState<number | null>(null);
+  const [activeProjectList, setActiveProjectList] = useState<"work" | "side_projects">("work");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isStickyDisabled, setIsStickyDisabled] = useState(false);
   const [showContactForm, setShowContactForm] = useState(false);
+  const [showAllSideProjects, setShowAllSideProjects] = useState(false);
   const expExpand = useInlineExpand();
   const contactSectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -182,9 +143,6 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
   const continuousLearning = bilingualContinuousLearning;
   const education = bilingualEducation;
   const experiences = bilingualExperiences;
-
-  // Calculate filter chips dynamically
-  const filterChips = getFilterChips(projects, language);
 
   // Experience filter chips with translations
   const experienceFilterChips = [
@@ -223,15 +181,26 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
   // Filtrer les projets masqués (hidden: true) puis appliquer le filtre de catégorie
   const visibleProjects = projects.filter((p) => !p.hidden);
 
-  const filteredProjects =
-    activeFilter === "all"
-      ? visibleProjects
-      : visibleProjects.filter((project) => {
-          const tags = language === "en" ? project.tags_en : project.tags_fr;
-          return (
-            project.category === activeFilter || tags?.some((tag) => tag.toLowerCase() === activeFilter.toLowerCase())
-          );
-        });
+  const workSignatureIds = new Set(["sonor", "wttj-conversion-seniors"]);
+  const workProjects = visibleProjects.filter((p) => workSignatureIds.has(p.id));
+  const sideProjectsAllRaw = visibleProjects.filter((p) => p.workType === "side_project");
+  // Swap the last two items for visual ordering
+  const sideProjectsAll =
+    sideProjectsAllRaw.length >= 2
+      ? [
+          ...sideProjectsAllRaw.slice(0, -2),
+          sideProjectsAllRaw[sideProjectsAllRaw.length - 1],
+          sideProjectsAllRaw[sideProjectsAllRaw.length - 2],
+        ]
+      : sideProjectsAllRaw;
+  const sideProjectsDisplayed = showAllSideProjects ? sideProjectsAll : sideProjectsAll.slice(0, 6);
+
+  const projectDetailRoutes: Record<string, string> = {
+    sonor: "/case-study/sonor",
+    "wttj-conversion-seniors": "/cases/wttj",
+    "agentic-evaluation": "/case-study/agents-eval",
+    "agentic-hospitality": "/case-study/fb-agent",
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -243,7 +212,8 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
     }
   };
 
-  const openModal = (index: number) => {
+  const openModal = (list: "work" | "side_projects", index: number) => {
+    setActiveProjectList(list);
     setSelectedProjectIndex(index);
     setIsModalOpen(true);
   };
@@ -257,12 +227,14 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
 
     if (direction === "prev" && selectedProjectIndex > 0) {
       setSelectedProjectIndex(selectedProjectIndex - 1);
-    } else if (direction === "next" && selectedProjectIndex < filteredProjects.length - 1) {
+    } else if (direction === "next" && selectedProjectIndex < (activeProjectList === "work" ? workProjects.length : sideProjectsAll.length) - 1) {
       setSelectedProjectIndex(selectedProjectIndex + 1);
     }
   };
 
-  const selectedProject = selectedProjectIndex !== null ? filteredProjects[selectedProjectIndex] : null;
+  const activeListProjects = activeProjectList === "work" ? workProjects : sideProjectsAll;
+
+  const selectedProject = selectedProjectIndex !== null ? activeListProjects[selectedProjectIndex] : null;
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden" id="main-content">
@@ -565,26 +537,14 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
             </p>
           </ScrollReveal>
 
-          <FilterChips
-            chips={filterChips}
-            activeChip={activeFilter}
-            onChipChange={setActiveFilter}
-            className="mb-12"
-            disableSticky={isStickyDisabled}
-          />
-
-          {/* Mobile/Tablet: Grid Layout with staggered animations */}
+          {/* Mobile/Tablet: Grid Layout */}
           <StaggerContainer
-            id={`panel-${activeFilter}`}
-            role="tabpanel"
-            aria-labelledby={`tab-${activeFilter}`}
             className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 justify-items-center"
             staggerDelay={0.1}
           >
-            {filteredProjects.map((project, index) => {
-              const originalIndex = projects.findIndex((p) => p.id === project.id);
-              const isComingSoon =
-                originalIndex >= 4 && project.id !== "agents-eval" && project.id !== "agentic-hospitality";
+            {workProjects.map((project, index) => {
+              const hasDetailPage = Boolean(projectDetailRoutes[project.id]);
+              const isComingSoon = !hasDetailPage;
               const isBuilding = project.id === "agentic-hospitality";
 
               return (
@@ -603,9 +563,10 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                       }
                       badge={(language === "en" ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                       image={project.image}
-                      onClick={() => openModal(index)}
+                      onClick={() => openModal("work", index)}
                       showComingSoon={isComingSoon}
                       showBuilding={isBuilding}
+                      ctaLabel={(language === "en" ? project.ctaLabel_en : project.ctaLabel_fr) || undefined}
                       language={language}
                     />
                   ) : (
@@ -622,7 +583,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                       }
                       badge={(language === "en" ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                       image={project.image}
-                      onClick={() => openModal(index)}
+                      onClick={() => openModal("work", index)}
                       showComingSoon={isComingSoon}
                       showBuilding={isBuilding}
                       language={language}
@@ -634,12 +595,11 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           </StaggerContainer>
 
           {/* Desktop: Carousel Layout */}
-          <div id={`panel-${activeFilter}-desktop`} role="tabpanel" aria-labelledby={`tab-${activeFilter}`} className="hidden lg:block mb-12">
+          <div className="hidden lg:block mb-12">
             <CarouselRow>
-              {filteredProjects.map((project, index) => {
-                const originalIndex = projects.findIndex((p) => p.id === project.id);
-                const isComingSoon =
-                  originalIndex >= 4 && project.id !== "agents-eval" && project.id !== "agentic-hospitality";
+              {workProjects.map((project, index) => {
+                const hasDetailPage = Boolean(projectDetailRoutes[project.id]);
+                const isComingSoon = !hasDetailPage;
                 const isBuilding = project.id === "agentic-hospitality";
 
                 return project.id === "sonor" ? (
@@ -657,9 +617,10 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                     }
                     badge={(language === "en" ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                     image={project.image}
-                    onClick={() => openModal(index)}
+                    onClick={() => openModal("work", index)}
                     showComingSoon={isComingSoon}
                     showBuilding={isBuilding}
+                    ctaLabel={(language === "en" ? project.ctaLabel_en : project.ctaLabel_fr) || undefined}
                     language={language}
                   />
                 ) : (
@@ -677,7 +638,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                     }
                     badge={(language === "en" ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
                     image={project.image}
-                    onClick={() => openModal(index)}
+                    onClick={() => openModal("work", index)}
                     showComingSoon={isComingSoon}
                     showBuilding={isBuilding}
                     language={language}
@@ -932,6 +893,81 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
 
       <AboutSection />
 
+      {/* Side Projects / Labs (compact) */}
+      <section id="side-projects" className="py-20 px-4 bg-background">
+        <div className="max-w-[1400px] mx-auto">
+          <ScrollReveal variant="fade-up">
+            <SectionHeader title={content.sideProjects.title} alignment="left" className="mb-4" />
+          </ScrollReveal>
+
+          <ScrollReveal variant="fade-up" delay={0.1}>
+            <p className="text-sm md:text-base text-muted-foreground max-w-2xl mb-8">
+              {content.sideProjects.subtitle}
+            </p>
+          </ScrollReveal>
+
+          <div id="side-projects-grid">
+            <CarouselRow>
+              {sideProjectsDisplayed.map((project) => {
+                const hasDetailPage = Boolean(projectDetailRoutes[project.id]);
+                const isComingSoon = !hasDetailPage;
+                const isBuilding = project.id === "agentic-hospitality";
+                const originalIndex = sideProjectsAll.findIndex((p) => p.id === project.id);
+
+                const caseStudyHref =
+                  project.id === "agentic-evaluation"
+                    ? "/case-study/agents-eval"
+                    : project.id === "agentic-hospitality"
+                      ? "/case-study/fb-agent"
+                      : undefined;
+
+                return (
+                  <CardImmersive
+                    key={project.id}
+                    id={project.id}
+                    // Homogeneous structure for split cards: no kicker, Title + Tag + Status
+                    kicker=""
+                    title={language === "en" ? project.subtitle_en : project.subtitle_fr}
+                    tagline={(language === "en" ? project.tagline_en : project.tagline_fr) || ""}
+                    badge={(language === "en" ? project.tags_en[0] : project.tags_fr[0]) || "Project"}
+                    image={project.image}
+                    onClick={() => openModal("side_projects", originalIndex)}
+                    showComingSoon={isComingSoon}
+                    showBuilding={isBuilding}
+                    language={language}
+                    variant="split"
+                    className="w-[280px] h-[360px] md:w-[300px] md:h-[390px]"
+                    ctaLabel={isComingSoon ? content.sideProjects.comingSoon : content.sideProjects.viewDetails}
+                    caseStudyLink={
+                      caseStudyHref
+                        ? {
+                            href: caseStudyHref,
+                            label: language === "fr" ? "Lire l’étude de cas" : "Read the case study",
+                          }
+                        : undefined
+                    }
+                  />
+                );
+              })}
+            </CarouselRow>
+          </div>
+
+          {sideProjectsAll.length > 6 && (
+            <div className="flex justify-center mt-10">
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => setShowAllSideProjects((v) => !v)}
+                aria-expanded={showAllSideProjects}
+                aria-controls="side-projects-grid"
+              >
+                {showAllSideProjects ? content.sideProjects.showLess : content.sideProjects.showMore}
+              </Button>
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* MASQUÉ - Transition teaser between About and Curated Library
       <ScrollReveal variant="fade-up" delay={0.1}>
         <section className="py-12 px-4 bg-background">
@@ -1141,7 +1177,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           onClose={closeModal}
           onNavigate={navigateToProject}
           canNavigatePrev={selectedProjectIndex !== null && selectedProjectIndex > 0}
-          canNavigateNext={selectedProjectIndex !== null && selectedProjectIndex < filteredProjects.length - 1}
+          canNavigateNext={selectedProjectIndex !== null && selectedProjectIndex < activeListProjects.length - 1}
           logo={selectedProject.logo}
           title={
             (language === "en" ? selectedProject?.modalTitle_en : selectedProject?.modalTitle_fr) ||
@@ -1158,25 +1194,15 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
             label:
               (language === "en" ? selectedProject.ctaLabel_en : selectedProject.ctaLabel_fr) ||
               (language === "fr" ? "Découvrir l'étude de cas !" : "Discover the case study!"),
-          href:
-              selectedProject.id === "sonor"
-                ? "/case-study/sonor"
-                : selectedProject.id === "wttj-conversion-seniors"
-                  ? "/cases/wttj"
-                  : selectedProject.id === "agentic-evaluation"
-                    ? "/case-study/agents-eval"
-                    : selectedProject.id === "agentic-hospitality"
-                      ? "/case-study/fb-agent"
-                      : selectedProject.id === "agentic-studio" ||
-                        selectedProject.id === "spotify-valence-journeys" ||
-                        selectedProject.id === "on-air"
-                      ? "/404"
-                      : "#",
+            href: projectDetailRoutes[selectedProject.id],
           }}
-          showComingSoon={
-            projects.findIndex((p) => p.id === selectedProject.id) >= 4 &&
-            selectedProject.id !== "agentic-evaluation" &&
-            selectedProject.id !== "agentic-hospitality"
+          showComingSoon={!projectDetailRoutes[selectedProject.id]}
+          navigationLabel={
+            activeProjectList === "work"
+              ? language === "fr"
+                ? "Work"
+                : "Work"
+              : content.sideProjects.title
           }
         />
       )}
