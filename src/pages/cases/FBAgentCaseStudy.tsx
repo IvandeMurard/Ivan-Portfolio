@@ -479,7 +479,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                   {[{
                   number: '1',
                   title: 'Dashboard-First, Then Conversational',
-                  rationale: 'Dashboard to ease trust and adoption.',
+                  rationale: 'Dashboard to ease trust and adoption. Conversation to enhance spontaneity and clarity of thought.',
                   tradeoff: 'Delayed conversational interface, but de-risks trust issues.'
                 }, {
                   number: '2',
