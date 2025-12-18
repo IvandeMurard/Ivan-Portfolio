@@ -25,6 +25,11 @@ const content = {
         tools: [{ name: "Perplexity Pro", icon: "/img/perplexity_icon.svg", url: "https://perplexity.ai" }],
       },
       {
+        label: "Knowledge",
+        description: "Knowledge management",
+        tools: [{ name: "Obsidian", icon: "/img/obsidian-icon.svg", url: "https://obsidian.md" }],
+      },
+      {
         label: "Reasoning",
         description: "Strategic planning",
         tools: [{ name: "Claude Opus 4.5", icon: "/img/claude_icon.svg", url: "https://claude.ai" }],
@@ -37,11 +42,6 @@ const content = {
           { name: "Cursor", icon: "/img/cursor-icon.svg", url: "https://cursor.sh" },
           { name: "Warp", icon: "/img/Warp_icon.png", url: "https://warp.dev" },
         ],
-      },
-      {
-        label: "Knowledge",
-        description: "Knowledge management",
-        tools: [{ name: "Obsidian", icon: "/img/obsidian-icon.svg", url: "https://obsidian.md" }],
       },
       {
         label: "Design",
@@ -62,6 +62,11 @@ const content = {
         tools: [{ name: "Perplexity Pro", icon: "/img/perplexity_icon.svg", url: "https://perplexity.ai" }],
       },
       {
+        label: "Connaissances",
+        description: "Gestion des connaissances",
+        tools: [{ name: "Obsidian", icon: "/img/obsidian-icon.svg", url: "https://obsidian.md" }],
+      },
+      {
         label: "Raisonnement",
         description: "Planification stratégique",
         tools: [{ name: "Claude Opus 4.5", icon: "/img/claude_icon.svg", url: "https://claude.ai" }],
@@ -74,11 +79,6 @@ const content = {
           { name: "Cursor", icon: "/img/cursor-icon.svg", url: "https://cursor.sh" },
           { name: "Warp", icon: "/img/Warp_icon.png", url: "https://warp.dev" },
         ],
-      },
-      {
-        label: "Connaissances",
-        description: "Gestion des connaissances",
-        tools: [{ name: "Obsidian", icon: "/img/obsidian-icon.svg", url: "https://obsidian.md" }],
       },
       {
         label: "Design",
