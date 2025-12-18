@@ -316,8 +316,8 @@ const FBAgentCaseStudy: React.FC = () => {
               <div className="bg-gradient-to-r from-primary to-accent text-primary-foreground p-8 rounded-2xl border border-primary/20">
                 <p className="text-lg leading-relaxed">
                   <strong>Conversational-first system with visual transparency</strong>
-                  Phase 1 uses a dashboard for transparency and adoption. Phase 2 adds natural language queries:{" "}
-                  <em>"How many servers do I need for Saturday XX/XX/XX dinner?"</em>
+                  The dashboard brings transparency, adoption and data visualisation. Voice enables speed and natural
+                  language queries: <em>"How many servers do I need for Saturday XX/XX/XX dinner?"</em>
                   The dashboard remains critical for human-in-the-loop oversight and audit trails.
                 </p>
               </div>
