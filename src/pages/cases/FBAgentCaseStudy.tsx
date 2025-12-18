@@ -306,7 +306,8 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                     </div>
                     <h4 className="text-lg font-bold text-white">Dashboard-First with Conversational Vision</h4>
                     <p className="text-base text-zinc-400 leading-relaxed">
-                      Phase 1: Visual dashboard for transparent prediction input and reasoning display. Phase 2: Conversational layer for rapid queries during service prep. Dashboard persists for oversight, audit trails, and compliance.
+                      Phase 1: Visual dashboard for trust and adoption.
+Phase 2: Conversational layer for clarity and spontaneity.           
                     </p>
                   </div>
 
@@ -330,7 +331,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                     </div>
                     <h4 className="text-lg font-bold text-white">Context-Aware Architecture</h4>
                     <p className="text-base text-zinc-400 leading-relaxed">
-                      Bridges external signals (events, weather) with internal operations (PMS, staff calendar) into unified predictions.
+                      Bridges external signals (events, weather) with internal truth (PMS, calendars, occupancy, ...) into unified predictions.
                     </p>
                   </div>
 
@@ -373,7 +374,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                     </div>
                     <h4 className="text-lg font-bold text-white">Human-in-the-Loop Design</h4>
                     <p className="text-base text-zinc-400 leading-relaxed">
-                      Augmentation, not automation. The agent recommends; managers approve, adjust, or override based on local expertise.
+                      The agent recommends and managers approve, adjust, or override based on local expertise.     
                     </p>
                   </div>
                 </div>
