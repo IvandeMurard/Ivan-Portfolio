@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+import { ArrowDown, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
 
 interface ProcessStep {
   label: string;
@@ -129,10 +130,11 @@ export const ProcessFlowchart = () => {
     <motion.div
       variants={itemVariants}
       className="relative flex flex-col items-center gap-3 p-4 md:p-5 rounded-xl
-                 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md
-                 border border-border/30 hover:border-border/50
+                 bg-card/95 dark:bg-slate-900/70
+                 border border-border/60 hover:border-border/80
+                 shadow-sm hover:shadow-md
                  transition-all duration-200 hover:scale-[1.02]
-                 min-w-[140px] md:min-w-[160px] flex-1"
+                 min-w-[160px] md:min-w-[190px] flex-1"
       aria-label={`${step.label}: ${step.description}`}
     >
 
@@ -172,7 +174,7 @@ export const ProcessFlowchart = () => {
       <h4 className="text-sm font-semibold text-foreground">{step.label}</h4>
 
       {/* Description */}
-      <p className="text-sm text-foreground/75 dark:text-foreground/80 text-center leading-snug">
+      <p className="text-sm text-muted-foreground text-center leading-snug">
         {step.description}
       </p>
     </motion.div>
@@ -182,8 +184,7 @@ export const ProcessFlowchart = () => {
     <motion.section
       className="w-full py-12 md:py-16 bg-transparent"
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.25, margin: "-50px 0px" }}
+      animate="visible"
     >
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         {/* Title */}
@@ -220,6 +221,21 @@ export const ProcessFlowchart = () => {
             <StepCard key={step.label} step={step} index={index} />
           ))}
         </motion.div>
+
+        {/* CTA under My Process */}
+        <div className="mt-10 flex justify-center">
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="group hover:bg-contact hover:text-contact-foreground hover:border-contact transition-all duration-300"
+          >
+            <a href="#contact">
+              Let's connect
+              <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
+            </a>
+          </Button>
+        </div>
       </div>
     </motion.section>
   );
