@@ -305,10 +305,8 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                       </svg>
                     </div>
                     <h4 className="text-lg font-bold text-white">Dashboard-First with Conversational Vision</h4>
-                    <p className="text-base text-zinc-400 leading-relaxed">
-                      Phase 1: Visual dashboard for trust and adoption.
-Phase 2: Conversational layer for clarity and spontaneity.           
-                    </p>
+                    <p className="text-base text-zinc-400 leading-relaxed">Visual dashboard for trust and adoption.
+Conversational layer for clarity and spontaneity.</p>
                   </div>
 
                   <div className="space-y-4">
