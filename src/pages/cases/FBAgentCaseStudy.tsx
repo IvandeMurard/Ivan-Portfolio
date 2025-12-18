@@ -120,10 +120,10 @@ const FBAgentCaseStudy: React.FC = () => {
             {/* From Reactive to Predictive */}
             <Section id="evolution">
               <div className="text-center mb-8">
-                <h2 className="text-4xl font-bold text-foreground mb-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                   From Reactive to Predictive Operations
                 </h2>
-                <p className="text-xl text-muted-foreground">The Industry Evolution</p>
+                <p className="text-lg text-muted-foreground">The Industry Evolution</p>
               </div>
 
               <div className="grid md:grid-cols-5 gap-6">
@@ -146,8 +146,8 @@ const FBAgentCaseStudy: React.FC = () => {
                     <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold mb-4">
                       {idx + 1}
                     </div>
-                    <h4 className="font-bold text-foreground mb-2">{item.title}</h4>
-                    <p className="text-sm text-muted-foreground">{item.desc}</p>
+                    <h4 className="text-lg font-bold text-foreground mb-2">{item.title}</h4>
+                    <p className="text-base text-muted-foreground">{item.desc}</p>
                   </div>)}
               </div>
             </Section>
@@ -160,7 +160,7 @@ const FBAgentCaseStudy: React.FC = () => {
                   occupancy rates, historical demand, yet current Property Management Systems (PMS) lack predictive capabilities that account for external factors.
                 </p>
 
-                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-8">
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 mt-8">
                   Industry Shift: From Guest-Centric to Staff-Centric Technology
                 </h3>
                 <p className="text-foreground leading-relaxed mb-6">
@@ -185,35 +185,35 @@ const FBAgentCaseStudy: React.FC = () => {
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-8">
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 mt-8">
                   The Problem: Three Operational Gaps
                 </h3>
 
                 <div className="grid md:grid-cols-3 gap-6 my-6">
                   <div className="p-6 bg-card rounded-xl border-l-4 border-red-500 border border-border shadow-sm">
-                    <h4 className="font-bold text-foreground mb-3">1. Unpredictability</h4>
-                    <p className="text-sm text-foreground">
+                    <h4 className="text-lg font-bold text-foreground mb-3">1. Unpredictability</h4>
+                    <p className="text-base text-foreground">
                       Demand fluctuates based on city events, weather, holidays, seasonality.
                       Current PMS shows what happened, not what will happen.
                     </p>
                   </div>
                   <div className="p-6 bg-card rounded-xl border-l-4 border-orange-500 border border-border shadow-sm">
-                    <h4 className="font-bold text-foreground mb-3">2. Operational Silos</h4>
-                    <p className="text-sm text-foreground">
+                    <h4 className="text-lg font-bold text-foreground mb-3">2. Operational Silos</h4>
+                    <p className="text-base text-foreground">
                       Managers manually correlate PMS, event calendars, weather apps, staff
                       scheduling. Cognitive load is enormous.
                     </p>
                   </div>
                   <div className="p-6 bg-card rounded-xl border-l-4 border-yellow-500 border border-border shadow-sm">
-                    <h4 className="font-bold text-foreground mb-3">3. No Shared Standard</h4>
-                    <p className="text-sm text-foreground">
+                    <h4 className="text-lg font-bold text-foreground mb-3">3. No Shared Standard</h4>
+                    <p className="text-base text-foreground">
                       Generic tools don't fit hospitality's needs: explainability,
                       human-in-the-loop, real-time adaptation, property-specific patterns.
                     </p>
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-8">
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 mt-8">
                   Impact: The Cost of Poor Forecasting
                 </h3>
                 <div className="grid md:grid-cols-3 gap-6 my-6 text-center">
@@ -236,15 +236,15 @@ const FBAgentCaseStudy: React.FC = () => {
             {/* Section 2: My Role */}
             <Section id="role" title="My Role & Approach" number="2">
               <div className="prose prose-lg max-w-none">
-                <p className="text-xl text-foreground leading-relaxed mb-6">
+                <p className="text-lg text-foreground leading-relaxed mb-6">
                   I am driving this project end-to-end: from analyzing the market through hospitality research to architecting and building a functional RAG-powered prediction system.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-6 my-6">
                   <div className="p-6 bg-card rounded-xl border border-border shadow-sm">
-                    <h3 className="text-xl font-bold text-foreground mb-4">
+                    <h4 className="text-lg font-bold text-foreground mb-4">
                       Product Strategy
-                    </h3>
+                    </h4>
                     <ul className="space-y-3 text-foreground">
                       <li>Market research via Mews reports and sustainability studies</li>
                       <li>User journey mapping for F&B managers</li>
@@ -257,9 +257,9 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                     </ul>
                   </div>
                   <div className="p-6 bg-card rounded-xl border border-border shadow-sm">
-                    <h3 className="text-xl font-bold text-foreground mb-4">
+                    <h4 className="text-lg font-bold text-foreground mb-4">
                       Technical Execution
-                    </h3>
+                    </h4>
                     <ul className="space-y-3 text-foreground">
                       <li>Human-in-the-loop philosophy by design</li>
                       <li>FastAPI backend + Claude reasoning integration</li>
@@ -275,7 +275,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
             {/* Section 3: Solution */}
             <Section id="solution" title="Solution: Ambient Agentic Experience" number="3">
               <div className="bg-gradient-to-r from-primary to-accent text-primary-foreground p-8 rounded-2xl border border-primary/20">
-                <p className="text-xl leading-relaxed">Conversational interface prototyping (Phase 2 plan)<strong>conversational-first system with visual transparency</strong>. Phase 1 uses a dashboard for rapid input and oversight, managers see predictions, confidence scores, and reasoning chains. Phase 2 adds natural language queries: <em>"How many servers do I need for Saturday XX/XX/XX dinner?"</em> The dashboard remains critical for human-in-the-loop oversight and audit trails.
+                <p className="text-lg leading-relaxed">Conversational interface prototyping (Phase 2 plan)<strong>conversational-first system with visual transparency</strong>. Phase 1 uses a dashboard for rapid input and oversight, managers see predictions, confidence scores, and reasoning chains. Phase 2 adds natural language queries: <em>"How many servers do I need for Saturday XX/XX/XX dinner?"</em> The dashboard remains critical for human-in-the-loop oversight and audit trails.
                 </p>
               </div>
             </Section>
@@ -284,10 +284,10 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
             <section className="py-16 md:py-20 px-4 md:px-8 bg-zinc-900 dark:bg-zinc-950 rounded-3xl border border-zinc-800">
               <div className="max-w-[1400px] mx-auto space-y-12">
                 <div className="text-center space-y-4">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+                  <h2 className="text-3xl md:text-4xl font-bold text-white">
                     Core Design Principles for Hospitality AI
                   </h2>
-                  <p className="text-lg md:text-xl text-zinc-400">
+                  <p className="text-lg text-zinc-400">
                     Built for operational reality and human trust
                   </p>
                 </div>
@@ -304,8 +304,8 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                         <path d="M48 32 L44 24 L44 40 Z" fill="currentColor" opacity="0.8" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold text-white">Dashboard-First with Conversational Vision</h3>
-                    <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
+                    <h4 className="text-lg font-bold text-white">Dashboard-First with Conversational Vision</h4>
+                    <p className="text-base text-zinc-400 leading-relaxed">
                       Phase 1: Visual dashboard for transparent prediction input and reasoning display. Phase 2: Conversational layer for rapid queries during service prep. Dashboard persists for oversight, audit trails, and compliance.
                     </p>
                   </div>
@@ -328,8 +328,8 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                         <line x1="32" y1="32" x2="44" y2="44" stroke="currentColor" strokeWidth="1.5" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold text-white">Context-Aware Architecture</h3>
-                    <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
+                    <h4 className="text-lg font-bold text-white">Context-Aware Architecture</h4>
+                    <p className="text-base text-zinc-400 leading-relaxed">
                       Bridges external signals (events, weather) with internal operations (PMS, staff calendar) into unified predictions.
                     </p>
                   </div>
@@ -351,8 +351,8 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                         <line x1="40" y1="30" x2="44" y2="30" stroke="currentColor" strokeWidth="1.5" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold text-white">Explainable Predictions</h3>
-                    <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
+                    <h4 className="text-lg font-bold text-white">Explainable Predictions</h4>
+                    <p className="text-base text-zinc-400 leading-relaxed">
                       RAG architecture provides transparency: managers see which historical scenarios informed each prediction, not just numbers.
                     </p>
                   </div>
@@ -371,8 +371,8 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                         <circle cx="52" cy="52" r="4" fill="currentColor" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold text-white">Human-in-the-Loop Design</h3>
-                    <p className="text-sm md:text-base text-zinc-400 leading-relaxed">
+                    <h4 className="text-lg font-bold text-white">Human-in-the-Loop Design</h4>
+                    <p className="text-base text-zinc-400 leading-relaxed">
                       Augmentation, not automation. The agent recommends; managers approve, adjust, or override based on local expertise.
                     </p>
                   </div>
@@ -471,7 +471,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                 </div>
 
                 {/* Strategic Decisions */}
-                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-8">
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 mt-8">
                   Strategic Decisions: Why I Made These Choices
                 </h3>
 
@@ -495,11 +495,11 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                       <div className="text-2xl font-bold text-primary mb-3">
                         {decision.number}
                       </div>
-                      <h4 className="font-bold text-foreground mb-3">{decision.title}</h4>
-                      <p className="text-sm text-foreground mb-3">
+                      <h4 className="text-lg font-bold text-foreground mb-3">{decision.title}</h4>
+                      <p className="text-base text-foreground mb-3">
                         <strong>Rationale:</strong> {decision.rationale}
                       </p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-base text-muted-foreground">
                         <strong>Trade-off:</strong> {decision.tradeoff}
                       </p>
                     </div>)}
@@ -510,7 +510,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
             {/* Section 5: Architecture */}
             <Section id="architecture" title="Architecture & Technical Implementation" number="5">
               <div className="prose prose-lg max-w-none bg-muted -mx-8 px-8 py-8 rounded-2xl border border-border/50">
-                <h3 className="text-2xl font-semibold text-foreground mb-6">
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6">
                   System Architecture: Modular Agent Pipeline
                 </h3>
 
@@ -551,12 +551,12 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                   </pre>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-8">
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 mt-8">
                   How It Works
                 </h3>
 
                 <div className="bg-card p-6 rounded-xl mb-6 border border-border shadow-sm">
-                  <h4 className="font-bold text-foreground mb-3">Pattern Matching Process</h4>
+                  <h4 className="text-lg font-bold text-foreground mb-3">Pattern Matching Process</h4>
                   <ol className="space-y-2 text-foreground">
                     <li>
                       <strong>1. Storage:</strong> Historical scenarios embedded as vectors in
@@ -606,8 +606,8 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                 learning: 'Pure ML insufficient for hospitality\'s nuanced reality. Known edge cases require explicit business rules.',
                 fix: 'Hybrid architecture: RAG for pattern-based predictions + rule-based overrides for known exceptions.'
               }].map((challenge, idx) => <div key={idx} className="p-6 bg-card rounded-xl border-l-4 border-red-500 border border-border shadow-sm">
-                    <h3 className="text-xl font-bold text-foreground mb-4">{challenge.title}</h3>
-                    <div className="space-y-3 text-sm">
+                    <h4 className="text-lg font-bold text-foreground mb-4">{challenge.title}</h4>
+                    <div className="space-y-3 text-base">
                       <p className="text-foreground">
                         <span className="text-red-600 font-bold">❌ Issue:</span>{' '}
                         {challenge.issue}
@@ -645,7 +645,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                     <div className="h-20 flex items-center justify-center mb-4">
                       <span className="text-2xl font-bold text-foreground">Mews</span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-2 flex-grow text-foreground">Agentic AI for Hotels</h3>
+                    <h4 className="text-lg font-semibold mb-2 flex-grow text-foreground">Agentic AI for Hotels</h4>
                     <p className="text-base text-muted-foreground leading-relaxed mb-4 flex-grow">
                       The Mews vision for AI in hospitality (2024)
                     </p>
@@ -658,7 +658,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                     <div className="h-20 flex items-center justify-center mb-4">
                       <span className="text-lg font-semibold text-foreground">Roadbook</span>
                     </div>
-                    <h3 className="text-xl font-semibold mb-2 flex-grow text-foreground">The Future of Hotels: Innovations Shaping Hospitality</h3>
+                    <h4 className="text-lg font-semibold mb-2 flex-grow text-foreground">The Future of Hotels: Innovations Shaping Hospitality</h4>
                     <p className="text-base text-muted-foreground leading-relaxed mb-4 flex-grow">
                       Industry insights on hospitality innovation and trends
                     </p>
@@ -673,8 +673,8 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
             {/* CTA Section */}
             <div className="py-12 text-center">
               <div className="bg-gradient-to-br from-contact to-contact/80 text-contact-foreground p-12 rounded-2xl border border-contact/20">
-                <h3 className="text-3xl font-bold mb-4">Ready to discuss this project?</h3>
-                <p className="text-xl text-contact-foreground/90 mb-8">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4">Ready to discuss this project?</h3>
+                <p className="text-lg text-contact-foreground/90 mb-8">
                   Let's talk about product vision and building great AI experiences
                 </p>
                 <button onClick={() => navigate('/#contact')} className="inline-block px-8 py-3 bg-background text-contact font-semibold rounded-lg hover:bg-muted transition-colors border border-contact/20">
