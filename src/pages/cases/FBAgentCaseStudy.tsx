@@ -288,7 +288,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                     Core Design Principles for Hospitality AI
                   </h2>
                   <p className="text-lg text-zinc-400">
-                    Built for operational reality and human trust
+                    Built for operational efficiency and human trust
                   </p>
                 </div>
 
