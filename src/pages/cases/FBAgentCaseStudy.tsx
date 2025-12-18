@@ -312,7 +312,7 @@ const FBAgentCaseStudy: React.FC = () => {
             </Section>
 
             {/* Section 3: Solution */}
-            <Section id="solution" title="Solution: Hands-on reliable Predictions." number="3">
+            <Section id="solution" title="Solution: Hands-on Reliable Predictions." number="3">
               <div className="bg-gradient-to-r from-primary to-accent text-primary-foreground p-8 rounded-2xl border border-primary/20">
                 <p className="text-lg leading-relaxed">
                   <strong>Ambient Agentic Experience</strong>
