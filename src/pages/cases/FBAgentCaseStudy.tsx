@@ -119,14 +119,14 @@ const FBAgentCaseStudy: React.FC = () => {
 
             {/* From Reactive to Predictive */}
             <Section id="evolution">
-              <div className="text-center mb-12">
+              <div className="text-center mb-8">
                 <h2 className="text-4xl font-bold text-foreground mb-4">
                   From Reactive to Predictive Operations
                 </h2>
                 <p className="text-xl text-muted-foreground">The Industry Evolution</p>
               </div>
 
-              <div className="grid md:grid-cols-5 gap-6 mb-12">
+              <div className="grid md:grid-cols-5 gap-6">
                 {[{
                 title: 'Where We Are',
                 desc: 'Managers rely on intuition + basic occupancy data'
@@ -160,7 +160,7 @@ const FBAgentCaseStudy: React.FC = () => {
                   occupancy rates, historical demand, yet current Property Management Systems (PMS) lack predictive capabilities that account for external factors.
                 </p>
 
-                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-12">
+                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-8">
                   Industry Shift: From Guest-Centric to Staff-Centric Technology
                 </h3>
                 <p className="text-foreground leading-relaxed mb-6">
@@ -185,7 +185,7 @@ const FBAgentCaseStudy: React.FC = () => {
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-12">
+                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-8">
                   The Problem: Three Operational Gaps
                 </h3>
 
@@ -213,7 +213,7 @@ const FBAgentCaseStudy: React.FC = () => {
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-12">
+                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-8">
                   Impact: The Cost of Poor Forecasting
                 </h3>
                 <div className="grid md:grid-cols-3 gap-6 my-6 text-center">
@@ -471,7 +471,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                 </div>
 
                 {/* Strategic Decisions */}
-                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-12">
+                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-8">
                   Strategic Decisions: Why I Made These Choices
                 </h3>
 
@@ -551,7 +551,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                   </pre>
                 </div>
 
-                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-12">
+                <h3 className="text-2xl font-semibold text-foreground mb-6 mt-8">
                   How It Works
                 </h3>
 
@@ -577,14 +577,13 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
                   </ol>
                 </div>
 
-                <div className="p-6 bg-green-50 dark:bg-green-950/20 rounded-xl mb-6 border border-green-200/50">
+                <div className="p-6 bg-green-50 dark:bg-green-950/20 rounded-xl border border-green-200/50">
                   <p className="text-foreground">
                     <strong>Example output:</strong> "145 covers (88% confidence). Based on 3
                     similar Saturday patterns with major events nearby: Concert nights averaged
                     142-151 covers."
                   </p>
                 </div>
-
               </div>
             </Section>
 
