@@ -182,14 +182,6 @@ export const ProcessFlowchart = () => {
     </motion.div>
   );
 
-  const Arrow = () => (
-    <motion.div
-      variants={itemVariants}
-      className="hidden lg:flex items-center justify-center text-muted-foreground/50"
-    >
-      <ChevronRight className="w-6 h-6" />
-    </motion.div>
-  );
 
   return (
     <section className="w-full py-12 md:py-16 bg-transparent">
@@ -205,25 +197,9 @@ export const ProcessFlowchart = () => {
           {currentContent.title}
         </motion.h3>
 
-        {/* Desktop: Horizontal flow with arrows */}
+        {/* Responsive grid */}
         <motion.div
-          className="hidden lg:flex items-center justify-center gap-2"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={containerVariants}
-        >
-          {currentContent.steps.map((step, index) => (
-            <div key={step.label} className="contents">
-              <StepCard step={step} index={index} />
-              {index < currentContent.steps.length - 1 && <Arrow />}
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Tablet: 3x2 grid */}
-        <motion.div
-          className="hidden md:grid lg:hidden grid-cols-3 gap-4"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
@@ -234,18 +210,14 @@ export const ProcessFlowchart = () => {
           ))}
         </motion.div>
 
-        {/* Mobile: 2x3 grid */}
-        <motion.div
-          className="grid md:hidden grid-cols-2 gap-3"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          variants={containerVariants}
-        >
-          {currentContent.steps.map((step, index) => (
-            <StepCard key={step.label} step={step} index={index} />
-          ))}
-        </motion.div>
+        {/* Desktop: Arrows between cards */}
+        <div className="hidden lg:flex justify-center -mt-20 mb-4">
+          <div className="flex items-center gap-[116px]">
+            {[0, 1, 2, 3, 4].map((i) => (
+              <ChevronRight key={i} className="w-5 h-5 text-muted-foreground/50" />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
