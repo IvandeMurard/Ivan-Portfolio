@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -105,6 +106,9 @@ export const ProcessFlowchart = () => {
   const { language } = useLanguage();
   const prefersReducedMotion = useReducedMotion();
   const currentContent = content[language];
+  
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -133,7 +137,7 @@ export const ProcessFlowchart = () => {
                  bg-white/60 dark:bg-slate-900/60 backdrop-blur-md 
                  border border-border/30 hover:border-border/50
                  transition-all duration-200 hover:scale-[1.02]
-                 min-w-[140px] md:min-w-[160px]"
+                 min-w-[140px] md:min-w-[160px] flex-1"
     >
       {/* Step number badge */}
       <span className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-primary text-primary-foreground 
@@ -182,42 +186,49 @@ export const ProcessFlowchart = () => {
     </motion.div>
   );
 
-
   return (
-    <section className="w-full py-12 md:py-16 bg-transparent">
+    <section ref={ref} className="w-full py-12 md:py-16 bg-transparent">
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         {/* Title */}
         <motion.h3
           className="text-lg md:text-xl text-foreground/60 font-medium mb-8 md:mb-10 text-center"
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ duration: prefersReducedMotion ? 0.1 : 0.4 }}
         >
           {currentContent.title}
         </motion.h3>
 
-        {/* Responsive grid */}
+        {/* Desktop: Horizontal flow with inline arrows */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4"
+          className="hidden lg:flex items-stretch justify-center gap-3"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          animate={inView ? "visible" : "hidden"}
+          variants={containerVariants}
+        >
+          {currentContent.steps.map((step, index) => (
+            <div key={step.label} className="flex items-center gap-3">
+              <StepCard step={step} index={index} />
+              {index < currentContent.steps.length - 1 && (
+                <motion.div variants={itemVariants}>
+                  <ChevronRight className="w-5 h-5 text-muted-foreground/50 flex-shrink-0" />
+                </motion.div>
+              )}
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Tablet/Mobile: Grid layout */}
+        <motion.div
+          className="grid lg:hidden grid-cols-2 md:grid-cols-3 gap-3 md:gap-4"
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
         >
           {currentContent.steps.map((step, index) => (
             <StepCard key={step.label} step={step} index={index} />
           ))}
         </motion.div>
-
-        {/* Desktop: Arrows between cards */}
-        <div className="hidden lg:flex justify-center -mt-20 mb-4">
-          <div className="flex items-center gap-[116px]">
-            {[0, 1, 2, 3, 4].map((i) => (
-              <ChevronRight key={i} className="w-5 h-5 text-muted-foreground/50" />
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
