@@ -381,7 +381,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
             </section>
 
             {/* Avi Brosh Quote */}
-            <QuoteBlock quote="Technology has brought incredible convenience, but the human element is irreplaceable. A warm welcome, a local tip from the front desk, a morning conversation over coffee—these are the things that linger in a guest's memory." author="Avi Brosh" role="Founder, Palisociety" source="The future of hotels: innovations shaping hospitality | Roadbook" sourceUrl="https://roadbook.com/travel/super-hotels-of-the-future/" authorImage="/img/avi_brosh.webp" />
+            <QuoteBlock quote="Technology has brought incredible convenience, but the human element is irreplaceable. A warm welcome, a local tip from the front desk, a morning conversation over coffee, these are the things that linger in a guest's memory." author="Avi Brosh" role="Founder, Palisociety" source="The future of hotels: innovations shaping hospitality | Roadbook" sourceUrl="https://roadbook.com/travel/super-hotels-of-the-future/" authorImage="/img/avi_brosh.webp" />
 
             {/* Section 4: Process & Roadmap */}
             <Section id="roadmap" title="Process & Key Decisions" number="4">
