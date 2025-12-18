@@ -350,7 +350,7 @@ Conversational layer for clarity and spontaneity.</p>
                     </div>
                     <h4 className="text-lg font-bold text-white">Explainable Predictions</h4>
                     <p className="text-base text-zinc-400 leading-relaxed">
-                      RAG architecture provides transparency: managers see which historical scenarios informed each prediction, not just numbers.
+                      RAG architecture provides transparency: managers see historical scenarios used, not just numbers.
                     </p>
                   </div>
 
