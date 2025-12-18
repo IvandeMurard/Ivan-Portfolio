@@ -290,9 +290,8 @@ const FBAgentCaseStudy: React.FC = () => {
                       <li>Market research via Mews reports and sustainability studies</li>
                       <li>User journey mapping for F&B managers</li>
                       <li>MVP scope definition for hackathon constraints</li>
-                      <li>Human-in-the-loop philosophy by design
-                      <li>Front-end design (Phase 2)
-                      </li>
+                      <li>Human-in-the-loop philosophy by design</li>
+                      <li>Front-end design (Phase 2)</li>
                     </ul>
                   </div>
                   <div className="p-6 bg-card rounded-xl border border-border shadow-sm">
