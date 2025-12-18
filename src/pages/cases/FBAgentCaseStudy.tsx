@@ -62,7 +62,7 @@ const FBAgentCaseStudy: React.FC = () => {
       {/* Hero Section */}
       <div className="container mx-auto px-4 lg:px-8 pt-20 pb-8 max-w-[1400px]">
         <CaseStudyHero
-          title="Building an AI Agent to Predict Hospitality Staffing Needs"
+          title="Building an AI Agent to Predict Hospitality Staff and F&B Needs"
           subtitle="Bridging external context (events, weather) with internal operations (PMS, staffing, calendar)"
           backgroundImage="/img/2025_HOTFuture_TheManner_Lobby_1299.webp"
           tools={[
