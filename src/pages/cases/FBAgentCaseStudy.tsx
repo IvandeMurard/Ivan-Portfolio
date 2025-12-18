@@ -386,13 +386,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
             {/* Section 4: Process & Roadmap */}
             <Section id="roadmap" title="Process & Key Decisions" number="4">
               <div className="prose prose-lg max-w-none">
-                <div className="bg-yellow-50 dark:bg-yellow-950/20 border-l-4 border-yellow-500 p-6 rounded-r-xl mb-6 border border-yellow-200/50">
-                  <p className="text-foreground">
-                    <strong>Important context:</strong> This is a <strong>side project</strong>{' '}
-                    developed in evenings and weekends alongside other commitments. Progress is
-                    measured in focused sprints, not continuous full-time development.
-                  </p>
-                </div>
+                
 
                 <div className="space-y-6">
                   {/* Horizontal Timeline */}
