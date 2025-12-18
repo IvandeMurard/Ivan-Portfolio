@@ -246,7 +246,7 @@ const FBAgentCaseStudy: React.FC = () => {
                       Product Strategy
                     </h3>
                     <ul className="space-y-3 text-foreground">
-                      <li>Market research via Mews reports and sustainability studies</li>
+                      <li>Market research via industry reports and sustainability studies</li>
                       <li>User journey mapping for F&B managers</li>
                       <li>MVP scope definition for hackathon constraints</li>
                       <li>Human-in-the-loop philosophy by design</li>
