@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
@@ -96,9 +95,6 @@ export const ProcessFlowchart = () => {
   const { language } = useLanguage();
   const prefersReducedMotion = useReducedMotion();
   const currentContent = content[language];
-  
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-50px" });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -108,6 +104,15 @@ export const ProcessFlowchart = () => {
         staggerChildren: prefersReducedMotion ? 0 : 0.08,
         delayChildren: 0.1,
       },
+    },
+  };
+
+  const titleVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.1 : 0.4, ease: "easeOut" as const },
     },
   };
 
@@ -124,14 +129,15 @@ export const ProcessFlowchart = () => {
     <motion.div
       variants={itemVariants}
       className="relative flex flex-col items-center gap-3 p-4 md:p-5 rounded-xl
-                 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md 
+                 bg-white/60 dark:bg-slate-900/60 backdrop-blur-md
                  border border-border/30 hover:border-border/50
                  transition-all duration-200 hover:scale-[1.02]
                  min-w-[140px] md:min-w-[160px] flex-1"
+      aria-label={`${step.label}: ${step.description}`}
     >
 
       {/* Tools icons */}
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex items-center justify-center gap-2" aria-label="Tools" role="list">
         {step.tools.map((tool) => (
           <TooltipProvider key={tool.name} delayDuration={100}>
             <Tooltip>
@@ -140,7 +146,8 @@ export const ProcessFlowchart = () => {
                   href={tool.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block transition-transform duration-200 hover:scale-110"
+                  className="block rounded-md transition-transform duration-200 hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  aria-label={`${tool.name} (opens in a new tab)`}
                 >
                   <img
                     src={tool.icon}
@@ -162,24 +169,27 @@ export const ProcessFlowchart = () => {
       </div>
 
       {/* Label */}
-      <span className="text-sm font-semibold text-foreground">{step.label}</span>
+      <h4 className="text-sm font-semibold text-foreground">{step.label}</h4>
 
       {/* Description */}
-      <span className="text-xs text-muted-foreground text-center leading-tight">
+      <p className="text-sm text-foreground/75 dark:text-foreground/80 text-center leading-snug">
         {step.description}
-      </span>
+      </p>
     </motion.div>
   );
 
   return (
-    <section ref={ref} className="w-full py-12 md:py-16 bg-transparent">
+    <motion.section
+      className="w-full py-12 md:py-16 bg-transparent"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.25, margin: "-50px 0px" }}
+    >
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         {/* Title */}
         <motion.h3
-          className="text-lg md:text-xl text-foreground/60 font-medium mb-8 md:mb-10 text-center"
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-          transition={{ duration: prefersReducedMotion ? 0.1 : 0.4 }}
+          className="text-lg md:text-xl text-foreground/80 font-semibold mb-8 md:mb-10 text-center"
+          variants={titleVariants}
         >
           {currentContent.title}
         </motion.h3>
@@ -187,8 +197,6 @@ export const ProcessFlowchart = () => {
         {/* Desktop: Horizontal flow with inline arrows */}
         <motion.div
           className="hidden lg:flex items-stretch justify-center gap-3"
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
         >
           {currentContent.steps.map((step, index) => (
@@ -206,8 +214,6 @@ export const ProcessFlowchart = () => {
         {/* Tablet/Mobile: Grid layout */}
         <motion.div
           className="grid lg:hidden grid-cols-2 md:grid-cols-3 gap-3 md:gap-4"
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
         >
           {currentContent.steps.map((step, index) => (
@@ -215,6 +221,6 @@ export const ProcessFlowchart = () => {
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
