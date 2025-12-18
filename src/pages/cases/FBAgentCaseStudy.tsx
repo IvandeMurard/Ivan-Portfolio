@@ -466,7 +466,7 @@ Human-in-the-loop philosophy by design Front-end design (Phase 2)</li>
 
                 {/* Strategic Decisions */}
                 <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 mt-8">
-                  Strategic Decisions: Why I Made These Choices
+                  Strategic Decisions: Choices Made 
                 </h3>
 
                 <div className="grid md:grid-cols-3 gap-6">
