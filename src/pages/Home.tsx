@@ -10,7 +10,7 @@ import { MediaCard } from "../components/work/MediaCard";
 import { CarouselRow } from "../components/CarouselRow";
 import { WorkModal } from "../components/WorkModal";
 import { CTABanner } from "../components/work/CTABanner";
-import { BuiltWithBanner } from "../components/BuiltWithBanner";
+import { ProcessFlowchart } from "../components/ProcessFlowchart";
 import { Button } from "../components/ui/button";
 import { Separator } from "../components/ui/separator";
 import { Mail, Linkedin, Calendar, ArrowDown, ChevronDown, ArrowRight, Check } from "lucide-react";
@@ -975,8 +975,8 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
         </section>
       </ScrollReveal>
 
-      {/* Built With Banner */}
-      <BuiltWithBanner />
+      {/* Process Flowchart */}
+      <ProcessFlowchart />
 
       {/* Contact Section - Centered */}
       <section
