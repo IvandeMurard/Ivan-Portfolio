@@ -33,15 +33,10 @@ const content = {
         label: "Building",
         description: "Development via MCP",
         tools: [
-          { name: "Claude Sonnet 4.5", icon: "/img/claude_icon.svg", url: "https://claude.ai" },
           { name: "Linear", icon: "/img/linear_icon.svg", url: "https://linear.app" },
           { name: "Cursor", icon: "/img/cursor-icon.svg", url: "https://cursor.sh" },
+          { name: "Warp", icon: "/img/Warp_icon.png", url: "https://warp.dev" },
         ],
-      },
-      {
-        label: "Terminal",
-        description: "Command line interface",
-        tools: [{ name: "Warp", icon: "/img/Warp_icon.png", url: "https://warp.dev" }],
       },
       {
         label: "Knowledge",
@@ -75,15 +70,10 @@ const content = {
         label: "Construction",
         description: "Développement via MCP",
         tools: [
-          { name: "Claude Sonnet 4.5", icon: "/img/claude_icon.svg", url: "https://claude.ai" },
           { name: "Linear", icon: "/img/linear_icon.svg", url: "https://linear.app" },
           { name: "Cursor", icon: "/img/cursor-icon.svg", url: "https://cursor.sh" },
+          { name: "Warp", icon: "/img/Warp_icon.png", url: "https://warp.dev" },
         ],
-      },
-      {
-        label: "Terminal",
-        description: "Interface en ligne de commande",
-        tools: [{ name: "Warp", icon: "/img/Warp_icon.png", url: "https://warp.dev" }],
       },
       {
         label: "Connaissances",
@@ -139,11 +129,6 @@ export const ProcessFlowchart = () => {
                  transition-all duration-200 hover:scale-[1.02]
                  min-w-[140px] md:min-w-[160px] flex-1"
     >
-      {/* Step number badge */}
-      <span className="absolute -top-2 -left-2 w-6 h-6 rounded-full bg-primary text-primary-foreground 
-                       text-xs font-bold flex items-center justify-center shadow-sm">
-        {index + 1}
-      </span>
 
       {/* Tools icons */}
       <div className="flex items-center justify-center gap-2">
