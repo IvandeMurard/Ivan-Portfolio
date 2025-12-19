@@ -203,14 +203,12 @@ export const ProcessFlowchart = () => {
           variants={containerVariants}
         >
           {currentContent.steps.map((step, index) => (
-            <div key={step.label} className="flex items-center gap-3">
+            <motion.div key={step.label} className="flex items-center gap-3" variants={itemVariants}>
               <StepCard step={step} index={index} />
               {index < currentContent.steps.length - 1 && (
-                <motion.div variants={itemVariants}>
-                  <ChevronRight className="w-5 h-5 text-muted-foreground/50 flex-shrink-0" />
-                </motion.div>
+                <ChevronRight className="w-5 h-5 text-muted-foreground/50 flex-shrink-0" />
               )}
-            </div>
+            </motion.div>
           ))}
         </motion.div>
 
@@ -223,7 +221,9 @@ export const ProcessFlowchart = () => {
           variants={containerVariants}
         >
           {currentContent.steps.map((step, index) => (
-            <StepCard key={step.label} step={step} index={index} />
+            <motion.div key={step.label} variants={itemVariants}>
+              <StepCard step={step} index={index} />
+            </motion.div>
           ))}
         </motion.div>
 
