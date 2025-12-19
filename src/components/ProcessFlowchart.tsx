@@ -127,8 +127,7 @@ export const ProcessFlowchart = () => {
   };
 
   const StepCard = ({ step, index }: { step: ProcessStep; index: number }) => (
-    <motion.div
-      variants={itemVariants}
+    <div
       className="relative flex flex-col items-center gap-3 p-4 md:p-5 rounded-xl
                  bg-card/95 dark:bg-slate-900/70
                  border border-border/60 hover:border-border/80
@@ -177,7 +176,7 @@ export const ProcessFlowchart = () => {
       <p className="text-sm text-muted-foreground text-center leading-snug">
         {step.description}
       </p>
-    </motion.div>
+    </div>
   );
 
   return (

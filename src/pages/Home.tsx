@@ -245,6 +245,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
         sections={[
           { id: "hero", label: "Welcome" },
           { id: "work", label: "Work" },
+          { id: "side-projects", label: "Side-projects" },
           { id: "hackathons", label: "Hackathons" },
           { id: "experience", label: "Experience" },
           { id: "about", label: "About" },
