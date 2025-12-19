@@ -1,5 +1,5 @@
 // src/data/homeContent.ts
-export type Language = 'en' | 'fr';
+export type Language = "en" | "fr";
 
 export const homeContent = {
   en: {
@@ -10,12 +10,12 @@ export const homeContent = {
       proofPoints: [
         "2 hackathon wins turning ideas into working products",
         "Currently shipping: AI agents for F&B industry",
-        "5+ years shipping products people use"
+        "5+ years shipping products people use",
       ],
       ctas: {
         viewWork: "View my work",
-        contact: "Get in touch"
-      }
+        contact: "Get in touch",
+      },
     },
     marquee: {
       items: [
@@ -28,8 +28,8 @@ export const homeContent = {
         "5+ / Years experience",
         "•",
         "Paris-based",
-        "•"
-      ]
+        "•",
+      ],
     },
     work: {
       title: "Work",
@@ -47,18 +47,18 @@ export const homeContent = {
       },
       transition: {
         title: "More coming soon.",
-        subtitle: "I'm currently documenting additional case studies from past projects."
+        subtitle: "I'm currently documenting additional case studies from past projects.",
       },
       cta: {
         title: "Want to explore how we could work together?",
         description: "Let's discuss your challenges and see if my approach could help move things forward.",
         buttonText: "Get in touch",
-        buttonLink: "#contact"
-      }
+        buttonLink: "#contact",
+      },
     },
     sideProjects: {
       title: "Side projects",
-      subtitle: "Short builds, experiments, and agentic prototypes — documented as I go.",
+      subtitle: "Short builds, experiments, and agentic prototypes, documented as I go.",
       showMore: "Show more",
       showLess: "Show less",
       comingSoon: "Coming soon",
@@ -70,23 +70,23 @@ export const homeContent = {
       filterChips: {
         all: "All",
         won: "Won",
-        finalist: "Finalist"
-      }
+        finalist: "Finalist",
+      },
     },
     experience: {
       title: "Experience & Education",
       filterChips: {
         experiences: "Experiences",
         continuousLearning: "Continuous Learning",
-        education: "Education"
-      }
+        education: "Education",
+      },
     },
     contact: {
       title: "Let's Talk",
       subtitle: "Always happy to connect about product, AI, or potential collaborations.",
       calendly: "Book a call",
       email: "Email me",
-      linkedin: "LinkedIn"
+      linkedin: "LinkedIn",
     },
     footer: {
       builtWith: "Built with",
@@ -95,9 +95,9 @@ export const homeContent = {
         home: "Home",
         work: "Work",
         about: "About",
-        contact: "Contact"
-      }
-    }
+        contact: "Contact",
+      },
+    },
   },
   fr: {
     hero: {
@@ -107,12 +107,12 @@ export const homeContent = {
       proofPoints: [
         "2 hackathons gagnés transformant des idées en produits fonctionnels",
         "En cours de livraison : agents IA pour l'industrie F&B",
-        "5+ ans à livrer des produits utilisés par les gens"
+        "5+ ans à livrer des produits utilisés par les gens",
       ],
       ctas: {
         viewWork: "Voir mon travail",
-        contact: "Me contacter"
-      }
+        contact: "Me contacter",
+      },
     },
     marquee: {
       items: [
@@ -125,8 +125,8 @@ export const homeContent = {
         "5+ / Années d'expérience",
         "•",
         "Basé à Paris",
-        "•"
-      ]
+        "•",
+      ],
     },
     work: {
       title: "Travaux",
@@ -144,14 +144,14 @@ export const homeContent = {
       },
       transition: {
         title: "D'autres arrivent bientôt.",
-        subtitle: "Je documente actuellement des études de cas supplémentaires de projets passés."
+        subtitle: "Je documente actuellement des études de cas supplémentaires de projets passés.",
       },
       cta: {
         title: "Envie d'explorer comment nous pourrions travailler ensemble ?",
         description: "Discutons de vos défis et voyons si mon approche pourrait aider à faire avancer les choses.",
         buttonText: "Me contacter",
-        buttonLink: "#contact"
-      }
+        buttonLink: "#contact",
+      },
     },
     sideProjects: {
       title: "Side projects",
@@ -167,23 +167,23 @@ export const homeContent = {
       filterChips: {
         all: "Tous",
         won: "Gagnés",
-        finalist: "Finaliste"
-      }
+        finalist: "Finaliste",
+      },
     },
     experience: {
       title: "Expérience & Formation",
       filterChips: {
         experiences: "Expériences",
         continuousLearning: "Formation Continue",
-        education: "Formation"
-      }
+        education: "Formation",
+      },
     },
     contact: {
       title: "Parlons-en",
       subtitle: "Toujours ravi d'échanger sur le produit, l'IA ou des collaborations potentielles.",
       calendly: "Réserver un appel",
       email: "M'écrire",
-      linkedin: "LinkedIn"
+      linkedin: "LinkedIn",
     },
     footer: {
       builtWith: "Construit avec",
@@ -192,8 +192,8 @@ export const homeContent = {
         home: "Accueil",
         work: "Travaux",
         about: "À propos",
-        contact: "Contact"
-      }
-    }
-  }
+        contact: "Contact",
+      },
+    },
+  },
 };
