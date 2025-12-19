@@ -181,16 +181,14 @@ export const ProcessFlowchart = () => {
   );
 
   return (
-    <motion.section
-      className="w-full py-12 md:py-16 bg-transparent"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-    >
+    <section className="w-full py-12 md:py-16 bg-transparent">
       <div className="max-w-6xl mx-auto px-4 md:px-6">
         {/* Title */}
         <motion.h3
           className="text-lg md:text-xl text-foreground/80 font-semibold mb-8 md:mb-10 text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
           variants={titleVariants}
         >
           {currentContent.title}
@@ -199,6 +197,9 @@ export const ProcessFlowchart = () => {
         {/* Desktop: Horizontal flow with inline arrows */}
         <motion.div
           className="hidden lg:flex items-stretch justify-center gap-3"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
         >
           {currentContent.steps.map((step, index) => (
@@ -216,6 +217,9 @@ export const ProcessFlowchart = () => {
         {/* Tablet/Mobile: Grid layout */}
         <motion.div
           className="grid lg:hidden grid-cols-2 md:grid-cols-3 gap-3 md:gap-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
           variants={containerVariants}
         >
           {currentContent.steps.map((step, index) => (
@@ -238,6 +242,6 @@ export const ProcessFlowchart = () => {
           </Button>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
