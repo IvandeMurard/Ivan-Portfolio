@@ -1,7 +1,7 @@
 // src/site.config.ts
 export const SITE = {
   name: "Ivan de Murard",
-  tagline: "Zero-to-One Product Manager",
+  tagline: "AI Product Builder",
 } as const;
 
 // Centralisation des URL sociales (facilement éditables)

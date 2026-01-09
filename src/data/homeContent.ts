@@ -5,10 +5,10 @@ export const homeContent = {
   en: {
     hero: {
       name: "Ivan de Murard",
-      title: "Zero-to-One Product Manager",
+      title: "AI Product Builder",
       subtitle: "From hospitality to AI: I ship fast friction-less products and experiences with care.",
       proofPoints: [
-        "2 hackathon wins turning ideas into working products",
+        "Building AI agents for hospitality operations (RAG + LLM reasoning)",
         "Currently shipping: AI agents for F&B industry",
         "5+ years shipping products people use",
       ],
@@ -102,10 +102,10 @@ export const homeContent = {
   fr: {
     hero: {
       name: "Ivan de Murard",
-      title: "Product Manager Zero-to-One",
+      title: "AI Product Builder",
       subtitle: "De l'hospitalité à l'IA : je livre rapidement des produits et expériences fluides avec soin.",
       proofPoints: [
-        "2 hackathons gagnés transformant des idées en produits fonctionnels",
+        "Construction d'agents IA pour les opérations hôtelières (RAG + raisonnement LLM)",
         "En cours de livraison : agents IA pour l'industrie F&B",
         "5+ ans à livrer des produits utilisés par les gens",
       ],
