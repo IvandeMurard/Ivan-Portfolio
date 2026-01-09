@@ -9,7 +9,7 @@ export const homeContent = {
       subtitle: "",
       proofPoints: [
         "Building AI agents for hospitality operations (RAG + LLM reasoning)",
-        "Currently shipping: AI agents for F&B industry",
+        "Former Open Data SaaS Co-founder",
         "5+ years shipping products people use",
       ],
       ctas: {
@@ -106,7 +106,7 @@ export const homeContent = {
       subtitle: "",
       proofPoints: [
         "Construction d'agents IA pour les opérations hôtelières (RAG + raisonnement LLM)",
-        "En cours de livraison : agents IA pour l'industrie F&B",
+        "Ancien co-fondateur SaaS Open Data",
         "5+ ans à livrer des produits utilisés par les gens",
       ],
       ctas: {
