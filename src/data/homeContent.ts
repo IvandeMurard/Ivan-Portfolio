@@ -6,7 +6,7 @@ export const homeContent = {
     hero: {
       name: "Ivan de Murard",
       title: "AI Product Builder",
-      subtitle: "From hospitality to AI: I ship fast friction-less products and experiences with care.",
+      subtitle: "",
       proofPoints: [
         "Building AI agents for hospitality operations (RAG + LLM reasoning)",
         "Currently shipping: AI agents for F&B industry",
@@ -103,7 +103,7 @@ export const homeContent = {
     hero: {
       name: "Ivan de Murard",
       title: "AI Product Builder",
-      subtitle: "De l'hospitalité à l'IA : je livre rapidement des produits et expériences fluides avec soin.",
+      subtitle: "",
       proofPoints: [
         "Construction d'agents IA pour les opérations hôtelières (RAG + raisonnement LLM)",
         "En cours de livraison : agents IA pour l'industrie F&B",
