@@ -181,8 +181,11 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
   // Filtrer les projets masqués (hidden: true) puis appliquer le filtre de catégorie
   const visibleProjects = projects.filter((p) => !p.hidden);
 
-  const workSignatureIds = new Set(["sonor", "wttj-conversion-seniors"]);
-  const workProjects = visibleProjects.filter((p) => workSignatureIds.has(p.id));
+  const workSignatureIds = new Set(["sonor", "wttj-conversion-seniors", "agentic-hospitality"]);
+  const workOrder = ["sonor", "wttj-conversion-seniors", "agentic-hospitality"];
+  const workProjects = visibleProjects
+    .filter((p) => workSignatureIds.has(p.id))
+    .sort((a, b) => workOrder.indexOf(a.id) - workOrder.indexOf(b.id));
   const sideProjectsAllRaw = visibleProjects.filter((p) => p.workType === "side_project");
   // Swap the last two items for visual ordering
   const sideProjectsAll =
