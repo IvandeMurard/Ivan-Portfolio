@@ -1017,7 +1017,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
             >
               <Button
                 size="lg"
-                className="bg-card text-contact dark:text-white hover:bg-contact hover:text-white dark:hover:bg-background dark:hover:text-foreground hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
+                className="bg-card text-contact dark:text-white hover:bg-contact hover:text-white hover:border hover:border-white dark:hover:border-0 dark:hover:bg-background dark:hover:text-foreground hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
                 onClick={() => {
                   triggerHaptic('light');
                   const newState = !showContactForm;
@@ -1067,7 +1067,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
               </Button>
               <Button
                 size="lg"
-                className="bg-card text-contact dark:text-white hover:bg-contact hover:text-white dark:hover:bg-background dark:hover:text-foreground hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
+                className="bg-card text-contact dark:text-white hover:bg-contact hover:text-white hover:border hover:border-white dark:hover:border-0 dark:hover:bg-background dark:hover:text-foreground hover:scale-105 hover:shadow-xl active:scale-95 transition-all duration-300"
                 onClick={() => triggerHaptic('light')}
                 asChild
               >
