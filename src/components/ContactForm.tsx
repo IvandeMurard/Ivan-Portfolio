@@ -350,7 +350,7 @@ const ContactForm = () => {
       <Button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-primary text-primary-foreground hover:bg-orange-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
         aria-busy={isSubmitting}
       >
         {isSubmitting && (
