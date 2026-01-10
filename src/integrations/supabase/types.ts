@@ -53,6 +53,24 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_rate_limit: {
+        Row: {
+          created_at: string
+          id: string
+          ip_address: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          ip_address: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          ip_address?: string
+        }
+        Relationships: []
+      }
       experience_tools: {
         Row: {
           created_at: string
@@ -258,6 +276,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          ip_address: string | null
           product_link: string | null
           product_name: string
           status: string
@@ -265,6 +284,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          ip_address?: string | null
           product_link?: string | null
           product_name: string
           status?: string
@@ -272,6 +292,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          ip_address?: string | null
           product_link?: string | null
           product_name?: string
           status?: string
@@ -348,10 +369,10 @@ export type Database = {
       }
     }
     Functions: {
-      check_tool_suggestion_rate_limit: {
-        Args: { user_id: string }
-        Returns: boolean
-      }
+      check_tool_suggestion_rate_limit:
+        | { Args: { client_ip: string }; Returns: boolean }
+        | { Args: { user_id: string }; Returns: boolean }
+      cleanup_old_rate_limits: { Args: never; Returns: undefined }
     }
     Enums: {
       [_ in never]: never
