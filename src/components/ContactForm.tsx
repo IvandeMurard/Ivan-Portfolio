@@ -10,10 +10,14 @@ import { z } from "zod";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
 
 const createContactSchema = (language: 'en' | 'fr') => z.object({
-  name: z.string()
+  firstName: z.string()
     .trim()
-    .min(1, language === 'en' ? "Name is required" : "Le nom est requis")
-    .max(100, language === 'en' ? "Name must be less than 100 characters" : "Le nom doit faire moins de 100 caractères"),
+    .min(1, language === 'en' ? "First name is required" : "Le prénom est requis")
+    .max(50, language === 'en' ? "First name must be less than 50 characters" : "Le prénom doit faire moins de 50 caractères"),
+  lastName: z.string()
+    .trim()
+    .min(1, language === 'en' ? "Last name is required" : "Le nom est requis")
+    .max(50, language === 'en' ? "Last name must be less than 50 characters" : "Le nom doit faire moins de 50 caractères"),
   email: z.string()
     .trim()
     .min(1, language === 'en' ? "Email is required" : "L'email est requis")
@@ -28,11 +32,13 @@ const createContactSchema = (language: 'en' | 'fr') => z.object({
 const ContactForm = () => {
   const { toast } = useToast();
   const { language } = useLanguage();
-  const nameId = useId();
+  const firstNameId = useId();
+  const lastNameId = useId();
   const emailId = useId();
   const messageId = useId();
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     message: "",
   });
@@ -44,10 +50,12 @@ const ContactForm = () => {
     en: {
       formTitle: "Contact Form",
       formDescription: "Fill out this form to send me a message. All fields are required.",
-      nameLabel: "Your name",
+      firstNameLabel: "First name",
+      lastNameLabel: "Last name",
       emailLabel: "Email address",
       messageLabel: "Your message",
-      namePlaceholder: "John Doe",
+      firstNamePlaceholder: "John",
+      lastNamePlaceholder: "Doe",
       emailPlaceholder: "john@example.com",
       messagePlaceholder: "Tell me about your project...",
       success: "Message sent! I'll get back to you soon.",
@@ -59,10 +67,12 @@ const ContactForm = () => {
     fr: {
       formTitle: "Formulaire de contact",
       formDescription: "Remplissez ce formulaire pour m'envoyer un message. Tous les champs sont requis.",
-      nameLabel: "Votre nom",
+      firstNameLabel: "Prénom",
+      lastNameLabel: "Nom",
       emailLabel: "Adresse email",
       messageLabel: "Votre message",
-      namePlaceholder: "Jean Dupont",
+      firstNamePlaceholder: "Jean",
+      lastNamePlaceholder: "Dupont",
       emailPlaceholder: "jean@exemple.fr",
       messagePlaceholder: "Parlez-moi de votre projet...",
       success: "Message envoyé ! Je vous répondrai bientôt.",
@@ -86,9 +96,13 @@ const ContactForm = () => {
       const contactSchema = createContactSchema(language);
       const validatedData = contactSchema.parse(formData);
 
-      // Call Supabase edge function
+      // Call Supabase edge function with combined name
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: validatedData,
+        body: {
+          name: `${validatedData.firstName} ${validatedData.lastName}`,
+          email: validatedData.email,
+          message: validatedData.message,
+        },
       });
 
       if (error) {
@@ -102,11 +116,11 @@ const ContactForm = () => {
         description: t.success,
       });
 
-      setFormData({ name: "", email: "", message: "" });
+      setFormData({ firstName: "", lastName: "", email: "", message: "" });
       
       // Return focus to first field after success
       setTimeout(() => {
-        document.getElementById(nameId)?.focus();
+        document.getElementById(firstNameId)?.focus();
       }, 100);
     } catch (error: any) {
       console.error("Form submission error:", error);
@@ -124,9 +138,13 @@ const ContactForm = () => {
         
         // Focus first error field
         const firstErrorField = error.errors[0]?.path[0];
-        if (firstErrorField) {
+        if (firstErrorField === 'firstName') {
           setTimeout(() => {
-            document.getElementById(`${firstErrorField}Id`)?.focus();
+            document.getElementById(firstNameId)?.focus();
+          }, 100);
+        } else if (firstErrorField === 'lastName') {
+          setTimeout(() => {
+            document.getElementById(lastNameId)?.focus();
           }, 100);
         }
       } else {
@@ -167,44 +185,87 @@ const ContactForm = () => {
         {isSubmitting && t.sending}
       </div>
 
-      {/* Name field */}
-      <div className="space-y-2">
-        <Label 
-          htmlFor={nameId}
-          className="text-contact-foreground font-medium"
-        >
-          {t.nameLabel} <span className="text-destructive" aria-label={t.requiredField}>*</span>
-        </Label>
-        <Input
-          id={nameId}
-          type="text"
-          name="name"
-          placeholder={t.namePlaceholder}
-          value={formData.name}
-          onChange={(e) => {
-            setFormData({ ...formData, name: e.target.value });
-            if (errors.name) {
-              setErrors({ ...errors, name: '' });
-            }
-          }}
-          className={`bg-card/80 border-contact-foreground/30 text-foreground placeholder:text-muted-foreground ${
-            errors.name ? 'border-destructive focus-visible:ring-destructive' : ''
-          }`}
-          aria-required="true"
-          aria-invalid={!!errors.name}
-          aria-describedby={errors.name ? `${nameId}-error` : undefined}
-          autoComplete="name"
-        />
-        {errors.name && (
-          <p 
-            id={`${nameId}-error`} 
-            className="text-sm text-destructive flex items-center gap-1"
-            role="alert"
+      {/* First name & Last name fields - on a single row */}
+      <div className="grid grid-cols-2 gap-4">
+        {/* First name field */}
+        <div className="space-y-2">
+          <Label 
+            htmlFor={firstNameId}
+            className="text-contact-foreground font-medium"
           >
-            <AlertCircle className="w-4 h-4" aria-hidden="true" />
-            {errors.name}
-          </p>
-        )}
+            {t.firstNameLabel} <span className="text-destructive" aria-label={t.requiredField}>*</span>
+          </Label>
+          <Input
+            id={firstNameId}
+            type="text"
+            name="firstName"
+            placeholder={t.firstNamePlaceholder}
+            value={formData.firstName}
+            onChange={(e) => {
+              setFormData({ ...formData, firstName: e.target.value });
+              if (errors.firstName) {
+                setErrors({ ...errors, firstName: '' });
+              }
+            }}
+            className={`bg-card/80 border-contact-foreground/30 text-foreground placeholder:text-muted-foreground ${
+              errors.firstName ? 'border-destructive focus-visible:ring-destructive' : ''
+            }`}
+            aria-required="true"
+            aria-invalid={!!errors.firstName}
+            aria-describedby={errors.firstName ? `${firstNameId}-error` : undefined}
+            autoComplete="given-name"
+          />
+          {errors.firstName && (
+            <p 
+              id={`${firstNameId}-error`} 
+              className="text-sm text-destructive flex items-center gap-1"
+              role="alert"
+            >
+              <AlertCircle className="w-4 h-4" aria-hidden="true" />
+              {errors.firstName}
+            </p>
+          )}
+        </div>
+
+        {/* Last name field */}
+        <div className="space-y-2">
+          <Label 
+            htmlFor={lastNameId}
+            className="text-contact-foreground font-medium"
+          >
+            {t.lastNameLabel} <span className="text-destructive" aria-label={t.requiredField}>*</span>
+          </Label>
+          <Input
+            id={lastNameId}
+            type="text"
+            name="lastName"
+            placeholder={t.lastNamePlaceholder}
+            value={formData.lastName}
+            onChange={(e) => {
+              setFormData({ ...formData, lastName: e.target.value });
+              if (errors.lastName) {
+                setErrors({ ...errors, lastName: '' });
+              }
+            }}
+            className={`bg-card/80 border-contact-foreground/30 text-foreground placeholder:text-muted-foreground ${
+              errors.lastName ? 'border-destructive focus-visible:ring-destructive' : ''
+            }`}
+            aria-required="true"
+            aria-invalid={!!errors.lastName}
+            aria-describedby={errors.lastName ? `${lastNameId}-error` : undefined}
+            autoComplete="family-name"
+          />
+          {errors.lastName && (
+            <p 
+              id={`${lastNameId}-error`} 
+              className="text-sm text-destructive flex items-center gap-1"
+              role="alert"
+            >
+              <AlertCircle className="w-4 h-4" aria-hidden="true" />
+              {errors.lastName}
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Email field */}
