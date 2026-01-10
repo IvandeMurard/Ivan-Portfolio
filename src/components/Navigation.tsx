@@ -284,11 +284,11 @@ export const Navigation: FC<NavigationProps> = ({ onKeyboardHelpToggle }) => {
                 />
               </Link>
 
-              {/* CONTACT CTA - Enhanced with glow and haptic */}
+              {/* CONTACT CTA - Inverted style on hover with haptic */}
               <Link
                 to="/#contact"
                 onClick={handleContactClick}
-                className="group relative inline-flex items-center h-9 px-4 text-sm font-semibold rounded-xl transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="group relative inline-flex items-center h-9 px-4 text-sm font-semibold rounded-xl border-2 border-transparent transition-all duration-200 hover:bg-white hover:text-contact hover:border-contact focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 style={{
                   background: COLORS.accent,
                   color: COLORS.onAccent,
@@ -296,15 +296,7 @@ export const Navigation: FC<NavigationProps> = ({ onKeyboardHelpToggle }) => {
                 }}
                 aria-label={language === 'en' ? 'Go to contact section' : 'Aller à la section contact'}
               >
-                {/* Glow effect on hover */}
-                <span 
-                  aria-hidden="true"
-                  className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{
-                    boxShadow: `0 0 20px ${COLORS.accent}60, 0 4px 12px ${COLORS.accent}40`,
-                  }}
-                />
-                {/* Scale and brightness on hover */}
+                {/* Scale on hover */}
                 <span className="relative z-10 group-hover:scale-[1.02] group-active:scale-[0.96] transition-transform duration-150">
                   {labels.contact}
                 </span>
