@@ -228,32 +228,31 @@ export function CardImmersive({
               {showComingSoon ? (
                 <ComingSoonBadge />
               ) : showBuilding ? (
-                <div
-                  className={[
-                    "flex items-center justify-center rounded-full bg-black/40 backdrop-blur-sm transition-all duration-300",
-                    isHovered ? "w-auto h-10 px-4 gap-2" : "w-[52px] h-[52px]",
-                  ].join(" ")}
-                >
-                  {/* Badge Building visible par défaut */}
+                <div className="relative">
+                  {/* Badge Building visible par défaut, caché au hover */}
                   <div
                     className={[
                       "transition-all duration-300",
-                      isHovered ? "opacity-0 scale-75 absolute" : "opacity-100 scale-100",
+                      isHovered ? "opacity-0 scale-75" : "opacity-100 scale-100",
                     ].join(" ")}
                   >
                     <BuildingBadge />
                   </div>
                   
-                  {/* CTA visible au hover */}
-                  <span
+                  {/* CTA noir visible au hover - positionné par-dessus */}
+                  <div
                     className={[
-                      "text-[13px] font-[600] text-white whitespace-nowrap transition-opacity duration-200",
-                      isHovered ? "opacity-100" : "opacity-0",
+                      "absolute inset-0 flex items-center justify-end",
+                      "transition-all duration-300",
+                      isHovered ? "opacity-100" : "opacity-0 pointer-events-none",
                     ].join(" ")}
-                    aria-hidden="true"
                   >
-                    {finalCtaLabel}
-                  </span>
+                    <div className="flex items-center justify-center rounded-full bg-black/40 backdrop-blur-sm h-10 px-4 gap-2">
+                      <span className="text-[13px] font-[600] text-white whitespace-nowrap">
+                        {finalCtaLabel}
+                      </span>
+                    </div>
+                  </div>
                   <span className="sr-only">{finalCtaLabel}</span>
                 </div>
               ) : (
