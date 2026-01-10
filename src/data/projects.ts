@@ -157,8 +157,8 @@ export const projects: Project[] = [
     ],
     longDescription_en: "A hackathon project exploring AI agents for predictive hospitality operations.",
     longDescription_fr: "Un projet de hackathon explorant les agents IA pour les opérations hôtelières prédictives.",
-    ctaLabel_en: "Discover the case study!",
-    ctaLabel_fr: "Découvrir l'étude de cas !",
+    ctaLabel_en: "Explore the work in progress",
+    ctaLabel_fr: "Explorer le travail en cours",
   },
   // Agentic Studio
   {
