@@ -228,7 +228,36 @@ export function CardImmersive({
               {showComingSoon ? (
                 <ComingSoonBadge />
               ) : showBuilding ? (
-                <BuildingBadge />
+                <div
+                  className={[
+                    "flex items-center justify-center rounded-full transition-all duration-300",
+                    isHovered 
+                      ? "w-auto h-10 px-4 gap-2 bg-black/40 backdrop-blur-sm" 
+                      : "bg-amber-500/90 backdrop-blur-sm px-3 py-1.5",
+                  ].join(" ")}
+                >
+                  {/* Badge Building visible par défaut */}
+                  <span
+                    className={[
+                      "flex items-center gap-1.5 text-[13px] font-semibold text-white transition-opacity duration-200",
+                      isHovered ? "opacity-0 absolute" : "opacity-100",
+                    ].join(" ")}
+                  >
+                    <span>🏗️</span>
+                    <span>Building!</span>
+                  </span>
+                  
+                  {/* CTA visible au hover */}
+                  <span
+                    className={[
+                      "text-[13px] font-[600] text-white whitespace-nowrap transition-opacity duration-200",
+                      isHovered ? "opacity-100" : "opacity-0 absolute",
+                    ].join(" ")}
+                  >
+                    {finalCtaLabel}
+                  </span>
+                  <span className="sr-only">{finalCtaLabel}</span>
+                </div>
               ) : (
                 <div
                   className={[
