@@ -228,34 +228,30 @@ export function CardImmersive({
               {showComingSoon ? (
                 <ComingSoonBadge />
               ) : showBuilding ? (
-                <div
-                  className={[
-                    "flex items-center justify-center rounded-full transition-all duration-300",
-                    isHovered 
-                      ? "w-auto h-10 px-4 gap-2 bg-black/40 backdrop-blur-sm" 
-                      : "bg-amber-500/90 backdrop-blur-sm px-3 py-1.5",
-                  ].join(" ")}
-                >
-                  {/* Badge Building visible par défaut */}
-                  <span
+                <div className="relative">
+                  {/* Badge Building visible par défaut, caché au hover */}
+                  <div
                     className={[
-                      "flex items-center gap-1.5 text-[13px] font-semibold text-white transition-opacity duration-200",
-                      isHovered ? "opacity-0 absolute" : "opacity-100",
+                      "transition-opacity duration-300",
+                      isHovered ? "opacity-0" : "opacity-100",
                     ].join(" ")}
                   >
-                    <span>🏗️</span>
-                    <span>Building!</span>
-                  </span>
+                    <BuildingBadge />
+                  </div>
                   
                   {/* CTA visible au hover */}
-                  <span
+                  <div
                     className={[
-                      "text-[13px] font-[600] text-white whitespace-nowrap transition-opacity duration-200",
-                      isHovered ? "opacity-100" : "opacity-0 absolute",
+                      "absolute inset-0 flex items-center justify-center transition-opacity duration-300",
+                      isHovered ? "opacity-100" : "opacity-0",
                     ].join(" ")}
                   >
-                    {finalCtaLabel}
-                  </span>
+                    <div className="flex items-center justify-center rounded-full bg-black/40 backdrop-blur-sm w-auto h-10 px-4 gap-2">
+                      <span className="text-[13px] font-[600] text-white whitespace-nowrap">
+                        {finalCtaLabel}
+                      </span>
+                    </div>
+                  </div>
                   <span className="sr-only">{finalCtaLabel}</span>
                 </div>
               ) : (
