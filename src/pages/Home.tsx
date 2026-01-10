@@ -645,6 +645,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                     onClick={() => openModal("work", index)}
                     showComingSoon={isComingSoon}
                     showBuilding={isBuilding}
+                    ctaLabel={(language === "en" ? project.ctaLabel_en : project.ctaLabel_fr) || undefined}
                     language={language}
                   />
                 );
