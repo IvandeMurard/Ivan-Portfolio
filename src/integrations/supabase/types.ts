@@ -367,6 +367,30 @@ export type Database = {
         }
         Relationships: []
       }
+      tool_suggestions_public: {
+        Row: {
+          created_at: string | null
+          id: string | null
+          product_link: string | null
+          product_name: string | null
+          status: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string | null
+          product_link?: string | null
+          product_name?: string | null
+          status?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string | null
+          product_link?: string | null
+          product_name?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       check_tool_suggestion_rate_limit:
