@@ -186,7 +186,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
   const workProjects = visibleProjects
     .filter((p) => workSignatureIds.has(p.id))
     .sort((a, b) => workOrder.indexOf(a.id) - workOrder.indexOf(b.id));
-  const sideProjectsAllRaw = visibleProjects.filter((p) => p.workType === "side_project");
+  const sideProjectsAllRaw = visibleProjects.filter((p) => p.workType === "side_project" && !workSignatureIds.has(p.id));
   // Swap the last two items for visual ordering
   const sideProjectsAll =
     sideProjectsAllRaw.length >= 2
