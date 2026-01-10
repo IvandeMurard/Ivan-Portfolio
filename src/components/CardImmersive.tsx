@@ -239,10 +239,10 @@ export function CardImmersive({
                     <BuildingBadge />
                   </div>
                   
-                  {/* CTA noir visible au hover - positionné par-dessus */}
+                  {/* CTA noir visible au hover - positionné à droite sans déborder */}
                   <div
                     className={[
-                      "absolute inset-0 flex items-center justify-end",
+                      "absolute top-1/2 right-0 -translate-y-1/2",
                       "transition-all duration-300",
                       isHovered ? "opacity-100" : "opacity-0 pointer-events-none",
                     ].join(" ")}
