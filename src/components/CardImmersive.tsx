@@ -222,11 +222,11 @@ export function CardImmersive({
               {tagline}
             </p>
 
-            <div className="flex items-end justify-between">
+            <div className="flex items-end justify-between gap-3">
               <span 
                 className={[
-                  "work-badge transition-all duration-300",
-                  isHovered ? "max-w-[120px] truncate" : "max-w-none"
+                  "work-badge transition-all duration-300 overflow-hidden text-ellipsis whitespace-nowrap",
+                  isHovered ? "max-w-[100px] flex-shrink" : "max-w-none flex-shrink-0"
                 ].join(" ")}
                 title={badge}
               >
