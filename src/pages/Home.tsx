@@ -359,26 +359,38 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                   <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
                 </Button>
 
-                {/* CTA secondaire - texte blanc avec flèche animée */}
+                {/* CTA secondaire - texte blanc avec flèche animée + underline reveal */}
                 <motion.button
                   onClick={() => scrollToSection("contact")}
-                  className="inline-flex items-center gap-2 text-base sm:text-lg font-medium text-white hover:text-white/90 transition-colors duration-300 group"
+                  className="relative inline-flex items-center gap-2 text-base sm:text-lg font-medium text-white hover:text-white/90 transition-colors duration-300 group"
                   whileHover={prefersReducedMotion ? {} : { x: 2 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
                 >
-                  {content.hero.ctas.contact}
+                  {/* Texte avec underline reveal */}
+                  <span className="relative">
+                    {content.hero.ctas.contact}
+                    <span 
+                      className="absolute bottom-0 left-0 h-[2px] w-0 bg-white transition-all duration-300 ease-out group-hover:w-full"
+                      aria-hidden="true"
+                    />
+                  </span>
+                  
+                  {/* Flèche avec animation spring au hover */}
                   <motion.div
                     animate={prefersReducedMotion ? {} : { x: [0, 4, 0] }}
+                    whileHover={prefersReducedMotion ? {} : { x: 8, scale: 1.15 }}
                     transition={{
                       duration: 1.5,
                       repeat: Infinity,
                       ease: "easeInOut",
                       repeatDelay: 0.5,
+                      x: { type: "spring", stiffness: 400, damping: 10 },
+                      scale: { type: "spring", stiffness: 400, damping: 10 },
                     }}
                     className="inline-flex"
                   >
                     <ArrowRight
-                      className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300"
+                      className="w-4 h-4 sm:w-5 sm:h-5"
                       style={{ willChange: "transform", transform: "translateZ(0)" }}
                     />
                   </motion.div>
