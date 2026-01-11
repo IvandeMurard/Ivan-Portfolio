@@ -225,8 +225,8 @@ export function CardImmersive({
             <div className="flex items-end justify-between gap-3">
               <span 
                 className={[
-                  "work-badge transition-all duration-300 overflow-hidden text-ellipsis whitespace-nowrap",
-                  isHovered ? "max-w-[100px] flex-shrink" : "max-w-none flex-shrink-0"
+                  "work-badge transition-all duration-300",
+                  isHovered ? "max-w-[100px] leading-tight" : "max-w-none whitespace-nowrap"
                 ].join(" ")}
                 title={badge}
               >
