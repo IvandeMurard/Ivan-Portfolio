@@ -230,10 +230,10 @@ export function CardImmersive({
               ) : showBuilding ? (
                 <div
                   className={[
-                    "flex items-center justify-center rounded-full transition-all duration-300 overflow-hidden flex-shrink",
+                    "flex items-center justify-center rounded-full transition-all duration-300 overflow-hidden",
                     isHovered
-                      ? "bg-black/40 backdrop-blur-sm h-10 px-4 max-w-[200px]"
-                      : "bg-transparent h-auto px-0 max-w-none",
+                      ? "bg-black/40 backdrop-blur-sm h-10 px-4 w-fit max-w-[280px]"
+                      : "bg-transparent h-auto px-0 w-auto",
                   ].join(" ")}
                 >
                   {/* Badge Building visible par défaut, caché au hover */}
@@ -249,7 +249,7 @@ export function CardImmersive({
                   {/* CTA texte visible au hover */}
                   <span
                     className={[
-                      "text-[13px] font-[600] text-white whitespace-nowrap truncate transition-opacity duration-300",
+                      "text-[13px] font-[600] text-white whitespace-nowrap transition-opacity duration-300",
                       isHovered ? "opacity-100" : "opacity-0 w-0 overflow-hidden",
                     ].join(" ")}
                   >
