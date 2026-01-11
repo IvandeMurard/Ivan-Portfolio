@@ -288,12 +288,7 @@ export const Navigation: FC<NavigationProps> = ({ onKeyboardHelpToggle }) => {
               <Link
                 to="/#contact"
                 onClick={handleContactClick}
-                className="group relative inline-flex items-center h-9 px-4 text-sm font-semibold rounded-xl border-2 border-transparent transition-all duration-200 hover:bg-white hover:text-contact hover:border-contact focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                style={{
-                  background: COLORS.accent,
-                  color: COLORS.onAccent,
-                  transitionTimingFunction: designTokens.motion.easing.product,
-                }}
+                className="group relative inline-flex items-center h-9 px-4 text-sm font-semibold rounded-xl border-2 border-transparent bg-contact text-contact-foreground transition-all duration-200 hover:!bg-white hover:!text-contact hover:!border-contact focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 aria-label={language === 'en' ? 'Go to contact section' : 'Aller à la section contact'}
               >
                 {/* Scale on hover */}
