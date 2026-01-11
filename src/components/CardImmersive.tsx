@@ -223,7 +223,15 @@ export function CardImmersive({
             </p>
 
             <div className="flex items-end justify-between">
-              <span className="work-badge">{badge}</span>
+              <span 
+                className={[
+                  "work-badge transition-all duration-300",
+                  isHovered ? "max-w-[120px] truncate" : "max-w-none"
+                ].join(" ")}
+                title={badge}
+              >
+                {badge}
+              </span>
 
               {showComingSoon ? (
                 <ComingSoonBadge />
