@@ -65,8 +65,18 @@ export const homeContent = {
       viewDetails: "View summary",
     },
     hackathons: {
-      title: "Hackathons & Competitions",
+      title: "Hackathons",
       subtitle: "Rapid prototyping and team collaboration",
+      intro: {
+        headline: "Joined 5 hackathons, won 2.",
+        listTitle: "I enjoy:",
+        items: [
+          "Competing",
+          "Facing a creative and technical challenge",
+          "Networking, sharing learned experience",
+          "Learning new processes and tools"
+        ]
+      },
       filterChips: {
         all: "All",
         won: "Won",
@@ -162,8 +172,18 @@ export const homeContent = {
       viewDetails: "Voir le résumé",
     },
     hackathons: {
-      title: "Hackathons & Compétitions",
+      title: "Hackathons",
       subtitle: "Prototypage rapide et collaboration en équipe",
+      intro: {
+        headline: "5 hackathons, 2 victoires.",
+        listTitle: "Ce que j'apprécie :",
+        items: [
+          "La compétition",
+          "Affronter un défi créatif et technique",
+          "Le networking, partager les expériences",
+          "Découvrir de nouveaux processus et outils"
+        ]
+      },
       filterChips: {
         all: "Tous",
         won: "Gagnés",
