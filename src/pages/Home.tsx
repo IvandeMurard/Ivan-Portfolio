@@ -741,7 +741,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                         <div className="flex items-start gap-2">
                           <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
                           <div>
-                            <h3 className="font-semibold text-foreground">
+                            <h3 className="font-semibold text-foreground/80">
                               {language === "en" ? hack.title_en : hack.title_fr}
                             </h3>
                             <p className="text-sm text-accent font-medium">
@@ -765,7 +765,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
 
           {/* Inter-section teaser */}
 
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-12">
             <Button
               variant="outline"
               size="lg"
