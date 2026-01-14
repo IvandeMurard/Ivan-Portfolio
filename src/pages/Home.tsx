@@ -686,47 +686,77 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
         </div>
       </section>
 
-      {/* Hackathons Section - Left Aligned */}
+      {/* Hackathons Section - Two Columns */}
       <section id="hackathons" className="py-24 px-4 bg-secondary">
         <div className="max-w-7xl mx-auto">
-          <ScrollReveal variant="fade-up">
-            <SectionHeader title="Hackathons" alignment="left" className="mb-12" />
-          </ScrollReveal>
-
-          <StaggerContainer className="space-y-8" staggerDelay={0.15}>
-            {hackathons.map((hack, index) => (
-              <StaggerItem key={index} variant="slide-right">
-                <div className="flex gap-8 pb-8 last:pb-0">
-                  <div className="w-20 flex-shrink-0">
-                    <span className="text-sm font-medium text-muted-foreground">{hack.year}</span>
-                  </div>
-                  <div className="flex-1 space-y-2">
-                    <div className="flex items-start gap-2">
-                      <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
-                      <div>
-                        <h3 className="font-semibold text-foreground">
-                          {language === "en" ? hack.title_en : hack.title_fr}
-                        </h3>
-                        <p className="text-sm text-accent font-medium">
-                          {language === "en" ? hack.team_en : hack.team_fr}{" "}
-                          <span className="text-muted-foreground">•</span>{" "}
-                          {language === "en" ? hack.status_en : hack.status_fr}
-                        </p>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          {language === "en" ? hack.description_en : hack.description_fr}
-                        </p>
+          
+          {/* Layout deux colonnes */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-16">
+            
+            {/* Colonne gauche - Intro (sticky) */}
+            <div className="lg:sticky lg:top-24 lg:self-start">
+              <ScrollReveal variant="fade-up">
+                <SectionHeader title={content.hackathons.title} alignment="left" className="mb-6" />
+                
+                {/* Headline */}
+                <p className="text-lg font-semibold text-foreground mb-4">
+                  {content.hackathons.intro.headline}
+                </p>
+                
+                {/* Liste "I enjoy" */}
+                <p className="text-sm font-medium text-muted-foreground mb-3">
+                  {content.hackathons.intro.listTitle}
+                </p>
+                <ul className="space-y-2">
+                  {content.hackathons.intro.items.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <span className="text-accent mt-0.5">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </ScrollReveal>
+            </div>
+            
+            {/* Colonne droite - Liste hackathons */}
+            <div>
+              <StaggerContainer className="space-y-8" staggerDelay={0.15}>
+                {hackathons.map((hack, index) => (
+                  <StaggerItem key={index} variant="slide-right">
+                    <div className="flex gap-8 pb-8 last:pb-0">
+                      <div className="w-20 flex-shrink-0">
+                        <span className="text-sm font-medium text-muted-foreground">{hack.year}</span>
+                      </div>
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-start gap-2">
+                          <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0" />
+                          <div>
+                            <h3 className="font-semibold text-foreground">
+                              {language === "en" ? hack.title_en : hack.title_fr}
+                            </h3>
+                            <p className="text-sm text-accent font-medium">
+                              {language === "en" ? hack.team_en : hack.team_fr}{" "}
+                              <span className="text-muted-foreground">•</span>{" "}
+                              {language === "en" ? hack.status_en : hack.status_fr}
+                            </p>
+                            <p className="text-sm text-muted-foreground mt-1">
+                              {language === "en" ? hack.description_en : hack.description_fr}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
+            
+          </div>
 
           {/* Inter-section teaser */}
-          <div className="text-center mt-12 mb-6">
+          <div className="text-center mt-16 mb-6">
             <p className="text-sm text-muted-foreground">
-              🚀 <span className="font-medium">Want the full story?</span>
+              🚀 <span className="font-medium">{language === "en" ? "Want the full story?" : "Envie d'en savoir plus ?"}</span>
             </p>
           </div>
 
@@ -737,7 +767,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
               className="group hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300"
               onClick={() => scrollToSection("experience")}
             >
-              Discover my journey
+              {language === "en" ? "Discover my journey" : "Découvrir mon parcours"}
               <ArrowDown className="ml-2 h-4 w-4 group-hover:animate-bounce" />
             </Button>
           </div>
