@@ -13,7 +13,7 @@ import { CTABanner } from "../components/work/CTABanner";
 import { ProcessFlowchart } from "../components/ProcessFlowchart";
 import { Button } from "../components/ui/button";
 import { Separator } from "../components/ui/separator";
-import { Mail, Linkedin, Calendar, ArrowDown, ChevronDown, ArrowRight, Check } from "lucide-react";
+import { Mail, Linkedin, Calendar, ArrowDown, ChevronDown, ArrowRight, Check, Trophy, Zap, Users, Wrench } from "lucide-react";
 import { sonorCase } from "../data/cases/sonor.case";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import { GradientBorderSection } from "@/components/GradientBorderSection";
@@ -696,25 +696,35 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
             {/* Colonne gauche - Intro (sticky) */}
             <div className="lg:sticky lg:top-24 lg:self-start">
               <ScrollReveal variant="fade-up">
-                <SectionHeader title={content.hackathons.title} alignment="left" className="mb-6" />
-                
-                {/* Headline */}
-                <p className="text-lg font-semibold text-foreground mb-4">
-                  {content.hackathons.intro.headline}
-                </p>
-                
-                {/* Liste "I enjoy" */}
-                <p className="text-sm font-medium text-muted-foreground mb-3">
-                  {content.hackathons.intro.listTitle}
-                </p>
-                <ul className="space-y-2">
-                  {content.hackathons.intro.items.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <span className="text-accent mt-0.5">•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="bg-card/60 backdrop-blur-sm p-6 rounded-xl border-l-4 border-accent shadow-sm">
+                  <SectionHeader title={content.hackathons.title} alignment="left" className="mb-6" />
+                  
+                  {/* Headline - Plus imposant */}
+                  <p className="text-2xl md:text-3xl font-bold text-foreground mb-6 leading-tight">
+                    {content.hackathons.intro.headline}
+                  </p>
+                  
+                  {/* Liste "I enjoy" avec icônes */}
+                  <p className="text-sm font-semibold text-foreground mb-4 uppercase tracking-wide">
+                    {content.hackathons.intro.listTitle}
+                  </p>
+                  <ul className="space-y-3">
+                    {content.hackathons.intro.items.map((item, idx) => {
+                      const icons = [
+                        <Trophy key="trophy" className="h-4 w-4 text-amber-500" />,
+                        <Zap key="zap" className="h-4 w-4 text-yellow-500" />,
+                        <Users key="users" className="h-4 w-4 text-blue-500" />,
+                        <Wrench key="wrench" className="h-4 w-4 text-emerald-500" />
+                      ];
+                      return (
+                        <li key={idx} className="flex items-start gap-3 text-sm text-muted-foreground">
+                          <span className="mt-0.5 flex-shrink-0">{icons[idx] || icons[0]}</span>
+                          <span>{item}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </ScrollReveal>
             </div>
             
