@@ -754,11 +754,6 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           </div>
 
           {/* Inter-section teaser */}
-          <div className="text-center mt-16 mb-6">
-            <p className="text-sm text-muted-foreground">
-              🚀 <span className="font-medium">{language === "en" ? "Want the full story?" : "Envie d'en savoir plus ?"}</span>
-            </p>
-          </div>
 
           <div className="flex justify-center">
             <Button
