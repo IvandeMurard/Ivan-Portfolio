@@ -690,6 +690,9 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
       <section id="hackathons" className="py-24 px-4 bg-secondary">
         <div className="max-w-7xl mx-auto">
           
+          {/* Titre de section - hors colonnes */}
+          <SectionHeader title={content.hackathons.title} alignment="left" className="mb-12" />
+          
           {/* Layout deux colonnes */}
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-16">
             
@@ -697,7 +700,6 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
             <div className="lg:sticky lg:top-24 lg:self-start">
               <ScrollReveal variant="fade-up">
                 <div className="bg-card/60 backdrop-blur-sm p-6 rounded-xl border-l-4 border-accent shadow-sm">
-                  <SectionHeader title={content.hackathons.title} alignment="left" className="mb-6" />
                   
                   {/* Headline - Plus imposant */}
                   <p className="text-2xl md:text-3xl font-bold text-foreground mb-6 leading-tight">
