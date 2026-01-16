@@ -12,13 +12,9 @@ import { WorkModal } from "../components/WorkModal";
 import { CTABanner } from "../components/work/CTABanner";
 import { ProcessFlowchart } from "../components/ProcessFlowchart";
 import { Button } from "../components/ui/button";
-import { Separator } from "../components/ui/separator";
 import { Mail, Linkedin, Calendar, ArrowDown, ChevronDown, ArrowRight, Check, Trophy, Zap, Users, Wrench } from "lucide-react";
-import { sonorCase } from "../data/cases/sonor.case";
 import MarqueeBanner from "@/components/MarqueeBanner";
-import { GradientBorderSection } from "@/components/GradientBorderSection";
 import { AboutSection } from "@/components/sections/AboutSection";
-import { ResourceLibraryTeaser } from "@/components/sections/ResourceLibraryTeaser";
 import { useInlineExpand } from "@/hooks/useInlineExpand";
 import { InlineExpand } from "@/components/InlineExpand";
 import { SOCIAL_LINKS } from "@/site.config";
@@ -36,12 +32,6 @@ import { education as bilingualEducation } from "@/data/education";
 import { experiences as bilingualExperiences } from "@/data/experience";
 import ContactForm from "@/components/ContactForm";
 import { useHapticFeedback } from "@/hooks/useHapticFeedback";
-
-const getExperienceFilterChips = (language: "en" | "fr") => [
-  { id: "experiences", label: language === "fr" ? "Expériences" : "Experiences" },
-  { id: "continuous-learning", label: "Continuous Learning" },
-  { id: "education", label: language === "fr" ? "Éducation" : "Education" },
-];
 
 // RippleButton component with ripple effect
 interface RippleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
