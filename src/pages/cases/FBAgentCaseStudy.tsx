@@ -110,34 +110,26 @@ const FBAgentCaseStudy: React.FC = () => {
                 <h3 className="text-sm font-bold text-foreground uppercase tracking-wide mb-4">TL;DR</h3>
                 <div className="space-y-4 text-foreground">
                   <p>
-                    <strong>Context:</strong> Hospitality managers face unpredictable demand due to external factors
-                    (city events, weather, holidays) that current systems don't integrate with internal operations data.
+                    <strong>Context:</strong> Hotel F&B managers still rely on manual pattern matching (PMS + events + weather) to plan staffing. It takes 5–8 hours per week and often stays around ~70% accuracy.
                   </p>
                   <p>
-                    <strong>Problem:</strong> Results in over/under-staffing, operational stress, food waste, and
-                    inability to optimize service delivery. No AI tools bridge external context with internal PMS data
-                    for F&B operations.
+                    <strong>Problem:</strong> This leads to over/under-staffing, operational stress, food waste, and missed revenue. Existing tools don't bridge external context (events, weather) with internal PMS data for F&B operations.
                   </p>
                   <p>
-                    <strong>Solution:</strong> Dashboard-first prediction system with conversational vision.{" "}
+                    <strong>Solution:</strong> A PMS-agnostic AI agent that uses{" "}
                     <Tooltip
                       term="RAG (Retrieval-Augmented Generation)"
                       definition="A technique that combines vector database search with LLM reasoning. Instead of relying solely on an AI model's training, RAG retrieves relevant information from a database and uses it to generate more accurate, explainable responses."
                     >
-                      RAG architecture
+                      RAG
                     </Tooltip>{" "}
-                    (Qdrant + Claude) combines external context (events, weather) with pattern matching to generate
-                    explainable staff predictions. Visual dashboard (Streamlit) for transparency and oversight, with
-                    conversational interface planned for Phase 2.
+                    (Qdrant + Claude) over 495 historical F&B patterns to predict covers, recommend staffing, and explain each decision in natural language.
                   </p>
                   <p>
-                    <strong>My role:</strong> End-to-end ownership: market research, problem framing, RAG architecture
-                    design, API pipeline implementation (FastAPI + Qdrant + Claude), Streamlit dashboard development,
-                    conversational roadmap planning.
+                    <strong>My role:</strong> End-to-end ownership — market research, problem framing, data modelling, RAG architecture (Mistral + Qdrant), FastAPI backend, deployment, and roadmap design (Before / Now / Next / Later) with PMS integrations in mind.
                   </p>
                   <p>
-                    <strong>What's next:</strong> PMS API integration for real historical data, conversational interface
-                    development (Phase 2), manager approval workflow, expansion to F&B demand prediction (Phase 3).
+                    <strong>What's now/next:</strong> Solidifying the manager-in-the-loop workflow and metrics (Now), then building a dashboard and PMS integrations (Next), and evolving towards an operations copilot for hospitality (Later).
                   </p>
                 </div>
               </div>
@@ -145,65 +137,57 @@ const FBAgentCaseStudy: React.FC = () => {
 
             {/* Section 1: Context & Problem */}
             <Section id="problem" title="Context & Problem" number="1">
-              {/* The Industry Evolution - Integrated block */}
-              <div className="mb-8">
-                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6">
-                  The Industry Evolution: From Reactive to Predictive Operations
-                </h3>
-                <div className="grid md:grid-cols-5 gap-6">
-                  {[
-                    {
-                      title: "Where We Are",
-                      desc: "Managers rely on pattern recognition and occupancy data",
-                    },
-                    {
-                      title: "The Gap",
-                      desc: "External context lives in silos. No predictive layer.",
-                    },
-                    {
-                      title: "The Vision",
-                      desc: "Unified prediction combining ALL operational signals",
-                    },
-                    {
-                      title: "The Challenge",
-                      desc: "Data integration + explainability + human expertise",
-                    },
-                    {
-                      title: "My Approach",
-                      desc: "Agentic architecture + RAG + dashboard-first with conversational vision",
-                    },
-                  ].map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="p-6 bg-card rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow"
-                    >
-                      <div className="w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold mb-4">
-                        {idx + 1}
-                      </div>
-                      <h4 className="text-lg font-bold text-foreground mb-2">{item.title}</h4>
-                      <p className="text-base text-muted-foreground">{item.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               <div className="prose prose-lg max-w-none bg-muted -mx-8 px-8 py-8 rounded-2xl border border-border/50">
                 <p className="text-foreground leading-relaxed mb-6">
-                  Hotels and restaurants generate vast amounts of data: booking patterns, occupancy rates, historical
-                  demand, yet current Property Management Systems (PMS) lack predictive capabilities that account for
-                  external factors.
+                  Hotels and restaurants generate lots of data: bookings, occupancy, historical covers. Yet most Property Management Systems (PMS) are still reactive: they show what happened, not what will happen.
                 </p>
+
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6">
+                  The Manager's Weekly Routine
+                </h3>
+                <p className="text-foreground leading-relaxed mb-4">
+                  To plan staffing, F&B managers manually correlate:
+                </p>
+                <ul className="list-disc list-inside text-foreground space-y-2 mb-6">
+                  <li>PMS occupancy and reservations</li>
+                  <li>City event calendars</li>
+                  <li>Weather apps</li>
+                  <li>Past "similar weekends" from memory</li>
+                </ul>
+                <p className="text-foreground leading-relaxed mb-6">
+                  It takes <strong>5–8 hours per week</strong> and often leads to rough, <strong>~70% accurate</strong> forecasts.
+                </p>
+
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 mt-8">
+                  The Cost of Poor Forecasting
+                </h3>
+                <div className="grid md:grid-cols-3 gap-6 my-6">
+                  <div className="p-6 bg-card rounded-xl border-l-4 border-red-500 border border-border shadow-sm">
+                    <h4 className="text-lg font-bold text-foreground mb-3">Overstaffed Services</h4>
+                    <p className="text-base text-foreground">
+                      Labor costs erode margins when more staff than needed are scheduled.
+                    </p>
+                  </div>
+                  <div className="p-6 bg-card rounded-xl border-l-4 border-orange-500 border border-border shadow-sm">
+                    <h4 className="text-lg font-bold text-foreground mb-3">Understaffed Services</h4>
+                    <p className="text-base text-foreground">
+                      Guest experience suffers, reviews decline, team burns out.
+                    </p>
+                  </div>
+                  <div className="p-6 bg-card rounded-xl border-l-4 border-yellow-500 border border-border shadow-sm">
+                    <h4 className="text-lg font-bold text-foreground mb-3">Food Waste</h4>
+                    <p className="text-base text-foreground">
+                      Over-preparation from inaccurate cover predictions leads to waste and ESG concerns.
+                    </p>
+                  </div>
+                </div>
 
                 <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 mt-8">
                   Industry Shift: From Guest-Centric to Staff-Centric Technology
                 </h3>
                 <p className="text-foreground leading-relaxed mb-6">
-                  For decades, hospitality technology investments focused exclusively on guest experience: booking
-                  engines, loyalty programs, mobile check-in. But the industry is now recognizing that{" "}
-                  <strong>
-                    operational efficiency and staff wellbeing are prerequisites for sustainable service delivery
-                  </strong>
-                  .
+                  For decades, hospitality technology focused on guest experience. But the industry is now recognizing that{" "}
+                  <strong>operational efficiency and staff wellbeing are prerequisites for sustainable service delivery</strong>.
                 </p>
 
                 {/* Graph */}
@@ -216,87 +200,42 @@ const FBAgentCaseStudy: React.FC = () => {
                   <p className="text-sm text-muted-foreground mt-4">
                     Industry trend: Hospitality startups increasingly target staff operations
                   </p>
-                  <div className="text-xs text-muted-foreground mt-2">Source: Mews - Agentic AI for Hotels</div>
-                </div>
-
-                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 mt-8">
-                  The Problem: Three Operational Gaps
-                </h3>
-
-                <div className="grid md:grid-cols-3 gap-6 my-6">
-                  <div className="p-6 bg-card rounded-xl border-l-4 border-red-500 border border-border shadow-sm">
-                    <h4 className="text-lg font-bold text-foreground mb-3">1. Unpredictability</h4>
-                    <p className="text-base text-foreground">
-                      Demand fluctuates based on city events, weather, holidays, seasonality. Current PMS shows what
-                      happened, not what will happen.
-                    </p>
-                  </div>
-                  <div className="p-6 bg-card rounded-xl border-l-4 border-orange-500 border border-border shadow-sm">
-                    <h4 className="text-lg font-bold text-foreground mb-3">2. Operational Silos</h4>
-                    <p className="text-base text-foreground">
-                      Managers manually correlate PMS, event calendars, weather apps, staff scheduling. Cognitive load
-                      is enormous.
-                    </p>
-                  </div>
-                  <div className="p-6 bg-card rounded-xl border-l-4 border-yellow-500 border border-border shadow-sm">
-                    <h4 className="text-lg font-bold text-foreground mb-3">3. No Shared Standard</h4>
-                    <p className="text-base text-foreground">
-                      Generic tools don't fit hospitality's needs: explainability, human-in-the-loop, real-time
-                      adaptation, property-specific patterns.
-                    </p>
-                  </div>
-                </div>
-
-                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 mt-8">
-                  Impact: The Cost of Poor Forecasting
-                </h3>
-                <div className="grid md:grid-cols-3 gap-6 my-6 text-center">
-                  <div className="p-4 bg-card rounded-lg border border-border">
-                    <div className="text-4xl font-bold text-red-600 mb-2">30-40%</div>
-                    <p className="text-foreground">Food waste in hospitality operations</p>
-                  </div>
-                  <div className="p-4 bg-card rounded-lg border border-border">
-                    <div className="text-4xl font-bold text-orange-600 mb-2">High</div>
-                    <p className="text-foreground">Labor cost volatility</p>
-                  </div>
-                  <div className="p-4 bg-card rounded-lg border border-border">
-                    <div className="text-4xl font-bold text-yellow-600 mb-2">60%</div>
-                    <p className="text-foreground">Managers report forecasting as top stressor</p>
-                  </div>
                 </div>
               </div>
+
+              {/* Food Waste Quote - moved from Roadmap section */}
+              <QuoteBlock
+                quote="Food waste is one of the biggest challenges in hospitality. It is one of the most immediate and measurable ways we can reduce our impact as a hotel group."
+                author="Toni Stoeckl"
+                role="Chief Marketing Officer, Starwood Hotels (1 Hotels)"
+                sourceUrl="https://roadbook.com/travel/super-hotels-of-the-future/"
+                authorImage="/img/toni_stoeckl.webp"
+              />
             </Section>
 
             {/* Section 2: My Role */}
             <Section id="role" title="My Role & Approach" number="2">
               <div className="prose prose-lg max-w-none">
                 <p className="text-lg text-foreground leading-relaxed mb-6">
-                  I am driving this project end-to-end: from analyzing the market through hospitality research to
-                  architecting and building a functional RAG-powered prediction system.
+                  I drove this project end-to-end, as both product manager and technical lead.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-6 my-6">
                   <div className="p-6 bg-card rounded-xl border border-border shadow-sm">
-                    <h4 className="text-lg font-bold text-foreground mb-4">Product Strategy</h4>
+                    <h4 className="text-lg font-bold text-foreground mb-4">Product</h4>
                     <ul className="space-y-3 text-foreground">
-                      <li>Market research via Mews reports and sustainability studies</li>
-                      <li>User journey mapping for F&B managers</li>
-                      <li>MVP scope definition for hackathon constraints</li>
-                      <li>Human-in-the-loop philosophy by design</li>
-                      <li>Front-end design (Phase 2)</li>
+                      <li>Framed the problem with a focus on real F&B pains (stress, waste, labor cost)</li>
+                      <li>Designed the data model and agent behavior around "augment, not replace" managers</li>
+                      <li>Defined an incremental roadmap: Phase 1–5 with clear Before / Now / Next / Later</li>
                     </ul>
                   </div>
                   <div className="p-6 bg-card rounded-xl border border-border shadow-sm">
-                    <h4 className="text-lg font-bold text-foreground mb-4">Technical Execution</h4>
+                    <h4 className="text-lg font-bold text-foreground mb-4">Technical</h4>
                     <ul className="space-y-3 text-foreground">
-                      <li>Human-in-the-loop philosophy by design</li>
-                      <li>FastAPI backend + Claude reasoning integration</li>
-                      <li>
-                        Dashboard development: Streamlit interface for transparent prediction display and pattern
-                        visualization
-                      </li>
-                      <li>Conversational interface prototyping (Phase 2 planned)</li>
-                      <li>Modular agent design for scalability</li>
+                      <li>Processed a hotel booking dataset into 495 F&B patterns</li>
+                      <li>Designed and implemented a RAG pipeline (Mistral embeddings + Qdrant)</li>
+                      <li>Built and deployed a FastAPI backend that exposes a simple /predict endpoint</li>
+                      <li>Set up validation scenarios and observability for predictions</li>
                     </ul>
                   </div>
                 </div>
@@ -304,13 +243,43 @@ const FBAgentCaseStudy: React.FC = () => {
             </Section>
 
             {/* Section 3: Solution */}
-            <Section id="solution" title="Solution: Hands-on Reliable Predictions." number="3">
-              <div className="bg-gradient-to-r from-primary to-accent text-primary-foreground p-8 rounded-2xl border border-primary/20">
-                <p className="text-lg leading-relaxed">
-                  <strong>Ambient Agentic Experience</strong>
-                  The dashboard brings transparency, adoption and data visualisation. Voice enables speed and natural
-                  language queries: <em>"How many servers do I need for Saturday XX/XX/XX dinner?"</em>
+            <Section id="solution" title="Solution: An AI F&B Operations Agent" number="3">
+              <div className="prose prose-lg max-w-none mb-8">
+                <p className="text-lg text-foreground leading-relaxed mb-6">
+                  At its core, this project is an <strong>AI F&B Operations Agent</strong>.
                 </p>
+
+                <div className="bg-gradient-to-r from-primary to-accent text-primary-foreground p-8 rounded-2xl border border-primary/20 mb-8">
+                  <h4 className="text-lg font-bold mb-4">The agent's job is to:</h4>
+                  <ul className="space-y-2">
+                    <li>Understand the context of an upcoming service (property, date, service type, occupancy, events, weather)</li>
+                    <li>Find similar historical services</li>
+                    <li>Predict covers and recommend staffing</li>
+                    <li>Explain its reasoning in a way a F&B manager can trust</li>
+                  </ul>
+                </div>
+
+                <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6">The Experience</h3>
+                <div className="grid md:grid-cols-3 gap-6 my-6">
+                  <div className="p-6 bg-card rounded-xl border border-border shadow-sm">
+                    <h4 className="text-lg font-bold text-foreground mb-3">API-First</h4>
+                    <p className="text-base text-foreground">
+                      Can live inside a PMS, a staff planning tool, or a custom dashboard.
+                    </p>
+                  </div>
+                  <div className="p-6 bg-card rounded-xl border border-border shadow-sm">
+                    <h4 className="text-lg font-bold text-foreground mb-3">Transparent</h4>
+                    <p className="text-base text-foreground">
+                      Managers see not only a number, but also the "why" behind it.
+                    </p>
+                  </div>
+                  <div className="p-6 bg-card rounded-xl border border-border shadow-sm">
+                    <h4 className="text-lg font-bold text-foreground mb-3">Human-in-the-Loop</h4>
+                    <p className="text-base text-foreground">
+                      Managers can approve, adjust, or override recommendations.
+                    </p>
+                  </div>
+                </div>
               </div>
             </Section>
 
@@ -423,58 +392,75 @@ const FBAgentCaseStudy: React.FC = () => {
               authorImage="/img/avi_brosh.webp"
             />
 
-            {/* Section 4: Process & Roadmap */}
-            <Section id="roadmap" title="Process & Key Decisions" number="4">
+            {/* Section 4: Roadmap */}
+            <Section id="roadmap" title="Roadmap" number="4">
               <div className="prose prose-lg max-w-none">
                 <div className="space-y-6">
-                  {/* Horizontal Timeline */}
+                  {/* Horizontal Timeline - 5 Phases */}
                   <div className="relative">
                     <div className="hidden md:block absolute top-4 left-0 right-0 h-[2px] bg-primary/30" />
 
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-4">
                       {[
                         {
-                          period: "November 2025",
-                          title: "Hackathon Sprint (48h)",
-                          goal: "Validate core architecture with functional MVP",
+                          period: "Before",
+                          title: "Phase 1 — Foundations",
+                          goal: "Validate core architecture",
                           deliverables: [
-                            "FastAPI backend with /predict endpoint",
-                            "Qdrant setup with synthetic patterns",
-                            "Claude API integration for reasoning",
+                            "Set up FastAPI backend with /predict endpoint",
+                            "Configured Qdrant vector database",
+                            "Integrated Claude API for reasoning",
                             "Proof-of-concept: RAG works for hospitality",
                           ],
                           status: "completed" as const,
                         },
                         {
-                          period: "December 2025",
-                          title: "Phase 1 - Foundations (~3 weeks, part-time)",
-                          goal: "Refine architecture, add explainability",
+                          period: "Before",
+                          title: "Phase 2 — RAG with Real Patterns",
+                          goal: "Build pattern library from real data",
                           deliverables: [
-                            "Pattern search optimization",
-                            "Structured reasoning output",
-                            "Streamlit prototype",
-                            "Voice interface (in progress)",
+                            "Processed hotel dataset into 495 F&B patterns",
+                            "Implemented Mistral embeddings",
+                            "Optimized similarity search",
+                            "Validated pattern quality",
                           ],
-                          status: "in-progress" as const,
-                          currentStage: "Architecture validated, limitations documented",
+                          status: "completed" as const,
                         },
                         {
-                          period: "Q1 2026 (Planned)",
-                          title: "Phase 2 - Real Data Integration",
-                          goal: "Move from synthetic to production-grade data",
+                          period: "Now",
+                          title: "Phase 3 — Productisation & Observability",
+                          goal: "Production-ready API",
                           deliverables: [
-                            "PMS API integration",
-                            "Event & weather APIs",
-                            "Staff calendar connection",
-                            "Holiday/edge case rules",
+                            "Manager-in-the-loop workflow",
+                            "Prediction confidence scoring",
+                            "Error handling and logging",
+                            "API documentation",
+                          ],
+                          status: "in-progress" as const,
+                          currentStage: "Solidifying workflow and metrics",
+                        },
+                        {
+                          period: "Next",
+                          title: "Phase 4 — Dashboard & PMS Integrations",
+                          goal: "Real-world deployment",
+                          deliverables: [
+                            "Visual dashboard for managers",
+                            "PMS API integration (Mews, Opera, etc.)",
+                            "Event & weather data connectors",
+                            "Staff calendar sync",
                           ],
                           status: "planned" as const,
                         },
                         {
-                          period: "Q2 2026 (Vision)",
-                          title: "Phase 3 - F&B Demand Prediction",
-                          goal: "Expand from staff to food/beverage forecasting",
-                          deliverables: [],
+                          period: "Later",
+                          title: "Phase 5 — Operations Copilot",
+                          goal: "Expand to full F&B operations",
+                          deliverables: [
+                            "F&B demand prediction",
+                            "Inventory optimization",
+                            "Menu recommendations",
+                            "Waste reduction tracking",
+                          ],
                           status: "planned" as const,
                         },
                       ].map((phase, index) => (
@@ -509,7 +495,9 @@ const FBAgentCaseStudy: React.FC = () => {
                           </div>
 
                           <div className="text-center md:text-left p-4 bg-card rounded-lg border border-border shadow-sm">
-                            <h4 className="text-base font-bold text-foreground mb-1">{phase.period}</h4>
+                            <span className={`inline-block px-2 py-0.5 text-xs font-semibold rounded mb-2 ${phase.period === "Before" ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300" : phase.period === "Now" ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300" : phase.period === "Next" ? "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300" : "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300"}`}>
+                              {phase.period}
+                            </span>
                             <h5 className="text-sm font-semibold text-foreground mb-2">{phase.title}</h5>
                             <p className="text-sm text-muted-foreground mb-2">
                               <strong>Goal:</strong> {phase.goal}
@@ -523,7 +511,7 @@ const FBAgentCaseStudy: React.FC = () => {
                             )}
                             {phase.currentStage && (
                               <p className="text-xs text-primary mt-2">
-                                <strong>Current stage:</strong> {phase.currentStage}
+                                <strong>Current:</strong> {phase.currentStage}
                               </p>
                             )}
                           </div>
@@ -531,30 +519,21 @@ const FBAgentCaseStudy: React.FC = () => {
                       ))}
                     </div>
                   </div>
-
-                  {/* Food Waste Quote */}
-                  <QuoteBlock
-                    quote="Food waste is one of the biggest challenges in hospitality. It is one of the most immediate and measurable ways we can reduce our impact as a hotel group."
-                    author="Toni Stoeckl"
-                    role="Chief Marketing Officer, Starwood Hotels (1 Hotels)"
-                    sourceUrl="https://roadbook.com/travel/super-hotels-of-the-future/"
-                    authorImage="/img/toni_stoeckl.webp"
-                  />
                 </div>
 
                 {/* Strategic Decisions */}
                 <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 mt-8">
-                  Strategic Decisions: Choices Made
+                  Strategic Decisions
                 </h3>
 
                 <div className="grid md:grid-cols-3 gap-6">
                   {[
                     {
                       number: "1",
-                      title: "Dashboard-First, Then Conversational",
+                      title: "API-First, Then Dashboard",
                       rationale:
-                        "Dashboard to ease trust and adoption. Conversation to enhance spontaneity and clarity of thought.",
-                      tradeoff: "Delayed conversational interface, but de-risks trust issues.",
+                        "A robust API allows integration with any PMS or tool. Dashboard comes after core prediction is solid.",
+                      tradeoff: "No visual interface initially, but ensures flexibility and portability.",
                     },
                     {
                       number: "2",
@@ -591,24 +570,27 @@ const FBAgentCaseStudy: React.FC = () => {
                   System Architecture: Modular Agent Pipeline
                 </h3>
 
+                <p className="text-foreground leading-relaxed mb-6">
+                  The system enriches context from external signals (events, weather) and internal data (PMS, occupancy), then uses <strong>495 F&B patterns</strong> embedded with Mistral and stored in Qdrant. Claude serves as the reasoning agent, generating predictions via a FastAPI <code>/predict</code> endpoint.
+                </p>
+
                 {/* Architecture diagram */}
                 <div className="my-6 p-8 bg-card text-foreground rounded-xl font-mono text-sm overflow-x-auto border border-border">
                   <pre className="whitespace-pre">
                     {`┌─────────────────────────────────────────────────┐
 │     USER INPUT                                  │
-│  Phase 1: Dashboard form (date, events, weather)│
-│  Phase 2: Conversational (voice/text) - Planned │
+│  Text input (property, date, service, context)  │
 └────────────────────┬────────────────────────────┘
                      │
 ┌────────────────────▼────────────────────────────┐
-│     CONTEXT ENRICHMENT AGENTS                   │
+│     CONTEXT ENRICHMENT                          │
 │  External: Events API, Weather API              │
-│  Internal (Phase 2): PMS, Staff Calendar        │
+│  Internal: PMS occupancy, reservations          │
 └────────────────────┬────────────────────────────┘
                      │
 ┌────────────────────▼────────────────────────────┐
 │     PATTERN SEARCH (Qdrant Vector DB)           │
-│  • Historical patterns as embeddings            │
+│  • 495 F&B patterns (Mistral embeddings)        │
 │  • Similarity search (cosine distance)          │
 │  • Returns top 3-5 matches                      │
 └────────────────────┬────────────────────────────┘
@@ -634,7 +616,7 @@ const FBAgentCaseStudy: React.FC = () => {
                   <h4 className="text-lg font-bold text-foreground mb-3">Pattern Matching Process</h4>
                   <ol className="space-y-2 text-foreground">
                     <li>
-                      <strong>1. Storage:</strong> Historical scenarios embedded as vectors in Qdrant
+                      <strong>1. Storage:</strong> 495 historical F&B scenarios embedded as vectors in Qdrant (Mistral embeddings)
                     </li>
                     <li>
                       <strong>2. Query:</strong> Manager asks → system enriches context → creates query embedding
@@ -663,23 +645,23 @@ const FBAgentCaseStudy: React.FC = () => {
               <div className="grid md:grid-cols-3 gap-6">
                 {[
                   {
-                    title: "Pattern Quality & Realism",
+                    title: "Synthetic Patterns vs Real Behavior",
                     issue:
-                      "Synthetic patterns repeated same events (Coldplay/U2) regardless of context. Predictions showed identical reasoning for different scenarios.",
+                      "Synthetic patterns repeated same events regardless of context. Predictions showed identical reasoning for different scenarios.",
                     learning:
-                      "POC validated RAG architecture and reasoning engine. Synthetic data sufficient for technical proof-of-concept, but production requires diverse, real patterns.",
-                    fix: "PMS API integration for actual hotel historical data. Real patterns capture property-specific nuances and seasonal variations.",
+                      "POC validated RAG architecture. Synthetic data sufficient for technical proof-of-concept, but production requires diverse, real patterns.",
+                    fix: "Processed hotel booking dataset into 495 real F&B patterns capturing property-specific nuances.",
                   },
                   {
-                    title: "Internal Context Gap",
+                    title: "Missing Internal PMS Context",
                     issue:
-                      "No access to internal signals: occupancy rates, hotel events, staff availability, guest preferences.",
+                      "No access to internal signals: real-time occupancy, hotel events, staff availability, guest preferences.",
                     learning:
-                      "External factors represent only 60% of prediction equation. Internal context is the critical missing 40%.",
-                    fix: "Multi-source integration: PMS API, staff calendar, property event calendar. This bridges external and internal operational context.",
+                      "External factors represent only ~60% of prediction equation. Internal context is the critical missing 40%.",
+                    fix: "API-first architecture ready for PMS integration (Mews, Opera) to bridge external and internal context.",
                   },
                   {
-                    title: "Edge Cases & Holiday Logic",
+                    title: "Edge Cases & Holidays",
                     issue:
                       'Christmas Day predicted as "normal high demand" despite being known anomaly. Pattern matching alone cannot handle exceptional scenarios.',
                     learning:
@@ -700,7 +682,7 @@ const FBAgentCaseStudy: React.FC = () => {
                         <span className="text-green-600 font-bold">✅ Learning:</span> {challenge.learning}
                       </p>
                       <p className="text-foreground">
-                        <span className="text-blue-600 font-bold">🔧 Phase 2 fix:</span> {challenge.fix}
+                        <span className="text-blue-600 font-bold">🔧 Fix:</span> {challenge.fix}
                       </p>
                     </div>
                   </div>
@@ -712,28 +694,16 @@ const FBAgentCaseStudy: React.FC = () => {
             <Section id="faq" title="FAQ" number="7">
               <div className="bg-card rounded-xl border border-border overflow-hidden shadow-sm">
                 <FAQItem
-                  question="Why not use existing forecasting tools?"
-                  answer="Generic forecasting tools don't bridge external context (city events, weather, holidays) with internal operations (PMS data, staff schedules). They provide statistical predictions without explaining why demand will shift. This agent is purpose-built for hospitality's operational reality: managers need explainable recommendations they can trust, not black-box numbers."
+                  question="How is this different from a classic dashboard?"
+                  answer="A dashboard shows what happened. This agent predicts what will happen and explains why. It uses RAG to find similar historical patterns, then Claude to reason about them and generate staffing recommendations with confidence scores. Managers see the 'why' behind every prediction, not just a number."
                 />
                 <FAQItem
-                  question="How does this differ from a dashboard?"
-                  answer="Phase 1 (Current): It is a dashboard (Streamlit) with API backend. This was intentional—visual interface validates RAG architecture and builds manager trust through transparent reasoning display. Phase 2 (Planned): Conversational layer (voice/text) for rapid queries during service prep. The dashboard persists for: prediction oversight and approval workflow, pattern analysis during operational planning, audit trails for compliance (EU AI Act, GDPR), historical data review and confidence tracking."
-                />
-                <FAQItem
-                  question="How did you validate the approach without real users?"
-                  answer="Through industry research (Mews reports, sustainability studies) and testing with realistic synthetic scenarios. Phase 1 validated the technical architecture and reasoning quality. Phase 2 will include pilot deployment with actual F&B managers to measure prediction accuracy vs. their intuition baseline and assess trust/adoption."
-                />
-                <FAQItem
-                  question="What about data privacy and security?"
-                  answer="Phase 1 uses synthetic data (no real guest or operational data). Production deployment would require: SOC 2 compliance, data anonymization protocols, clear hotel consent for PMS integration, encrypted data transmission, and audit logs. Privacy-by-design from architecture stage."
-                />
-                <FAQItem
-                  question="Why Dashboard + Conversational, Not Voice-Only?"
-                  answer="Industry research confirms: Human-in-the-loop AI requires visual transparency. All leading hospitality AI platforms combine conversational input with visual oversight, not voice-only systems. By 2030, organizations will maintain 'explanation logs' with human audit trails. GDPR Article 22 requires transparent, explainable AI decisions. Visual interfaces enable managers to verify reasoning chains, review confidence scores, and override recommendations before finalizing staffing decisions—critical for regulatory compliance. Leading platforms (Mews, Agentic Hospitality, industry standard) combine conversational input for speed with visual oversight for control. This hybrid approach builds trust, ensures compliance, and enables manager verification—essential for high-stakes operational decisions."
-                />
-                <FAQItem
-                  question="Why start with staff vs. F&B demand?"
+                  question="Why start with staff instead of full F&B demand?"
                   answer="Staff forecasting is mathematically simpler (covers to staff ratio) with fewer variables. Starting here validated the RAG architecture with a tractable problem before tackling F&B demand's complexity (menu variations, ingredient availability, supplier constraints, waste metrics). Iterative approach: prove core architecture, then expand scope."
+                />
+                <FAQItem
+                  question="How did you validate the approach without live PMS data?"
+                  answer="Through industry research (Mews reports, sustainability studies) and processing a real hotel booking dataset into 495 F&B patterns. This validated that RAG + Claude can identify relevant historical scenarios and generate explainable predictions. Next step is PMS integration for real-time data."
                 />
               </div>
             </Section>
@@ -748,12 +718,12 @@ const FBAgentCaseStudy: React.FC = () => {
                     rel="noopener noreferrer"
                     className="flex flex-col p-6 rounded-lg bg-card border-2 border-transparent hover:border-contact transition-all group shadow-sm"
                   >
-                    <div className="h-20 flex items-center justify-center mb-4">
+                    <div className="h-16 flex items-center justify-center mb-4">
                       <span className="text-2xl font-bold text-foreground">Mews</span>
                     </div>
-                    <h4 className="text-lg font-semibold mb-2 flex-grow text-foreground">Agentic AI for Hotels</h4>
-                    <p className="text-base text-muted-foreground leading-relaxed mb-4 flex-grow">
-                      The Mews vision for AI in hospitality (2024)
+                    <h4 className="text-lg font-semibold mb-2 text-foreground">Agentic AI for Hotels</h4>
+                    <p className="text-base text-muted-foreground leading-relaxed mb-4">
+                      Leading PMS provider's vision for agentic AI in hospitality.
                     </p>
                     <div className="flex items-center gap-2 text-contact text-sm hover:underline underline-offset-4 transition-all">
                       Read <ExternalLink className="w-4 h-4" />
@@ -766,14 +736,14 @@ const FBAgentCaseStudy: React.FC = () => {
                     rel="noopener noreferrer"
                     className="flex flex-col p-6 rounded-lg bg-card border-2 border-transparent hover:border-contact transition-all group shadow-sm"
                   >
-                    <div className="h-20 flex items-center justify-center mb-4">
+                    <div className="h-16 flex items-center justify-center mb-4">
                       <span className="text-lg font-semibold text-foreground">Roadbook</span>
                     </div>
-                    <h4 className="text-lg font-semibold mb-2 flex-grow text-foreground">
-                      The Future of Hotels: Innovations Shaping Hospitality
+                    <h4 className="text-lg font-semibold mb-2 text-foreground">
+                      The Future of Hotels
                     </h4>
-                    <p className="text-base text-muted-foreground leading-relaxed mb-4 flex-grow">
-                      Industry insights on hospitality innovation and trends
+                    <p className="text-base text-muted-foreground leading-relaxed mb-4">
+                      Industry insights on hospitality innovation trends.
                     </p>
                     <div className="flex items-center gap-2 text-contact text-sm hover:underline underline-offset-4 transition-all">
                       Read <ExternalLink className="w-4 h-4" />
