@@ -2,6 +2,7 @@
 import * as React from "react";
 import { ComingSoonBadge } from "../ComingSoonBadge";
 import { BuildingBadge } from "../BuildingBadge";
+import { useTilt } from "@/hooks/useTilt";
 
 type MediaCardProps = {
   id: string;
@@ -17,6 +18,8 @@ type MediaCardProps = {
   showBuilding?: boolean;
   ctaLabel?: string;       // CTA accessible bilingue
   language?: "en" | "fr";  // Pour labels bilingues
+  /** Enable 3D tilt effect on hover */
+  enable3D?: boolean;
 };
 
 export function MediaCard({
@@ -33,12 +36,21 @@ export function MediaCard({
   showBuilding = false,
   ctaLabel,
   language = "en",
+  enable3D = true,
 }: MediaCardProps) {
   const defaultCtaLabel = language === "en" ? "Discover the case study!" : "Découvrir l'étude de cas !";
   const finalCtaLabel = ctaLabel || defaultCtaLabel;
   const [hover, setHover] = React.useState(false);
   const [imgError, setImgError] = React.useState(false);
   const videoRef = React.useRef<HTMLVideoElement | null>(null);
+  
+  // 3D tilt effect
+  const { ref: tiltRef, style: tiltStyle, glareStyle, isHovered } = useTilt({
+    maxTilt: 8,
+    scale: 1.02,
+    glare: true,
+    speed: 400,
+  });
 
   // Pause la vidéo si la carte sort de l'écran
   React.useEffect(() => {
@@ -65,6 +77,7 @@ export function MediaCard({
 
   return (
     <article
+      ref={enable3D && !reducedMotion ? tiltRef : undefined}
       key={id}
       role="button"
       tabIndex={0}
@@ -90,14 +103,28 @@ export function MediaCard({
       className={[
         "work-card group/card",
         "relative overflow-hidden rounded-token bg-card shadow-overlay",
-        "transition-transform duration-300 will-change-transform hover:-translate-y-1",
+        "transition-all duration-300 will-change-transform",
+        enable3D && !reducedMotion ? "" : "hover:-translate-y-1",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
         "w-[360px] h-[480px] cursor-pointer",
         className,
       ].join(" ")}
+      style={enable3D && !reducedMotion ? tiltStyle : undefined}
     >
-      {/* Élévation douce */}
-      <span className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[0_16px_40px_hsl(var(--overlay))] opacity-0 transition-opacity duration-300 group-hover/card:opacity-100" />
+      {/* 3D Glare overlay */}
+      {enable3D && !reducedMotion && <div style={glareStyle} aria-hidden="true" />}
+
+      {/* Élévation douce - enhanced for 3D effect */}
+      <span 
+        className="pointer-events-none absolute inset-0 rounded-[inherit] transition-all duration-300"
+        style={{
+          boxShadow: isHovered && enable3D && !reducedMotion
+            ? '0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 15px 25px -8px rgba(0, 0, 0, 0.2)'
+            : '0 16px 40px hsl(var(--overlay))',
+          opacity: isHovered || hover ? 1 : 0,
+        }}
+        aria-hidden="true"
+      />
 
       {/* Media wrapper (scale only inside to keep radius crisp) */}
       <div className="relative h-full w-full rounded-[inherit] overflow-hidden transform-gpu will-change-transform transition-transform duration-500 group-hover/card:scale-[1.02] saturate-[1.25] contrast-[1.10] brightness-[1.02] group-hover/card:saturate-[1.5] group-hover/card:brightness-[1.06]">
