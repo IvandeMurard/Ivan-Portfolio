@@ -2,6 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { ComingSoonBadge } from "./ComingSoonBadge";
 import { BuildingBadge } from "./BuildingBadge";
+import { useTilt } from "@/hooks/useTilt";
 
 type Props = {
   id: string;
@@ -20,6 +21,8 @@ type Props = {
   showComingSoon?: boolean;
   showBuilding?: boolean;
   language?: "en" | "fr";
+  /** Enable 3D tilt effect on hover */
+  enable3D?: boolean;
 };
 
 export function CardImmersive({
@@ -39,17 +42,33 @@ export function CardImmersive({
   showComingSoon = false,
   showBuilding = false,
   language = "en",
+  enable3D = true,
 }: Props) {
   const defaultCtaLabel = language === "en" ? "Discover the case study!" : "Découvrir l'étude de cas !";
   const finalCtaLabel = ctaLabel || defaultCtaLabel;
   const [isHovered, setIsHovered] = React.useState(false);
   const [imgError, setImgError] = React.useState(false);
+  
+  // Check for reduced motion
+  const reducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  
+  // 3D tilt effect
+  const { ref: tiltRef, style: tiltStyle, glareStyle, isHovered: isTiltHovered } = useTilt({
+    maxTilt: 8,
+    scale: 1.02,
+    glare: true,
+    speed: 400,
+  });
 
   const isCompact = variant === "compact";
   const isSplit = variant === "split";
 
   return (
     <article
+      ref={enable3D && !reducedMotion && !isSplit ? tiltRef : undefined}
       key={id}
       tabIndex={0}
       role="button"
@@ -75,13 +94,28 @@ export function CardImmersive({
               "focus-visible:ring-offset-background",
             ].join(" ")
           : "shadow-overlay",
-        "transition-transform duration-300 will-change-transform hover:-translate-y-1",
+        "transition-all duration-300 will-change-transform",
+        enable3D && !reducedMotion && !isSplit ? "" : "hover:-translate-y-1",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
         "w-[360px] h-[480px] cursor-pointer",
         className,
       ].join(" ")}
+      style={enable3D && !reducedMotion && !isSplit ? tiltStyle : undefined}
     >
-      <span className="pointer-events-none absolute inset-0 rounded-[inherit] shadow-[0_16px_40px_hsl(var(--overlay))] opacity-0 transition-opacity duration-300 group-hover/card:opacity-100" />
+      {/* 3D Glare overlay */}
+      {enable3D && !reducedMotion && !isSplit && <div style={glareStyle} aria-hidden="true" />}
+      
+      {/* Enhanced shadow for 3D effect */}
+      <span 
+        className="pointer-events-none absolute inset-0 rounded-[inherit] transition-all duration-300"
+        style={{
+          boxShadow: (isTiltHovered || isHovered) && enable3D && !reducedMotion && !isSplit
+            ? '0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 15px 25px -8px rgba(0, 0, 0, 0.2)'
+            : '0 16px 40px hsl(var(--overlay))',
+          opacity: isHovered ? 1 : 0,
+        }}
+        aria-hidden="true"
+      />
       {isSplit ? (
         <div className="relative h-full w-full rounded-[inherit] overflow-hidden transform-gpu will-change-transform transition-transform duration-500 group-hover/card:scale-[1.01] bg-card">
           {/* Image (top ~60%) */}
