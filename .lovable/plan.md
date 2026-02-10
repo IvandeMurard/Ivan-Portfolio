@@ -1,200 +1,76 @@
 
-# Plan de transformation créative du portfolio
+## Plan : Page CV accessible uniquement par URL
 
-## Objectif
-Créer une signature visuelle distinctive et mémorable pour capter l'attention des product designers, PMs et product builders, tout en maintenant l'élégance professionnelle.
-
----
-
-## Vue d'ensemble des transformations
-
-| Section | Transformation | Impact |
-|---------|---------------|--------|
-| Hero | Effet "spotlight" cursor + typographie cinétique | Première impression mémorable |
-| Work | Cartes avec effet parallaxe 3D au hover | Engagement visuel accru |
-| Contact | CTA magnétique + effet "glow" réactif | Conversion optimisée |
-| Global | Cursor trail + transitions fluides entre sections | Cohérence créative |
+### Objectif
+Creer une page `/cv` elegante et immersive, non referencee dans la navigation, qui presente le CV d'Ivan de Murard. La page est accessible uniquement en connaissant l'URL directe.
 
 ---
 
-## 1. Hero Section : Typographie cinétique + Cursor spotlight
+### Concept UX
 
-### Concept
-Transformer le hero en une expérience interactive où le curseur révèle du contenu, avec une typographie qui "respire" et réagit au scroll.
-
-### Éléments créatifs
-
-**A. Effet Spotlight Cursor**
-```text
-+----------------------------------+
-|                                  |
-|   [Cursor] ━━━> Halo lumineux    |
-|        qui suit le mouvement     |
-|        et éclaire le texte       |
-|                                  |
-+----------------------------------+
-```
-- Cercle lumineux (radial gradient) qui suit le curseur
-- Intensité modulée par la position (plus proche du texte = plus intense)
-- Respecte `prefers-reduced-motion`
-
-**B. Typographie cinétique**
-- Nom "Ivan de Murard" : effet de révélation caractère par caractère au chargement
-- Titre "Zero-to-One PM" : text-reveal avec masque animé de gauche à droite
-- Sous-texte : fade-in progressif avec stagger (décalage entre paragraphes)
-
-**C. Scroll-triggered transform**
-- Au scroll, le texte du hero se compresse légèrement vers le haut
-- Parallaxe subtle sur les éléments (titre bouge moins vite que le background)
-
-### Fichiers à créer/modifier
-- `src/components/effects/SpotlightCursor.tsx` (nouveau)
-- `src/components/hero/HeroKinetic.tsx` (nouveau)
-- `src/pages/Home.tsx` (intégration)
+La page doit etre une experience a part entiere : pas un simple PDF embed, mais une mise en page web soignee du CV, avec les memes effets creatifs du portfolio (animations subtiles, typographie soignee).
 
 ---
 
-## 2. Section Work : Cartes 3D immersives
+### Contenu de la page (extrait du PDF)
 
-### Concept
-Cartes de projet avec effet de profondeur 3D au hover, créant une sensation de "carte physique" que l'on peut manipuler.
+**En-tete**
+- Ivan de Murard - Product Manager
+- Tagline : "5 ans de pilotage cross-fonctionnel de produits IT - 2 ans co-fondateur SaaS"
+- Contact : email, telephone, Paris, LinkedIn
 
-### Éléments créatifs
-
-**A. Tilt effect 3D**
-```text
-       Normal              Hover (tilté)
-    +----------+         +----------+
-    |          |         |         /|
-    |  Card    |  ━━━>   |  Card  / |
-    |          |         |       /  |
-    +----------+         +------+   |
-                              (perspective)
-```
-- `rotateX` et `rotateY` basés sur la position du curseur
-- Reflet dynamique (highlight) qui suit le mouvement
-- Ombre portée qui s'adapte à l'inclinaison
-
-**B. Image reveal au hover**
-- L'image de fond fait un léger zoom-in
-- Overlay gradient s'éclaircit pour révéler plus de détails
-- Effet "peek" : contenu additionnel glisse depuis le bas
-
-**C. Transition entre cartes**
-- Animation de sortie fluide quand on quitte une carte
-- Micro-delay pour éviter le "flickering"
-
-### Fichiers à créer/modifier
-- `src/components/cards/Card3D.tsx` (nouveau)
-- `src/hooks/useTilt.ts` (nouveau hook)
-- `src/components/CardImmersive.tsx` (refactor)
-- `src/components/work/MediaCard.tsx` (refactor)
+**Sections**
+1. Experiences professionnelles (4 postes : FORTIL/DomusVi, ALTEN/Bouygues Telecom, OpenDataSoft, Sonor)
+2. Competences (Langues, Produit, Methodologies, Outils, IA, Technique)
+3. Formation (Maestro, Join Lion, IxDF, IHEDREA)
+4. Side Projects et Engagements (Hackathons, Side-project IA, Volontariat)
 
 ---
 
-## 3. Contact Section : CTA magnétique + Glow
+### Details techniques
 
-### Concept
-Boutons qui "attirent" légèrement le curseur et émettent une lueur réactive, créant un appel à l'action irrésistible.
+#### 1. Copier le PDF dans le projet
+- Copier le PDF uploade vers `public/cv/CV_Ivan_de_Murard_Product_Manager.pdf`
+- Permettre un lien de telechargement direct depuis la page
 
-### Éléments créatifs
+#### 2. Creer la page `src/pages/CV.tsx`
 
-**A. Effet magnétique**
-```text
-    Curseur approche    →    Bouton se "déplace"
-                              légèrement vers le curseur
-    
-    [Mouse] ............ [  Button  ]
-                    ↘
-                  [ Button ] (shift vers la souris)
-```
-- Translation de 2-4px vers le curseur
-- Retour élastique (spring animation) quand le curseur s'éloigne
+Structure de la page :
+- Navigation minimale (logo + retour accueil uniquement, pas la nav complete)
+- Hero compact avec nom, titre, tagline
+- Section Experiences avec timeline verticale
+- Section Competences en grille de tags/badges
+- Section Formation en liste compacte
+- Section Side Projects
+- Bouton "Telecharger le PDF" flottant ou en header
+- Footer du portfolio
 
-**B. Glow réactif**
-- Halo coloré (emerald #065f46) autour du bouton
-- Intensité qui pulse au hover
-- Animation "breathe" subtile en idle
+Animations :
+- Utiliser les `ScrollReveal` et `StaggerContainer` existants
+- Typographie cinematique sur le nom (reutiliser le pattern HeroKinetic)
+- Cards avec hover subtil pour chaque experience
 
-**C. Micro-feedback**
-- Ripple effect amélioré (déjà présent, à optimiser)
-- Haptic feedback sur mobile (déjà implémenté)
+#### 3. Ajouter la route dans `App.tsx`
+- Ajouter `<Route path="/cv" element={<CVPage />} />`
+- Ne PAS ajouter de lien dans `Navigation.tsx` (page "cachee")
 
-### Fichiers à créer/modifier
-- `src/components/ui/MagneticButton.tsx` (nouveau)
-- `src/components/ContactSection.tsx` (refactor)
-
----
-
-## 4. Éléments globaux : Cohérence créative
-
-### A. Cursor trail (optionnel, desktop only)
-- Fine traînée du curseur avec dégradé opacité
-- Activable/désactivable dans les settings
-- Performance : limité à 60fps, cleanup automatique
-
-### B. Section transitions
-- Effet "wipe" ou "fade-morph" entre sections au scroll
-- Indicateur de progression enrichi (points → ligne continue)
-
-### C. Loading state créatif
-- Animation skeleton améliorée pour les cartes
-- Logo animé pendant le chargement initial
+#### 4. Donnees bilingues
+- Reutiliser les donnees existantes de `src/data/experience.ts`, `src/data/education.ts`, `src/data/continuousLearning.ts`
+- Completer avec les informations supplementaires du PDF (competences, side projects, contact)
+- Creer un fichier `src/data/cv.ts` pour les donnees specifiques au CV (competences, side projects, infos de contact)
 
 ---
 
-## Priorités d'implémentation
-
-| Phase | Éléments | Effort | Impact |
-|-------|----------|--------|--------|
-| 1 | Hero spotlight + typographie cinétique | Moyen | Très élevé |
-| 2 | Cartes 3D tilt effect | Moyen | Élevé |
-| 3 | Contact magnétique + glow | Faible | Élevé |
-| 4 | Cursor trail + transitions globales | Faible | Moyen |
-
----
-
-## Considérations techniques
-
-### Performance
-- Tous les effets respectent `prefers-reduced-motion`
-- Utilisation de `will-change` et `transform: translateZ(0)` pour GPU acceleration
-- Throttle des event listeners (mousemove) à 60fps max
-- Cleanup des animations au unmount
-
-### Accessibilité
-- Focus states préservés pour navigation clavier
-- Pas de contenu essentiel masqué par les effets
-- Screen reader support maintenu
-
-### Mobile
-- Effets cursor désactivés sur touch devices
-- Alternatives tactiles (tap feedback, ripple)
-- Performance optimisée pour devices mobiles
-
----
-
-## Fichiers impactés (résumé)
+### Fichiers impactes
 
 | Action | Fichier |
 |--------|---------|
-| Créer | `src/components/effects/SpotlightCursor.tsx` |
-| Créer | `src/components/hero/HeroKinetic.tsx` |
-| Créer | `src/components/cards/Card3D.tsx` |
-| Créer | `src/hooks/useTilt.ts` |
-| Créer | `src/hooks/useMagnetic.ts` |
-| Créer | `src/components/ui/MagneticButton.tsx` |
-| Modifier | `src/pages/Home.tsx` |
-| Modifier | `src/components/CardImmersive.tsx` |
-| Modifier | `src/components/work/MediaCard.tsx` |
+| Copier | PDF vers `public/cv/CV_Ivan_de_Murard_Product_Manager.pdf` |
+| Creer | `src/data/cv.ts` (competences, side projects, contact) |
+| Creer | `src/pages/CV.tsx` (page complete) |
+| Modifier | `src/App.tsx` (ajout route `/cv`) |
 
----
-
-## Rendu visuel attendu
-
-La combinaison de ces éléments créera une expérience :
-
-1. **Mémorable** : L'effet spotlight + typographie cinétique du hero marque immédiatement les esprits
-2. **Interactive** : Chaque mouvement de souris génère un feedback visuel
-3. **Professionnelle** : Les effets restent élégants, jamais "gadget"
-4. **Distinctive** : Signature visuelle unique parmi les portfolios PM/Designer
+### Ce qui ne change PAS
+- Navigation (pas de lien vers /cv)
+- Aucune autre page existante
+- Donnees experience/education existantes reutilisees telles quelles
