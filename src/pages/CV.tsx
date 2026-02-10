@@ -88,7 +88,7 @@ export default function CVPage() {
                 href={cvContact.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-foreground transition-colors"
+                className="flex items-center gap-1.5 hover:text-[#0A66C2] transition-colors"
               >
                 <Linkedin size={14} /> LinkedIn
               </a>
@@ -96,7 +96,7 @@ export default function CVPage() {
                 href="https://github.com/ivandemurard"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-foreground transition-colors"
+                className="flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
               >
                 <Github size={14} /> GitHub
               </a>

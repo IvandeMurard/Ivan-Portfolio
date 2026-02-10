@@ -1,7 +1,7 @@
 // src/data/cv.ts — CV-specific data (skills, side projects, contact)
 
 export const cvContact = {
-  email: "ivan.music.demurard@gmail.com",
+  email: "ivandemurard@gmail.com",
   phone: "+33 6 49 53 82 96",
   location: "Paris, France",
   linkedin: "https://www.linkedin.com/in/ivan-music-de-murard/",
@@ -87,6 +87,6 @@ export const cvSideProjects: SideProjectItem[] = [
 ];
 
 export const cvTagline = {
-  en: "5 years of cross-functional IT product management · 2 years SaaS co-founder",
-  fr: "5 ans de pilotage cross-fonctionnel de produits IT · 2 ans co-fondateur SaaS",
+  en: "5 years of cross-functional product management · 2 years SaaS co-founder · Entrepreneurship, start-up and scale-up experience · AI and data-driven",
+  fr: "5 ans de gestion produit cross-fonctionnelle · 2 ans co-fondateur SaaS · Expérience entrepreneuriale, start-up et scale-up · IA et data-driven",
 };
