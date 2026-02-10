@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Download, Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
+import { ArrowLeft, Download, Mail, Calendar, MapPin, Linkedin, Github } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { experiences } from "@/data/experience";
 import { education } from "@/data/education";
@@ -78,8 +78,8 @@ export default function CVPage() {
               <a href={`mailto:${cvContact.email}`} className="flex items-center gap-1.5 hover:text-foreground transition-colors">
                 <Mail size={14} /> {cvContact.email}
               </a>
-              <a href={`tel:${cvContact.phone}`} className="flex items-center gap-1.5 hover:text-foreground transition-colors">
-                <Phone size={14} /> {cvContact.phone}
+              <a href={cvContact.calendar} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+                <Calendar size={14} /> {isFr ? "Prendre RDV" : "Book a call"}
               </a>
               <span className="flex items-center gap-1.5">
                 <MapPin size={14} /> {cvContact.location}
