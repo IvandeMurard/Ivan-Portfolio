@@ -18,6 +18,7 @@ import AgentsEval from "./pages/cases/AgentsEval";
 import FBAgentCaseStudy from "./pages/cases/FBAgentCaseStudy";
 import ResourceLibrary from "./pages/ResourceLibrary";
 import NotFound from "./pages/NotFound";
+import CVPage from "./pages/CV";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +57,7 @@ const App = () => {
               <Route path="/case-study/fb-agent" element={<FBAgentCaseStudy />} />
               <Route path="/case-study/f-and-b-agent" element={<FBAgentCaseStudy />} />
               <Route path="/resource-library" element={<ResourceLibrary />} />
+              <Route path="/cv" element={<CVPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
