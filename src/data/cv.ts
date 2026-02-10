@@ -2,7 +2,7 @@
 
 export const cvContact = {
   email: "ivandemurard@gmail.com",
-  phone: "+33 6 49 53 82 96",
+  calendar: "https://cal.com/ivandemurard/30min",
   location: "Paris, France",
   linkedin: "https://www.linkedin.com/in/ivan-music-de-murard/",
 };
