@@ -1,19 +1,29 @@
 
-# Mise a jour de la page CV
 
-## Changements
+## Ajustements page CV
 
-### 1. Ajouter le lien GitHub
-- Importer l'icone `Github` depuis `lucide-react` dans `src/pages/CV.tsx`
-- Ajouter un lien GitHub (https://github.com/ivandemurard) dans la ligne de contact, a cote du lien LinkedIn existant
+### 1. Email
+Remplacer `ivan.music.demurard@gmail.com` par `ivandemurard@gmail.com` dans `src/data/cv.ts`.
 
-### 2. Remplacer le PDF telechargeable
-- Copier le nouveau fichier PDF vers `public/cv/CV_Ivan_de_Murard_Product_Manager.pdf` (ecrase l'ancien)
-- L'URL de telechargement reste la meme, donc aucun changement de code supplementaire
+### 2. Couleurs hover LinkedIn et GitHub
+Dans `src/pages/CV.tsx`, appliquer des classes hover specifiques :
+- LinkedIn : `hover:text-[#0A66C2]` (bleu officiel LinkedIn)
+- GitHub : `hover:text-black dark:hover:text-white` (noir GitHub)
+
+### 3. Remplacer le PDF
+Copier le nouveau fichier vers `public/cv/CV_Ivan_de_Murard_Product_Manager.pdf`.
+
+### 4. Tagline enrichie
+Mettre a jour `cvTagline.en` dans `src/data/cv.ts` avec :
+"5 years of cross-functional product management · 2 years SaaS co-founder · Entrepreneurship, start-up and scale-up experience · AI and data-driven"
+
+Et la version francaise equivalente.
 
 ### Fichiers impactes
 
 | Action | Fichier |
 |--------|---------|
-| Modifier | `src/pages/CV.tsx` (ajout icone Github + lien) |
+| Modifier | `src/data/cv.ts` (email + tagline) |
+| Modifier | `src/pages/CV.tsx` (hover colors LinkedIn/GitHub) |
 | Remplacer | `public/cv/CV_Ivan_de_Murard_Product_Manager.pdf` |
+
