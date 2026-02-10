@@ -148,9 +148,9 @@ const NotFound = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="lg:pt-8"
             >
-              <div className="bg-primary text-primary-foreground p-6 md:p-8 rounded-2xl shadow-xl">
+                <div className="bg-contact text-contact-foreground p-6 md:p-8 rounded-2xl shadow-xl">
                 <h3 className="text-2xl font-bold mb-2">Let's connect</h3>
-                <p className="text-primary-foreground/90 mb-6 text-sm">
+                <p className="text-contact-foreground/90 mb-6 text-sm">
                   It's on me, give me a chance to get back to you
                 </p>
                 <ContactForm />
