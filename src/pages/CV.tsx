@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Download, Mail, Phone, MapPin, Linkedin } from "lucide-react";
+import { ArrowLeft, Download, Mail, Phone, MapPin, Linkedin, Github } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { experiences } from "@/data/experience";
 import { education } from "@/data/education";
@@ -91,6 +91,14 @@ export default function CVPage() {
                 className="flex items-center gap-1.5 hover:text-foreground transition-colors"
               >
                 <Linkedin size={14} /> LinkedIn
+              </a>
+              <a
+                href="https://github.com/ivandemurard"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 hover:text-foreground transition-colors"
+              >
+                <Github size={14} /> GitHub
               </a>
             </div>
           </section>
