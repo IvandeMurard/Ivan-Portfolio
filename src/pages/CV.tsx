@@ -53,12 +53,13 @@ export default function CVPage() {
     setTimeout(() => {
       toast(isFr ? "Bonne lecture !" : "Enjoy the read!", {
         description: isFr ? "Envie d'en discuter ?" : "Want to chat about it?",
+        duration: 8000,
         action: {
           label: isFr ? "Prendre RDV" : "Book a call",
           onClick: () => window.open("https://cal.com/ivandemurard/30min", "_blank"),
         },
       });
-    }, 500);
+    }, 2500);
   }, [downloaded, isFr]);
 
   return (
