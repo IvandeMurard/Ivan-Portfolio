@@ -17,7 +17,7 @@ export const cvSkills: SkillCategory[] = [
   {
     label_en: "Languages",
     label_fr: "Langues",
-    items: ["Français (natif)", "English (C1)", "Español (B2)", "Português (B1)"],
+    items: ["Français (natif)", "English (C1)"],
   },
   {
     label_en: "Product",
