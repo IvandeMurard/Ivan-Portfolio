@@ -78,11 +78,11 @@ export const cvSideProjects: SideProjectItem[] = [
     year: "2019",
   },
   {
-    title_en: "Volunteering – Nightingale Mentor",
-    title_fr: "Bénévolat – Mentor Nightingale",
-    description_en: "Mentored young students from underserved communities over a full school year",
-    description_fr: "Mentorat de jeunes élèves issus de communautés défavorisées sur une année scolaire complète",
-    year: "2023",
+    title_en: "Volunteering – GrowNYC Greenmarkets",
+    title_fr: "Bénévolat – Marchés GrowNYC",
+    description_en: "Volunteered at New York City farmers' markets with GrowNYC: direct sales alongside local farmers, visitor outreach and awareness, participation in community events",
+    description_fr: "Volontariat sur les marchés fermiers de New York avec GrowNYC : vente aux côtés des producteurs locaux, sensibilisation des visiteurs, participation à des événements communautaires",
+    year: "2012",
   },
 ];
 
