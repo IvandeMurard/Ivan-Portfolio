@@ -71,7 +71,7 @@ export default function WTTJCaseStudy() {
   return (
     <div className="overflow-x-hidden" role="main">
       <Navigation />
-      {/* <ProgressIndicator
+      <ProgressIndicator
         sections={[
           { id: 'context-problem', label: content.progressIndicator.context },
           { id: 'discovery', label: content.progressIndicator.discovery },
@@ -81,7 +81,7 @@ export default function WTTJCaseStudy() {
           { id: 'learnings', label: content.progressIndicator.learnings },
           { id: 'go-further', label: content.progressIndicator.more },
         ]}
-      /> */}
+      />
 
       {/* Main Container */}
       <div className="container mx-auto px-4 lg:px-8 pt-20 pb-16 max-w-7xl">
