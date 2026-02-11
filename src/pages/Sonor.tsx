@@ -130,7 +130,7 @@ export default function SonorPage() {
   return (
     <div className="overflow-x-hidden" role="main">
       <Navigation />
-      {/* <ProgressIndicator sections={sections} /> */}
+      <ProgressIndicator sections={sections} />
 
       {/* Main Container */}
       <div className="container mx-auto px-4 lg:px-8 pt-20 pb-16 max-w-7xl">

@@ -53,7 +53,7 @@ const FBAgentCaseStudy: React.FC = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      {/* <ProgressIndicator sections={sections} /> */}
+      <ProgressIndicator sections={sections} />
 
       {/* Hero Section */}
       <div className="container mx-auto px-4 lg:px-8 pt-20 pb-8 max-w-[1400px]">
