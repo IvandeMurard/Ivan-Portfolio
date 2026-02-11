@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Download, Mail, Calendar, MapPin, Linkedin, Github } from "lucide-react";
+import { ArrowLeft, Download, Check, Mail, Calendar, MapPin, Linkedin, Github } from "lucide-react";
+import { toast } from "sonner";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { experiences } from "@/data/experience";
 import { education } from "@/data/education";
@@ -35,6 +36,30 @@ export default function CVPage() {
   const { language } = useLanguage();
   const t = labels[language];
   const isFr = language === "fr";
+  const [downloaded, setDownloaded] = useState(false);
+
+  const handleDownload = useCallback(() => {
+    if (downloaded) return;
+    const a = document.createElement("a");
+    a.href = PDF_URL;
+    a.download = "";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    setDownloaded(true);
+    setTimeout(() => setDownloaded(false), 2000);
+
+    setTimeout(() => {
+      toast(isFr ? "Bonne lecture !" : "Enjoy the read!", {
+        description: isFr ? "Envie d'en discuter ?" : "Want to chat about it?",
+        action: {
+          label: isFr ? "Prendre RDV" : "Book a call",
+          onClick: () => window.open("https://cal.com/ivandemurard/30min", "_blank"),
+        },
+      });
+    }, 500);
+  }, [downloaded, isFr]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -48,14 +73,17 @@ export default function CVPage() {
             <ArrowLeft size={16} />
             {t.back}
           </Link>
-          <a
-            href={PDF_URL}
-            download
-            className="flex items-center gap-2 rounded-full bg-[hsl(var(--contact))] text-[hsl(var(--contact-foreground))] px-4 py-2 text-sm font-medium hover:opacity-90 transition-opacity"
+          <button
+            onClick={handleDownload}
+            className="flex items-center gap-2 rounded-full bg-[hsl(var(--contact))] text-[hsl(var(--contact-foreground))] px-4 py-2 text-sm font-medium hover:opacity-90 transition-all"
           >
-            <Download size={16} />
-            {t.download}
-          </a>
+            {downloaded ? (
+              <Check size={16} className="animate-scale-in" />
+            ) : (
+              <Download size={16} />
+            )}
+            {downloaded ? (isFr ? "Téléchargé !" : "Downloaded!") : t.download}
+          </button>
         </div>
       </header>
 
