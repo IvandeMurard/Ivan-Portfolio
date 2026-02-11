@@ -236,7 +236,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
       <Navigation onKeyboardHelpToggle={onKeyboardHelpToggle} />
       <ScrollProgressBar />
 
-      <ProgressIndicator
+      {/* <ProgressIndicator
         sections={[
           { id: "hero", label: "Welcome" },
           { id: "work", label: "Work" },
@@ -246,7 +246,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
           { id: "side-projects", label: "Side-projects" },
           { id: "contact", label: "Contact" },
         ]}
-      />
+      /> */}
 
       {/* Hero Section - Enhanced with spotlight cursor and kinetic typography */}
       <HeroKinetic

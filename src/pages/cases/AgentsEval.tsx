@@ -107,7 +107,7 @@ export default function AgentsEvalCase() {
   return (
     <div className="overflow-x-hidden" role="main">
       <Navigation />
-      <ProgressIndicator
+      {/* <ProgressIndicator
         sections={[
           { id: "evolution", label: "0. Evolution" },
           { id: "problem", label: "1. Problem" },
@@ -120,7 +120,7 @@ export default function AgentsEvalCase() {
           { id: "learnings", label: "8. Learnings" },
           { id: "going-further", label: "9. More" },
         ]}
-      />
+      /> */}
 
       {/* Main Container */}
       <div className="container mx-auto px-4 lg:px-8 pt-20 pb-16 max-w-[1400px]">
