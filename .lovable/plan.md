@@ -1,25 +1,30 @@
 
 
-## Corrections des side projects dans cv.ts
+## Ajouter un lien CV dans la navigation et le footer
 
-Trois corrections a apporter dans `src/data/cv.ts` :
+### Navigation (`src/components/Navigation.tsx`)
 
-### 1. Recoder l'Habitat : 2e prix -> 1er prix
-- EN : "1st prize" au lieu de "2nd prize"
-- FR : "1er prix" au lieu de "2e prix"
+**Desktop** : Ajouter un lien "CV" entre "About" et le bouton "Contact", avec le meme style discret que les autres liens (Home, Work, About). Ce lien pointera vers `/cv` via un `<Link>` classique (pas un anchor scroll).
 
-### 2. Hack The Crisis : 1er prix -> finaliste
-- Retirer "Winner" du titre (EN: "Hack The Crisis -- Hackathon", FR: "Hack The Crisis -- Hackathon")
-- EN : "Reached the final -- Designed and pitched a crisis response tool in 48h during COVID-19"
-- FR : "Finaliste -- Conception et pitch d'un outil de reponse de crise en 48h pendant le COVID-19"
+**Mobile** : Ajouter le meme lien "CV" dans le drawer mobile, entre "About" et "Contact".
 
-### 3. F&B Agent : remplacer Lovable par Qdrant, ajouter Claude
-- EN : "built with Cursor + Qdrant + Claude + Supabase"
-- FR : "construit avec Cursor + Qdrant + Claude + Supabase"
+**Labels bilingues** : ajouter `cv: "CV"` dans `navLabels` (identique EN/FR).
 
-### Fichier impacte
+### Footer (`src/components/footer.tsx`)
+
+Ajouter un lien "CV" dans la colonne Navigation du footer, en derniere position de la liste des sections. Ce sera un `<Link to="/cv">` style comme les autres liens du footer.
+
+### Fichiers impactes
 
 | Fichier | Modification |
 |---------|-------------|
-| `src/data/cv.ts` | Mise a jour de 3 entrees dans `cvSideProjects` |
+| `src/components/Navigation.tsx` | Ajout lien CV desktop (entre About et Contact) + mobile drawer |
+| `src/components/footer.tsx` | Ajout lien CV dans la colonne navigation |
+
+### Details techniques
+
+- Le lien CV utilise `<Link to="/cv">` de react-router (navigation standard, pas un scroll anchor)
+- Pas d'underline animee active pour CV (pas de section observable sur la home page)
+- Style identique aux autres liens nav pour rester discret et coherent
+- Dans le footer, ajout d'un element supplementaire a la fin de la liste des sections existantes
 
