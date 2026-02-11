@@ -1,33 +1,21 @@
 
 
-## Rendre le toast visible malgre la fenetre de telechargement
+## Remplacer l'experience de volontariat sur la page CV
 
-### Probleme
-Le toast apparait apres 500ms mais la fenetre de telechargement du navigateur le masque. Quand l'utilisateur ferme cette fenetre, le toast a deja disparu.
+### Modification
+Remplacer l'entree "Volunteering - Nightingale Mentor" (lignes 80-86) dans `src/data/cv.ts` par la nouvelle experience GrowNYC, reformulee :
 
-### Solution
-Deux ajustements dans `src/pages/CV.tsx` :
-
-1. **Augmenter le delai d'apparition** : passer de 500ms a 2500ms pour que le toast s'affiche apres que l'utilisateur ait gere la fenetre de telechargement
-2. **Augmenter la duree d'affichage** : ajouter `duration: 8000` (8 secondes au lieu des ~4s par defaut de sonner) pour que le toast reste visible plus longtemps
+| Champ | Valeur |
+|-------|--------|
+| title_en | Volunteering -- GrowNYC Greenmarkets |
+| title_fr | Benevolat -- Marches GrowNYC |
+| description_en | Volunteered at New York City farmers' markets with GrowNYC: direct sales alongside local farmers, visitor outreach and awareness, participation in community events |
+| description_fr | Volontariat sur les marches fermiers de New York avec GrowNYC : vente aux cotes des producteurs locaux, sensibilisation des visiteurs, participation a des evenements communautaires |
+| year | 2012 |
 
 ### Fichier impacte
 
 | Fichier | Modification |
 |---------|-------------|
-| `src/pages/CV.tsx` | setTimeout passe a 2500ms + ajout `duration: 8000` sur le toast |
-
-### Detail technique
-
-Dans la fonction `handleDownload`, modifier l'appel toast :
-
-```text
-setTimeout(() => {
-  toast("Bonne lecture !", {
-    description: "...",
-    duration: 8000,   // <-- ajout
-    action: { ... },
-  });
-}, 2500);             // <-- modifie (etait 500)
-```
+| `src/data/cv.ts` | Remplacement de l'entree Nightingale (lignes 80-86) par GrowNYC |
 
