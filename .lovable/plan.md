@@ -1,28 +1,24 @@
 
 
-## Deplacer le lien CV sous les icones Connect dans le footer
+## Masquer temporairement le ProgressIndicator (les dots de navigation)
 
-### Modification
+### Approche
 
-Deplacer le `<Link to="/cv">CV</Link>` de la colonne Navigation (lignes 93-100) vers la colonne Connect (colonne 4), juste apres la liste d'icones sociales.
+Commenter les lignes `<ProgressIndicator ... />` dans toutes les pages ou il apparait, sans supprimer le code ni les imports. Cela permet de le reactiver facilement plus tard en decommentant.
 
-### Resultat visuel
-
-```text
-CONNECT
-[mail] [cal] [linkedin] [github] [x]
-CV
-```
-
-### Fichier impacte
+### Fichiers impactes
 
 | Fichier | Modification |
 |---------|-------------|
-| `src/components/footer.tsx` | Supprimer le `<li>` CV des lignes 93-100, ajouter un lien CV texte apres le `</ul>` des icones sociales (vers ligne 170) |
+| `src/pages/Home.tsx` | Commenter le bloc `<ProgressIndicator sections={...} />` |
+| `src/pages/Sonor.tsx` | Commenter `<ProgressIndicator sections={sections} />` |
+| `src/pages/cases/wttj-case-study.tsx` | Commenter le bloc `<ProgressIndicator sections={...} />` |
+| `src/pages/cases/AgentsEval.tsx` | Commenter le bloc `<ProgressIndicator sections={...} />` |
+| `src/pages/cases/FBAgentCaseStudy.tsx` | Commenter `<ProgressIndicator sections={sections} />` |
+| `src/pages/cases/CaseStudyTemplate.tsx` | Commenter `<ProgressIndicator sections={...} />` |
 
 ### Details techniques
 
-- Le lien CV sera place dans un `<Link to="/cv">` avec le meme style que les liens de section (`text-[15px] text-white/80 hover:text-[#065f46]`)
-- Espacement : `mt-4` au-dessus pour separer des icones
-- Les deux colonnes Navigation retrouvent leur symetrie exacte
-
+- Les imports restent en place (pas d'erreur de build, juste un import inutilise temporaire)
+- Le composant `ProgressIndicator.tsx` n'est pas modifie
+- Pour reactiver : decommenter les 6 lignes concernees
