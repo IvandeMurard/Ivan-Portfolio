@@ -90,14 +90,6 @@ export function Footer({
                     </button>
                   </li>
                 ))}
-                <li>
-                  <Link
-                    to="/cv"
-                    className="block text-[15px] font-[400] text-white/80 hover:text-[#065f46] transition-colors duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#065f46] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1220] rounded-sm"
-                  >
-                    CV
-                  </Link>
-                </li>
               </ul>
             </nav>
           </div>
@@ -180,6 +172,12 @@ export function Footer({
                 );
               })}
             </ul>
+            <Link
+              to="/cv"
+              className="block mt-4 text-[15px] font-[400] text-white/80 hover:text-[#065f46] transition-colors duration-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#065f46] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B1220] rounded-sm"
+            >
+              CV
+            </Link>
           </nav>
         </div>
 
