@@ -782,17 +782,17 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
         className="py-24 px-4 bg-contact text-contact-foreground section-border-accent"
       >
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          <ScrollReveal variant="fade-up">
+          <div>
             <h2 className="text-h2" id="contact-heading">
               Ready to build the future?
             </h2>
-          </ScrollReveal>
+          </div>
 
-          <ScrollReveal variant="fade-up" delay={0.1}>
+          <div>
             <p className="text-lg max-w-2xl mx-auto opacity-90">Let's talk.</p>
-          </ScrollReveal>
+          </div>
 
-          <ScrollReveal variant="scale" delay={0.2}>
+          <div>
             <div
               className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
               role="group"
@@ -869,7 +869,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
                 </a>
               </Button>
             </div>
-          </ScrollReveal>
+          </div>
 
           {/* Contact Form - Appears on Email button click */}
           <AnimatePresence>
