@@ -1,30 +1,28 @@
 
 
-## Ajouter un lien CV dans la navigation et le footer
+## Deplacer le lien CV sous les icones Connect dans le footer
 
-### Navigation (`src/components/Navigation.tsx`)
+### Modification
 
-**Desktop** : Ajouter un lien "CV" entre "About" et le bouton "Contact", avec le meme style discret que les autres liens (Home, Work, About). Ce lien pointera vers `/cv` via un `<Link>` classique (pas un anchor scroll).
+Deplacer le `<Link to="/cv">CV</Link>` de la colonne Navigation (lignes 93-100) vers la colonne Connect (colonne 4), juste apres la liste d'icones sociales.
 
-**Mobile** : Ajouter le meme lien "CV" dans le drawer mobile, entre "About" et "Contact".
+### Resultat visuel
 
-**Labels bilingues** : ajouter `cv: "CV"` dans `navLabels` (identique EN/FR).
+```text
+CONNECT
+[mail] [cal] [linkedin] [github] [x]
+CV
+```
 
-### Footer (`src/components/footer.tsx`)
-
-Ajouter un lien "CV" dans la colonne Navigation du footer, en derniere position de la liste des sections. Ce sera un `<Link to="/cv">` style comme les autres liens du footer.
-
-### Fichiers impactes
+### Fichier impacte
 
 | Fichier | Modification |
 |---------|-------------|
-| `src/components/Navigation.tsx` | Ajout lien CV desktop (entre About et Contact) + mobile drawer |
-| `src/components/footer.tsx` | Ajout lien CV dans la colonne navigation |
+| `src/components/footer.tsx` | Supprimer le `<li>` CV des lignes 93-100, ajouter un lien CV texte apres le `</ul>` des icones sociales (vers ligne 170) |
 
 ### Details techniques
 
-- Le lien CV utilise `<Link to="/cv">` de react-router (navigation standard, pas un scroll anchor)
-- Pas d'underline animee active pour CV (pas de section observable sur la home page)
-- Style identique aux autres liens nav pour rester discret et coherent
-- Dans le footer, ajout d'un element supplementaire a la fin de la liste des sections existantes
+- Le lien CV sera place dans un `<Link to="/cv">` avec le meme style que les liens de section (`text-[15px] text-white/80 hover:text-[#065f46]`)
+- Espacement : `mt-4` au-dessus pour separer des icones
+- Les deux colonnes Navigation retrouvent leur symetrie exacte
 
