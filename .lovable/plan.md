@@ -1,24 +1,29 @@
 
 
-## Masquer temporairement le ProgressIndicator (les dots de navigation)
+## Reactiver le ProgressIndicator uniquement sur les 3 etudes de cas Work
 
-### Approche
+### Contexte
 
-Commenter les lignes `<ProgressIndicator ... />` dans toutes les pages ou il apparait, sans supprimer le code ni les imports. Cela permet de le reactiver facilement plus tard en decommentant.
+Les 3 cartes de la section Work pointent vers :
+- `/case-study/sonor` → `src/pages/Sonor.tsx`
+- `/cases/wttj` → `src/pages/cases/wttj-case-study.tsx`
+- `/case-study/fb-agent` → `src/pages/cases/FBAgentCaseStudy.tsx`
+
+### Modification
+
+Decommenter le `<ProgressIndicator ... />` dans ces 3 fichiers uniquement. Les autres pages (Home, AgentsEval, CaseStudyTemplate) restent avec le composant commente.
 
 ### Fichiers impactes
 
-| Fichier | Modification |
-|---------|-------------|
-| `src/pages/Home.tsx` | Commenter le bloc `<ProgressIndicator sections={...} />` |
-| `src/pages/Sonor.tsx` | Commenter `<ProgressIndicator sections={sections} />` |
-| `src/pages/cases/wttj-case-study.tsx` | Commenter le bloc `<ProgressIndicator sections={...} />` |
-| `src/pages/cases/AgentsEval.tsx` | Commenter le bloc `<ProgressIndicator sections={...} />` |
-| `src/pages/cases/FBAgentCaseStudy.tsx` | Commenter `<ProgressIndicator sections={sections} />` |
-| `src/pages/cases/CaseStudyTemplate.tsx` | Commenter `<ProgressIndicator sections={...} />` |
+| Fichier | Action |
+|---------|--------|
+| `src/pages/Sonor.tsx` | Decommenter `<ProgressIndicator sections={sections} />` |
+| `src/pages/cases/wttj-case-study.tsx` | Decommenter le bloc `<ProgressIndicator sections={...} />` |
+| `src/pages/cases/FBAgentCaseStudy.tsx` | Decommenter `<ProgressIndicator sections={sections} />` |
 
-### Details techniques
+### Ce qui reste masque
 
-- Les imports restent en place (pas d'erreur de build, juste un import inutilise temporaire)
-- Le composant `ProgressIndicator.tsx` n'est pas modifie
-- Pour reactiver : decommenter les 6 lignes concernees
+- `src/pages/Home.tsx` — reste commente
+- `src/pages/cases/AgentsEval.tsx` — reste commente
+- `src/pages/cases/CaseStudyTemplate.tsx` — reste commente
+
