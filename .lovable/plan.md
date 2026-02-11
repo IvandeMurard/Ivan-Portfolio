@@ -1,33 +1,33 @@
 
 
-## Animation bouton Download + Toast post-telechargement
+## Rendre le toast visible malgre la fenetre de telechargement
 
-Deux micro-interactions au clic sur "Telecharger le PDF" :
+### Probleme
+Le toast apparait apres 500ms mais la fenetre de telechargement du navigateur le masque. Quand l'utilisateur ferme cette fenetre, le toast a deja disparu.
 
-### 1. Animation du bouton
-- Le `<a>` devient un `<button>` qui declenche le telechargement programmatiquement
-- Au clic : l'icone Download se transforme en icone Check avec une animation de scale-in
-- Le texte passe a "Telecharge !" / "Downloaded!"
-- Apres 2 secondes, retour a l'etat initial (icone Download + texte original)
-- Utilisation d'un state `downloaded` avec `useState` et `setTimeout`
+### Solution
+Deux ajustements dans `src/pages/CV.tsx` :
 
-### 2. Toast elegant
-- Utilisation de `sonner` (deja installe) pour afficher un toast minimaliste
-- Message : "Bonne lecture !" (FR) / "Enjoy the read!" (EN)
-- Description avec lien Cal.com : "Envie d'en discuter ?" / "Want to chat about it?"
-- Le toast inclut un bouton action vers `https://cal.com/ivandemurard/30min`
-- Apparait ~500ms apres le clic (legerement decale de l'animation bouton)
+1. **Augmenter le delai d'apparition** : passer de 500ms a 2500ms pour que le toast s'affiche apres que l'utilisateur ait gere la fenetre de telechargement
+2. **Augmenter la duree d'affichage** : ajouter `duration: 8000` (8 secondes au lieu des ~4s par defaut de sonner) pour que le toast reste visible plus longtemps
 
 ### Fichier impacte
 
 | Fichier | Modification |
 |---------|-------------|
-| `src/pages/CV.tsx` | Bouton avec state anime + toast sonner au clic |
+| `src/pages/CV.tsx` | setTimeout passe a 2500ms + ajout `duration: 8000` sur le toast |
 
-### Details techniques
-- Import `toast` depuis `sonner` et `Check` depuis `lucide-react`
-- Ajout d'un `useState<boolean>` pour gerer l'etat du bouton
-- Le telechargement se fait via creation d'un lien `<a>` temporaire en JS (`document.createElement('a')`)
-- Transition CSS entre les deux etats du bouton avec `transition-all`
-- Pas de nouveau composant, tout reste dans `CV.tsx` pour rester simple
+### Detail technique
+
+Dans la fonction `handleDownload`, modifier l'appel toast :
+
+```text
+setTimeout(() => {
+  toast("Bonne lecture !", {
+    description: "...",
+    duration: 8000,   // <-- ajout
+    action: { ... },
+  });
+}, 2500);             // <-- modifie (etait 500)
+```
 
