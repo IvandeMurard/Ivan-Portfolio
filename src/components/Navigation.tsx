@@ -45,8 +45,8 @@ export const Navigation: FC<NavigationProps> = ({ onKeyboardHelpToggle }) => {
   const { language, setLanguage } = useLanguage();
 
   const navLabels = {
-    en: { home: "Home", work: "Work", about: "About", contact: "Contact" },
-    fr: { home: "Accueil", work: "Travaux", about: "À propos", contact: "Contact" }
+    en: { home: "Home", work: "Work", about: "About", cv: "CV", contact: "Contact" },
+    fr: { home: "Accueil", work: "Travaux", about: "À propos", cv: "CV", contact: "Contact" }
   };
   const labels = navLabels[language];
 
@@ -284,6 +284,27 @@ export const Navigation: FC<NavigationProps> = ({ onKeyboardHelpToggle }) => {
                 />
               </Link>
 
+              {/* CV */}
+              <Link
+                to="/cv"
+                className={navLinkBase}
+                aria-current={location.pathname === "/cv" ? "page" : undefined}
+                style={{ color: location.pathname === "/cv" ? inkOnContext : undefined, fontWeight: location.pathname === "/cv" ? 600 : undefined }}
+              >
+                {labels.cv}
+                <motion.span
+                  aria-hidden
+                  className="pointer-events-none absolute left-3 right-3 -bottom-[6px] h-[2px] rounded-full bg-foreground/80"
+                  initial={false}
+                  animate={{ 
+                    scaleX: location.pathname === "/cv" ? 1 : 0,
+                    opacity: location.pathname === "/cv" ? 1 : 0 
+                  }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                  style={{ originX: 0.5 }}
+                />
+              </Link>
+
               {/* CONTACT CTA - Inverted style on hover with haptic */}
               <Link
                 to="/#contact"
@@ -427,6 +448,15 @@ export const Navigation: FC<NavigationProps> = ({ onKeyboardHelpToggle }) => {
                   className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all"
                 >
                   {labels.about}
+                </Link>
+
+                {/* CV - Mobile */}
+                <Link
+                  to="/cv"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center h-12 px-4 text-base font-medium rounded-xl text-foreground/80 hover:text-foreground hover:bg-black/[0.08] dark:hover:bg-white/[0.12] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all"
+                >
+                  {labels.cv}
                 </Link>
 
                 <Link
