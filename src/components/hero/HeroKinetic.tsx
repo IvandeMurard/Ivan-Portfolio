@@ -192,7 +192,6 @@ export function HeroKinetic({
                     repeat: Infinity,
                     ease: "easeInOut",
                     repeatDelay: 0.5,
-                    x: { type: "spring", stiffness: 400, damping: 10 },
                     scale: { type: "spring", stiffness: 400, damping: 10 },
                   }}
                   className="inline-flex"
