@@ -126,6 +126,7 @@ export const Home: React.FC<{ onKeyboardHelpToggle?: () => void }> = ({ onKeyboa
   const contactSectionRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const { triggerHaptic } = useHapticFeedback();
+  useDynamicTheme();
 
   // Get translated content
   const content = homeContent[language];
