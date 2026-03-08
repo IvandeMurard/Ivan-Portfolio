@@ -143,7 +143,7 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
                   <img
                     src={tool.icon}
                     alt={tool.name}
-                    className="w-7 h-7 object-contain"
+                    className="w-6 h-6 object-contain"
                     onError={(e) => {
                       // Fallback si l'icône n'existe pas - afficher la première lettre
                       const img = e.currentTarget as HTMLImageElement;
