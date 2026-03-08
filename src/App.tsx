@@ -68,6 +68,7 @@ const App = () => {
             <Toaster />
             <Sonner />
             <CustomCursor />
+            <CinematicEntrance />
             <BrowserRouter>
             <ScrollToTop />
             <WelcomeBackToast />
