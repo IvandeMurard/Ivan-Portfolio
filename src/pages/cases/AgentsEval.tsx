@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
+import { ScrollProgressBar } from "@/components/ScrollProgressBar";
+import { CaseBreadcrumb } from "@/components/case-study/CaseBreadcrumb";
 import { Footer } from "@/components/footer";
 import { CTABanner } from "@/components/work/CTABanner";
 import { EvaluationEngineDiagram } from "@/components/case/EvaluationEngineDiagram";
