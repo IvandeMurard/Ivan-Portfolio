@@ -55,6 +55,8 @@ const FBAgentCaseStudy: React.FC = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <ScrollProgressBar />
+      <CaseBreadcrumb projectName="F&B Agent" />
       <ProgressIndicator sections={sections} />
 
       {/* Hero Section */}

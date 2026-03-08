@@ -73,6 +73,8 @@ export default function WTTJCaseStudy() {
   return (
     <div className="overflow-x-hidden" role="main">
       <Navigation />
+      <ScrollProgressBar />
+      <CaseBreadcrumb projectName="Welcome to the Jungle" />
       <ProgressIndicator
         sections={[
           { id: 'context-problem', label: content.progressIndicator.context },

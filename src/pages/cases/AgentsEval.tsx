@@ -109,6 +109,8 @@ export default function AgentsEvalCase() {
   return (
     <div className="overflow-x-hidden" role="main">
       <Navigation />
+      <ScrollProgressBar />
+      <CaseBreadcrumb projectName="Agentic Evaluation" />
       {/* <ProgressIndicator
         sections={[
           { id: "evolution", label: "0. Evolution" },

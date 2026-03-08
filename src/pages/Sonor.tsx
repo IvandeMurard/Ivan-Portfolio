@@ -132,6 +132,8 @@ export default function SonorPage() {
   return (
     <div className="overflow-x-hidden" role="main">
       <Navigation />
+      <ScrollProgressBar />
+      <CaseBreadcrumb projectName="SONOR" />
       <ProgressIndicator sections={sections} />
 
       {/* Main Container */}
