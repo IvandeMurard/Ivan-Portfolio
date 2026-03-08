@@ -38,7 +38,7 @@ export function CinematicEntrance() {
     const timer = setTimeout(() => {
       setShow(false);
       sessionStorage.setItem(SESSION_KEY, "1");
-    }, 3200);
+    }, 2000);
 
     return () => {
       clearInterval(interval);
