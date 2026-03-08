@@ -50,7 +50,7 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
   return (
     <section 
       ref={ref}
-      className="relative h-[40vh] min-h-[350px] w-full flex items-center overflow-hidden rounded-2xl"
+      className="relative h-[45vh] min-h-[400px] w-full flex items-center overflow-hidden rounded-2xl"
       onMouseMove={imageCredit ? handleMouseMove : undefined}
     >
       {/* Background Image avec Parallax amélioré et Blur */}
