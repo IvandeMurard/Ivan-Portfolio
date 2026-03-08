@@ -3,19 +3,24 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const SESSION_KEY = "portfolio_entrance_played";
 
-/**
- * CinematicEntrance - Full-screen overlay that slides away on first visit.
- * Uses sessionStorage so it only plays once per session.
- */
+const WELCOME_WORDS = [
+  "Bienvenue",
+  "Welcome",
+  "Bienvenido",
+  "Willkommen",
+  "Benvenuto",
+  "ようこそ",
+  "환영합니다",
+  "Bem-vindo",
+];
+
 export function CinematicEntrance() {
   const [show, setShow] = useState(false);
+  const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
-    // Only play on homepage, first visit this session
     if (window.location.pathname !== "/") return;
     if (sessionStorage.getItem(SESSION_KEY)) return;
-
-    // Check reduced motion
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       sessionStorage.setItem(SESSION_KEY, "1");
       return;
@@ -23,12 +28,25 @@ export function CinematicEntrance() {
 
     setShow(true);
 
+    const interval = setInterval(() => {
+      setWordIndex((prev) => {
+        if (prev >= WELCOME_WORDS.length - 1) {
+          clearInterval(interval);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 350);
+
     const timer = setTimeout(() => {
       setShow(false);
       sessionStorage.setItem(SESSION_KEY, "1");
-    }, 1800);
+    }, 3200);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -54,20 +72,20 @@ export function CinematicEntrance() {
             exit={{ x: "100%" }}
             transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
           />
-          {/* Center text */}
-          <motion.span
-            className="relative z-10 text-3xl md:text-5xl font-[900] tracking-tight"
-            style={{
-              color: "hsl(var(--contact-foreground))",
-              fontFamily: "Inter",
-            }}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Ivan de Murard
-          </motion.span>
+          {/* Cycling welcome text */}
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={wordIndex}
+              className="relative z-10 text-3xl md:text-5xl font-serif italic font-bold tracking-tight"
+              style={{ color: "hsl(var(--contact-foreground))" }}
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.04 }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
+            >
+              {WELCOME_WORDS[wordIndex]}
+            </motion.span>
+          </AnimatePresence>
         </motion.div>
       )}
     </AnimatePresence>
