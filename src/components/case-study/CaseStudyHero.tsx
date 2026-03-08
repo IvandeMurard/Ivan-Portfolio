@@ -134,7 +134,7 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
               {tools.map((tool, index) => (
                 <motion.div
                   key={tool.name}
-                  className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-all hover:scale-105"
+                  className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-all hover:scale-105"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 + index * 0.08, duration: 0.3 }}
