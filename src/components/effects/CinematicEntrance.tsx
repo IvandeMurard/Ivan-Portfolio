@@ -8,10 +8,7 @@ const WELCOME_WORDS = [
   "Welcome",
   "Bienvenido",
   "Willkommen",
-  "Benvenuto",
   "ようこそ",
-  "환영합니다",
-  "Bem-vindo",
 ];
 
 export function CinematicEntrance() {
@@ -36,12 +33,12 @@ export function CinematicEntrance() {
         }
         return prev + 1;
       });
-    }, 350);
+    }, 250);
 
     const timer = setTimeout(() => {
       setShow(false);
       sessionStorage.setItem(SESSION_KEY, "1");
-    }, 3200);
+    }, 2000);
 
     return () => {
       clearInterval(interval);
@@ -62,7 +59,7 @@ export function CinematicEntrance() {
             style={{ backgroundColor: "hsl(var(--contact))" }}
             initial={{ x: 0 }}
             exit={{ x: "-100%" }}
-            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
           />
           {/* Right curtain */}
           <motion.div
@@ -70,7 +67,7 @@ export function CinematicEntrance() {
             style={{ backgroundColor: "hsl(var(--contact))" }}
             initial={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
           />
           {/* Cycling welcome text */}
           <AnimatePresence mode="wait">
