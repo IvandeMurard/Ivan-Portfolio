@@ -34,6 +34,7 @@ import ContactForm from "@/components/ContactForm";
 import { useHapticFeedback } from "@/hooks/useHapticFeedback";
 import { HeroKinetic } from "@/components/hero/HeroKinetic";
 import { MagneticButton } from "@/components/ui/MagneticButton";
+import { useDynamicTheme } from "@/hooks/useDynamicTheme";
 
 // RippleButton component with ripple effect
 interface RippleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
