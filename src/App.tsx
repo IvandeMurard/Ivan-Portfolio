@@ -15,6 +15,7 @@ import { KeyboardShortcutsHelp } from "@/components/KeyboardShortcutsHelp";
 import { CustomCursor } from "@/components/effects/CustomCursor";
 import { PageTransition } from "@/components/effects/PageTransition";
 import { WelcomeBackToast } from "@/components/effects/WelcomeBackToast";
+import { CinematicEntrance } from "@/components/effects/CinematicEntrance";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import { Home } from "./pages/Home";
 import Sonor from "./pages/Sonor";
