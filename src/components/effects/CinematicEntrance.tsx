@@ -8,10 +8,7 @@ const WELCOME_WORDS = [
   "Welcome",
   "Bienvenido",
   "Willkommen",
-  "Benvenuto",
   "ようこそ",
-  "환영합니다",
-  "Bem-vindo",
 ];
 
 export function CinematicEntrance() {
