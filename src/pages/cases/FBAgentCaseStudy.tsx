@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { Tooltip, FAQItem, QuoteBlock, Section } from "@/components/casestudy";
 import { Footer } from "@/components/footer";
 import { Navigation } from "@/components/Navigation";
+import { ScrollProgressBar } from "@/components/ScrollProgressBar";
+import { CaseBreadcrumb } from "@/components/case-study/CaseBreadcrumb";
 import { ProgressIndicator } from "@/components/ProgressIndicator";
 import { CaseStudyHero } from "@/components/case-study/CaseStudyHero";
 import { CaseStudySidebar } from "@/components/case-study/CaseStudySidebar";
@@ -53,6 +55,8 @@ const FBAgentCaseStudy: React.FC = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <ScrollProgressBar />
+      <CaseBreadcrumb projectName="F&B Agent" />
       <ProgressIndicator sections={sections} />
 
       {/* Hero Section */}

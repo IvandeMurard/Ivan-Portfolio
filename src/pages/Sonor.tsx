@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/footer";
 import { ProgressIndicator } from "@/components/ProgressIndicator";
+import { ScrollProgressBar } from "@/components/ScrollProgressBar";
+import { CaseBreadcrumb } from "@/components/case-study/CaseBreadcrumb";
 import { CaseStudyHero } from "@/components/case-study/CaseStudyHero";
 import { CaseStudySidebar } from "@/components/case-study/CaseStudySidebar";
 import { CaseStudyTLDR } from "@/components/case-study/CaseStudyTLDR";
@@ -130,6 +132,8 @@ export default function SonorPage() {
   return (
     <div className="overflow-x-hidden" role="main">
       <Navigation />
+      <ScrollProgressBar />
+      <CaseBreadcrumb projectName="SONOR" />
       <ProgressIndicator sections={sections} />
 
       {/* Main Container */}

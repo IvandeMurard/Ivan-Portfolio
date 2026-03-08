@@ -10,6 +10,7 @@ import { cvContact, cvSkills, cvSideProjects, cvTagline } from "@/data/cv";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import { Badge } from "@/components/ui/badge";
 import { TextReveal } from "@/components/TextReveal";
+import { Separator } from "@/components/ui/separator";
 
 const PDF_URL = "/cv/CV_Ivan_de_Murard_Product_Manager.pdf";
 
@@ -76,7 +77,7 @@ export default function CVPage() {
           </Link>
           <button
             onClick={handleDownload}
-            className="flex items-center gap-2 rounded-full bg-[hsl(var(--contact))] text-[hsl(var(--contact-foreground))] px-4 py-2 text-sm font-medium hover:opacity-90 transition-all"
+            className="hidden md:flex items-center gap-2 rounded-full bg-[hsl(var(--contact))] text-[hsl(var(--contact-foreground))] px-4 py-2 text-sm font-medium hover:opacity-90 transition-all"
           >
             {downloaded ? (
               <Check size={16} className="animate-scale-in" />
@@ -88,53 +89,58 @@ export default function CVPage() {
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-16 space-y-20">
-        {/* ───── Hero ───── */}
-        <ScrollReveal>
-          <section className="space-y-4">
-            <TextReveal as="h1" className="text-4xl md:text-5xl font-black tracking-tight text-foreground">
-              Ivan de Murard
-            </TextReveal>
-            <p className="text-xl md:text-2xl font-semibold text-muted-foreground">
-              Product Manager
-            </p>
-            <p className="text-base text-muted-foreground max-w-xl">
-              {isFr ? cvTagline.fr : cvTagline.en}
-            </p>
+      <main className="max-w-4xl mx-auto px-6">
+        {/* ───── Hero with gradient accent ───── */}
+        <section className="pt-16 pb-12">
+          <div className="h-1 w-16 rounded-full bg-gradient-to-r from-[hsl(var(--contact))] to-primary mb-8" />
+          <ScrollReveal>
+            <div className="space-y-4">
+              <TextReveal as="h1" className="text-4xl md:text-5xl font-black tracking-tight text-foreground">
+                Ivan de Murard
+              </TextReveal>
+              <p className="text-xl md:text-2xl font-semibold text-muted-foreground">
+                Product Manager
+              </p>
+              <p className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
+                {isFr ? cvTagline.fr : cvTagline.en}
+              </p>
 
-            {/* Contact row */}
-            <div className="flex flex-wrap gap-4 pt-2 text-sm text-muted-foreground">
-              <a href={`mailto:${cvContact.email}`} className="flex items-center gap-1.5 hover:text-foreground transition-colors">
-                <Mail size={14} /> {cvContact.email}
-              </a>
-              <a href={cvContact.calendar} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-foreground transition-colors">
-                <Calendar size={14} /> {isFr ? "Prendre RDV" : "Book a call"}
-              </a>
-              <span className="flex items-center gap-1.5">
-                <MapPin size={14} /> {cvContact.location}
-              </span>
-              <a
-                href={cvContact.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-[#0A66C2] transition-colors"
-              >
-                <Linkedin size={14} /> LinkedIn
-              </a>
-              <a
-                href="https://github.com/ivandemurard"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-black dark:hover:text-white transition-colors"
-              >
-                <Github size={14} /> GitHub
-              </a>
+              {/* Contact row */}
+              <div className="flex flex-wrap gap-4 pt-2 text-sm text-muted-foreground">
+                <a href={`mailto:${cvContact.email}`} className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+                  <Mail size={14} /> {cvContact.email}
+                </a>
+                <a href={cvContact.calendar} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+                  <Calendar size={14} /> {isFr ? "Prendre RDV" : "Book a call"}
+                </a>
+                <span className="flex items-center gap-1.5">
+                  <MapPin size={14} /> {cvContact.location}
+                </span>
+                <a
+                  href={cvContact.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 hover:text-[#0A66C2] transition-colors"
+                >
+                  <Linkedin size={14} /> LinkedIn
+                </a>
+                <a
+                  href="https://github.com/ivandemurard"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 hover:text-foreground transition-colors"
+                >
+                  <Github size={14} /> GitHub
+                </a>
+              </div>
             </div>
-          </section>
-        </ScrollReveal>
+          </ScrollReveal>
+        </section>
+
+        <Separator />
 
         {/* ───── Experiences ───── */}
-        <section>
+        <section className="py-16">
           <ScrollReveal>
             <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-8">
               {t.experience}
@@ -171,8 +177,10 @@ export default function CVPage() {
           </StaggerContainer>
         </section>
 
+        <Separator />
+
         {/* ───── Skills ───── */}
-        <section>
+        <section className="py-16">
           <ScrollReveal>
             <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-8">
               {t.skills}
@@ -203,8 +211,10 @@ export default function CVPage() {
           </StaggerContainer>
         </section>
 
+        <Separator />
+
         {/* ───── Education ───── */}
-        <section>
+        <section className="py-16">
           <ScrollReveal>
             <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-8">
               {t.education}
@@ -212,7 +222,6 @@ export default function CVPage() {
           </ScrollReveal>
 
           <StaggerContainer staggerDelay={0.1} className="space-y-6">
-            {/* Continuous learning first (most recent) */}
             {continuousLearning.map((cl, i) => (
               <StaggerItem key={`cl-${i}`}>
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
@@ -230,7 +239,6 @@ export default function CVPage() {
               </StaggerItem>
             ))}
 
-            {/* Formal education */}
             {education.map((edu, i) => (
               <StaggerItem key={`edu-${i}`}>
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
@@ -250,8 +258,10 @@ export default function CVPage() {
           </StaggerContainer>
         </section>
 
+        <Separator />
+
         {/* ───── Side Projects ───── */}
-        <section>
+        <section className="py-16 pb-24 md:pb-16">
           <ScrollReveal>
             <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-8">
               {t.sideProjects}
@@ -279,6 +289,21 @@ export default function CVPage() {
           </StaggerContainer>
         </section>
       </main>
+
+      {/* Mobile fixed download bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden border-t border-border bg-background/90 backdrop-blur-md px-4 py-3">
+        <button
+          onClick={handleDownload}
+          className="w-full flex items-center justify-center gap-2 rounded-full bg-[hsl(var(--contact))] text-[hsl(var(--contact-foreground))] px-4 py-2.5 text-sm font-medium hover:opacity-90 transition-all"
+        >
+          {downloaded ? (
+            <Check size={16} className="animate-scale-in" />
+          ) : (
+            <Download size={16} />
+          )}
+          {downloaded ? (isFr ? "Téléchargé !" : "Downloaded!") : t.download}
+        </button>
+      </div>
 
       {/* Minimal footer */}
       <footer className="border-t border-border py-8 text-center text-xs text-muted-foreground">

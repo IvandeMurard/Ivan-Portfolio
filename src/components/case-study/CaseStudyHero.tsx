@@ -50,7 +50,7 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
   return (
     <section 
       ref={ref}
-      className="relative h-[40vh] min-h-[350px] w-full flex items-center overflow-hidden rounded-2xl"
+      className="relative h-[45vh] min-h-[400px] w-full flex items-center overflow-hidden rounded-2xl"
       onMouseMove={imageCredit ? handleMouseMove : undefined}
     >
       {/* Background Image avec Parallax amélioré et Blur */}
@@ -134,7 +134,7 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
               {tools.map((tool, index) => (
                 <motion.div
                   key={tool.name}
-                  className="w-12 h-12 rounded-lg bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-all hover:scale-105"
+                  className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-md hover:shadow-lg transition-all hover:scale-105"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 + index * 0.08, duration: 0.3 }}
@@ -143,7 +143,7 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({
                   <img
                     src={tool.icon}
                     alt={tool.name}
-                    className="w-7 h-7 object-contain"
+                    className="w-6 h-6 object-contain"
                     onError={(e) => {
                       // Fallback si l'icône n'existe pas - afficher la première lettre
                       const img = e.currentTarget as HTMLImageElement;

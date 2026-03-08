@@ -1,79 +1,66 @@
 
 
-## Implement 6 Subpage UX/UI Improvements
+## Ameliorer le taux de reponse du Feedback Widget
 
-After auditing all subpages, here's what needs to be done. Note: **Improvement #3 (Scroll-to-top) is already implemented globally** via `ScrollToTop` in `App.tsx`, so we skip it.
+### Diagnostic actuel
 
----
+Le widget actuel presente une friction elevee : le visiteur doit rediger un texte libre des l'ouverture. Les formulaires ouverts sans amorce ont un taux de completion tres bas (~2-5%).
 
-### 1. Reading progress bar on all case studies
+### Ameliorations proposees
 
-Add `ScrollProgressBar` import to 4 case study pages. The component already exists with spring animation and configurable colors.
+#### 1. Ajouter un "Reaction bar" en entree de modale (quick rating)
 
-**Files to edit:**
-- `src/pages/Sonor.tsx` -- add `import { ScrollProgressBar }` + render `<ScrollProgressBar />` after `<Navigation />`
-- `src/pages/cases/wttj-case-study.tsx` -- same
-- `src/pages/cases/FBAgentCaseStudy.tsx` -- same
-- `src/pages/cases/AgentsEval.tsx` -- same
+Avant le textarea, afficher une rangee de 4-5 emojis cliquables (type NPS simplifie) :
 
----
+```text
++-----------------------------------------------+
+|  How's your experience so far?                 |
+|                                                |
+|  [😕]  [😐]  [🙂]  [😍]                       |
+|                                                |
+|  [textarea apparait apres le clic]             |
++-----------------------------------------------+
+```
 
-### 2. Breadcrumb navigation on all case studies
+- Le visiteur clique un emoji → le textarea s'ouvre en dessous avec un placeholder contextuel
+- Si l'utilisateur envoie juste l'emoji sans texte, c'est quand meme valide (1-click feedback)
+- Reduit la friction initiale de ~80%
 
-Create a minimal sticky breadcrumb component that appears on scroll, showing `Home / [Project Name]`.
+#### 2. Placeholder contextuel selon la reaction
 
-**New file:** `src/components/case-study/CaseBreadcrumb.tsx`
-- Props: `projectName: string`
-- Sticky below nav (top-[56px]), appears after 100px scroll with fade-in
-- Uses `Link` from react-router-dom for Home
-- Minimal styling: small text, muted colors, glassmorphic background
+| Reaction | Placeholder FR | Placeholder EN |
+|----------|---------------|----------------|
+| Negatif  | "Qu'est-ce qui pourrait etre ameliore ?" | "What could be improved?" |
+| Neutre   | "Un detail a partager ?" | "Anything to share?" |
+| Positif  | "Qu'est-ce qui vous a plu ?" | "What did you like?" |
 
-**Files to edit:** Import and render in all 4 case study pages after Navigation.
+#### 3. Rendre le nom et l'email optionnels et collapses
 
----
+Remplacer les 2 champs toujours visibles par un lien discret "Ajouter vos coordonnees (optionnel)" qui revele les champs au clic. Moins de champs visibles = moins de friction.
 
-### 3. Mobile section navigation
+#### 4. Ameliorer le bouton flottant
 
-The `ProgressIndicator` is `hidden lg:block` -- invisible on mobile. Add a compact mobile bar.
+- Remplacer le label "Feedback" par une icone message-bubble + tooltip au hover
+- Plus petit et moins intrusif visuellement
+- Animation pulse subtile apres 30s pour attirer l'attention une seule fois
 
-**Edit:** `src/components/ProgressIndicator.tsx`
-- Add a mobile-only (`lg:hidden`) fixed bottom bar showing current section label
-- Tapping it opens a simple dropdown/sheet with all sections
-- Uses existing `activeSection` state and `scrollToSection` logic
-- Styled as a slim glassmorphic bar at the bottom of the viewport
+#### 5. Message de succes enrichi
 
----
+Apres envoi, afficher un message plus chaleureux avec un petit emoji anime, au lieu du texte simple actuel.
 
-### 4. CV page polish
+### Fichier impacte
 
-**Edit:** `src/pages/CV.tsx`
-- Add a subtle gradient/accent stripe at top of hero section
-- Add `<Separator />` dividers between major sections for visual rhythm
-- Consistent section spacing: ensure all sections use `space-y-16` or `py-16`
-- Add a fixed bottom download bar on mobile (`md:hidden`) with the PDF download button
-- Refine the hero with slightly larger tagline text
+| Fichier | Modifications |
+|---------|--------------|
+| `src/components/FeedbackWidget.tsx` | Ajout reaction bar, textarea conditionnel, champs contact collapses, bouton flottant icon, message succes enrichi |
 
----
+### Details techniques
 
-### 5. Case study hero consistency
-
-**Edit:** `src/components/case-study/CaseStudyHero.tsx`
-- Change `h-[40vh] min-h-[350px]` to `h-[45vh] min-h-[400px]`
-- Add a default subtitle fallback when none provided (empty string, no visual change)
-- Normalize tool icon containers from `w-12 h-12` / `w-7 h-7` to `w-10 h-10` / `w-6 h-6` for a tighter, more refined look
-
----
-
-### Summary of files changed
-
-| # | File | Action |
-|---|------|--------|
-| 1 | `src/components/case-study/CaseBreadcrumb.tsx` | **New** |
-| 2 | `src/components/ProgressIndicator.tsx` | Edit (add mobile nav) |
-| 3 | `src/components/case-study/CaseStudyHero.tsx` | Edit (height + icon sizing) |
-| 4 | `src/pages/CV.tsx` | Edit (polish + mobile download) |
-| 5 | `src/pages/Sonor.tsx` | Edit (add progress bar + breadcrumb) |
-| 6 | `src/pages/cases/wttj-case-study.tsx` | Edit (add progress bar + breadcrumb) |
-| 7 | `src/pages/cases/FBAgentCaseStudy.tsx` | Edit (add progress bar + breadcrumb) |
-| 8 | `src/pages/cases/AgentsEval.tsx` | Edit (add progress bar + breadcrumb) |
+- Nouvel etat `reaction: string | null` pour stocker l'emoji selectionne
+- Le textarea n'apparait qu'apres selection d'une reaction (ou reste accessible via un lien "Ecrire directement")
+- Le champ `reaction` est inclus dans le payload Formspree
+- Les champs nom/email sont enveloppes dans un `details/summary` natif ou un toggle state
+- Le bouton flottant passe d'un label texte a une icone SVG bulle + tooltip
+- Animation pulse CSS one-shot (via `animation-iteration-count: 1`)
+- Aucune dependance supplementaire requise
 
