@@ -59,7 +59,7 @@ export function CinematicEntrance() {
             style={{ backgroundColor: "hsl(var(--contact))" }}
             initial={{ x: 0 }}
             exit={{ x: "-100%" }}
-            transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
           />
           {/* Right curtain */}
           <motion.div
