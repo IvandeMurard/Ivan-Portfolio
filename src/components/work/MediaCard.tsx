@@ -77,6 +77,7 @@ export function MediaCard({
 
   return (
     <article
+      data-cursor="view"
       ref={enable3D && !reducedMotion ? tiltRef : undefined}
       key={id}
       role="button"

@@ -604,3 +604,30 @@
     transparent 100%
   );
 }
+
+/* Custom cursor: hide native cursor on desktop when custom cursor is active */
+@media (pointer: fine) {
+  html {
+    cursor: none;
+  }
+  a, button, [role="button"], input, textarea, select, [tabindex] {
+    cursor: none !important;
+  }
+}
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
