@@ -5,6 +5,8 @@
 
 import { useNavigate } from 'react-router-dom';
 import { Navigation } from '@/components/Navigation';
+import { ScrollProgressBar } from '@/components/ScrollProgressBar';
+import { CaseBreadcrumb } from '@/components/case-study/CaseBreadcrumb';
 import { Footer } from '@/components/footer';
 import { ProgressIndicator } from '@/components/ProgressIndicator';
 import { CaseStudyHero } from '@/components/case-study/CaseStudyHero';
