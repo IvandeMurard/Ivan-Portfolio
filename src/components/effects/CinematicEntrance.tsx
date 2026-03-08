@@ -33,7 +33,7 @@ export function CinematicEntrance() {
         }
         return prev + 1;
       });
-    }, 350);
+    }, 250);
 
     const timer = setTimeout(() => {
       setShow(false);
