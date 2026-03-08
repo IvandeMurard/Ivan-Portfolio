@@ -68,6 +68,7 @@ export function CardImmersive({
 
   return (
     <article
+      data-cursor="view"
       ref={enable3D && !reducedMotion && !isSplit ? tiltRef : undefined}
       key={id}
       tabIndex={0}
